@@ -4,6 +4,9 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTemplate", "CoreTemplate\CoreTemplate.csproj", "{86EA2254-BCD2-4269-B8F2-067FD5E8A8CD}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE} = {C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}
+	EndProjectSection
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Clients", "1. Clients", "{9C885ACC-50A7-41E1-8393-9D2F839772F8}"
 EndProject
@@ -14,10 +17,18 @@ EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Tests", "4. Tests", "{A605FFCD-9A67-4278-97D9-93F7FCEFD6DD}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTemplate.Managers", "CoreTemplate.Managers\CoreTemplate.Managers.csproj", "{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}"
+	ProjectSection(ProjectDependencies) = postProject
+		{5021DB16-CFD2-4299-8F9D-E2E182F20779} = {5021DB16-CFD2-4299-8F9D-E2E182F20779}
+	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTemplate.Accessors", "CoreTemplate.Accessors\CoreTemplate.Accessors.csproj", "{5021DB16-CFD2-4299-8F9D-E2E182F20779}"
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTemplate.Tests", "CoreTemplate.Tests\CoreTemplate.Tests.csproj", "{11737A2D-160F-4744-99DD-60F025274755}"
+	ProjectSection(ProjectDependencies) = postProject
+		{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE} = {C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}
+		{5021DB16-CFD2-4299-8F9D-E2E182F20779} = {5021DB16-CFD2-4299-8F9D-E2E182F20779}
+		{86EA2254-BCD2-4269-B8F2-067FD5E8A8CD} = {86EA2254-BCD2-4269-B8F2-067FD5E8A8CD}
+	EndProjectSection
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

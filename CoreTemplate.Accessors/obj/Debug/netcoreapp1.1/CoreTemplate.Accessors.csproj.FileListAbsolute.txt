@@ -1,0 +1,5 @@
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Accessors\bin\Debug\netcoreapp1.1\CoreTemplate.Accessors.deps.json
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Accessors\bin\Debug\netcoreapp1.1\CoreTemplate.Accessors.runtimeconfig.json
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Accessors\bin\Debug\netcoreapp1.1\CoreTemplate.Accessors.runtimeconfig.dev.json
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Accessors\bin\Debug\netcoreapp1.1\CoreTemplate.Accessors.dll
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Accessors\obj\Debug\netcoreapp1.1\CoreTemplate.Accessors.AssemblyInfo.cs

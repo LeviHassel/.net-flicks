@@ -1,0 +1,6 @@
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Managers\bin\Debug\netcoreapp1.1\CoreTemplate.Managers.deps.json
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Managers\bin\Debug\netcoreapp1.1\CoreTemplate.Managers.runtimeconfig.json
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Managers\bin\Debug\netcoreapp1.1\CoreTemplate.Managers.runtimeconfig.dev.json
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Managers\bin\Debug\netcoreapp1.1\CoreTemplate.Managers.dll
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Managers\obj\Debug\netcoreapp1.1\CoreTemplate.Managers.csprojResolveAssemblyReference.cache
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Managers\obj\Debug\netcoreapp1.1\CoreTemplate.Managers.AssemblyInfo.cs

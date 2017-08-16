@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
-using CoreTemplate.Models;
 
-namespace CoreTemplate.Data
+namespace CoreTemplate.Accessors
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+  public class CoreTemplateContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        public CoreTemplateContext(DbContextOptions<CoreTemplateContext> options)
             : base(options)
         {
         }

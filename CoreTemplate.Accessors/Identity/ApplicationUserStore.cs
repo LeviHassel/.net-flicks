@@ -1,8 +1,6 @@
-﻿using CoreTemplate.Accessors;
-using CoreTemplate.Accessors.Identity;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 
-namespace MvcIndividualAuth.Data.Identity
+namespace CoreTemplate.Accessors.Identity
 {
   public class ApplicationUserStore : UserStore<ApplicationUser>
   {

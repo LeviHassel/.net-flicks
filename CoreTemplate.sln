@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26430.16
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTemplate", "CoreTemplate\CoreTemplate.csproj", "{86EA2254-BCD2-4269-B8F2-067FD5E8A8CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTemplate", "CoreTemplate\CoreTemplate.csproj", "{86EA2254-BCD2-4269-B8F2-067FD5E8A8CD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE} = {C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}
 	EndProjectSection
@@ -16,51 +16,18 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Accessors", "3. Accessor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Tests", "4. Tests", "{A605FFCD-9A67-4278-97D9-93F7FCEFD6DD}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTemplate.Managers", "CoreTemplate.Managers\CoreTemplate.Managers.csproj", "{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTemplate.Managers", "CoreTemplate.Managers\CoreTemplate.Managers.csproj", "{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5021DB16-CFD2-4299-8F9D-E2E182F20779} = {5021DB16-CFD2-4299-8F9D-E2E182F20779}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTemplate.Accessors", "CoreTemplate.Accessors\CoreTemplate.Accessors.csproj", "{5021DB16-CFD2-4299-8F9D-E2E182F20779}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTemplate.Accessors", "CoreTemplate.Accessors\CoreTemplate.Accessors.csproj", "{5021DB16-CFD2-4299-8F9D-E2E182F20779}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTemplate.Tests", "CoreTemplate.Tests\CoreTemplate.Tests.csproj", "{11737A2D-160F-4744-99DD-60F025274755}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTemplate.Tests", "CoreTemplate.Tests\CoreTemplate.Tests.csproj", "{11737A2D-160F-4744-99DD-60F025274755}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE} = {C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}
 		{5021DB16-CFD2-4299-8F9D-E2E182F20779} = {5021DB16-CFD2-4299-8F9D-E2E182F20779}
 		{86EA2254-BCD2-4269-B8F2-067FD5E8A8CD} = {86EA2254-BCD2-4269-B8F2-067FD5E8A8CD}
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "ViewModels", "ViewModels", "{72D9B314-0F9B-4428-9BC4-0A17309AC50E}"
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Account", "Account", "{7DB10AA6-C681-4EE6-AA87-BBE1C570A742}"
-	ProjectSection(SolutionItems) = preProject
-		CoreTemplate\Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs = CoreTemplate\Models\AccountViewModels\ExternalLoginConfirmationViewModel.cs
-		CoreTemplate\Models\AccountViewModels\ForgotPasswordViewModel.cs = CoreTemplate\Models\AccountViewModels\ForgotPasswordViewModel.cs
-		CoreTemplate\Models\AccountViewModels\LoginViewModel.cs = CoreTemplate\Models\AccountViewModels\LoginViewModel.cs
-		CoreTemplate\Models\AccountViewModels\RegisterViewModel.cs = CoreTemplate\Models\AccountViewModels\RegisterViewModel.cs
-		CoreTemplate\Models\AccountViewModels\ResetPasswordViewModel.cs = CoreTemplate\Models\AccountViewModels\ResetPasswordViewModel.cs
-		CoreTemplate\Models\AccountViewModels\SendCodeViewModel.cs = CoreTemplate\Models\AccountViewModels\SendCodeViewModel.cs
-		CoreTemplate\Models\AccountViewModels\VerifyCodeViewModel.cs = CoreTemplate\Models\AccountViewModels\VerifyCodeViewModel.cs
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Manage", "Manage", "{B1C43D2C-8070-470D-9ADB-11AA80008A21}"
-	ProjectSection(SolutionItems) = preProject
-		CoreTemplate\Models\ManageViewModels\AddPhoneNumberViewModel.cs = CoreTemplate\Models\ManageViewModels\AddPhoneNumberViewModel.cs
-		CoreTemplate\Models\ManageViewModels\ChangePasswordViewModel.cs = CoreTemplate\Models\ManageViewModels\ChangePasswordViewModel.cs
-		CoreTemplate\Models\ManageViewModels\ConfigureTwoFactorViewModel.cs = CoreTemplate\Models\ManageViewModels\ConfigureTwoFactorViewModel.cs
-		CoreTemplate\Models\ManageViewModels\FactorViewModel.cs = CoreTemplate\Models\ManageViewModels\FactorViewModel.cs
-		CoreTemplate\Models\ManageViewModels\IndexViewModel.cs = CoreTemplate\Models\ManageViewModels\IndexViewModel.cs
-		CoreTemplate\Models\ManageViewModels\ManageLoginsViewModel.cs = CoreTemplate\Models\ManageViewModels\ManageLoginsViewModel.cs
-		CoreTemplate\Models\ManageViewModels\RemoveLoginViewModel.cs = CoreTemplate\Models\ManageViewModels\RemoveLoginViewModel.cs
-		CoreTemplate\Models\ManageViewModels\SetPasswordViewModel.cs = CoreTemplate\Models\ManageViewModels\SetPasswordViewModel.cs
-		CoreTemplate\Models\ManageViewModels\VerifyPhoneNumberViewModel.cs = CoreTemplate\Models\ManageViewModels\VerifyPhoneNumberViewModel.cs
-	EndProjectSection
-EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Managers", "Managers", "{3D813567-B3D4-414A-8954-3BC8EFE14286}"
-	ProjectSection(SolutionItems) = preProject
-		CoreTemplate\Services\IEmailSender.cs = CoreTemplate\Services\IEmailSender.cs
-		CoreTemplate\Services\ISmsSender.cs = CoreTemplate\Services\ISmsSender.cs
-		CoreTemplate\Services\MessageServices.cs = CoreTemplate\Services\MessageServices.cs
 	EndProjectSection
 EndProject
 Global
@@ -94,9 +61,5 @@ Global
 		{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE} = {5B0E4EE7-0E9E-445F-996F-B79D42AD5E80}
 		{5021DB16-CFD2-4299-8F9D-E2E182F20779} = {CC7AA74F-201C-46A3-B36F-67285D44BD01}
 		{11737A2D-160F-4744-99DD-60F025274755} = {A605FFCD-9A67-4278-97D9-93F7FCEFD6DD}
-		{72D9B314-0F9B-4428-9BC4-0A17309AC50E} = {5B0E4EE7-0E9E-445F-996F-B79D42AD5E80}
-		{7DB10AA6-C681-4EE6-AA87-BBE1C570A742} = {72D9B314-0F9B-4428-9BC4-0A17309AC50E}
-		{B1C43D2C-8070-470D-9ADB-11AA80008A21} = {72D9B314-0F9B-4428-9BC4-0A17309AC50E}
-		{3D813567-B3D4-414A-8954-3BC8EFE14286} = {5B0E4EE7-0E9E-445F-996F-B79D42AD5E80}
 	EndGlobalSection
 EndGlobal

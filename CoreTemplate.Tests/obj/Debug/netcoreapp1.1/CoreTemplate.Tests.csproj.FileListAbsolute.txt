@@ -3,3 +3,4 @@ D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Tests\bin\Debug\ne
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Tests\bin\Debug\netcoreapp1.1\CoreTemplate.Tests.runtimeconfig.dev.json
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Tests\bin\Debug\netcoreapp1.1\CoreTemplate.Tests.dll
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Tests\obj\Debug\netcoreapp1.1\CoreTemplate.Tests.AssemblyInfo.cs
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Tests\obj\Debug\netcoreapp1.1\CoreTemplate.Tests.csprojResolveAssemblyReference.cache

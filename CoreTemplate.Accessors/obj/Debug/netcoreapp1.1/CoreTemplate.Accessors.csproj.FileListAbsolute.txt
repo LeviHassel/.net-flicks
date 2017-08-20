@@ -3,3 +3,4 @@ D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Accessors\bin\Debu
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Accessors\bin\Debug\netcoreapp1.1\CoreTemplate.Accessors.runtimeconfig.dev.json
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Accessors\bin\Debug\netcoreapp1.1\CoreTemplate.Accessors.dll
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Accessors\obj\Debug\netcoreapp1.1\CoreTemplate.Accessors.AssemblyInfo.cs
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate.Accessors\obj\Debug\netcoreapp1.1\CoreTemplate.Accessors.csprojResolveAssemblyReference.cache

@@ -4,7 +4,6 @@ D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate\bin\Debug\netcorea
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate\bin\Debug\netcoreapp1.1\CoreTemplate.dll
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate\bin\Debug\netcoreapp1.1\CoreTemplate.pdb
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate\obj\Debug\netcoreapp1.1\CoreTemplate.csprojResolveAssemblyReference.cache
-D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate\obj\Debug\netcoreapp1.1\CoreTemplate.AssemblyInfo.cs
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate\obj\Debug\netcoreapp1.1\CoreTemplate.dll
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate\obj\Debug\netcoreapp1.1\CoreTemplate.pdb

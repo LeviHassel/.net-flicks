@@ -11,48 +11,43 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoreTemplate.Accessors.Accessors
 {
-  public class MyRepository : EntityAccessor<Entity>, IMyTableAccessor
+  public class MovieAccessor : EntityAccessor<Entity>, IMovieAccessor
   {
-    public MyRepository(CoreTemplateContext db) : base(db)
+    public MovieAccessor(CoreTemplateContext db) : base(db)
     {
     }
 
-    public MyTableDTO Get(int id)
+    public MovieDTO Get(int id)
     {
-      var entity = _db.MyTables
+      var entity = _db.Movies
         .Single(x => x.Id == id);
 
-      var dto = Mapper.Map<MyTableDTO>(entity);
+      var dto = Mapper.Map<MovieDTO>(entity);
 
       return dto;
     }
 
-    public List<MyTableDTO> GetAll()
+    public List<MovieDTO> GetAll()
     {
-      var entities = _db.MyTables
+      var entities = _db.Movies
         .AsNoTracking()
         .ToList();
 
-      var dtos = Mapper.Map<List<MyTableDTO>>(entities);
+      var dtos = Mapper.Map<List<MovieDTO>>(entities);
 
       return dtos;
     }
 
-    public MyTableDTO Save(MyTableDTO dto)
+    public MovieDTO Save(MovieDTO dto)
     {
       try
       {
-        var entity = Mapper.Map<MyTable>(dto);
-
-        if (string.IsNullOrEmpty(dto.Foo))
-        {
-          throw new ArgumentException("MyTable requires Foo");
-        }
+        var entity = Mapper.Map<Movie>(dto);
 
         if (dto.Id == 0)
         {
           //added
-          _db.MyTables.Add(entity);
+          _db.Movies.Add(entity);
         }
         else
         {
@@ -62,7 +57,7 @@ namespace CoreTemplate.Accessors.Accessors
 
         _db.SaveChanges();
 
-        var returnDto = Mapper.Map<MyTableDTO>(entity);
+        var returnDto = Mapper.Map<MovieDTO>(entity);
 
         return returnDto;
       }

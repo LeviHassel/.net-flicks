@@ -8,7 +8,7 @@ namespace CoreTemplate.Accessors.Config
   {
     public AutoMapperAccessorsConfig()
     {
-      CreateMap<MyTable, MyTableDTO>().ReverseMap();
+      CreateMap<Movie, MovieDTO>().ReverseMap();
     }
 
     public override string ProfileName

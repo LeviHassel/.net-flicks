@@ -7,3 +7,4 @@ D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate\obj\Debug\netcorea
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate\obj\Debug\netcoreapp1.1\CoreTemplate.AssemblyInfo.cs
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate\obj\Debug\netcoreapp1.1\CoreTemplate.dll
 D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate\obj\Debug\netcoreapp1.1\CoreTemplate.pdb
+D:\Documents\Other\GitHub Workspace\CoreTemplate\CoreTemplate\obj\Debug\netcoreapp1.1\UserSecretsAssemblyInfo.cs

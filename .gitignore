@@ -234,4 +234,4 @@ _Pvt_Extensions
 .fake/
 
 #Include everything in wwwroot
-!CoreTemplate/wwwroot/*
+!/CoreTemplate/wwwroot

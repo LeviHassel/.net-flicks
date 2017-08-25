@@ -1,0 +1,15 @@
+#exclude the global ignore for this file
+!.gitignore
+ 
+#include everything in this directory
+!*
+ 
+#except these misc
+.DS_Store
+.DS_Store?
+ehthumbs.db
+_notes
+cache
+dwsync.xml
+.svn
+.hg

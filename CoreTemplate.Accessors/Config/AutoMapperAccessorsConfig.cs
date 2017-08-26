@@ -13,7 +13,7 @@ namespace CoreTemplate.Accessors.Config
 
     public override string ProfileName
     {
-      get { return this.GetType().ToString(); }
+      get { return GetType().ToString(); }
     }
   }
 }

@@ -10,35 +10,34 @@ using System;
 
 namespace CoreTemplate.Config
 {
-  public static class ManagersDependencies
-  {
-    public static IServiceCollection AddManagersDependencies(this IServiceCollection services)
+    public static class ManagersDependencies
     {
-      if (services == null)
-      {
-        throw new ArgumentNullException(nameof(services));
-      }
+        public static IServiceCollection AddManagersDependencies(this IServiceCollection services)
+        {
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
 
-      services.AddTransient<IEmailManager, MessageManager>();
-      services.AddTransient<ISmsManager, MessageManager>();
-      services.AddTransient<IMovieManager, MovieManager>();
+            services.AddTransient<IEmailManager, MessageManager>();
+            services.AddTransient<ISmsManager, MessageManager>();
+            services.AddTransient<IMovieManager, MovieManager>();
 
-      /*
-      Ninject Dependencies
+            /*
+            Ninject Dependencies
 
-      //identity binds
-      Kernel.Bind<IIdentityService>().To<IdentityService>();
-      Kernel.Bind<ApplicationUserManager>().ToSelf();
-      Kernel.Bind<ApplicationSignInManager>().ToSelf();
-      Kernel.Bind<IdentityFactoryOptions<ApplicationUserManager>>().ToSelf();
-      Kernel.Bind(typeof(IUserStore<>)).To(typeof(UserStore<>)).InRequestScope();
+            //identity binds
+            Kernel.Bind<IIdentityService>().To<IdentityService>();
+            Kernel.Bind<ApplicationUserManager>().ToSelf();
+            Kernel.Bind<ApplicationSignInManager>().ToSelf();
+            Kernel.Bind<IdentityFactoryOptions<ApplicationUserManager>>().ToSelf();
+            Kernel.Bind(typeof(IUserStore<>)).To(typeof(UserStore<>)).InRequestScope();
 
-      //services
-      Kernel.Bind<IAccountService>().To<AccountService>();
-      */
+            //services
+            Kernel.Bind<IAccountService>().To<AccountService>();
+            */
 
-      return services;
+            return services;
+        }
     }
-  }
 }
- 

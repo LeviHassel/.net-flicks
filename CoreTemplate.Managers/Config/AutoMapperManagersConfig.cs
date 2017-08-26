@@ -4,16 +4,16 @@ using CoreTemplate.Managers.ViewModels.Home;
 
 namespace CoreTemplate.Managers.Config
 {
-  public class AutoMapperManagersConfig : Profile
-  {
-    public AutoMapperManagersConfig()
+    public class AutoMapperManagersConfig : Profile
     {
-      CreateMap<MovieDTO, MovieViewModel>().ReverseMap();
-    }
+        public AutoMapperManagersConfig()
+        {
+            CreateMap<MovieDTO, MovieViewModel>().ReverseMap();
+        }
 
-    public override string ProfileName
-    {
-      get { return GetType().ToString(); }
+        public override string ProfileName
+        {
+            get { return GetType().ToString(); }
+        }
     }
-  }
 }

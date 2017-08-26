@@ -1,15 +1,16 @@
-﻿using System.Linq;
-using System.Threading.Tasks;
-using CoreTemplate.Models.ManageViewModels;
+﻿using CoreTemplate.Managers;
+using CoreTemplate.Managers.ViewModels.Manage;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using System.Linq;
+using System.Threading.Tasks;
 
 namespace CoreTemplate.Controllers
 {
-  [Authorize]
+    [Authorize]
     public class ManageController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

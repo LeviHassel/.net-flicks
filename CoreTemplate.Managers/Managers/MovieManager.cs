@@ -11,38 +11,38 @@ using System.Collections.Generic;
 
 namespace CoreTemplate.Managers.Services
 {
-  public class MovieManager : IMovieManager
-  {
-    private IMovieAccessor _movieAccessor;
-
-    public MovieManager(IMovieAccessor movieAccessor)
+    public class MovieManager : IMovieManager
     {
-      _movieAccessor = movieAccessor;
+        private IMovieAccessor _movieAccessor;
+
+        public MovieManager(IMovieAccessor movieAccessor)
+        {
+            _movieAccessor = movieAccessor;
+        }
+
+        public MovieViewModel Get(int id)
+        {
+            var dto = _movieAccessor.Get(id);
+            var vm = Mapper.Map<MovieViewModel>(dto);
+
+            return vm;
+        }
+
+        public MoviesViewModel GetAll()
+        {
+            var dtos = _movieAccessor.GetAll();
+            var movieVms = Mapper.Map<List<MovieViewModel>>(dtos);
+
+            return new MoviesViewModel { Movies = movieVms };
+        }
+
+        public MovieViewModel Save(MovieViewModel viewModel)
+        {
+            var dto = Mapper.Map<MovieDTO>(viewModel);
+            var dbDto = _movieAccessor.Save(dto);
+            var vm = Mapper.Map<MovieViewModel>(dbDto);
+
+            return vm;
+        }
     }
-
-    public MovieViewModel Get(int id)
-    {
-      var dto = _movieAccessor.Get(id);
-      var vm = Mapper.Map<MovieViewModel>(dto);
-
-      return vm;
-    }
-
-    public MoviesViewModel GetAll()
-    {
-      var dtos = _movieAccessor.GetAll();
-      var movieVms = Mapper.Map<List<MovieViewModel>>(dtos);
-
-      return new MoviesViewModel { Movies = movieVms };
-    }
-
-    public MovieViewModel Save(MovieViewModel viewModel)
-    {
-      var dto = Mapper.Map<MovieDTO>(viewModel);
-      var dbDto = _movieAccessor.Save(dto);
-      var vm = Mapper.Map<MovieViewModel>(dbDto);
-
-      return vm;
-    }
-  }
 }

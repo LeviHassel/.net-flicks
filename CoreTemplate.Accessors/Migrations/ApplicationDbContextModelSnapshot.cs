@@ -5,7 +5,7 @@ using Microsoft.EntityFrameworkCore.Metadata;
 
 namespace CoreTemplate.Accessors.Migrations
 {
-  [DbContext(typeof(CoreTemplateContext))]
+    [DbContext(typeof(CoreTemplateContext))]
     partial class CoreTemplateContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

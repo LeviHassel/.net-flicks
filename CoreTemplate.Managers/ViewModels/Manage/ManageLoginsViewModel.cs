@@ -4,10 +4,10 @@ using Microsoft.AspNetCore.Identity;
 
 namespace CoreTemplate.Managers.ViewModels.Manage
 {
-  public class ManageLoginsViewModel
-  {
-    public IList<UserLoginInfo> CurrentLogins { get; set; }
+    public class ManageLoginsViewModel
+    {
+        public IList<UserLoginInfo> CurrentLogins { get; set; }
 
-    public IList<AuthenticationDescription> OtherLogins { get; set; }
-  }
+        public IList<AuthenticationDescription> OtherLogins { get; set; }
+    }
 }

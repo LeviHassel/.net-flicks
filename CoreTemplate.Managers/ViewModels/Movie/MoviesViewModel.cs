@@ -2,8 +2,8 @@
 
 namespace CoreTemplate.Managers.ViewModels.Home
 {
-  public class MoviesViewModel
-  {
-    public List<MovieViewModel> Movies { get; set; }
-  }
+    public class MoviesViewModel
+    {
+        public List<MovieViewModel> Movies { get; set; }
+    }
 }

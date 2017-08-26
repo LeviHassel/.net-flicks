@@ -12,7 +12,7 @@ using CoreTemplate.Managers.ViewModels.Account;
 
 namespace CoreTemplate.Controllers
 {
-  [Authorize]
+    [Authorize]
     public class AccountController : Controller
     {
         private readonly UserManager<ApplicationUser> _userManager;

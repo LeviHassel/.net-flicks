@@ -4,16 +4,16 @@ using CoreTemplate.Accessors.Models.EF;
 
 namespace CoreTemplate.Accessors.Config
 {
-  public class AutoMapperAccessorsConfig : Profile
-  {
-    public AutoMapperAccessorsConfig()
+    public class AutoMapperAccessorsConfig : Profile
     {
-      CreateMap<Movie, MovieDTO>().ReverseMap();
-    }
+        public AutoMapperAccessorsConfig()
+        {
+            CreateMap<Movie, MovieDTO>().ReverseMap();
+        }
 
-    public override string ProfileName
-    {
-      get { return GetType().ToString(); }
+        public override string ProfileName
+        {
+            get { return GetType().ToString(); }
+        }
     }
-  }
 }

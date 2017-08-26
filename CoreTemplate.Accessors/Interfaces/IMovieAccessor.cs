@@ -3,12 +3,12 @@ using System.Collections.Generic;
 
 namespace CoreTemplate.Accessors.Interfaces
 {
-  public interface IMovieAccessor
-  {
-    MovieDTO Save(MovieDTO entity);
+    public interface IMovieAccessor
+    {
+        MovieDTO Save(MovieDTO entity);
 
-    List<MovieDTO> GetAll();
+        List<MovieDTO> GetAll();
 
-    MovieDTO Get(int id);
-  }
+        MovieDTO Get(int id);
+    }
 }

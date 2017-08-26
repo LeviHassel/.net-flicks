@@ -11,23 +11,23 @@ using System;
 
 namespace CoreTemplate.Config
 {
-  public static class AccessorsDependencies
-  {
-    public static IServiceCollection AddAccessorsDependencies(this IServiceCollection services)
+    public static class AccessorsDependencies
     {
-      if (services == null)
-      {
-        throw new ArgumentNullException(nameof(services));
-      }
+        public static IServiceCollection AddAccessorsDependencies(this IServiceCollection services)
+        {
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
 
-      services.AddTransient<DbContext, CoreTemplateContext>();
-      services.AddTransient<IMovieAccessor, MovieAccessor>();
+            services.AddTransient<DbContext, CoreTemplateContext>();
+            services.AddTransient<IMovieAccessor, MovieAccessor>();
 
-      //Currently unused bindings from  Ninject:
-      //Kernel.Bind<MvcIndividualAuthContext>().ToSelf().InRequestScope();
-      //Kernel.Bind<IUserStore<ApplicationUser, string>>().To<ApplicationUserStore>();
+            //Currently unused bindings from  Ninject:
+            //Kernel.Bind<MvcIndividualAuthContext>().ToSelf().InRequestScope();
+            //Kernel.Bind<IUserStore<ApplicationUser, string>>().To<ApplicationUserStore>();
 
-      return services;
+            return services;
+        }
     }
-  }
 }

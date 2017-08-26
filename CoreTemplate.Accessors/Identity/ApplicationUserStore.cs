@@ -2,11 +2,11 @@
 
 namespace CoreTemplate.Accessors.Identity
 {
-  public class ApplicationUserStore : UserStore<ApplicationUser>
-  {
-    public ApplicationUserStore(CoreTemplateContext context)
-        : base(context)
+    public class ApplicationUserStore : UserStore<ApplicationUser>
     {
+        public ApplicationUserStore(CoreTemplateContext context)
+            : base(context)
+        {
+        }
     }
-  }
 }

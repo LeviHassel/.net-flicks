@@ -2,7 +2,7 @@
 
 namespace CoreTemplate.Managers
 {
-  public interface IEmailSender
+  public interface IEmailManager
   {
     Task SendEmailAsync(string email, string subject, string message);
   }

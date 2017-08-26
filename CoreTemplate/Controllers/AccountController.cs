@@ -7,6 +7,8 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
+using CoreTemplate.Managers;
+using CoreTemplate.Managers.ViewModels.Account;
 
 namespace CoreTemplate.Controllers
 {
@@ -15,8 +17,8 @@ namespace CoreTemplate.Controllers
     {
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
-        private readonly IEmailSender _emailSender;
-        private readonly ISmsSender _smsSender;
+        private readonly IEmailManager _emailManager;
+        private readonly ISmsManager _smsManager;
         private readonly ILogger _logger;
         private readonly string _externalCookieScheme;
 
@@ -24,15 +26,15 @@ namespace CoreTemplate.Controllers
             UserManager<ApplicationUser> userManager,
             SignInManager<ApplicationUser> signInManager,
             IOptions<IdentityCookieOptions> identityCookieOptions,
-            IEmailSender emailSender,
-            ISmsSender smsSender,
+            IEmailManager emailSender,
+            ISmsManager smsSender,
             ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _externalCookieScheme = identityCookieOptions.Value.ExternalCookieAuthenticationScheme;
-            _emailSender = emailSender;
-            _smsSender = smsSender;
+            _emailManager = emailSender;
+            _smsManager = smsSender;
             _logger = loggerFactory.CreateLogger<AccountController>();
         }
 
@@ -115,7 +117,7 @@ namespace CoreTemplate.Controllers
                     // Send an email with this link
                     //var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
                     //var callbackUrl = Url.Action(nameof(ConfirmEmail), "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                    //await _emailSender.SendEmailAsync(model.Email, "Confirm your account",
+                    //await _emailManager.SendEmailAsync(model.Email, "Confirm your account",
                     //    $"Please confirm your account by clicking this link: <a href='{callbackUrl}'>link</a>");
                     await _signInManager.SignInAsync(user, isPersistent: false);
                     _logger.LogInformation(3, "User created a new account with password.");
@@ -275,7 +277,7 @@ namespace CoreTemplate.Controllers
                 // Send an email with this link
                 //var code = await _userManager.GeneratePasswordResetTokenAsync(user);
                 //var callbackUrl = Url.Action(nameof(ResetPassword), "Account", new { userId = user.Id, code = code }, protocol: HttpContext.Request.Scheme);
-                //await _emailSender.SendEmailAsync(model.Email, "Reset Password",
+                //await _emailManager.SendEmailAsync(model.Email, "Reset Password",
                 //   $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
                 //return View("ForgotPasswordConfirmation");
             }
@@ -381,11 +383,11 @@ namespace CoreTemplate.Controllers
             var message = "Your security code is: " + code;
             if (model.SelectedProvider == "Email")
             {
-                await _emailSender.SendEmailAsync(await _userManager.GetEmailAsync(user), "Security Code", message);
+                await _emailManager.SendEmailAsync(await _userManager.GetEmailAsync(user), "Security Code", message);
             }
             else if (model.SelectedProvider == "Phone")
             {
-                await _smsSender.SendSmsAsync(await _userManager.GetPhoneNumberAsync(user), message);
+                await _smsManager.SendSmsAsync(await _userManager.GetPhoneNumberAsync(user), message);
             }
 
             return RedirectToAction(nameof(VerifyCode), new { Provider = model.SelectedProvider, ReturnUrl = model.ReturnUrl, RememberMe = model.RememberMe });

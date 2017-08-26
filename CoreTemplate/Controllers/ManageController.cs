@@ -15,23 +15,23 @@ namespace CoreTemplate.Controllers
         private readonly UserManager<ApplicationUser> _userManager;
         private readonly SignInManager<ApplicationUser> _signInManager;
         private readonly string _externalCookieScheme;
-        private readonly IEmailSender _emailSender;
-        private readonly ISmsSender _smsSender;
+        private readonly IEmailManager _emailManager;
+        private readonly ISmsManager _smsManager;
         private readonly ILogger _logger;
 
         public ManageController(
           UserManager<ApplicationUser> userManager,
           SignInManager<ApplicationUser> signInManager,
           IOptions<IdentityCookieOptions> identityCookieOptions,
-          IEmailSender emailSender,
-          ISmsSender smsSender,
+          IEmailManager emailSender,
+          ISmsManager smsSender,
           ILoggerFactory loggerFactory)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _externalCookieScheme = identityCookieOptions.Value.ExternalCookieAuthenticationScheme;
-            _emailSender = emailSender;
-            _smsSender = smsSender;
+            _emailManager = emailSender;
+            _smsManager = smsSender;
             _logger = loggerFactory.CreateLogger<ManageController>();
         }
 
@@ -109,7 +109,7 @@ namespace CoreTemplate.Controllers
                 return View("Error");
             }
             var code = await _userManager.GenerateChangePhoneNumberTokenAsync(user, model.PhoneNumber);
-            await _smsSender.SendSmsAsync(model.PhoneNumber, "Your security code is: " + code);
+            await _smsManager.SendSmsAsync(model.PhoneNumber, "Your security code is: " + code);
             return RedirectToAction(nameof(VerifyPhoneNumber), new { PhoneNumber = model.PhoneNumber });
         }
 

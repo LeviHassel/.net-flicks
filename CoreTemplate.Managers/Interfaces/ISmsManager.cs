@@ -2,7 +2,7 @@
 
 namespace CoreTemplate.Managers
 {
-  public interface ISmsSender
+  public interface ISmsManager
   {
     Task SendSmsAsync(string number, string message);
   }

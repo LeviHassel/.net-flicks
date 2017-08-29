@@ -1,7 +1,8 @@
-﻿using Microsoft.AspNetCore;
+﻿using CoreTemplate;
+using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace AspNetCoreDotNetCore2._0App
+namespace CoreTemplate
 {
     public class Program
     {

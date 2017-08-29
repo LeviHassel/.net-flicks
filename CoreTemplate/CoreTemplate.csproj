@@ -1,7 +1,7 @@
 ﻿<Project Sdk="Microsoft.NET.Sdk.Web">
 
   <PropertyGroup Label="Configuration" Condition="'$(Configuration)|$(Platform)'=='Debug|AnyCPU'">
-    <OutputType>Library</OutputType>
+    <OutputType>Exe</OutputType>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -16,7 +16,7 @@
     <UserSecretsId>aspnet-CoreTemplate-e91132e6-85a2-421c-a63d-b0ed9cc0c64f</UserSecretsId>
     <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
     <OutputTypeEx>library</OutputTypeEx>
-    <StartupObject />
+    <StartupObject>CoreTemplate.Program</StartupObject>
     <AssemblyName>CoreTemplate</AssemblyName>
   </PropertyGroup>
   <ItemGroup>

@@ -9,7 +9,7 @@ using System.Collections.Generic;
  * TODO: Make this my own - Levi Hassel
  */
 
-namespace CoreTemplate.Managers.Services
+namespace CoreTemplate.Managers.Managers
 {
     public class MovieManager : IMovieManager
     {

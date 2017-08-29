@@ -1,6 +1,6 @@
 ﻿using CoreTemplate.Managers;
 using CoreTemplate.Managers.Interfaces;
-using CoreTemplate.Managers.Services;
+using CoreTemplate.Managers.Managers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 

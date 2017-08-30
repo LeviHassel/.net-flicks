@@ -1,5 +1,5 @@
-﻿using CoreTemplate.Accessors.Models.EF;
-using CoreTemplate.Managers;
+﻿using CoreTemplate.Managers;
+using CoreTemplate.Managers.Identity;
 using CoreTemplate.Models.AccountViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
@@ -16,14 +16,14 @@ namespace CoreTemplate.Controllers
     [Route("[controller]/[action]")]
     public class AccountController : Controller
     {
-        private readonly UserManager<ApplicationUser> _userManager;
-        private readonly SignInManager<ApplicationUser> _signInManager;
+        private readonly ApplicationUserManager _userManager;
+        private readonly ApplicationSignInManager _signInManager;
         private readonly IEmailManager _emailManager;
         private readonly ILogger _logger;
 
         public AccountController(
-            UserManager<ApplicationUser> userManager,
-            SignInManager<ApplicationUser> signInManager,
+            ApplicationUserManager userManager,
+            ApplicationSignInManager signInManager,
             IEmailManager emailSender,
             ILogger<AccountController> logger)
         {

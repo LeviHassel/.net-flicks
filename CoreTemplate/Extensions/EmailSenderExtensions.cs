@@ -1,9 +1,10 @@
+using CoreTemplate.Managers;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace CoreTemplate.Services
+namespace CoreTemplate.Managers
 {
-    public static class EmailSenderExtensions
+    public static class EmailManagerExtensions
     {
         public static Task SendEmailConfirmationAsync(this IEmailManager emailManager, string email, string link)
         {

@@ -14,7 +14,7 @@ namespace CoreTemplate.Accessors.Models.EF
         [Required]
         public string Director { get; set; }
 
-        public int Runtime { get; set; }
+        public int Runtimes { get; set; }
 
         public int Year { get; set; }
     }

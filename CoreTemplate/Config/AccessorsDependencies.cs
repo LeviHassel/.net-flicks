@@ -20,7 +20,7 @@ namespace CoreTemplate.Config
                 throw new ArgumentNullException(nameof(services));
             }
 
-            services.AddTransient<DbContext, CoreTemplateContext>();
+            services.AddTransient<DbContext, ApplicationDbContext>();
             services.AddTransient<IMovieAccessor, MovieAccessor>();
 
             //Currently unused bindings from  Ninject:

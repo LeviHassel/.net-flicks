@@ -19,8 +19,7 @@ namespace CoreTemplate.Config
                 throw new ArgumentNullException(nameof(services));
             }
 
-            services.AddTransient<IEmailManager, MessageManager>();
-            //services.AddTransient<ISmsManager, MessageManager>(); Remove all references
+            services.AddTransient<IEmailManager, EmailManager>();
             services.AddTransient<IMovieManager, MovieManager>();
 
             /*

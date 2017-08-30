@@ -20,7 +20,7 @@ namespace CoreTemplate.Config
             }
 
             services.AddTransient<IEmailManager, MessageManager>();
-            services.AddTransient<ISmsManager, MessageManager>();
+            //services.AddTransient<ISmsManager, MessageManager>(); Remove all references
             services.AddTransient<IMovieManager, MovieManager>();
 
             /*

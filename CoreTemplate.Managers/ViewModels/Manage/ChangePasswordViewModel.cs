@@ -1,6 +1,10 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
+using System.Linq;
+using System.Threading.Tasks;
 
-namespace CoreTemplate.Managers.ViewModels.Manage
+namespace CoreTemplate.Models.ManageViewModels
 {
     public class ChangePasswordViewModel
     {
@@ -19,5 +23,7 @@ namespace CoreTemplate.Managers.ViewModels.Manage
         [Display(Name = "Confirm new password")]
         [Compare("NewPassword", ErrorMessage = "The new password and confirmation password do not match.")]
         public string ConfirmPassword { get; set; }
+
+        public string StatusMessage { get; set; }
     }
 }

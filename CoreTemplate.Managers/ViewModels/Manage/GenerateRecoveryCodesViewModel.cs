@@ -6,9 +6,8 @@ using System.Threading.Tasks;
 
 namespace CoreTemplate.Models.ManageViewModels
 {
-    public class RemoveLoginViewModel
+    public class GenerateRecoveryCodesViewModel
     {
-        public string LoginProvider { get; set; }
-        public string ProviderKey { get; set; }
+        public string[] RecoveryCodes { get; set; }
     }
 }

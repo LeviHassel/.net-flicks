@@ -1,13 +1,11 @@
-﻿using CoreTemplate.Accessors.Identity;
-using CoreTemplate.Accessors.Models.EF;
-using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
+﻿using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 
 namespace CoreTemplate.Accessors
 {
-    public class CoreTemplateContext : IdentityDbContext<ApplicationUser>
+    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
     {
-        public CoreTemplateContext(DbContextOptions<CoreTemplateContext> options)
+        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
             : base(options)
         {
         }
@@ -19,7 +17,5 @@ namespace CoreTemplate.Accessors
             // For example, you can rename the ASP.NET Identity table names and more.
             // Add your customizations after calling base.OnModelCreating(builder);
         }
-
-        public DbSet<Movie> Movies { get; set; }
     }
 }

@@ -2,6 +2,7 @@
 using CoreTemplate.Accessors;
 using CoreTemplate.Accessors.Models.EF;
 using CoreTemplate.Config;
+using CoreTemplate.Managers.Identity;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -36,6 +37,9 @@ namespace CoreTemplate
             // services.AddAutoMapper(typeof(Startup));  // <-- newer automapper version uses this signature.
 
             // Add application services.
+            services.AddTransient<ApplicationUserManager>();
+            services.AddTransient<ApplicationSignInManager>();
+
             services.AddManagersDependencies();
             services.AddAccessorsDependencies();
         }

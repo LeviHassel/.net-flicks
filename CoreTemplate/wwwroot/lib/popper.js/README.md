@@ -31,7 +31,7 @@ to make it possible to position it near a given reference element.
 
 The engine is completely modular and most of its features are implemented as **modifiers**
 (similar to middlewares or plugins).  
-The whole code base is written in ES2015 and its features are automatically tested on real browsers thank to [SauceLabs](https://saucelabs.com/) and [TravisCI](travis-ci.org).
+The whole code base is written in ES2015 and its features are automatically tested on real browsers thanks to [SauceLabs](https://saucelabs.com/) and [TravisCI](https://travis-ci.org/).
 
 Popper.js has zero dependencies. No jQuery, no LoDash, nothing.  
 It's used by big companies like [Twitter in Bootstrap v4](https://getbootstrap.com/), [Microsoft in WebClipper](https://github.com/OneNoteDev/WebClipper) and [Atlassian in AtlasKit](https://aui-cdn.atlassian.com/atlaskit/registry/).
@@ -73,7 +73,7 @@ Popper.js is available on the following package managers and CDNs:
 | npm    | `npm install popper.js --save`                                                   |
 | yarn   | `yarn add popper.js`                                                             |
 | NuGet  | `PM> Install-Package popper.js`                                                  |
-| Bower  | `bower install popper.js=https://unpkg.com/popper.js --save`                     |
+| Bower  | `bower install popper.js --save`                     |
 | unpkg  | [`https://unpkg.com/popper.js`](https://unpkg.com/popper.js)                     |
 | cdnjs  | [`https://cdnjs.com/libraries/popper.js`](https://cdnjs.com/libraries/popper.js) |
 
@@ -83,9 +83,22 @@ Tooltip.js as well:
 |:-------|:---------------------------------------------------------------------------------|
 | npm    | `npm install tooltip.js --save`                                                  |
 | yarn   | `yarn add tooltip.js`                                                            |
-| Bower  | `bower install tooltip.js=https://unpkg.com/tooltip.js --save`                   |
+| Bower* | `bower install tooltip.js=https://unpkg.com/tooltip.js --save`                   |
 | unpkg  | [`https://unpkg.com/tooltip.js`](https://unpkg.com/tooltip.js)                   |
 | cdnjs  | [`https://cdnjs.com/libraries/popper.js`](https://cdnjs.com/libraries/popper.js) |
+
+\*: Bower isn't officially supported, it can be used to install Tooltip.js only trough the unpkg.com CDN. This method has the limitation of not being able to define a specific version of the library. Bower and Popper.js suggests to use npm or Yarn for your projects.  
+For more info, [read the related issue](https://github.com/FezVrasta/popper.js/issues/390).
+
+### Dist targets
+
+Popper.js is currently shipped with 3 targets in mind: UMD, ESM and ESNext.
+
+- UMD - Universal Module Definition: AMD, RequireJS and globals;
+- ESM - ES Modules: For webpack/Rollup or browser supporting the spec;
+- ESNext: Available in `dist/`, can be used with webpack and `babel-preset-env`;
+
+Make sure to use the right one for your needs. If you want to import it with a `<script>` tag, use UMD.
 
 ## Usage
 
@@ -105,7 +118,7 @@ var anotherPopper = new Popper(
 
 ### Callbacks
 
-Popper.js supports two kind of callbacks, the `onCreate` callback is called after
+Popper.js supports two kinds of callbacks, the `onCreate` callback is called after
 the popper has been initalized. The `onUpdate` one is called on any subsequent update.
 
 ```js
@@ -128,7 +141,7 @@ new Popper(reference, popper, {
 Popper.js is based on a "plugin-like" architecture, most of its features are fully encapsulated "modifiers".  
 A modifier is a function that is called each time Popper.js needs to compute the position of the popper. For this reason, modifiers should be very performant to avoid bottlenecks.  
 
-To learn how to create a modifier, [read the modifiers documentaton](docs/_includes/popper-documentation.md#modifiers--object)
+To learn how to create a modifier, [read the modifiers documentation](docs/_includes/popper-documentation.md#modifiers--object)
 
 
 ### React, Vue.js, Angular, AngularJS, Ember.js (etc...) integration
@@ -139,7 +152,7 @@ Popper.js limits all its DOM modifications inside the `applyStyle` modifier,
 you can simply disable it and manually apply the popper coordinates using
 your library of choice.  
 
-For a comphrensive list of libraries that let you use Popper.js into existing
+For a comprehensive list of libraries that let you use Popper.js into existing
 frameworks, visit the [MENTIONS](MENTIONS.md) page.
 
 Alternatively, you may even override your own `applyStyles` with your custom one and

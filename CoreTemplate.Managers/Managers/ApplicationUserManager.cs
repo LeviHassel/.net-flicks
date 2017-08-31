@@ -21,5 +21,10 @@ namespace CoreTemplate.Managers.Identity
                 : base(store, optionsAccessor, passwordHasher, userValidators, passwordValidators, keyNormalizer, errors, services, logger)
         {
         }
+		
+		public ApplicationUser CreateUser (string email) {
+			var user = new ApplicationUser { UserName = email, Email = email };
+			return user;
+		}
     }
 }

@@ -1,5 +1,5 @@
-﻿using CoreTemplate.Accessors.Models.EF;
-using CoreTemplate.Managers;
+﻿using CoreTemplate.Managers;
+using CoreTemplate.Managers.Identity;
 using CoreTemplate.Models.ManageViewModels;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;

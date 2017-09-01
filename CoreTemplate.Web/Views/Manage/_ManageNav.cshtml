@@ -1,5 +1,5 @@
-﻿@using CoreTemplate.Managers.Identity
-@using CoreTemplate.Views.Manage
+﻿@using CoreTemplate.Managers.Managers
+@using CoreTemplate.Web.Views.Manage
 @inject ApplicationSignInManager SignInManager
 @{
     var hasExternalLogins = (await SignInManager.GetExternalAuthenticationSchemesAsync()).Any();

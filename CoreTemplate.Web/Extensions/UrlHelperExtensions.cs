@@ -1,10 +1,7 @@
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using CoreTemplate.Controllers;
+using CoreTemplate.Web.Controllers;
+using Microsoft.AspNetCore.Mvc;
 
-namespace Microsoft.AspNetCore.Mvc
+namespace CoreTemplate.Web.Extensions
 {
     public static class UrlHelperExtensions
     {

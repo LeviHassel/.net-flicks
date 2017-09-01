@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.ViewFeatures;
 using System;
 
-namespace CoreTemplate.Views.Manage
+namespace CoreTemplate.Web.Views.Manage
 {
     public static class ManageNavPages
     {

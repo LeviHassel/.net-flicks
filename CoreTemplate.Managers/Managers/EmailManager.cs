@@ -1,4 +1,5 @@
-﻿using System.Threading.Tasks;
+﻿using CoreTemplate.Managers.Interfaces;
+using System.Threading.Tasks;
 
 namespace CoreTemplate.Managers.Managers
 {

@@ -1,8 +1,8 @@
-using CoreTemplate.Managers;
+using CoreTemplate.Managers.Interfaces;
 using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
-namespace CoreTemplate.Managers
+namespace CoreTemplate.Web.Extensions
 {
     public static class EmailManagerExtensions
     {

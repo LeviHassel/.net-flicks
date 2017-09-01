@@ -1,5 +1,4 @@
-﻿using CoreTemplate.Managers;
-using CoreTemplate.Managers.Interfaces;
+﻿using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.Managers.Managers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
@@ -8,7 +7,7 @@ using System;
  * TODO: Address comments based on what problems not having them causes - Levi Hassel
  */
 
-namespace CoreTemplate.Config
+namespace CoreTemplate.Web.Config
 {
     public static class ManagersDependencies
     {

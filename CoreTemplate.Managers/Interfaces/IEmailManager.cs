@@ -1,6 +1,6 @@
 ﻿using System.Threading.Tasks;
 
-namespace CoreTemplate.Managers
+namespace CoreTemplate.Managers.Interfaces
 {
     public interface IEmailManager
     {

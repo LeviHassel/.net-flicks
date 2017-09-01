@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using CoreTemplate.Accessors;
-using CoreTemplate.Accessors.Models.EF;
-using CoreTemplate.Config;
-using CoreTemplate.Managers.Identity;
+using CoreTemplate.Accessors.Models;
+using CoreTemplate.Managers.Managers;
+using CoreTemplate.Web.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
@@ -10,7 +10,7 @@ using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoreTemplate
+namespace CoreTemplate.Web
 {
     public class Startup
     {

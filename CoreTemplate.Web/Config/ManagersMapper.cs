@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using CoreTemplate.Accessors.Models.DTO;
-using CoreTemplate.Managers.ViewModels.Home;
+using CoreTemplate.Managers.ViewModels.Movie;
 
-namespace CoreTemplate.Managers.Config
+namespace CoreTemplate.Web.Config
 {
     public class AutoMapperManagersConfig : Profile
     {

@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.26730.10
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTemplate", "CoreTemplate\CoreTemplate.csproj", "{86EA2254-BCD2-4269-B8F2-067FD5E8A8CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTemplate.Web", "CoreTemplate.Web\CoreTemplate.Web.csproj", "{86EA2254-BCD2-4269-B8F2-067FD5E8A8CD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE} = {C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}
 	EndProjectSection

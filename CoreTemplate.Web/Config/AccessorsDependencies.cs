@@ -9,7 +9,7 @@ using System;
  * TODO: Address comments based on what problems not having them causes - Levi Hassel
  */
 
-namespace CoreTemplate.Config
+namespace CoreTemplate.Web.Config
 {
     public static class AccessorsDependencies
     {

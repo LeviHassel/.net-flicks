@@ -19,7 +19,7 @@
   <ItemGroup>
     <ProjectReference Include="..\CoreTemplate.Accessors\CoreTemplate.Accessors.csproj" />
     <ProjectReference Include="..\CoreTemplate.Managers\CoreTemplate.Managers.csproj" />
-    <ProjectReference Include="..\CoreTemplate\CoreTemplate.csproj" />
+    <ProjectReference Include="..\CoreTemplate.Web\CoreTemplate.Web.csproj" />
   </ItemGroup>
 
 </Project>

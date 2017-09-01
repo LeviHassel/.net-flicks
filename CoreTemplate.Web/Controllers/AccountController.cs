@@ -1,6 +1,7 @@
-﻿using CoreTemplate.Managers;
-using CoreTemplate.Managers.Identity;
-using CoreTemplate.Models.AccountViewModels;
+﻿using CoreTemplate.Managers.Interfaces;
+using CoreTemplate.Managers.Managers;
+using CoreTemplate.Managers.ViewModels.Account;
+using CoreTemplate.Web.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
@@ -10,7 +11,7 @@ using System;
 using System.Security.Claims;
 using System.Threading.Tasks;
 
-namespace CoreTemplate.Controllers
+namespace CoreTemplate.Web.Controllers
 {
     [Authorize]
     [Route("[controller]/[action]")]

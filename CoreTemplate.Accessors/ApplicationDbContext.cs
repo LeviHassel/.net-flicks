@@ -1,4 +1,5 @@
-﻿using CoreTemplate.Accessors.Models.EF;
+﻿using CoreTemplate.Accessors.Models;
+using CoreTemplate.Accessors.Models.EF;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 

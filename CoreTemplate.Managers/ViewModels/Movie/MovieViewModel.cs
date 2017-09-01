@@ -1,7 +1,7 @@
-﻿using System.ComponentModel.DataAnnotations;
-using CoreTemplate.Managers.ViewModels.Base;
+﻿using CoreTemplate.Managers.ViewModels.Base;
+using System.ComponentModel.DataAnnotations;
 
-namespace CoreTemplate.Managers.ViewModels.Home
+namespace CoreTemplate.Managers.ViewModels.Movie
 {
     public class MovieViewModel : EntityViewModel
     {

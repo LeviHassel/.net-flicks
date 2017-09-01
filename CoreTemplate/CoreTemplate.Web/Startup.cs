@@ -34,12 +34,9 @@ namespace CoreTemplate.Web
             services.AddMvc();
 
             services.AddAutoMapper();
-            // services.AddAutoMapper(typeof(Startup));  // <-- newer automapper version uses this signature.
+            // services.AddAutoMapper(typeof(Startup));  // <-- newer automapper version uses this signature
 
-            // Add application services.
-            services.AddTransient<ApplicationUserManager>();
-            services.AddTransient<ApplicationSignInManager>();
-
+            // Add application services
             services.AddManagersDependencies();
             services.AddAccessorsDependencies();
         }

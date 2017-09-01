@@ -18,6 +18,9 @@ namespace CoreTemplate.Web.Config
                 throw new ArgumentNullException(nameof(services));
             }
 
+            services.AddTransient<ApplicationUserManager>();
+            services.AddTransient<ApplicationSignInManager>();
+
             services.AddTransient<IEmailManager, EmailManager>();
             services.AddTransient<IMovieManager, MovieManager>();
 

@@ -1,7 +1,6 @@
 ﻿using AutoMapper;
 using CoreTemplate.Accessors;
 using CoreTemplate.Accessors.Models;
-using CoreTemplate.Managers.Managers;
 using CoreTemplate.Web.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;

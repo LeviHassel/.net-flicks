@@ -12,11 +12,11 @@ Dependencies: Managers
 
 ### Managers
 Dependencies: Accessors
-???
+The Managers project (usually called the Services layer in the world of C#) is cool.
 
 ### Accessors
 Dependencies: None
-???
+The Accessors project (usually called the Repository layer in world of C#) is cool.
 
 ### Tests
 Dependencies: Web, Managers and Accessors
@@ -28,5 +28,8 @@ Dependencies: Web, Managers and Accessors
 * [SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads "SQL Server Developer Edition")
 * [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms "SQL Server Management Studio")
 
-## How to Run
-First install all of the requirements above, which should be pretty straight-forward.
+## Getting Started
+1. Download and install all of the requirements listed above.
+2. Download this repository.
+3. Open SQL Server Management Studio, enter "localhost" as the Server Name and click Connect.
+4. 

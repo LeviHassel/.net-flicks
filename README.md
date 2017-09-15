@@ -8,18 +8,22 @@ This solution is divided into four projects.
 
 ### Web
 Dependencies: Managers
+
 ???
 
 ### Managers
 Dependencies: Accessors
+
 The Managers project (usually called the Services layer in the world of C#) is cool.
 
 ### Accessors
 Dependencies: None
+
 The Accessors project (usually called the Repository layer in world of C#) is cool.
 
 ### Tests
 Dependencies: Web, Managers and Accessors
+
 ???
 
 ## Requirements

@@ -55,8 +55,6 @@ namespace CoreTemplate.Accessors.Accessors
                     _db.Entry(entity).State = EntityState.Modified;
                 }
 
-                _db.SaveChanges();
-
                 var returnDto = Mapper.Map<MovieDTO>(entity);
 
                 return returnDto;

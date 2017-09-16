@@ -6,7 +6,7 @@ using CoreTemplate.Managers.ViewModels.Movie;
 using System.Collections.Generic;
 
 /*
- * TODO: Make this my own - Levi Hassel
+ * TODO: Make this my own
  */
 
 namespace CoreTemplate.Managers.Managers

@@ -6,7 +6,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 
 /*
- * TODO: Address comments based on what problems not having them causes - Levi Hassel
+ * TODO: Address comments based on what problems not having them causes
  */
 
 namespace CoreTemplate.Web.Config
@@ -20,7 +20,7 @@ namespace CoreTemplate.Web.Config
                 throw new ArgumentNullException(nameof(services));
             }
 
-            services.AddTransient<DbContext, ApplicationDbContext>();
+            services.AddTransient<DbContext, CoreTemplateContext>();
             services.AddTransient<IMovieAccessor, MovieAccessor>();
 
             //Currently unused bindings from  Ninject:

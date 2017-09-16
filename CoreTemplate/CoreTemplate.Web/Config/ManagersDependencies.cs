@@ -4,7 +4,7 @@ using Microsoft.Extensions.DependencyInjection;
 using System;
 
 /*
- * TODO: Address comments based on what problems not having them causes - Levi Hassel
+ * TODO: Address comments based on what problems not having them causes
  */
 
 namespace CoreTemplate.Web.Config

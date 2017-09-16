@@ -6,9 +6,13 @@ using System.Linq;
 
 namespace CoreTemplate.Accessors
 {
-    public class ApplicationDbContext : IdentityDbContext<ApplicationUser>
+    public class CoreTemplateContext : IdentityDbContext<ApplicationUser>
     {
-        public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options)
+        /// <summary>
+        /// Default context
+        /// </summary>
+        /// <param name="options"></param>
+        public CoreTemplateContext(DbContextOptions<CoreTemplateContext> options)
             : base(options)
         {
         }

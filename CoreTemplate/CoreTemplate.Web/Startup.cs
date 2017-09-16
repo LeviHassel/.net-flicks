@@ -26,6 +26,10 @@ namespace CoreTemplate.Web
             services.AddDbContext<CoreTemplateContext>(options =>
                 options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
 
+            /*
+             * TODO: Add testing connection setup here (see the line above)
+             */
+
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<CoreTemplateContext>()
                 .AddDefaultTokenProviders();

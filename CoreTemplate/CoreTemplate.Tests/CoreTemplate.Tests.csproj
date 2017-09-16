@@ -21,5 +21,11 @@
     <ProjectReference Include="..\CoreTemplate.Managers\CoreTemplate.Managers.csproj" />
     <ProjectReference Include="..\CoreTemplate.Web\CoreTemplate.Web.csproj" />
   </ItemGroup>
+  <ItemGroup>
+    <Folder Include="Helpers\" />
+    <Folder Include="IntegrationTests\" />
+    <Folder Include="UnitTests\Controllers\" />
+    <Folder Include="UnitTests\Managers\" />
+  </ItemGroup>
 
 </Project>

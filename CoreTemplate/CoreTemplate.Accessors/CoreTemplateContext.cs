@@ -27,6 +27,11 @@ namespace CoreTemplate.Accessors
             }
         }
 
+        public virtual void SetState(object entity, EntityState state)
+        {
+            this.Entry(entity).State = state;
+        }
+
         public DbSet<Movie> Movies { get; set; }
     }
 }

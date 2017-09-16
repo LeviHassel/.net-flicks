@@ -4,9 +4,9 @@ namespace CoreTemplate.Accessors.Accessors.Base
 {
     public class EntityAccessor<TEntity> where TEntity : Entity
     {
-        protected readonly ApplicationDbContext _db;
+        protected readonly CoreTemplateContext _db;
 
-        public EntityAccessor(ApplicationDbContext db)
+        public EntityAccessor(CoreTemplateContext db)
         {
             _db = db;
         }

@@ -7,7 +7,7 @@ using System;
 
 namespace CoreTemplate.Accessors.Migrations
 {
-    [DbContext(typeof(ApplicationDbContext))]
+    [DbContext(typeof(CoreTemplateContext))]
     [Migration("00000000000000_CreateIdentitySchema")]
     partial class CreateIdentitySchema
     {

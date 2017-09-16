@@ -13,7 +13,7 @@ namespace CoreTemplate.Accessors.Accessors
 {
     public class MovieAccessor : EntityAccessor<Entity>, IMovieAccessor
     {
-        public MovieAccessor(ApplicationDbContext db) : base(db)
+        public MovieAccessor(CoreTemplateContext db) : base(db)
         {
         }
 

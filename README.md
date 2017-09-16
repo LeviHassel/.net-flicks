@@ -4,22 +4,22 @@
 This is a good template. It uses [IDesign](http://www.idesign.net/ "IDesign") methodology.
 
 ## Design
-This solution is divided into four projects. 
+This solution is divided into four layers. 
 
-### Web
+### Clients
 Dependencies: Managers
 
-???
+The Clients layer is the user interface. This is where all of the controllers, views, front-end styling and JavaScript lives. If the need arises to build a Web API, you simply need to build a new project in this layer and hook it up to the other layers of your project.
 
 ### Managers
 Dependencies: Accessors
 
-The Managers project (usually called the Services layer in the world of C#) is cool.
+The Managers layer (usually called the Services layer in the world of C#), handles all of the business logic of the application.
 
 ### Accessors
 Dependencies: None
 
-The Accessors project (usually called the Repository layer in world of C#) is cool.
+The Accessors layer (usually called the Repository layer in world of C#), is in charge of storing and retrieving your application's data.
 
 ### Tests
 Dependencies: Web, Managers and Accessors

@@ -4,9 +4,9 @@ using CoreTemplate.Accessors.Models.EF;
 
 namespace CoreTemplate.Web.Config
 {
-    public class AutoMapperAccessorsConfig : Profile
+    public class AccessorMapper : Profile
     {
-        public AutoMapperAccessorsConfig()
+        public AccessorMapper()
         {
             CreateMap<Movie, MovieDTO>().ReverseMap();
         }

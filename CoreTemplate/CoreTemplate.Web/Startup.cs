@@ -40,8 +40,8 @@ namespace CoreTemplate.Web
             // services.AddAutoMapper(typeof(Startup));  // <-- newer automapper version uses this signature
 
             // Add application services
-            services.AddManagersDependencies();
-            services.AddAccessorsDependencies();
+            services.AddManagerDependencies();
+            services.AddAccessorDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

@@ -9,9 +9,9 @@ using System;
 
 namespace CoreTemplate.Web.Config
 {
-    public static class ManagersDependencies
+    public static class ManagerDependencies
     {
-        public static IServiceCollection AddManagersDependencies(this IServiceCollection services)
+        public static IServiceCollection AddManagerDependencies(this IServiceCollection services)
         {
             if (services == null)
             {

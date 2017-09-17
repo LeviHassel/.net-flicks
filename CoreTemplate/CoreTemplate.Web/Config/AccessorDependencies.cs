@@ -11,9 +11,9 @@ using System;
 
 namespace CoreTemplate.Web.Config
 {
-    public static class AccessorsDependencies
+    public static class AccessorDependencies
     {
-        public static IServiceCollection AddAccessorsDependencies(this IServiceCollection services)
+        public static IServiceCollection AddAccessorDependencies(this IServiceCollection services)
         {
             if (services == null)
             {

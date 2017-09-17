@@ -28,7 +28,6 @@
     <ProjectReference Include="..\CoreTemplate.Web\CoreTemplate.Web.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="IntegrationTests\" />
     <Folder Include="UnitTests\Controllers\" />
   </ItemGroup>
 

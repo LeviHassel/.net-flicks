@@ -79,10 +79,10 @@ namespace CoreTemplate.Tests.UnitTests.Managers
               .Returns(dto);
 
             //Act
-            var vm2 = _movieManager.SaveMovie(Mapper.Map<MovieViewModel>(dto));
+            var vmNew = _movieManager.SaveMovie(vm);
 
             //Assert
-            Assert.True(PropertyComparer.Equal(vm, vm2));
+            Assert.True(PropertyComparer.Equal(vm, vmNew));
         }
     }
 }

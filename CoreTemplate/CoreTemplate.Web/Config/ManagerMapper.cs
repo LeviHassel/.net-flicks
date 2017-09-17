@@ -4,9 +4,9 @@ using CoreTemplate.Managers.ViewModels.Movie;
 
 namespace CoreTemplate.Web.Config
 {
-    public class AutoMapperManagersConfig : Profile
+    public class ManagerMapper : Profile
     {
-        public AutoMapperManagersConfig()
+        public ManagerMapper()
         {
             CreateMap<MovieDTO, MovieViewModel>().ReverseMap();
         }

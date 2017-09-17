@@ -8,13 +8,13 @@ using System.Collections.Generic;
 
 namespace CoreTemplate.Tests.Helpers
 {
-    public class AccessorsHelper : IDisposable
+    public class AccessorHelper : IDisposable
     {
         public CoreTemplateContext Context { get; private set; }
 
         private IDbContextTransaction _transaction;
 
-        public AccessorsHelper()
+        public AccessorHelper()
         {
             //TODO: Figure out how to specify test db here with the options var, otherwise this will ruin my main database
             var options = new DbContextOptions<CoreTemplateContext>();
@@ -52,7 +52,7 @@ namespace CoreTemplate.Tests.Helpers
         }
 
         /*
-         * TODO: Revise SeedMovies to look less like the original code
+         * TODO: Revise SeedMovies to look less like the original code and be more efficient
          */
         internal List<Movie> SeedMovies(int count = 1)
         {

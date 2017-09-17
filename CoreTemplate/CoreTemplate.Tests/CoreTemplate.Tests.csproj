@@ -12,9 +12,15 @@
     <AssemblyName>CoreTemplate.Tests</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="3.50.6" />
+    <PackageReference Include="AutoFixture.Xunit2" Version="3.50.6" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.0" />
 	<PackageReference Include="AutoMapper" Version="6.1.1" />
     <PackageReference Include="AutoMapper.Extensions.Microsoft.DependencyInjection" Version="3.0.1" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.3.0" />
+    <PackageReference Include="Moq" Version="4.7.99" />
+    <PackageReference Include="xunit" Version="2.2.0" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.2.0" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoreTemplate.Accessors\CoreTemplate.Accessors.csproj" />
@@ -22,10 +28,8 @@
     <ProjectReference Include="..\CoreTemplate.Web\CoreTemplate.Web.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Helpers\" />
     <Folder Include="IntegrationTests\" />
     <Folder Include="UnitTests\Controllers\" />
-    <Folder Include="UnitTests\Managers\" />
   </ItemGroup>
 
 </Project>

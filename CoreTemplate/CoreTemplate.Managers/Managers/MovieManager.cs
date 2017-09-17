@@ -20,7 +20,7 @@ namespace CoreTemplate.Managers.Managers
             _movieAccessor = movieAccessor;
         }
 
-        public MovieViewModel Get(int id)
+        public MovieViewModel GetMovie(int id)
         {
             var dto = _movieAccessor.Get(id);
             var vm = Mapper.Map<MovieViewModel>(dto);
@@ -28,7 +28,7 @@ namespace CoreTemplate.Managers.Managers
             return vm;
         }
 
-        public MoviesViewModel GetAll()
+        public MoviesViewModel GetAllMovies()
         {
             var dtos = _movieAccessor.GetAll();
             var movieVms = Mapper.Map<List<MovieViewModel>>(dtos);
@@ -36,7 +36,7 @@ namespace CoreTemplate.Managers.Managers
             return new MoviesViewModel { Movies = movieVms };
         }
 
-        public MovieViewModel Save(MovieViewModel viewModel)
+        public MovieViewModel SaveMovie(MovieViewModel viewModel)
         {
             var dto = Mapper.Map<MovieDTO>(viewModel);
             var dbDto = _movieAccessor.Save(dto);

@@ -24,6 +24,8 @@ The Accessors layer (usually called the Repository layer in world of C#), is in 
 ### Tests
 Dependencies: Web, Managers and Accessors
 
+The Tests layer uses [xUnit](https://xunit.github.io/ "xUnit") along with [Moq](https://github.com/moq/moq4 "Moq") to handle integration and unit tests.
+
 ???
 
 ## Requirements

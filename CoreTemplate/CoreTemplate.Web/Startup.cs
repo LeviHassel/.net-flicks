@@ -68,6 +68,16 @@ namespace CoreTemplate.Web
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //Seed data
+            CoreTemplateContextSeed.SeedAsync(app).Wait();
+
+            /*
+             * TODO: Implement this
+             * //Seed user
+             * var defaultUser = new ApplicationUser { UserName = "admin@coretemplate.com", Email = "admin@coretemplate.com" };
+             * userManager.CreateAsync(defaultUser, "Pass@word1").Wait();
+             */
         }
     }
 }

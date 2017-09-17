@@ -23,8 +23,8 @@ namespace CoreTemplate.Web.Config
             services.AddTransient<DbContext, CoreTemplateContext>();
             services.AddTransient<IMovieAccessor, MovieAccessor>();
 
-            //Currently unused bindings from  Ninject:
-            //Kernel.Bind<MvcIndividualAuthContext>().ToSelf().InRequestScope();
+            //Currently unused bindings from Ninject:
+            //Kernel.Bind<CoreTemplateContext>().ToSelf().InRequestScope();
             //Kernel.Bind<IUserStore<ApplicationUser, string>>().To<ApplicationUserStore>();
 
             return services;

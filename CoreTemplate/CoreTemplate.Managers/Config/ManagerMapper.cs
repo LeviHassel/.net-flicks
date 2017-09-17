@@ -2,7 +2,7 @@
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Managers.ViewModels.Movie;
 
-namespace CoreTemplate.Web.Config
+namespace CoreTemplate.Managers.Config
 {
     public class ManagerMapper : Profile
     {

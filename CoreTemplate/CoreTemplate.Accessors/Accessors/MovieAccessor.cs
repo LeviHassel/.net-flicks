@@ -47,6 +47,7 @@ namespace CoreTemplate.Accessors.Accessors
                 if (dto.Id == 0)
                 {
                     //added
+                    //TODO: Figure out why this generates Id = -2147482647 (likely a db problem)
                     _db.Movies.Add(entity);
                 }
                 else

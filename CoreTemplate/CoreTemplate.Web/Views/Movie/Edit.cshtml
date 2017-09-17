@@ -1,0 +1,55 @@
+﻿@model CoreTemplate.Managers.ViewModels.Movie.MovieViewModel
+
+@{
+  ViewBag.Title = Model.Id > 0 ? string.Format("Edit #{0}", Model.Id) : "New Movie";
+}
+
+<div class="page-header">
+    <h3>@ViewBag.Title</h3>
+</div>
+
+@using (Html.BeginForm("Edit", "Movie", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(x => x.Id)
+
+    <div class="container">
+        <div class="form-group">
+            @Html.LabelFor(x => x.Name, new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Genre, new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.Genre, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Genre, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Director, new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.Director, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Director, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Year, new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.Year, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Year, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.Runtime, new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.Runtime, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Runtime, "", new { @class = "text-danger" })
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            <button class="btn btn-success" type="submit">Save</button>
+        </div>
+    </div>
+    }
+

@@ -37,7 +37,6 @@ namespace CoreTemplate.Web
             services.AddMvc();
 
             services.AddAutoMapper();
-            // services.AddAutoMapper(typeof(Startup));  // <-- newer automapper version uses this signature
 
             // Add application services
             services.AddManagerDependencies();
@@ -69,8 +68,11 @@ namespace CoreTemplate.Web
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //Seed data
-            CoreTemplateContextSeed.SeedAsync(app).Wait();
+            /*
+             * TODO: Figure out why this doesn't work
+             * //Seed data
+             * CoreTemplateContextSeed.SeedAsync(app).Wait();
+             */
 
             /*
              * TODO: Implement this

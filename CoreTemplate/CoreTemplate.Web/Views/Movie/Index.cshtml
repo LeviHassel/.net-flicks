@@ -1,0 +1,42 @@
+﻿@model CoreTemplate.Managers.ViewModels.Movie.MoviesViewModel
+
+@{
+  ViewBag.Title = "Movies";
+}
+
+<div class="page-header">
+    <div class="btn-toolbar pull-right">
+        @Html.ActionLink("New", "Edit", "Movie", null, new { @class = "btn btn-primary" })
+    </div>
+    <h3>@ViewBag.Title</h3>
+</div>
+
+<div>
+    <table class="table table-bordered table-striped">
+        <thead>
+            <tr>
+                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Name)</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Genre)</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Director)</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Runtime)</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Year)</h5></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model.Movies)
+            {
+                <tr>
+                    <td>@Html.DisplayFor(x => i.Name)</td>
+                    <td>@Html.DisplayFor(x => i.Genre)</td>
+                    <td>@Html.DisplayFor(x => i.Director)</td>
+                    <td>@Html.DisplayFor(x => i.Runtime)</td>
+                    <td>@Html.DisplayFor(x => i.Year)</td>
+                    <td>
+                        <button class="btnEdit btn btn-default glyphicon glyphicon-pencil" data-id=@i.Id></button>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

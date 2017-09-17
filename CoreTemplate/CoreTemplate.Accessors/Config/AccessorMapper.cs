@@ -2,7 +2,7 @@
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Accessors.Models.EF;
 
-namespace CoreTemplate.Web.Config
+namespace CoreTemplate.Accessors.Config
 {
     public class AccessorMapper : Profile
     {

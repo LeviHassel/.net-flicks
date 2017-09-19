@@ -1,11 +1,11 @@
-﻿using CoreTemplate.Accessors.Models;
+﻿using CoreTemplate.Accessors.Identity;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 
-namespace CoreTemplate.Managers.Managers
+namespace CoreTemplate.Managers.Identity
 {
     // Configure the application sign-in manager which is used in this application.
     public class ApplicationSignInManager : SignInManager<ApplicationUser>

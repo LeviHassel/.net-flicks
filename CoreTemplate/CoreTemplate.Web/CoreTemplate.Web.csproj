@@ -16,7 +16,7 @@
     <UserSecretsId>aspnet-CoreTemplate-e91132e6-85a2-421c-a63d-b0ed9cc0c64f</UserSecretsId>
     <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
     <OutputTypeEx>library</OutputTypeEx>
-    <StartupObject>CoreTemplate.Web.Program</StartupObject>
+    <StartupObject>CoreTemplate.Web.Config.Program</StartupObject>
     <AssemblyName>CoreTemplate.Web</AssemblyName>
   </PropertyGroup>
   <ItemGroup>

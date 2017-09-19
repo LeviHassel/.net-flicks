@@ -1,13 +1,16 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using AutoMapper;
+﻿using AutoMapper;
 using CoreTemplate.Accessors.Accessors.Base;
+using CoreTemplate.Accessors.Database;
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Accessors.Models.EF;
 using CoreTemplate.Accessors.Models.EF.Base;
 using Microsoft.EntityFrameworkCore;
+using System;
+using System.Collections.Generic;
+using System.Linq;
+
+//TODO: Refactor to be my own
 
 namespace CoreTemplate.Accessors.Accessors
 {

@@ -1,10 +1,10 @@
-﻿using CoreTemplate.Accessors;
-using CoreTemplate.Accessors.Config;
-using CoreTemplate.Accessors.Models;
+﻿using CoreTemplate.Accessors.Config;
+using CoreTemplate.Accessors.Database;
+using CoreTemplate.Accessors.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Configuration;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace CoreTemplate.Managers.Config

@@ -1,11 +1,11 @@
-﻿using CoreTemplate.Accessors.Models;
+﻿using CoreTemplate.Accessors.Identity;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using Microsoft.Extensions.Options;
 using System;
 using System.Collections.Generic;
 
-namespace CoreTemplate.Managers.Managers
+namespace CoreTemplate.Managers.Identity
 {
     // Configure the application user manager used in this application. UserManager is defined in ASP.NET Identity and is used by the application.
     public class ApplicationUserManager : UserManager<ApplicationUser>

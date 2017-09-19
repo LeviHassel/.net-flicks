@@ -1,4 +1,5 @@
-﻿using CoreTemplate.Managers.Interfaces;
+﻿using CoreTemplate.Managers.Identity;
+using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.Managers.Managers;
 using Microsoft.Extensions.DependencyInjection;
 using System;

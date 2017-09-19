@@ -1,4 +1,4 @@
-﻿using CoreTemplate.Accessors;
+﻿using CoreTemplate.Accessors.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;

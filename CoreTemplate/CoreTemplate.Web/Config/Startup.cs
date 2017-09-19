@@ -5,7 +5,7 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoreTemplate.Web
+namespace CoreTemplate.Web.Config
 {
     public class Startup
     {

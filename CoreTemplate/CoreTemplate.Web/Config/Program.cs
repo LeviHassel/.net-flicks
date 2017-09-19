@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 
-namespace CoreTemplate.Web
+namespace CoreTemplate.Web.Config
 {
     public class Program
     {

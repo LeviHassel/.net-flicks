@@ -1,4 +1,5 @@
 ﻿using CoreTemplate.Accessors.Accessors;
+using CoreTemplate.Accessors.Database;
 using CoreTemplate.Accessors.Interfaces;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;

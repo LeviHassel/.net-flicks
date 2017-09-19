@@ -1,10 +1,10 @@
-﻿using CoreTemplate.Accessors.Models;
+﻿using CoreTemplate.Accessors.Identity;
 using CoreTemplate.Accessors.Models.EF;
 using Microsoft.AspNetCore.Identity.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore;
 using System.Linq;
 
-namespace CoreTemplate.Accessors
+namespace CoreTemplate.Accessors.Database
 {
     public class CoreTemplateContext : IdentityDbContext<ApplicationUser>
     {

@@ -1,4 +1,5 @@
-﻿using CoreTemplate.Accessors.Models.EF.Base;
+﻿using CoreTemplate.Accessors.Database;
+using CoreTemplate.Accessors.Models.EF.Base;
 
 namespace CoreTemplate.Accessors.Accessors.Base
 {

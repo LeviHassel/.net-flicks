@@ -21,7 +21,6 @@ namespace CoreTemplate.Accessors.Config
 
             //TODO: Port over needed Ninject dependencies (see if not having these causes any problems):
             //Kernel.Bind<CoreTemplateContext>().ToSelf().InRequestScope();
-            //Kernel.Bind<IUserStore<ApplicationUser, string>>().To<ApplicationUserStore>();
 
             return services;
         }

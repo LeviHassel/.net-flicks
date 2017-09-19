@@ -25,14 +25,10 @@ namespace CoreTemplate.Managers.Config
             TODO: Port over needed Ninject dependencies (see if not having these causes any problems)
 
             //identity binds
-            Kernel.Bind<IIdentityService>().To<IdentityService>();
             Kernel.Bind<ApplicationUserManager>().ToSelf();
             Kernel.Bind<ApplicationSignInManager>().ToSelf();
             Kernel.Bind<IdentityFactoryOptions<ApplicationUserManager>>().ToSelf();
             Kernel.Bind(typeof(IUserStore<>)).To(typeof(UserStore<>)).InRequestScope();
-
-            //services
-            Kernel.Bind<IAccountService>().To<AccountService>();
             */
 
             return services;

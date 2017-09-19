@@ -1,11 +1,7 @@
 ﻿using AutoMapper;
-using CoreTemplate.Accessors;
-using CoreTemplate.Accessors.Models;
-using CoreTemplate.Web.Config;
+using CoreTemplate.Managers.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
-using Microsoft.AspNetCore.Identity;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -23,24 +19,11 @@ namespace CoreTemplate.Web
         // This method gets called by the runtime. Use this method to add services to the container.
         public void ConfigureServices(IServiceCollection services)
         {
-            services.AddDbContext<CoreTemplateContext>(options =>
-                options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-
-            /*
-             * TODO: Add testing connection setup here (see the line above)
-             */
-
-            services.AddIdentity<ApplicationUser, IdentityRole>()
-                .AddEntityFrameworkStores<CoreTemplateContext>()
-                .AddDefaultTokenProviders();
+            services.ConfigureCoreTemplate(Configuration);
 
             services.AddMvc();
 
             services.AddAutoMapper();
-
-            // Add application services
-            services.AddManagerDependencies();
-            services.AddAccessorDependencies();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

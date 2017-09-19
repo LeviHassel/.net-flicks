@@ -3,11 +3,7 @@ using CoreTemplate.Managers.Managers;
 using Microsoft.Extensions.DependencyInjection;
 using System;
 
-/*
- * TODO: Address comments based on what problems not having them causes
- */
-
-namespace CoreTemplate.Web.Config
+namespace CoreTemplate.Managers.Config
 {
     public static class ManagerDependencies
     {
@@ -25,7 +21,7 @@ namespace CoreTemplate.Web.Config
             services.AddTransient<IMovieManager, MovieManager>();
 
             /*
-            Ninject Dependencies
+            TODO: Port over needed Ninject dependencies (see if not having these causes any problems)
 
             //identity binds
             Kernel.Bind<IIdentityService>().To<IdentityService>();

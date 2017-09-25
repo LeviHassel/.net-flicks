@@ -11,7 +11,7 @@ namespace CoreTemplate.Managers.Config
 {
     public static class CoreTemplateConfiguration
     {
-        public static IServiceCollection ConfigureCoreTemplate(this IServiceCollection services, IConfiguration configuration)
+        public static IServiceCollection ConfigureDatabase(this IServiceCollection services, IConfiguration configuration)
         {
             if (services == null)
             {
@@ -21,13 +21,21 @@ namespace CoreTemplate.Managers.Config
             services.AddDbContext<CoreTemplateContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            //TODO: Add testing connection setup here (see the line above)
-
             services.AddIdentity<ApplicationUser, IdentityRole>()
                 .AddEntityFrameworkStores<CoreTemplateContext>()
                 .AddDefaultTokenProviders();
 
-            // Add application services
+            return services;
+        }
+
+        public static IServiceCollection ConfigureDependencies(this IServiceCollection services)
+        {
+            if (services == null)
+            {
+                throw new ArgumentNullException(nameof(services));
+            }
+
+            // Set up dependency injection
             services.AddManagerDependencies();
             services.AddAccessorDependencies();
 

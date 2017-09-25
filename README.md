@@ -31,11 +31,10 @@ The Tests layer uses [xUnit](https://xunit.github.io/ "xUnit") along with [Moq](
 ## Requirements
 * [Visual Studio Community](https://www.visualstudio.com/downloads/ "Visual Studio Community") (15.3+ is required for Core 2.0)
 * [.NET Core 2.0 SDK](https://www.microsoft.com/net/download/core ".NET Core 2.0 SDK")
-* [SQL Server Developer Edition](https://www.microsoft.com/en-us/sql-server/sql-server-downloads "SQL Server Developer Edition")
-* [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms "SQL Server Management Studio")
+* [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms "SQL Server Management Studio") (Optional - download if you'd prefer not to use Visual Studio's built-in SLQ Server Object Explorer)
 
 ## Getting Started
 1. Download and install all of the requirements listed above.
 2. Download this repository.
-3. Open SQL Server Management Studio, enter "localhost" as the Server Name and click Connect.
-4. 
+3. Open Package Manager Console, switch the Default Project to CoreTemplate.Accessors and type the command "update-database" (no quotes) into the window.
+3. If you'd like to use SQL Server Management Studio to manage your database instead of Visual Studio's built-in SLQ Server Object Explorer, follow the directions [here](http://nikgupta.net/2015/12/10/connect-localdb-from-management-studio/ "Connect to LocalDB via SQL Server Management Studio").

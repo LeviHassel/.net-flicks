@@ -4,8 +4,12 @@ using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Accessors.Models.EF;
 using CoreTemplate.Tests.Helpers;
+using CoreTemplate.Web.Config;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
 using System;
 using System.Linq;
+using System.Net.Http;
 using Xunit;
 
 /*

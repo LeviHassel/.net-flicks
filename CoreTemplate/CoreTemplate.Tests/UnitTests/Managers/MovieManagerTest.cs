@@ -28,7 +28,7 @@ namespace CoreTemplate.Tests.UnitTests.Managers
             });
         }
 
-        [Fact, AutoData]
+        [Theory, AutoData]
         public void MovieManager_GetMovie(MovieDTO dto)
         {
             //Arrange
@@ -45,7 +45,7 @@ namespace CoreTemplate.Tests.UnitTests.Managers
             Assert.True(PropertyComparer.Equal(dtoVm, vm));
         }
 
-        [Fact, AutoData]
+        [Theory, AutoData]
         public void MovieManager_GetAllMovies(MovieDTO dto1, MovieDTO dto2)
         {
             //Arrange
@@ -68,7 +68,7 @@ namespace CoreTemplate.Tests.UnitTests.Managers
             }
         }
 
-        [Fact, AutoData]
+        [Theory, AutoData]
         public void MovieManager_SaveMovie(MovieViewModel vm)
         {
             //Arrange

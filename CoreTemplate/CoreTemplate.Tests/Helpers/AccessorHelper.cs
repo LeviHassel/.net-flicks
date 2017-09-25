@@ -1,10 +1,15 @@
-﻿using CoreTemplate.Accessors;
+﻿using CoreTemplate.Accessors.Database;
 using CoreTemplate.Accessors.Models.EF;
+using CoreTemplate.Web.Config;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
+using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Microsoft.EntityFrameworkCore.Storage;
 using Ploeh.AutoFixture;
 using System;
 using System.Collections.Generic;
+using System.Linq;
+using System.Net.Http;
 
 namespace CoreTemplate.Tests.Helpers
 {
@@ -12,43 +17,37 @@ namespace CoreTemplate.Tests.Helpers
     {
         public CoreTemplateContext Context { get; private set; }
 
-        private IDbContextTransaction _transaction;
+        private readonly TestServer _server;
+
+        private readonly HttpClient _client;
 
         public AccessorHelper()
         {
-            //TODO: Figure out how to specify test db here with the options var, otherwise this will ruin my main database
-            var options = new DbContextOptions<CoreTemplateContext>();
+            var builder = new WebHostBuilder()
+                .UseStartup<TestStartup>();
 
-            Context = new CoreTemplateContext(options);
+            _server = new TestServer(builder);
 
-            //This applies all pending migrations
-            Context.Database.Migrate();
+            _client = _server.CreateClient();
 
-            _transaction = Context.Database.BeginTransaction();
+            //For more information about testing with SQLite, go here: https://docs.microsoft.com/en-us/ef/core/miscellaneous/testing/sqlite
+            var connection = new SqliteConnection("DataSource=:memory:");
+            connection.Open();
+
+            var options = new DbContextOptionsBuilder<CoreTemplateContext>()
+                .UseSqlite(connection)
+                .Options;
+
+            Context = new CoreTemplateContext(options) { };
+            Context.Database.OpenConnection();
+            Context.Database.EnsureCreated();
         }
 
         public void Dispose()
         {
-            Dispose(true);
-            GC.SuppressFinalize(this);
-        }
-
-        protected virtual void Dispose(bool disposing)
-        {
-            if (disposing)
-            {
-                if (_transaction != null)
-                {
-                    //Roll back the transaction, so the database is clean for the next test run
-                    _transaction.Rollback();
-                    _transaction.Dispose();
-                }
-
-                if (Context != null)
-                {
-                    Context.Dispose();
-                }
-            }
+            Context.Database.CloseConnection();
+            _server.Dispose();
+            _client.Dispose();
         }
 
         /*

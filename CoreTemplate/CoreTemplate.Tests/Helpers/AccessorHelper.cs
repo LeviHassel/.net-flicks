@@ -32,13 +32,6 @@ namespace CoreTemplate.Tests.Helpers
             CreateTestDatabase();
         }
 
-        public void Dispose()
-        {
-            Context.Database.CloseConnection();
-            _server.Dispose();
-            _client.Dispose();
-        }
-
         public void CreateTestDatabase()
         {
             //For more information about testing with SQLite, go here: https://docs.microsoft.com/en-us/ef/core/miscellaneous/testing/sqlite
@@ -52,6 +45,14 @@ namespace CoreTemplate.Tests.Helpers
             Context = new CoreTemplateContext(options) { };
             Context.Database.OpenConnection();
             Context.Database.EnsureCreated();
+        }
+
+        public void Dispose()
+        {
+            Context.Database.EnsureDeleted();
+            Context.Database.CloseConnection();
+            _server.Dispose();
+            _client.Dispose();
         }
 
         /*

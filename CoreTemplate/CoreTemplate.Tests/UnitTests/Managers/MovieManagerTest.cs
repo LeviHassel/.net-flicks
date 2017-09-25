@@ -3,7 +3,10 @@ using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Managers.Managers;
 using CoreTemplate.Managers.ViewModels.Movie;
+using CoreTemplate.Tests.Config;
 using CoreTemplate.Tests.Helpers;
+using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.TestHost;
 using Moq;
 using Ploeh.AutoFixture.Xunit2;
 using System.Collections.Generic;
@@ -19,13 +22,13 @@ namespace CoreTemplate.Tests.UnitTests.Managers
 
         public MovieManagerTest()
         {
+            var builder = new WebHostBuilder()
+                .UseStartup<TestStartup>();
+
+            var server = new TestServer(builder);
+
             _movieAccessorMock = new Mock<IMovieAccessor>();
             _movieManager = new MovieManager(_movieAccessorMock.Object);
-
-            Mapper.Initialize(x =>
-            {
-                x.CreateMap<MovieDTO, MovieViewModel>().ReverseMap();
-            });
         }
 
         [Theory, AutoData]

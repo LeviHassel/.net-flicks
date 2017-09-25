@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
+using CoreTemplate.Accessors.Config;
 using CoreTemplate.Accessors.Database;
 using CoreTemplate.Managers.Config;
 using CoreTemplate.Web.Config;
-using Microsoft.Data.Sqlite;
-using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoreTemplate.Tests
+namespace CoreTemplate.Tests.Config
 {
     public class TestStartup : Startup
     {
@@ -26,7 +25,10 @@ namespace CoreTemplate.Tests
 
             services.ConfigureDependencies();
 
-            services.AddAutoMapper();
+            Mapper.Initialize(cfg => {
+                cfg.AddProfile<AccessorMapper>();
+                cfg.AddProfile<ManagerMapper>();
+            });
         }
     }
 }

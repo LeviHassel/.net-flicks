@@ -1,6 +1,6 @@
 ﻿using CoreTemplate.Accessors.Database;
 using CoreTemplate.Accessors.Models.EF;
-using CoreTemplate.Web.Config;
+using CoreTemplate.Tests.Config;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.Sqlite;
@@ -8,7 +8,6 @@ using Microsoft.EntityFrameworkCore;
 using Ploeh.AutoFixture;
 using System;
 using System.Collections.Generic;
-using System.Linq;
 using System.Net.Http;
 
 namespace CoreTemplate.Tests.Helpers
@@ -30,6 +29,18 @@ namespace CoreTemplate.Tests.Helpers
 
             _client = _server.CreateClient();
 
+            CreateTestDatabase();
+        }
+
+        public void Dispose()
+        {
+            Context.Database.CloseConnection();
+            _server.Dispose();
+            _client.Dispose();
+        }
+
+        public void CreateTestDatabase()
+        {
             //For more information about testing with SQLite, go here: https://docs.microsoft.com/en-us/ef/core/miscellaneous/testing/sqlite
             var connection = new SqliteConnection("DataSource=:memory:");
             connection.Open();
@@ -41,13 +52,6 @@ namespace CoreTemplate.Tests.Helpers
             Context = new CoreTemplateContext(options) { };
             Context.Database.OpenConnection();
             Context.Database.EnsureCreated();
-        }
-
-        public void Dispose()
-        {
-            Context.Database.CloseConnection();
-            _server.Dispose();
-            _client.Dispose();
         }
 
         /*

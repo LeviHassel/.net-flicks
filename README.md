@@ -26,8 +26,6 @@ Dependencies: Web, Managers and Accessors
 
 The Tests layer uses [xUnit](https://xunit.github.io/ "xUnit") along with [Moq](https://github.com/moq/moq4 "Moq") to handle integration and unit tests.
 
-???
-
 ## Requirements
 * [Visual Studio Community](https://www.visualstudio.com/downloads/ "Visual Studio Community") (15.3+ is required for Core 2.0)
 * [.NET Core 2.0 SDK](https://www.microsoft.com/net/download/core ".NET Core 2.0 SDK")
@@ -37,5 +35,5 @@ The Tests layer uses [xUnit](https://xunit.github.io/ "xUnit") along with [Moq](
 ## Getting Started
 1. Download and install all of the requirements listed above.
 2. Download this repository.
-3. In Visual Studio, open Package Manager Console, switch the Default Project to CoreTemplate.Accessors and type the command "update-database" (no quotes) into the window. This should create the database, called CoreTemplateDb, for the application.
-4. If you'd like to use SQL Server Management Studio to manage your database instead of Visual Studio's built-in SLQ Server Object Explorer, open SSMS, connect to a database engine, enter "(localdb)\MSSQLLocalDB" for the Server name, make sure Windows authentication is checked and click Connect. You can now freely use either SSMS or SLQ Server Object Explorer to manage your database.
+3. In Visual Studio, open Package Manager Console, switch the Default Project to CoreTemplate.Accessors and type the command `update-database` into the window. This should create the database, called CoreTemplateDb.
+4. If you'd like to use SQL Server Management Studio to manage your database instead of Visual Studio's built-in SLQ Server Object Explorer, open SSMS, connect to a database engine, enter `(localdb)\MSSQLLocalDB` for the Server name, make sure Windows authentication is checked and click Connect. You can now freely use either SSMS or SLQ Server Object Explorer to manage your database.

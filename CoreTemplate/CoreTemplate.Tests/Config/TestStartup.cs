@@ -1,6 +1,4 @@
-﻿using AutoMapper;
-using CoreTemplate.Accessors.Config;
-using CoreTemplate.Accessors.Database;
+﻿using CoreTemplate.Accessors.Database;
 using CoreTemplate.Managers.Config;
 using CoreTemplate.Web.Config;
 using Microsoft.Extensions.Configuration;
@@ -25,10 +23,7 @@ namespace CoreTemplate.Tests.Config
 
             services.ConfigureDependencies();
 
-            Mapper.Initialize(cfg => {
-                cfg.AddProfile<AccessorMapper>();
-                cfg.AddProfile<ManagerMapper>();
-            });
+            CoreTemplateConfiguration.AddAutoMapper();
         }
     }
 }

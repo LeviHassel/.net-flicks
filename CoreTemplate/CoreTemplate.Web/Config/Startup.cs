@@ -1,5 +1,4 @@
-﻿using AutoMapper;
-using CoreTemplate.Managers.Config;
+﻿using CoreTemplate.Managers.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
@@ -25,7 +24,7 @@ namespace CoreTemplate.Web.Config
 
             services.ConfigureDependencies();
 
-            services.AddAutoMapper();
+            CoreTemplateConfiguration.AddAutoMapper();
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

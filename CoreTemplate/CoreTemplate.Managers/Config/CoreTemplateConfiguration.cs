@@ -1,4 +1,5 @@
-﻿using CoreTemplate.Accessors.Config;
+﻿using AutoMapper;
+using CoreTemplate.Accessors.Config;
 using CoreTemplate.Accessors.Database;
 using CoreTemplate.Accessors.Identity;
 using Microsoft.AspNetCore.Identity;
@@ -40,6 +41,14 @@ namespace CoreTemplate.Managers.Config
             services.AddAccessorDependencies();
 
             return services;
+        }
+
+        public static void AddAutoMapper()
+        {
+            Mapper.Initialize(cfg => {
+                cfg.AddProfile<AccessorMapper>();
+                cfg.AddProfile<ManagerMapper>();
+            });
         }
     }
 }

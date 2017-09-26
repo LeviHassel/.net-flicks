@@ -13,7 +13,7 @@ namespace CoreTemplate.Accessors.Database
             var context = (CoreTemplateContext)applicationBuilder
                 .ApplicationServices.GetService(typeof(CoreTemplateContext));
 
-            // TODO: Only run this if using a real database (add if statement to determine env)
+            // TODO: Only run this if using a real database
             // context.Database.Migrate();
 
             if (!context.Movies.Any())

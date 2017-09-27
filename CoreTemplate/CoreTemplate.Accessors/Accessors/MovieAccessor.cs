@@ -23,7 +23,8 @@ namespace CoreTemplate.Accessors.Accessors
         public MovieDTO Get(int id)
         {
             var entity = _db.Movies
-              .Single(x => x.Id == id);
+                .AsNoTracking()
+                .Single(x => x.Id == id);
 
             var dto = Mapper.Map<MovieDTO>(entity);
 
@@ -49,15 +50,16 @@ namespace CoreTemplate.Accessors.Accessors
 
                 if (dto.Id == 0)
                 {
-                    //added
-                    //TODO: Figure out why this generates Id = -2147482647 (likely a db problem)
+                    //Create new entry
                     _db.Movies.Add(entity);
                 }
                 else
                 {
-                    //modified
+                    //Modify existing entry
                     _db.Entry(entity).State = EntityState.Modified;
                 }
+
+                _db.SaveChanges();
 
                 var returnDto = Mapper.Map<MovieDTO>(entity);
 

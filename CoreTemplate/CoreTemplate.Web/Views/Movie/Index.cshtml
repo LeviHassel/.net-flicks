@@ -27,15 +27,15 @@
             @foreach (var i in Model.Movies)
             {
                 <tr>
-                    <td>@Html.DisplayFor(x => i.Name)</td>
+                    <td style="vertical-align: middle">@Html.DisplayFor(x => i.Name)</td>
                     <td style="vertical-align: middle">@Html.DisplayFor(x => i.Genre)</td>
                     <td style="vertical-align: middle">@Html.DisplayFor(x => i.Director)</td>
                     <td style="vertical-align: middle">@Html.DisplayFor(x => i.Runtime)</td>
                     <td style="vertical-align: middle">@Html.DisplayFor(x => i.Year)</td>
                     <td>
                         <div class="btn-toolbar pull-right">
-                            @Html.ActionLink("", "Edit", "Movie", new { id = i.Id }, new { @class = "btn btn-primary glyphicon glyphicon-pencil" })
-                            @Html.ActionLink("", "Delete", "Movie", new { id = i.Id }, new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+                            @Html.ActionLink("", "Edit", "Movie", new { id = i.Id }, new { @class = "btn btn-default glyphicon glyphicon-pencil" })
+                            @Html.ActionLink("", "Delete", "Movie", new { id = i.Id }, new { @class = "btn btn-default glyphicon glyphicon-trash" })
                         </div>
                     </td>
                 </tr>

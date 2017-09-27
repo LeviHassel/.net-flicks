@@ -44,5 +44,21 @@ namespace CoreTemplate.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult Delete(int id)
+        {
+            var vm = _movieManager.GetMovie(id);
+
+            return View(vm);
+        }
+
+        [HttpPost, ActionName("Delete")]
+        [ValidateAntiForgeryToken]
+        public ActionResult DeleteConfirmed(int id)
+        {
+            _movieManager.DeleteMovie(id);
+
+            return RedirectToAction("Index");
+        }
     }
 }

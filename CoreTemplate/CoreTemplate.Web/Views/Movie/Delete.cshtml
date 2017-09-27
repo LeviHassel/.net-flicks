@@ -1,0 +1,23 @@
+﻿@model CoreTemplate.Managers.ViewModels.Movie.MovieViewModel
+
+@{
+  ViewBag.Title = string.Format("Delete {0}", Model.Name);
+}
+
+<div class="page-header">
+    <h2>@ViewBag.Title</h2>
+</div>
+
+<h3>Are you sure you want to delete @Model.Name?</h3>
+<br /><br />
+<div>
+    @using (Html.BeginForm()) {
+        @Html.AntiForgeryToken()
+
+        <div class="form-actions no-color">
+            <input type="submit" value="Delete" class="btn btn-danger" />
+            <br /><br />
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    }
+</div>

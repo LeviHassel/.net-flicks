@@ -44,5 +44,10 @@ namespace CoreTemplate.Managers.Managers
 
             return vm;
         }
+
+        public void DeleteMovie(int id)
+        {
+            _movieAccessor.Delete(id);
+        }
     }
 }

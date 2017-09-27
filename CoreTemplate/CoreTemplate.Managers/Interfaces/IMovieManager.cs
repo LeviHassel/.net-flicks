@@ -9,5 +9,7 @@ namespace CoreTemplate.Managers.Interfaces
         MoviesViewModel GetAllMovies();
 
         MovieViewModel GetMovie(int id);
+
+        void DeleteMovie(int id);
     }
 }

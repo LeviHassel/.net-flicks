@@ -10,5 +10,7 @@ namespace CoreTemplate.Accessors.Interfaces
         List<MovieDTO> GetAll();
 
         MovieDTO Get(int id);
+
+        void Delete(int id);
     }
 }

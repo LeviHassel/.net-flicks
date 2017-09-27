@@ -8,11 +8,11 @@
     <div class="btn-toolbar pull-right">
         @Html.ActionLink("New", "Edit", "Movie", null, new { @class = "btn btn-primary" })
     </div>
-    <h3>@ViewBag.Title</h3>
+    <h2>@ViewBag.Title</h2>
 </div>
 
 <div>
-    <table class="table table-bordered table-striped">
+    <table class="table">
         <thead>
             <tr>
                 <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Name)</h5></th>
@@ -28,12 +28,15 @@
             {
                 <tr>
                     <td>@Html.DisplayFor(x => i.Name)</td>
-                    <td>@Html.DisplayFor(x => i.Genre)</td>
-                    <td>@Html.DisplayFor(x => i.Director)</td>
-                    <td>@Html.DisplayFor(x => i.Runtime)</td>
-                    <td>@Html.DisplayFor(x => i.Year)</td>
+                    <td style="vertical-align: middle">@Html.DisplayFor(x => i.Genre)</td>
+                    <td style="vertical-align: middle">@Html.DisplayFor(x => i.Director)</td>
+                    <td style="vertical-align: middle">@Html.DisplayFor(x => i.Runtime)</td>
+                    <td style="vertical-align: middle">@Html.DisplayFor(x => i.Year)</td>
                     <td>
-                        <button class="btnEdit btn btn-default glyphicon glyphicon-pencil" data-id=@i.Id></button>
+                        <div class="btn-toolbar pull-right">
+                            @Html.ActionLink("", "Edit", "Movie", new { id = i.Id }, new { @class = "btn btn-primary glyphicon glyphicon-pencil" })
+                            @Html.ActionLink("", "Delete", "Movie", new { id = i.Id }, new { @class = "btn btn-danger glyphicon glyphicon-trash" })
+                        </div>
                     </td>
                 </tr>
             }

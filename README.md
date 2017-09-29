@@ -29,7 +29,7 @@ The Tests layer uses [xUnit](https://xunit.github.io/ "xUnit") along with [Moq](
 ## Requirements
 * [Visual Studio Community](https://www.visualstudio.com/downloads/ "Visual Studio Community") (15.3+ is required for Core 2.0)
 * [.NET Core 2.0 SDK](https://www.microsoft.com/net/download/core ".NET Core 2.0 SDK")
-* [SQL Server 2016 Express LocalDB](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express "SQL Server 2016 Express LocalDB") (find the LocalDB download option link on the page- it's not the main one; during the installation process, select "New SQL Server stand-alone installation or add features to an existing installation" and use the default setup)
+* [SQL Server 2016 Express LocalDB](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express "SQL Server 2016 Express LocalDB") (Find the LocalDB download option link on the page- it's not the main one; during the installation process, select "New SQL Server stand-alone installation or add features to an existing installation" and use the default setup)
 
 ## Suggestions
 * [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms "SQL Server Management Studio") (Significantly more powerful and user-friendly alternative to Visual Studio's built-in SQL Server Object Explorer)

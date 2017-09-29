@@ -1,4 +1,4 @@
-# ASP .NET Core 2.0 Multi-Project Starter Template
+# ASP .NET Core 2.0 Multi-Layer Starter Template
 
 ## Overview
 This is a good template. It uses [IDesign](http://www.idesign.net/ "IDesign") methodology.

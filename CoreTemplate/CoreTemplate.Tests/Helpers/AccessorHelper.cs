@@ -70,23 +70,16 @@ namespace CoreTemplate.Tests.Helpers
                 entities.Add(fixture.Create<Movie>());
             }
 
-            try
-            {
-                Context.Movies.AddRange(entities);
-                Context.SaveChanges();
+            Context.Movies.AddRange(entities);
+            Context.SaveChanges();
 
-                //Detach created entities so that tests don't run into EF conflicts
-                foreach (var e in entities)
-                {
-                    Context.Entry(e).State = EntityState.Detached;
-                }
-
-                return entities;
-            }
-            catch (Exception)
+            //Detach created entities so that tests don't run into EF conflicts
+            foreach (var e in entities)
             {
-                throw;
+                Context.Entry(e).State = EntityState.Detached;
             }
+
+            return entities;
         }
     }
 }

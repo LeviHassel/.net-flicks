@@ -20,6 +20,8 @@ namespace CoreTemplate.Web.Config
         {
             services.ConfigureDatabase(Configuration);
 
+            services.AddElm();
+
             services.AddMvc();
 
             services.ConfigureDependencies();
@@ -51,6 +53,10 @@ namespace CoreTemplate.Web.Config
                     name: "default",
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
+
+            //Capture errors and add an endpoint to see the error log via "ELM" (Error Logging Middleware)
+            app.UseElmPage();
+            app.UseElmCapture();
 
             /*
              * TODO: Figure out why this doesn't work

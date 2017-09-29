@@ -44,31 +44,24 @@ namespace CoreTemplate.Accessors.Accessors
 
         public MovieDTO Save(MovieDTO dto)
         {
-            try
+            var entity = Mapper.Map<Movie>(dto);
+
+            if (dto.Id == 0)
             {
-                var entity = Mapper.Map<Movie>(dto);
-
-                if (dto.Id == 0)
-                {
-                    //Create new entry
-                    _db.Movies.Add(entity);
-                }
-                else
-                {
-                    //Modify existing entry
-                    _db.Entry(entity).State = EntityState.Modified;
-                }
-
-                _db.SaveChanges();
-
-                var returnDto = Mapper.Map<MovieDTO>(entity);
-
-                return returnDto;
+                //Create new entry
+                _db.Movies.Add(entity);
             }
-            catch (Exception)
+            else
             {
-                throw;
+                //Modify existing entry
+                _db.Entry(entity).State = EntityState.Modified;
             }
+
+            _db.SaveChanges();
+
+            var returnDto = Mapper.Map<MovieDTO>(entity);
+
+            return returnDto;
         }
 
         public void Delete(int id)

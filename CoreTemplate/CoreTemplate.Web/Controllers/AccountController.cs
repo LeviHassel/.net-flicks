@@ -19,17 +19,20 @@ namespace CoreTemplate.Web.Controllers
     {
         private readonly ApplicationUserManager _userManager;
         private readonly ApplicationSignInManager _signInManager;
+        private readonly IAccountManager _accountManager;
         private readonly IEmailManager _emailManager;
         private readonly ILogger _logger;
 
         public AccountController(
             ApplicationUserManager userManager,
             ApplicationSignInManager signInManager,
+            IAccountManager accountManager,
             IEmailManager emailSender,
             ILogger<AccountController> logger)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _accountManager = accountManager;
             _emailManager = emailSender;
             _logger = logger;
         }
@@ -88,13 +91,7 @@ namespace CoreTemplate.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> LoginWith2fa(bool rememberMe, string returnUrl = null)
         {
-            // Ensure the user has gone through the username & password screen first
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load two-factor authentication user.");
-            }
+            _accountManager.Get2faUser();
 
             var model = new LoginWith2faViewModel { RememberMe = rememberMe };
             ViewData["ReturnUrl"] = returnUrl;
@@ -112,6 +109,7 @@ namespace CoreTemplate.Web.Controllers
                 return View(model);
             }
 
+            //Incorporate Get2faUser here
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {
@@ -144,12 +142,7 @@ namespace CoreTemplate.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> LoginWithRecoveryCode(string returnUrl = null)
         {
-            // Ensure the user has gone through the username & password screen first
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load two-factor authentication user.");
-            }
+            _accountManager.Get2faUser();
 
             ViewData["ReturnUrl"] = returnUrl;
 
@@ -166,6 +159,7 @@ namespace CoreTemplate.Web.Controllers
                 return View(model);
             }
 
+            //Incorporate Get2faUser here
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
             if (user == null)
             {

@@ -5,7 +5,10 @@ using CoreTemplate.Managers.ViewModels.Manage;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 using System.Security.Claims;
+using System.Text;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace CoreTemplate.Managers.Managers
@@ -16,17 +19,22 @@ namespace CoreTemplate.Managers.Managers
         private ApplicationSignInManager _signInManager;
         private IEmailManager _emailManager;
         private ILogger _logger;
+        private UrlEncoder _urlEncoder;
+
+        private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
         public AccountManager(
             ApplicationUserManager userManager,
             ApplicationSignInManager signInManager,
             IEmailManager emailSender,
-            ILogger<AccountManager> logger)
+            ILogger<AccountManager> logger,
+            UrlEncoder urlEncoder)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _emailManager = emailSender;
             _logger = logger;
+            _urlEncoder = urlEncoder;
         }
 
         public async Task<string> Get2faUserId()
@@ -140,6 +148,49 @@ namespace CoreTemplate.Managers.Managers
             }
         }
 
+        public async Task ResetAuthenticator(ClaimsPrincipal User)
+        {
+            var user = await GetApplicationUser(User);
+
+            await _userManager.SetTwoFactorEnabledAsync(user, false);
+
+            await _userManager.ResetAuthenticatorKeyAsync(user);
+
+            _logger.LogInformation("User with id '{UserId}' has reset their authentication app key.", user.Id);
+        }
+
+        public async Task Disable2fa(ClaimsPrincipal User)
+        {
+            var user = await GetApplicationUser(User);
+
+            var disable2faResult = await _userManager.SetTwoFactorEnabledAsync(user, false);
+
+            if (!disable2faResult.Succeeded)
+            {
+                throw new ApplicationException($"Unexpected error occured disabling 2FA for user with ID '{user.Id}'.");
+            }
+
+            _logger.LogInformation("User with ID {UserId} has disabled 2fa.", user.Id);
+        }
+
+        public async Task<GenerateRecoveryCodesViewModel> GetGenerateRecoveryCodesViewModel(ClaimsPrincipal User)
+        {
+            var user = await GetApplicationUser(User);
+
+            if (!user.TwoFactorEnabled)
+            {
+                throw new ApplicationException($"Cannot generate recovery codes for user with ID '{user.Id}' as they do not have 2FA enabled.");
+            }
+
+            var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
+
+            var model = new GenerateRecoveryCodesViewModel { RecoveryCodes = recoveryCodes.ToArray() };
+
+            _logger.LogInformation("User with ID {UserId} has generated new 2FA recovery codes.", user.Id);
+
+            return model;
+        }
+
         public async Task<TwoFactorAuthenticationViewModel> GetTwoFactorAuthenticationViewModel(ClaimsPrincipal User)
         {
             var user = await GetApplicationUser(User);
@@ -154,7 +205,49 @@ namespace CoreTemplate.Managers.Managers
             return model;
         }
 
-        #region Private Methods
+        public async Task<EnableAuthenticatorViewModel> GetEnableAuthenticatorViewModel(ClaimsPrincipal User)
+        {
+            var user = await GetApplicationUser(User);
+
+            var unformattedKey = await _userManager.GetAuthenticatorKeyAsync(user);
+            if (string.IsNullOrEmpty(unformattedKey))
+            {
+                await _userManager.ResetAuthenticatorKeyAsync(user);
+                unformattedKey = await _userManager.GetAuthenticatorKeyAsync(user);
+            }
+
+            var model = new EnableAuthenticatorViewModel
+            {
+                SharedKey = FormatKey(unformattedKey),
+                AuthenticatorUri = GenerateQrCodeUri(user.Email, unformattedKey)
+            };
+
+            return model;
+        }
+
+        public async Task<bool> EnableAuthenticator(ClaimsPrincipal User, EnableAuthenticatorViewModel model)
+        {
+            var user = await GetApplicationUser(User);
+
+            // Strip spaces and hypens
+            var verificationCode = model.Code.Replace(" ", string.Empty).Replace("-", string.Empty);
+
+            var is2faTokenValid = await _userManager.VerifyTwoFactorTokenAsync(
+                user, _userManager.Options.Tokens.AuthenticatorTokenProvider, verificationCode);
+
+            if (is2faTokenValid)
+            {
+                var result = await _userManager.SetTwoFactorEnabledAsync(user, true);
+
+                _logger.LogInformation("User with ID {UserId} has enabled 2FA with an authenticator app.", user.Id);
+
+                return result.Succeeded;
+            }
+
+            return false;
+        }
+
+        #region Helpers
         private async Task<ApplicationUser> GetApplicationUser(ClaimsPrincipal user)
         {
             var applicationUser = await _userManager.GetUserAsync(user);
@@ -165,6 +258,32 @@ namespace CoreTemplate.Managers.Managers
             }
 
             return applicationUser;
+        }
+
+        private string FormatKey(string unformattedKey)
+        {
+            var result = new StringBuilder();
+            int currentPosition = 0;
+            while (currentPosition + 4 < unformattedKey.Length)
+            {
+                result.Append(unformattedKey.Substring(currentPosition, 4)).Append(" ");
+                currentPosition += 4;
+            }
+            if (currentPosition < unformattedKey.Length)
+            {
+                result.Append(unformattedKey.Substring(currentPosition));
+            }
+
+            return result.ToString().ToLowerInvariant();
+        }
+
+        private string GenerateQrCodeUri(string email, string unformattedKey)
+        {
+            return string.Format(
+                AuthenicatorUriFormat,
+                _urlEncoder.Encode("Test"),
+                _urlEncoder.Encode(email),
+                unformattedKey);
         }
         #endregion
     }

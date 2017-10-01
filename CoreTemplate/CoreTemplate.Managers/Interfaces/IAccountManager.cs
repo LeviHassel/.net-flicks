@@ -29,6 +29,16 @@ namespace CoreTemplate.Managers.Interfaces
 
         Task AddLogin(ClaimsPrincipal User);
 
+        Task ResetAuthenticator(ClaimsPrincipal User);
+
+        Task Disable2fa(ClaimsPrincipal User);
+
+        Task<bool> EnableAuthenticator(ClaimsPrincipal User, EnableAuthenticatorViewModel model);
+
+        Task<GenerateRecoveryCodesViewModel> GetGenerateRecoveryCodesViewModel(ClaimsPrincipal User);
+
+        Task<EnableAuthenticatorViewModel> GetEnableAuthenticatorViewModel(ClaimsPrincipal User);
+
         Task<TwoFactorAuthenticationViewModel> GetTwoFactorAuthenticationViewModel(ClaimsPrincipal User);
     }
 }

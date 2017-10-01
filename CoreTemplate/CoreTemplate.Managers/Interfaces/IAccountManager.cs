@@ -1,7 +1,12 @@
-﻿namespace CoreTemplate.Managers.Interfaces
+﻿using Microsoft.AspNetCore.Identity;
+using System.Threading.Tasks;
+
+namespace CoreTemplate.Managers.Interfaces
 {
     public interface IAccountManager
     {
-        void Get2faUser();
+        Task<string> Get2faUserId();
+
+        Task<SignInResult> Login(string email, string password, bool rememberMe);
     }
 }

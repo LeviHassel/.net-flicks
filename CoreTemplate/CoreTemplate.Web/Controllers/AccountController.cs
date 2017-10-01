@@ -59,9 +59,8 @@ namespace CoreTemplate.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                // This doesn't count login failures towards account lockout
-                // To enable password failures to trigger account lockout, set lockoutOnFailure: true
-                var result = await _signInManager.PasswordSignInAsync(model.Email, model.Password, model.RememberMe, lockoutOnFailure: false);
+                var result = await _accountManager.Login(model.Email, model.Password, model.RememberMe);
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User logged in.");
@@ -91,7 +90,7 @@ namespace CoreTemplate.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> LoginWith2fa(bool rememberMe, string returnUrl = null)
         {
-            _accountManager.Get2faUser();
+            await _accountManager.Get2faUserId();
 
             var model = new LoginWith2faViewModel { RememberMe = rememberMe };
             ViewData["ReturnUrl"] = returnUrl;
@@ -109,12 +108,7 @@ namespace CoreTemplate.Web.Controllers
                 return View(model);
             }
 
-            //Incorporate Get2faUser here
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
+            var userId = await _accountManager.Get2faUserId();
 
             var authenticatorCode = model.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
 
@@ -122,17 +116,17 @@ namespace CoreTemplate.Web.Controllers
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User with ID {UserId} logged in with 2fa.", user.Id);
+                _logger.LogInformation("User with ID {UserId} logged in with 2fa.", userId);
                 return RedirectToLocal(returnUrl);
             }
             else if (result.IsLockedOut)
             {
-                _logger.LogWarning("User with ID {UserId} account locked out.", user.Id);
+                _logger.LogWarning("User with ID {UserId} account locked out.", userId);
                 return RedirectToAction(nameof(Lockout));
             }
             else
             {
-                _logger.LogWarning("Invalid authenticator code entered for user with ID {UserId}.", user.Id);
+                _logger.LogWarning("Invalid authenticator code entered for user with ID {UserId}.", userId);
                 ModelState.AddModelError(string.Empty, "Invalid authenticator code.");
                 return View();
             }
@@ -142,7 +136,7 @@ namespace CoreTemplate.Web.Controllers
         [AllowAnonymous]
         public async Task<IActionResult> LoginWithRecoveryCode(string returnUrl = null)
         {
-            _accountManager.Get2faUser();
+            await _accountManager.Get2faUserId();
 
             ViewData["ReturnUrl"] = returnUrl;
 
@@ -159,12 +153,7 @@ namespace CoreTemplate.Web.Controllers
                 return View(model);
             }
 
-            //Incorporate Get2faUser here
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load two-factor authentication user.");
-            }
+            var userId = await _accountManager.Get2faUserId();
 
             var recoveryCode = model.RecoveryCode.Replace(" ", string.Empty);
 
@@ -172,17 +161,17 @@ namespace CoreTemplate.Web.Controllers
 
             if (result.Succeeded)
             {
-                _logger.LogInformation("User with ID {UserId} logged in with a recovery code.", user.Id);
+                _logger.LogInformation("User with ID {UserId} logged in with a recovery code.", userId);
                 return RedirectToLocal(returnUrl);
             }
             if (result.IsLockedOut)
             {
-                _logger.LogWarning("User with ID {UserId} account locked out.", user.Id);
+                _logger.LogWarning("User with ID {UserId} account locked out.", userId);
                 return RedirectToAction(nameof(Lockout));
             }
             else
             {
-                _logger.LogWarning("Invalid recovery code entered for user with ID {UserId}", user.Id);
+                _logger.LogWarning("Invalid recovery code entered for user with ID {UserId}", userId);
                 ModelState.AddModelError(string.Empty, "Invalid recovery code entered.");
                 return View();
             }

@@ -22,7 +22,10 @@ namespace CoreTemplate.Managers.Config
             services.AddDbContext<CoreTemplateContext>(options =>
                 options.UseSqlServer(configuration.GetConnectionString("DefaultConnection")));
 
-            services.AddIdentity<ApplicationUser, IdentityRole>()
+            services.AddIdentity<ApplicationUser, IdentityRole>(config =>
+                {
+                    config.SignIn.RequireConfirmedEmail = true;
+                })
                 .AddEntityFrameworkStores<CoreTemplateContext>()
                 .AddDefaultTokenProviders();
 

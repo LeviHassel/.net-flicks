@@ -1,8 +1,6 @@
-﻿using AutoMapper;
-using CoreTemplate.Managers.Identity;
+﻿using CoreTemplate.Managers.Identity;
 using CoreTemplate.Managers.Interfaces;
-using CoreTemplate.Managers.ViewModels.Movie;
-using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;
 using System.Threading.Tasks;
@@ -28,7 +26,7 @@ namespace CoreTemplate.Managers.Managers
             _logger = logger;
         }
 
-        public async void Get2faUser()
+        public async Task<string> Get2faUserId()
         {
             // Ensure the user has gone through the username & password screen first
             var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
@@ -37,6 +35,15 @@ namespace CoreTemplate.Managers.Managers
             {
                 throw new ApplicationException($"Unable to load two-factor authentication user.");
             }
+
+            return user.Id;
+        }
+
+        public async Task<SignInResult> Login(string email, string password, bool rememberMe)
+        {
+            // This doesn't count login failures towards account lockout
+            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
+            return await _signInManager.PasswordSignInAsync(email, password, rememberMe, lockoutOnFailure: false);
         }
     }
 }

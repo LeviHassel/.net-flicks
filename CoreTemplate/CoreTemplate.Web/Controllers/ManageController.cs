@@ -21,6 +21,7 @@ namespace CoreTemplate.Web.Controllers
     {
         private readonly ApplicationUserManager _userManager;
         private readonly ApplicationSignInManager _signInManager;
+        private readonly IAccountManager _accountManager;
         private readonly IEmailManager _emailManager;
         private readonly ILogger _logger;
         private readonly UrlEncoder _urlEncoder;
@@ -30,12 +31,14 @@ namespace CoreTemplate.Web.Controllers
         public ManageController(
 		  ApplicationUserManager userManager,
 		  ApplicationSignInManager signInManager,
+          IAccountManager accountManager,
           IEmailManager emailSender,
           ILogger<ManageController> logger,
           UrlEncoder urlEncoder)
         {
             _userManager = userManager;
             _signInManager = signInManager;
+            _accountManager = accountManager;
             _emailManager = emailSender;
             _logger = logger;
             _urlEncoder = urlEncoder;
@@ -131,13 +134,8 @@ namespace CoreTemplate.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ChangePassword()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
+            var hasPassword = await _accountManager.UserHasPassword(User);
 
-            var hasPassword = await _userManager.HasPasswordAsync(user);
             if (!hasPassword)
             {
                 return RedirectToAction(nameof(SetPassword));
@@ -259,23 +257,7 @@ namespace CoreTemplate.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> LinkLoginCallback()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            var info = await _signInManager.GetExternalLoginInfoAsync(user.Id);
-            if (info == null)
-            {
-                throw new ApplicationException($"Unexpected error occurred loading external login info for user with ID '{user.Id}'.");
-            }
-
-            var result = await _userManager.AddLoginAsync(user, info);
-            if (!result.Succeeded)
-            {
-                throw new ApplicationException($"Unexpected error occurred adding external login for user with ID '{user.Id}'.");
-            }
+            await _accountManager.AddLogin(User);
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -288,19 +270,8 @@ namespace CoreTemplate.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> RemoveLogin(RemoveLoginViewModel model)
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
+            await _accountManager.RemoveLogin(User, model.LoginProvider, model.ProviderKey);
 
-            var result = await _userManager.RemoveLoginAsync(user, model.LoginProvider, model.ProviderKey);
-            if (!result.Succeeded)
-            {
-                throw new ApplicationException($"Unexpected error occurred removing external login for user with ID '{user.Id}'.");
-            }
-
-            await _signInManager.SignInAsync(user, isPersistent: false);
             StatusMessage = "The external login was removed.";
             return RedirectToAction(nameof(ExternalLogins));
         }
@@ -308,18 +279,7 @@ namespace CoreTemplate.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> TwoFactorAuthentication()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            var model = new TwoFactorAuthenticationViewModel
-            {
-                HasAuthenticator = await _userManager.GetAuthenticatorKeyAsync(user) != null,
-                Is2faEnabled = user.TwoFactorEnabled,
-                RecoveryCodesLeft = await _userManager.CountRecoveryCodesAsync(user),
-            };
+            var model = await _accountManager.GetTwoFactorAuthenticationViewModel(User);
 
             return View(model);
         }

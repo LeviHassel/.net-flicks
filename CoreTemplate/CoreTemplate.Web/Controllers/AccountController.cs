@@ -59,7 +59,7 @@ namespace CoreTemplate.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var result = await _accountManager.Login(model.Email, model.Password, model.RememberMe);
+                var result = await _accountManager.LoginWithPassword(model.Email, model.Password, model.RememberMe);
 
                 if (result.Succeeded)
                 {
@@ -157,7 +157,7 @@ namespace CoreTemplate.Web.Controllers
 
             var recoveryCode = model.RecoveryCode.Replace(" ", string.Empty);
 
-            var result = await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
+            var result = await _accountManager.LoginWithRecoveryCode(recoveryCode);
 
             if (result.Succeeded)
             {
@@ -225,7 +225,7 @@ namespace CoreTemplate.Web.Controllers
         [ValidateAntiForgeryToken]
         public async Task<IActionResult> Logout()
         {
-            await _signInManager.SignOutAsync();
+            await _accountManager.SignOut();
             _logger.LogInformation("User logged out.");
             return RedirectToAction(nameof(HomeController.Index), "Home");
         }
@@ -250,7 +250,9 @@ namespace CoreTemplate.Web.Controllers
                 ErrorMessage = $"Error from external provider: {remoteError}";
                 return RedirectToAction(nameof(Login));
             }
-            var info = await _signInManager.GetExternalLoginInfoAsync();
+
+            var info = await _accountManager.GetExternalLoginInfo();
+
             if (info == null)
             {
                 return RedirectToAction(nameof(Login));
@@ -285,7 +287,8 @@ namespace CoreTemplate.Web.Controllers
             if (ModelState.IsValid)
             {
                 // Get the information about the user from the external login provider
-                var info = await _signInManager.GetExternalLoginInfoAsync();
+                var info = await _accountManager.GetExternalLoginInfo();
+
                 if (info == null)
                 {
                     throw new ApplicationException("Error loading external login information during confirmation.");
@@ -341,19 +344,21 @@ namespace CoreTemplate.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                var user = await _userManager.FindByEmailAsync(model.Email);
-                if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
-                {
-                    // Don't reveal that the user does not exist or is not confirmed
-                    return RedirectToAction(nameof(ForgotPasswordConfirmation));
-                }
-
                 // For more information on how to enable account confirmation and password reset please
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
-                var code = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var callbackUrl = Url.ResetPasswordCallbackLink(user.Id, code, Request.Scheme);
-                await _emailManager.SendEmailAsync(model.Email, "Reset Password",
-                   $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+
+                var code = await _accountManager.GetPasswordResetToken(model.Email);
+
+                if (code != null)
+                {
+                    var userId = await _accountManager.GetUserId(model.Email);
+                    var callbackUrl = Url.ResetPasswordCallbackLink(userId, code, Request.Scheme);
+
+                    await _emailManager.SendEmailAsync(model.Email, "Reset Password",
+                       $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+                }
+
+                // Don't reveal that the user does not exist or is not confirmed
                 return RedirectToAction(nameof(ForgotPasswordConfirmation));
             }
 

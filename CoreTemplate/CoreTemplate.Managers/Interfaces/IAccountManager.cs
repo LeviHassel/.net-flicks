@@ -1,4 +1,6 @@
-﻿using Microsoft.AspNetCore.Identity;
+﻿using CoreTemplate.Managers.ViewModels.Manage;
+using Microsoft.AspNetCore.Identity;
+using System.Security.Claims;
 using System.Threading.Tasks;
 
 namespace CoreTemplate.Managers.Interfaces
@@ -7,6 +9,26 @@ namespace CoreTemplate.Managers.Interfaces
     {
         Task<string> Get2faUserId();
 
-        Task<SignInResult> Login(string email, string password, bool rememberMe);
+        Task<SignInResult> LoginWithPassword(string email, string password, bool rememberMe);
+
+        Task<SignInResult> LoginWithRecoveryCode(string recoveryCode);
+
+        Task SignOut();
+
+        Task<string> GetPasswordResetToken(string email);
+
+        Task<string> GetUserId(string email);
+
+        Task<string> GetUserId(ClaimsPrincipal user);
+
+        Task<ExternalLoginInfo> GetExternalLoginInfo();
+
+        Task<bool> UserHasPassword(ClaimsPrincipal User);
+
+        Task RemoveLogin(ClaimsPrincipal User, string loginProvider, string providerKey);
+
+        Task AddLogin(ClaimsPrincipal User);
+
+        Task<TwoFactorAuthenticationViewModel> GetTwoFactorAuthenticationViewModel(ClaimsPrincipal User);
     }
 }

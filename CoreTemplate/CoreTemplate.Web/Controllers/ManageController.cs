@@ -6,9 +6,7 @@ using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Logging;
 using System;
-using System.Linq;
 using System.Threading.Tasks;
 
 namespace CoreTemplate.Web.Controllers
@@ -21,22 +19,17 @@ namespace CoreTemplate.Web.Controllers
         private readonly ApplicationSignInManager _signInManager;
         private readonly IAccountManager _accountManager;
         private readonly IEmailManager _emailManager;
-        private readonly ILogger _logger;
-        
-        private const string AuthenicatorUriFormat = "otpauth://totp/{0}:{1}?secret={2}&issuer={0}&digits=6";
 
         public ManageController(
 		  ApplicationUserManager userManager,
 		  ApplicationSignInManager signInManager,
           IAccountManager accountManager,
-          IEmailManager emailSender,
-          ILogger<ManageController> logger)
+          IEmailManager emailSender)
         {
             _userManager = userManager;
             _signInManager = signInManager;
             _accountManager = accountManager;
             _emailManager = emailSender;
-            _logger = logger;
         }
 
         [TempData]
@@ -129,13 +122,7 @@ namespace CoreTemplate.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> SetPassword()
         {
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            var hasPassword = await _userManager.HasPasswordAsync(user);
+            var hasPassword = await _accountManager.UserHasPassword(User);
 
             if (hasPassword)
             {
@@ -155,22 +142,15 @@ namespace CoreTemplate.Web.Controllers
                 return View(model);
             }
 
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
+            var result = await _accountManager.SetPassword(User, model);
+            
+            if (!result.Succeeded)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
-
-            var addPasswordResult = await _userManager.AddPasswordAsync(user, model.NewPassword);
-            if (!addPasswordResult.Succeeded)
-            {
-                AddErrors(addPasswordResult);
+                AddErrors(result);
                 return View(model);
             }
 
-            await _signInManager.SignInAsync(user, isPersistent: false);
             StatusMessage = "Your password has been set.";
-
             return RedirectToAction(nameof(SetPassword));
         }
 

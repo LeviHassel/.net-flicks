@@ -1,4 +1,5 @@
-﻿using CoreTemplate.Managers.ViewModels.Manage;
+﻿using CoreTemplate.Managers.ViewModels.Account;
+using CoreTemplate.Managers.ViewModels.Manage;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -39,7 +40,15 @@ namespace CoreTemplate.Managers.Interfaces
 
         Task UpdateUser(ClaimsPrincipal identityUser, IndexViewModel model);
 
+        Task<IdentityResult> CreateUserExternal(ExternalLoginViewModel model);
+
         Task<IdentityResult> ChangePassword(ClaimsPrincipal identityUser, ChangePasswordViewModel model);
+
+        Task<IdentityResult> SetPassword(ClaimsPrincipal identityUser, SetPasswordViewModel model);
+
+        Task<IdentityResult> ResetPassword(ResetPasswordViewModel model);
+
+        Task<IdentityResult> ConfirmEmail(string userId, string code);
 
         Task<GenerateRecoveryCodesViewModel> GetGenerateRecoveryCodesViewModel(ClaimsPrincipal identityUser);
 

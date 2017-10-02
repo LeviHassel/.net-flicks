@@ -286,26 +286,13 @@ namespace CoreTemplate.Web.Controllers
         {
             if (ModelState.IsValid)
             {
-                // Get the information about the user from the external login provider
-                var info = await _accountManager.GetExternalLoginInfo();
+                var result = await _accountManager.CreateUserExternal(model);
 
-                if (info == null)
-                {
-                    throw new ApplicationException("Error loading external login information during confirmation.");
-                }
-
-                var user = _userManager.CreateUser(model.Email);
-                var result = await _userManager.CreateAsync(user);
                 if (result.Succeeded)
                 {
-                    result = await _userManager.AddLoginAsync(user, info);
-                    if (result.Succeeded)
-                    {
-                        await _signInManager.SignInAsync(user, isPersistent: false);
-                        _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
-                        return RedirectToLocal(returnUrl);
-                    }
+                    return RedirectToLocal(returnUrl);
                 }
+                
                 AddErrors(result);
             }
 
@@ -321,12 +308,9 @@ namespace CoreTemplate.Web.Controllers
             {
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
-            var user = await _userManager.FindByIdAsync(userId);
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{userId}'.");
-            }
-            var result = await _userManager.ConfirmEmailAsync(user, code);
+
+            var result = await _accountManager.ConfirmEmail(userId, code);
+
             return View(result.Succeeded ? "ConfirmEmail" : "Error");
         }
 
@@ -394,17 +378,16 @@ namespace CoreTemplate.Web.Controllers
             {
                 return View(model);
             }
-            var user = await _userManager.FindByEmailAsync(model.Email);
-            if (user == null)
-            {
-                // Don't reveal that the user does not exist
-                return RedirectToAction(nameof(ResetPasswordConfirmation));
-            }
-            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
-            if (result.Succeeded)
+
+            var result = await _accountManager.ResetPassword(model);
+
+            // In order to not reveal a user's existence, take them to the confirmation page
+            // if the password was successfully reset or if the account doesn't exist
+            if (result == null || result.Succeeded)
             {
                 return RedirectToAction(nameof(ResetPasswordConfirmation));
             }
+
             AddErrors(result);
             return View();
         }

@@ -1,6 +1,7 @@
 ﻿using CoreTemplate.Accessors.Identity;
 using CoreTemplate.Managers.Identity;
 using CoreTemplate.Managers.Interfaces;
+using CoreTemplate.Managers.ViewModels.Account;
 using CoreTemplate.Managers.ViewModels.Manage;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
@@ -288,6 +289,34 @@ namespace CoreTemplate.Managers.Managers
             }
         }
 
+        public async Task<IdentityResult> CreateUserExternal(ExternalLoginViewModel model)
+        {
+            // Get the information about the user from the external login provider
+            var info = await GetExternalLoginInfo();
+
+            if (info == null)
+            {
+                throw new ApplicationException("Error loading external login information during confirmation.");
+            }
+
+            var user = _userManager.CreateUser(model.Email);
+
+            var createUserResult = await _userManager.CreateAsync(user);
+
+            if (createUserResult.Succeeded)
+            {
+                var addLoginResult = await _userManager.AddLoginAsync(user, info);
+
+                if (createUserResult.Succeeded)
+                {
+                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    _logger.LogInformation("User created an account using {Name} provider.", info.LoginProvider);
+                }
+            }
+
+            return createUserResult;
+        }
+
         public async Task<IdentityResult> ChangePassword(ClaimsPrincipal identityUser, ChangePasswordViewModel model)
         {
             var user = await GetApplicationUser(identityUser);
@@ -302,6 +331,45 @@ namespace CoreTemplate.Managers.Managers
             }
 
             return changePasswordResult;
+        }
+
+        public async Task<IdentityResult> SetPassword(ClaimsPrincipal identityUser, SetPasswordViewModel model)
+        {
+            var user = await GetApplicationUser(identityUser);
+
+            var addPasswordResult = await _userManager.AddPasswordAsync(user, model.NewPassword);
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
+            return addPasswordResult;
+        }
+
+        public async Task<IdentityResult> ResetPassword(ResetPasswordViewModel model)
+        {
+            var user = await _userManager.FindByEmailAsync(model.Email);
+
+            if (user == null)
+            {
+                return null;
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
+
+            return result;
+        }
+
+        public async Task<IdentityResult> ConfirmEmail(string userId, string code)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{userId}'.");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+
+            return result;
         }
 
         public async Task<bool> EnableAuthenticator(ClaimsPrincipal identityUser, EnableAuthenticatorViewModel model)

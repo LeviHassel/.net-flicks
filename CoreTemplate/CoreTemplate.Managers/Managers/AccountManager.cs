@@ -19,7 +19,6 @@ namespace CoreTemplate.Managers.Managers
     {
         private ApplicationUserManager _userManager;
         private ApplicationSignInManager _signInManager;
-        private IEmailManager _emailManager;
         private ILogger _logger;
         private UrlEncoder _urlEncoder;
 
@@ -28,13 +27,11 @@ namespace CoreTemplate.Managers.Managers
         public AccountManager(
             ApplicationUserManager userManager,
             ApplicationSignInManager signInManager,
-            IEmailManager emailManager,
             ILogger<AccountManager> logger,
             UrlEncoder urlEncoder)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailManager = emailManager;
             _logger = logger;
             _urlEncoder = urlEncoder;
         }

@@ -19,26 +19,36 @@ namespace CoreTemplate.Managers.Interfaces
 
         Task<string> GetUserId(string email);
 
-        Task<string> GetUserId(ClaimsPrincipal user);
+        Task<string> GetUserId(ClaimsPrincipal identityUser);
 
         Task<ExternalLoginInfo> GetExternalLoginInfo();
 
-        Task<bool> UserHasPassword(ClaimsPrincipal User);
+        Task<bool> UserHasPassword(ClaimsPrincipal identityUser);
 
-        Task RemoveLogin(ClaimsPrincipal User, string loginProvider, string providerKey);
+        Task RemoveLogin(ClaimsPrincipal identityUser, string loginProvider, string providerKey);
 
-        Task AddLogin(ClaimsPrincipal User);
+        Task AddLogin(ClaimsPrincipal identityUser);
 
-        Task ResetAuthenticator(ClaimsPrincipal User);
+        Task ResetAuthenticator(ClaimsPrincipal identityUser);
 
-        Task Disable2fa(ClaimsPrincipal User);
+        Task Disable2faWarning(ClaimsPrincipal identityUser);
 
-        Task<bool> EnableAuthenticator(ClaimsPrincipal User, EnableAuthenticatorViewModel model);
+        Task Disable2fa(ClaimsPrincipal identityUser);
 
-        Task<GenerateRecoveryCodesViewModel> GetGenerateRecoveryCodesViewModel(ClaimsPrincipal User);
+        Task<bool> EnableAuthenticator(ClaimsPrincipal identityUser, EnableAuthenticatorViewModel model);
 
-        Task<EnableAuthenticatorViewModel> GetEnableAuthenticatorViewModel(ClaimsPrincipal User);
+        Task UpdateUser(ClaimsPrincipal identityUser, IndexViewModel model);
 
-        Task<TwoFactorAuthenticationViewModel> GetTwoFactorAuthenticationViewModel(ClaimsPrincipal User);
+        Task<IdentityResult> ChangePassword(ClaimsPrincipal identityUser, ChangePasswordViewModel model);
+
+        Task<GenerateRecoveryCodesViewModel> GetGenerateRecoveryCodesViewModel(ClaimsPrincipal identityUser);
+
+        Task<EnableAuthenticatorViewModel> GetEnableAuthenticatorViewModel(ClaimsPrincipal identityUser);
+
+        Task<ExternalLoginsViewModel> GetExternalLoginsViewModel(ClaimsPrincipal identityUser);
+
+        Task<IndexViewModel> GetIndexViewModel(ClaimsPrincipal identityUser);
+
+        Task<TwoFactorAuthenticationViewModel> GetTwoFactorAuthenticationViewModel(ClaimsPrincipal identityUser);
     }
 }

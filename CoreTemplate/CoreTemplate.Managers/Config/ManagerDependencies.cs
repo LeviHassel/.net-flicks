@@ -19,17 +19,8 @@ namespace CoreTemplate.Managers.Config
             services.AddTransient<ApplicationSignInManager>();
 
             services.AddTransient<IEmailManager, EmailManager>();
+            services.AddTransient<IAccountManager, AccountManager>();
             services.AddTransient<IMovieManager, MovieManager>();
-
-            /*
-            TODO: Port over needed Ninject dependencies (see if not having these causes any problems)
-
-            //identity binds
-            Kernel.Bind<ApplicationUserManager>().ToSelf();
-            Kernel.Bind<ApplicationSignInManager>().ToSelf();
-            Kernel.Bind<IdentityFactoryOptions<ApplicationUserManager>>().ToSelf();
-            Kernel.Bind(typeof(IUserStore<>)).To(typeof(UserStore<>)).InRequestScope();
-            */
 
             return services;
         }

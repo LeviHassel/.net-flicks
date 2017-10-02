@@ -1,12 +1,10 @@
-﻿using CoreTemplate.Managers.Identity;
-using CoreTemplate.Managers.Interfaces;
+﻿using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.Managers.ViewModels.Manage;
 using CoreTemplate.Web.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
-using System;
 using System.Threading.Tasks;
 
 namespace CoreTemplate.Web.Controllers
@@ -15,21 +13,15 @@ namespace CoreTemplate.Web.Controllers
     [Route("[controller]/[action]")]
     public class ManageController : Controller
     {
-        private readonly ApplicationUserManager _userManager;
-        private readonly ApplicationSignInManager _signInManager;
         private readonly IAccountManager _accountManager;
         private readonly IEmailManager _emailManager;
 
         public ManageController(
-		  ApplicationUserManager userManager,
-		  ApplicationSignInManager signInManager,
           IAccountManager accountManager,
-          IEmailManager emailSender)
+          IEmailManager emailManager)
         {
-            _userManager = userManager;
-            _signInManager = signInManager;
             _accountManager = accountManager;
-            _emailManager = emailSender;
+            _emailManager = emailManager;
         }
 
         [TempData]

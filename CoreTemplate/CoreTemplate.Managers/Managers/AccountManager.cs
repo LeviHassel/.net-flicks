@@ -28,13 +28,13 @@ namespace CoreTemplate.Managers.Managers
         public AccountManager(
             ApplicationUserManager userManager,
             ApplicationSignInManager signInManager,
-            IEmailManager emailSender,
+            IEmailManager emailManager,
             ILogger<AccountManager> logger,
             UrlEncoder urlEncoder)
         {
             _userManager = userManager;
             _signInManager = signInManager;
-            _emailManager = emailSender;
+            _emailManager = emailManager;
             _logger = logger;
             _urlEncoder = urlEncoder;
         }

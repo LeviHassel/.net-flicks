@@ -69,16 +69,13 @@ namespace CoreTemplate.Web.Controllers
                 return View(model);
             }
 
-            var user = await _userManager.GetUserAsync(User);
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(User)}'.");
-            }
+            var code = await _accountManager.GetEmailConfirmationToken(model.Email);
 
-            var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-            var email = user.Email;
-            await _emailManager.SendEmailConfirmationAsync(email, callbackUrl);
+            var userId = await _accountManager.GetUserId(model.Email);
+
+            var callbackUrl = Url.EmailConfirmationLink(userId, code, Request.Scheme);
+
+            await _emailManager.SendEmailConfirmationAsync(model.Email, callbackUrl);
 
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToAction(nameof(Index));
@@ -173,7 +170,7 @@ namespace CoreTemplate.Web.Controllers
 
             // Request a redirect to the external login provider to link a login for the current user
             var redirectUrl = Url.Action(nameof(LinkLoginCallback));
-            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, _userManager.GetUserId(User));
+            var properties = await _accountManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, User);
             return new ChallengeResult(provider, properties);
         }
 

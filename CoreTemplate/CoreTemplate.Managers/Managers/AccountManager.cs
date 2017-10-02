@@ -3,6 +3,7 @@ using CoreTemplate.Managers.Identity;
 using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.Managers.ViewModels.Account;
 using CoreTemplate.Managers.ViewModels.Manage;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Logging;
 using System;
@@ -58,6 +59,13 @@ namespace CoreTemplate.Managers.Managers
             return await _signInManager.PasswordSignInAsync(email, password, rememberMe, lockoutOnFailure: false);
         }
 
+        public async Task LoginWithEmail(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+        }
+
         public async Task<SignInResult> LoginWithRecoveryCode(string recoveryCode)
         {
             return await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
@@ -80,6 +88,13 @@ namespace CoreTemplate.Managers.Managers
             return await _userManager.GeneratePasswordResetTokenAsync(user);
         }
 
+        public async Task<string> GetEmailConfirmationToken(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+        }
+
         public async Task<string> GetUserId(string email)
         {
             var user =  await _userManager.FindByEmailAsync(email);
@@ -94,12 +109,7 @@ namespace CoreTemplate.Managers.Managers
 
         public async Task<string> GetUserId(ClaimsPrincipal identityUser)
         {
-            var user = await _userManager.GetUserAsync(identityUser);
-
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(identityUser)}'.");
-            }
+            var user = await GetApplicationUser(identityUser);
 
             return user.Id;
         }
@@ -182,6 +192,30 @@ namespace CoreTemplate.Managers.Managers
             }
 
             _logger.LogInformation("User with ID {UserId} has disabled 2fa.", user.Id);
+        }
+
+        public async Task<SignInResult> LoginWith2fa(string authenticatorCode, bool rememberMe, bool rememberMachine)
+        {
+            return await _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe, rememberMachine);
+        }
+
+        public async Task<SignInResult> LoginExternal(ExternalLoginInfo info)
+        {
+            return await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+        }
+
+        public async Task<AuthenticationProperties> ConfigureExternalAuthenticationProperties(string provider, string redirectUrl, ClaimsPrincipal identityUser = null)
+        {
+            string userId = null;
+
+            if (identityUser != null)
+            {
+                var user = await GetApplicationUser(identityUser);
+
+                userId = user.Id;
+            }
+
+            return _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, userId);
         }
 
         public async Task<GenerateRecoveryCodesViewModel> GetGenerateRecoveryCodesViewModel(ClaimsPrincipal identityUser)
@@ -315,6 +349,15 @@ namespace CoreTemplate.Managers.Managers
             }
 
             return createUserResult;
+        }
+
+        public async Task<IdentityResult> CreateUser(RegisterViewModel model)
+        {
+            var user = _userManager.CreateUser(model.Email);
+
+            var result = await _userManager.CreateAsync(user, model.Password);
+
+            return result;
         }
 
         public async Task<IdentityResult> ChangePassword(ClaimsPrincipal identityUser, ChangePasswordViewModel model)

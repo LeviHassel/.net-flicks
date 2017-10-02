@@ -1,5 +1,6 @@
 ﻿using CoreTemplate.Managers.ViewModels.Account;
 using CoreTemplate.Managers.ViewModels.Manage;
+using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;
 using System.Threading.Tasks;
@@ -12,11 +13,15 @@ namespace CoreTemplate.Managers.Interfaces
 
         Task<SignInResult> LoginWithPassword(string email, string password, bool rememberMe);
 
+        Task LoginWithEmail(string email);
+
         Task<SignInResult> LoginWithRecoveryCode(string recoveryCode);
 
         Task SignOut();
 
         Task<string> GetPasswordResetToken(string email);
+
+        Task<string> GetEmailConfirmationToken(string email);
 
         Task<string> GetUserId(string email);
 
@@ -36,11 +41,19 @@ namespace CoreTemplate.Managers.Interfaces
 
         Task Disable2fa(ClaimsPrincipal identityUser);
 
+        Task<SignInResult> LoginWith2fa(string authenticatorCode, bool rememberMe, bool rememberMachine);
+
+        Task<SignInResult> LoginExternal(ExternalLoginInfo info);
+
+        Task<AuthenticationProperties> ConfigureExternalAuthenticationProperties(string provider, string redirectUrl, ClaimsPrincipal identityUser = null);
+
         Task<bool> EnableAuthenticator(ClaimsPrincipal identityUser, EnableAuthenticatorViewModel model);
 
         Task UpdateUser(ClaimsPrincipal identityUser, IndexViewModel model);
 
         Task<IdentityResult> CreateUserExternal(ExternalLoginViewModel model);
+
+        Task<IdentityResult> CreateUser(RegisterViewModel model);
 
         Task<IdentityResult> ChangePassword(ClaimsPrincipal identityUser, ChangePasswordViewModel model);
 

@@ -112,7 +112,7 @@ namespace CoreTemplate.Web.Controllers
 
             var authenticatorCode = model.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
 
-            var result = await _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe, model.RememberMachine);
+            var result = await _accountManager.LoginWith2fa(authenticatorCode, rememberMe, model.RememberMachine);
 
             if (result.Succeeded)
             {
@@ -200,20 +200,23 @@ namespace CoreTemplate.Web.Controllers
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var user = _userManager.CreateUser(model.Email);
-                var result = await _userManager.CreateAsync(user, model.Password);
+                var result = await _accountManager.CreateUser(model);
+
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                    var callbackUrl = Url.EmailConfirmationLink(user.Id, code, Request.Scheme);
-                    await _emailManager.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    var code = await _accountManager.GetEmailConfirmationToken(model.Email);
+                    var userId = await _accountManager.GetUserId(model.Email);
+                    var callbackUrl = Url.EmailConfirmationLink(userId, code, Request.Scheme);
 
-                    await _signInManager.SignInAsync(user, isPersistent: false);
+                    await _emailManager.SendEmailConfirmationAsync(model.Email, callbackUrl);
+                    await _accountManager.LoginWithEmail(model.Email);
+
                     _logger.LogInformation("User created a new account with password.");
                     return RedirectToLocal(returnUrl);
                 }
+
                 AddErrors(result);
             }
 
@@ -233,11 +236,11 @@ namespace CoreTemplate.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public IActionResult ExternalLogin(string provider, string returnUrl = null)
+        public async Task<IActionResult> ExternalLogin(string provider, string returnUrl = null)
         {
             // Request a redirect to the external login provider.
             var redirectUrl = Url.Action(nameof(ExternalLoginCallback), "Account", new { returnUrl });
-            var properties = _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
+            var properties = await _accountManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl);
             return Challenge(properties, provider);
         }
 
@@ -259,7 +262,8 @@ namespace CoreTemplate.Web.Controllers
             }
 
             // Sign in the user with this external login provider if the user already has a login.
-            var result = await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
+            var result = await _accountManager.LoginExternal(info);
+
             if (result.Succeeded)
             {
                 _logger.LogInformation("User logged in with {Name} provider.", info.LoginProvider);

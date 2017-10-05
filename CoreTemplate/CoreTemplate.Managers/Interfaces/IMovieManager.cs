@@ -10,6 +10,6 @@ namespace CoreTemplate.Managers.Interfaces
 
         MovieViewModel GetMovie(int id);
 
-        void DeleteMovie(int id);
+        MovieViewModel DeleteMovie(int id);
     }
 }

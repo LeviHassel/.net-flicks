@@ -45,9 +45,13 @@ namespace CoreTemplate.Managers.Managers
             return vmNew;
         }
 
-        public void DeleteMovie(int id)
+        public MovieViewModel DeleteMovie(int id)
         {
-            _movieAccessor.Delete(id);
+            var dto = _movieAccessor.Delete(id);
+
+            var vm = Mapper.Map<MovieViewModel>(dto);
+
+            return vm;
         }
     }
 }

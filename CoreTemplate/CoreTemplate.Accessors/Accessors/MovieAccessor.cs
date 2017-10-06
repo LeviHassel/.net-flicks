@@ -64,13 +64,16 @@ namespace CoreTemplate.Accessors.Accessors
             return returnDto;
         }
 
-        public void Delete(int id)
+        public MovieDTO Delete(int id)
         {
             var entity = _db.Movies.Single(x => x.Id == id);
 
             _db.Movies.Remove(entity);
-
             _db.SaveChanges();
+
+            var dto = Mapper.Map<MovieDTO>(entity);
+
+            return dto;
         }
     }
 }

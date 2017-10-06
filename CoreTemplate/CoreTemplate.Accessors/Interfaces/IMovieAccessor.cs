@@ -11,6 +11,6 @@ namespace CoreTemplate.Accessors.Interfaces
 
         MovieDTO Save(MovieDTO dto);
 
-        void Delete(int id);
+        MovieDTO Delete(int id);
     }
 }

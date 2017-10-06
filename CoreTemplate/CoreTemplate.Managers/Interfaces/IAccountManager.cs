@@ -9,68 +9,66 @@ namespace CoreTemplate.Managers.Interfaces
 {
     public interface IAccountManager
     {
-        Task<string> Get2faUserId();
+        Task<SignInResult> SignInWithPassword(string email, string password, bool rememberMe);
 
-        Task<SignInResult> LoginWithPassword(string email, string password, bool rememberMe);
+        Task SignInWithEmail(string email);
 
-        Task LoginWithEmail(string email);
-
-        Task<SignInResult> LoginWithRecoveryCode(string recoveryCode);
+        Task<SignInResult> SignInWithRecoveryCode(string recoveryCode);
 
         Task SignOut();
 
-        Task<string> GetPasswordResetToken(string email);
-
         Task<string> GetEmailConfirmationToken(string email);
 
-        Task<string> GetUserId(string email);
+        Task<string> GetPasswordResetToken(string email);
 
-        Task<string> GetUserId(ClaimsPrincipal identityUser);
+        Task<IndexViewModel> GetIndex(ClaimsPrincipal identityUser);
 
-        Task<ExternalLoginInfo> GetExternalLoginInfo();
+        Task<IdentityResult> CreateUser(RegisterViewModel vm);
 
-        Task<bool> UserHasPassword(ClaimsPrincipal identityUser);
+        Task UpdateUser(ClaimsPrincipal identityUser, IndexViewModel vm);
 
-        Task RemoveLogin(ClaimsPrincipal identityUser, string loginProvider, string providerKey);
+        Task<IdentityResult> ChangePassword(ClaimsPrincipal identityUser, ChangePasswordViewModel vm);
 
-        Task AddLogin(ClaimsPrincipal identityUser);
+        Task<IdentityResult> SetPassword(ClaimsPrincipal identityUser, SetPasswordViewModel vm);
+
+        Task<IdentityResult> ResetPassword(ResetPasswordViewModel vm);
+
+        Task<IdentityResult> ConfirmEmail(string userId, string code);
+
+        Task<string> Get2faUserId();
+
+        Task<SignInResult> LoginWith2fa(string authenticatorCode, bool rememberMe, bool rememberMachine);
+
+        Task<TwoFactorAuthenticationViewModel> GetTwoFactorAuthentication(ClaimsPrincipal identityUser);
+
+        Task<EnableAuthenticatorViewModel> GetEnableAuthenticator(ClaimsPrincipal identityUser);
+
+        Task<bool> EnableAuthenticator(ClaimsPrincipal identityUser, EnableAuthenticatorViewModel vm);
 
         Task ResetAuthenticator(ClaimsPrincipal identityUser);
+
+        Task<GenerateRecoveryCodesViewModel> GetGenerateRecoveryCodes(ClaimsPrincipal identityUser);
 
         Task Disable2faWarning(ClaimsPrincipal identityUser);
 
         Task Disable2fa(ClaimsPrincipal identityUser);
 
-        Task<SignInResult> LoginWith2fa(string authenticatorCode, bool rememberMe, bool rememberMachine);
+        Task<ExternalLoginInfo> GetExternalLoginInfo();
 
         Task<SignInResult> LoginExternal(ExternalLoginInfo info);
 
+        Task<ExternalLoginsViewModel> GetExternalLogins(ClaimsPrincipal identityUser);
+
+        Task AddExternalLogin(ClaimsPrincipal identityUser);
+
+        Task RemoveExternalLogin(ClaimsPrincipal identityUser, string loginProvider, string providerKey);
+
+        Task<IdentityResult> CreateUserExternal(ExternalLoginViewModel vm);
+
         Task<AuthenticationProperties> ConfigureExternalAuthenticationProperties(string provider, string redirectUrl, ClaimsPrincipal identityUser = null);
 
-        Task<bool> EnableAuthenticator(ClaimsPrincipal identityUser, EnableAuthenticatorViewModel model);
+        Task<string> GetUserId(string email);
 
-        Task UpdateUser(ClaimsPrincipal identityUser, IndexViewModel model);
-
-        Task<IdentityResult> CreateUserExternal(ExternalLoginViewModel model);
-
-        Task<IdentityResult> CreateUser(RegisterViewModel model);
-
-        Task<IdentityResult> ChangePassword(ClaimsPrincipal identityUser, ChangePasswordViewModel model);
-
-        Task<IdentityResult> SetPassword(ClaimsPrincipal identityUser, SetPasswordViewModel model);
-
-        Task<IdentityResult> ResetPassword(ResetPasswordViewModel model);
-
-        Task<IdentityResult> ConfirmEmail(string userId, string code);
-
-        Task<GenerateRecoveryCodesViewModel> GetGenerateRecoveryCodesViewModel(ClaimsPrincipal identityUser);
-
-        Task<EnableAuthenticatorViewModel> GetEnableAuthenticatorViewModel(ClaimsPrincipal identityUser);
-
-        Task<ExternalLoginsViewModel> GetExternalLoginsViewModel(ClaimsPrincipal identityUser);
-
-        Task<IndexViewModel> GetIndexViewModel(ClaimsPrincipal identityUser);
-
-        Task<TwoFactorAuthenticationViewModel> GetTwoFactorAuthenticationViewModel(ClaimsPrincipal identityUser);
+        Task<bool> UserHasPassword(ClaimsPrincipal identityUser);
     }
 }

@@ -38,9 +38,9 @@ namespace CoreTemplate.Web.Controllers
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Edit(MovieViewModel model)
+        public ActionResult Edit(MovieViewModel vm)
         {
-            _movieManager.SaveMovie(model);
+            _movieManager.SaveMovie(vm);
 
             return RedirectToAction("Index");
         }

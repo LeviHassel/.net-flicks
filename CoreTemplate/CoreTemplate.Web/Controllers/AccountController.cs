@@ -47,12 +47,12 @@ namespace CoreTemplate.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Login(LoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Login(LoginViewModel vm, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var result = await _accountManager.LoginWithPassword(model.Email, model.Password, model.RememberMe);
+                var result = await _accountManager.SignInWithPassword(vm.Email, vm.Password, vm.RememberMe);
 
                 if (result.Succeeded)
                 {
@@ -61,7 +61,7 @@ namespace CoreTemplate.Web.Controllers
                 }
                 if (result.RequiresTwoFactor)
                 {
-                    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, model.RememberMe });
+                    return RedirectToAction(nameof(LoginWith2fa), new { returnUrl, vm.RememberMe });
                 }
                 if (result.IsLockedOut)
                 {
@@ -71,12 +71,12 @@ namespace CoreTemplate.Web.Controllers
                 else
                 {
                     ModelState.AddModelError(string.Empty, "Invalid login attempt.");
-                    return View(model);
+                    return View(vm);
                 }
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(vm);
         }
 
         [HttpGet]
@@ -85,27 +85,27 @@ namespace CoreTemplate.Web.Controllers
         {
             await _accountManager.Get2faUserId();
 
-            var model = new LoginWith2faViewModel { RememberMe = rememberMe };
+            var vm = new LoginWith2faViewModel { RememberMe = rememberMe };
             ViewData["ReturnUrl"] = returnUrl;
 
-            return View(model);
+            return View(vm);
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LoginWith2fa(LoginWith2faViewModel model, bool rememberMe, string returnUrl = null)
+        public async Task<IActionResult> LoginWith2fa(LoginWith2faViewModel vm, bool rememberMe, string returnUrl = null)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(vm);
             }
 
             var userId = await _accountManager.Get2faUserId();
 
-            var authenticatorCode = model.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
+            var authenticatorCode = vm.TwoFactorCode.Replace(" ", string.Empty).Replace("-", string.Empty);
 
-            var result = await _accountManager.LoginWith2fa(authenticatorCode, rememberMe, model.RememberMachine);
+            var result = await _accountManager.LoginWith2fa(authenticatorCode, rememberMe, vm.RememberMachine);
 
             if (result.Succeeded)
             {
@@ -139,18 +139,18 @@ namespace CoreTemplate.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LoginWithRecoveryCode(LoginWithRecoveryCodeViewModel model, string returnUrl = null)
+        public async Task<IActionResult> LoginWithRecoveryCode(LoginWithRecoveryCodeViewModel vm, string returnUrl = null)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(vm);
             }
 
             var userId = await _accountManager.Get2faUserId();
 
-            var recoveryCode = model.RecoveryCode.Replace(" ", string.Empty);
+            var recoveryCode = vm.RecoveryCode.Replace(" ", string.Empty);
 
-            var result = await _accountManager.LoginWithRecoveryCode(recoveryCode);
+            var result = await _accountManager.SignInWithRecoveryCode(recoveryCode);
 
             if (result.Succeeded)
             {
@@ -188,23 +188,23 @@ namespace CoreTemplate.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel model, string returnUrl = null)
+        public async Task<IActionResult> Register(RegisterViewModel vm, string returnUrl = null)
         {
             ViewData["ReturnUrl"] = returnUrl;
             if (ModelState.IsValid)
             {
-                var result = await _accountManager.CreateUser(model);
+                var result = await _accountManager.CreateUser(vm);
 
                 if (result.Succeeded)
                 {
                     _logger.LogInformation("User created a new account with password.");
 
-                    var code = await _accountManager.GetEmailConfirmationToken(model.Email);
-                    var userId = await _accountManager.GetUserId(model.Email);
+                    var code = await _accountManager.GetEmailConfirmationToken(vm.Email);
+                    var userId = await _accountManager.GetUserId(vm.Email);
                     var callbackUrl = Url.EmailConfirmationLink(userId, code, Request.Scheme);
 
-                    await _emailManager.SendEmailConfirmationAsync(model.Email, callbackUrl);
-                    await _accountManager.LoginWithEmail(model.Email);
+                    await _emailManager.SendEmailConfirmationAsync(vm.Email, callbackUrl);
+                    await _accountManager.SignInWithEmail(vm.Email);
 
                     _logger.LogInformation("User created a new account with password.");
                     return RedirectToLocal(returnUrl);
@@ -214,7 +214,7 @@ namespace CoreTemplate.Web.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(vm);
         }
 
         [HttpPost]
@@ -279,11 +279,11 @@ namespace CoreTemplate.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel model, string returnUrl = null)
+        public async Task<IActionResult> ExternalLoginConfirmation(ExternalLoginViewModel vm, string returnUrl = null)
         {
             if (ModelState.IsValid)
             {
-                var result = await _accountManager.CreateUserExternal(model);
+                var result = await _accountManager.CreateUserExternal(vm);
 
                 if (result.Succeeded)
                 {
@@ -294,7 +294,7 @@ namespace CoreTemplate.Web.Controllers
             }
 
             ViewData["ReturnUrl"] = returnUrl;
-            return View(nameof(ExternalLogin), model);
+            return View(nameof(ExternalLogin), vm);
         }
 
         [HttpGet]
@@ -321,21 +321,21 @@ namespace CoreTemplate.Web.Controllers
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel model)
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel vm)
         {
             if (ModelState.IsValid)
             {
                 // For more information on how to enable account confirmation and password reset please
                 // visit https://go.microsoft.com/fwlink/?LinkID=532713
 
-                var code = await _accountManager.GetPasswordResetToken(model.Email);
+                var code = await _accountManager.GetPasswordResetToken(vm.Email);
 
                 if (code != null)
                 {
-                    var userId = await _accountManager.GetUserId(model.Email);
+                    var userId = await _accountManager.GetUserId(vm.Email);
                     var callbackUrl = Url.ResetPasswordCallbackLink(userId, code, Request.Scheme);
 
-                    await _emailManager.SendEmailAsync(model.Email, "Reset Password",
+                    await _emailManager.SendEmailAsync(vm.Email, "Reset Password",
                        $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
                 }
 
@@ -344,7 +344,7 @@ namespace CoreTemplate.Web.Controllers
             }
 
             // If we got this far, something failed, redisplay form
-            return View(model);
+            return View(vm);
         }
 
         [HttpGet]
@@ -362,21 +362,21 @@ namespace CoreTemplate.Web.Controllers
             {
                 throw new ApplicationException("A code must be supplied for password reset.");
             }
-            var model = new ResetPasswordViewModel { Code = code };
-            return View(model);
+            var vm = new ResetPasswordViewModel { Code = code };
+            return View(vm);
         }
 
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel model)
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(vm);
             }
 
-            var result = await _accountManager.ResetPassword(model);
+            var result = await _accountManager.ResetPassword(vm);
 
             // In order to not reveal a user's existence, take them to the confirmation page
             // if the password was successfully reset or if the account doesn't exist

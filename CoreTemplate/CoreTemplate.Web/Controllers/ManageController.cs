@@ -30,23 +30,23 @@ namespace CoreTemplate.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> Index()
         {
-            var model = await _accountManager.GetIndexViewModel(User);
+            var vm = await _accountManager.GetIndex(User);
 
-            model.StatusMessage = StatusMessage;
+            vm.StatusMessage = StatusMessage;
 
-            return View(model);
+            return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Index(IndexViewModel model)
+        public async Task<IActionResult> Index(IndexViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(vm);
             }
 
-            await _accountManager.UpdateUser(User, model);
+            await _accountManager.UpdateUser(User, vm);
 
             StatusMessage = "Your profile has been updated";
             return RedirectToAction(nameof(Index));
@@ -54,20 +54,20 @@ namespace CoreTemplate.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SendVerificationEmail(IndexViewModel model)
+        public async Task<IActionResult> SendVerificationEmail(IndexViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(vm);
             }
 
-            var code = await _accountManager.GetEmailConfirmationToken(model.Email);
+            var code = await _accountManager.GetEmailConfirmationToken(vm.Email);
 
-            var userId = await _accountManager.GetUserId(model.Email);
+            var userId = await _accountManager.GetUserId(vm.Email);
 
             var callbackUrl = Url.EmailConfirmationLink(userId, code, Request.Scheme);
 
-            await _emailManager.SendEmailConfirmationAsync(model.Email, callbackUrl);
+            await _emailManager.SendEmailConfirmationAsync(vm.Email, callbackUrl);
 
             StatusMessage = "Verification email sent. Please check your email.";
             return RedirectToAction(nameof(Index));
@@ -83,25 +83,25 @@ namespace CoreTemplate.Web.Controllers
                 return RedirectToAction(nameof(SetPassword));
             }
 
-            var model = new ChangePasswordViewModel { StatusMessage = StatusMessage };
-            return View(model);
+            var vm = new ChangePasswordViewModel { StatusMessage = StatusMessage };
+            return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel model)
+        public async Task<IActionResult> ChangePassword(ChangePasswordViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(vm);
             }
 
-            var result = await _accountManager.ChangePassword(User, model);
+            var result = await _accountManager.ChangePassword(User, vm);
 
             if (!result.Succeeded)
             {
                 AddErrors(result);
-                return View(model);
+                return View(vm);
             }
 
             StatusMessage = "Your password has been changed.";
@@ -118,25 +118,25 @@ namespace CoreTemplate.Web.Controllers
                 return RedirectToAction(nameof(ChangePassword));
             }
 
-            var model = new SetPasswordViewModel { StatusMessage = StatusMessage };
-            return View(model);
+            var vm = new SetPasswordViewModel { StatusMessage = StatusMessage };
+            return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> SetPassword(SetPasswordViewModel model)
+        public async Task<IActionResult> SetPassword(SetPasswordViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(vm);
             }
 
-            var result = await _accountManager.SetPassword(User, model);
+            var result = await _accountManager.SetPassword(User, vm);
             
             if (!result.Succeeded)
             {
                 AddErrors(result);
-                return View(model);
+                return View(vm);
             }
 
             StatusMessage = "Your password has been set.";
@@ -146,11 +146,11 @@ namespace CoreTemplate.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> ExternalLogins()
         {
-            var model = await _accountManager.GetExternalLoginsViewModel(User);
+            var vm = await _accountManager.GetExternalLogins(User);
 
-            model.StatusMessage = StatusMessage;
+            vm.StatusMessage = StatusMessage;
 
-            return View(model);
+            return View(vm);
         }
 
         [HttpPost]
@@ -169,7 +169,7 @@ namespace CoreTemplate.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> LinkLoginCallback()
         {
-            await _accountManager.AddLogin(User);
+            await _accountManager.AddExternalLogin(User);
 
             // Clear the existing external cookie to ensure a clean login process
             await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
@@ -180,9 +180,9 @@ namespace CoreTemplate.Web.Controllers
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RemoveLogin(RemoveLoginViewModel model)
+        public async Task<IActionResult> RemoveExternalLogin(RemoveLoginViewModel vm)
         {
-            await _accountManager.RemoveLogin(User, model.LoginProvider, model.ProviderKey);
+            await _accountManager.RemoveExternalLogin(User, vm.LoginProvider, vm.ProviderKey);
 
             StatusMessage = "The external login was removed.";
             return RedirectToAction(nameof(ExternalLogins));
@@ -191,9 +191,9 @@ namespace CoreTemplate.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> TwoFactorAuthentication()
         {
-            var model = await _accountManager.GetTwoFactorAuthenticationViewModel(User);
+            var vm = await _accountManager.GetTwoFactorAuthentication(User);
 
-            return View(model);
+            return View(vm);
         }
 
         [HttpGet]
@@ -216,30 +216,30 @@ namespace CoreTemplate.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> EnableAuthenticator()
         {
-            var model = await _accountManager.GetEnableAuthenticatorViewModel(User);
+            var vm = await _accountManager.GetEnableAuthenticator(User);
 
-            return View(model);
+            return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> EnableAuthenticator(EnableAuthenticatorViewModel model)
+        public async Task<IActionResult> EnableAuthenticator(EnableAuthenticatorViewModel vm)
         {
             if (!ModelState.IsValid)
             {
-                return View(model);
+                return View(vm);
             }
 
-            var successfullyEnabled = await _accountManager.EnableAuthenticator(User, model);
+            var successfullyEnabled = await _accountManager.EnableAuthenticator(User, vm);
 
             if (successfullyEnabled)
             {
                 return RedirectToAction(nameof(GenerateRecoveryCodes));
             }
 
-            ModelState.AddModelError("model.Code", "Verification code is invalid.");
+            ModelState.AddModelError("vm.Code", "Verification code is invalid.");
 
-            return View(model);
+            return View(vm);
         }
 
         [HttpGet]
@@ -260,9 +260,9 @@ namespace CoreTemplate.Web.Controllers
         [HttpGet]
         public async Task<IActionResult> GenerateRecoveryCodes()
         {
-            var model = await _accountManager.GetGenerateRecoveryCodesViewModel(User);
+            var vm = await _accountManager.GetGenerateRecoveryCodes(User);
 
-            return View(model);
+            return View(vm);
         }
 
         #region Helpers

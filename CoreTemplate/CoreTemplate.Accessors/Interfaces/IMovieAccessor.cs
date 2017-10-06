@@ -5,11 +5,11 @@ namespace CoreTemplate.Accessors.Interfaces
 {
     public interface IMovieAccessor
     {
-        MovieDTO Save(MovieDTO entity);
+        MovieDTO Get(int id);
 
         List<MovieDTO> GetAll();
 
-        MovieDTO Get(int id);
+        MovieDTO Save(MovieDTO dto);
 
         void Delete(int id);
     }

@@ -36,34 +36,19 @@ namespace CoreTemplate.Managers.Managers
             _urlEncoder = urlEncoder;
         }
 
-        public async Task<string> Get2faUserId()
+        #region Sign In/Out
+        public async Task<SignInResult> SignInWithPassword(string email, string password, bool rememberMe)
         {
-            // Ensure the user has gone through the username & password screen first
-            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
-
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load two-factor authentication user.");
-            }
-
-            return user.Id;
-        }
-
-        public async Task<SignInResult> LoginWithPassword(string email, string password, bool rememberMe)
-        {
-            // This doesn't count login failures towards account lockout
-            // To enable password failures to trigger account lockout, set lockoutOnFailure: true
             return await _signInManager.PasswordSignInAsync(email, password, rememberMe, lockoutOnFailure: false);
         }
 
-        public async Task LoginWithEmail(string email)
+        public async Task SignInWithEmail(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
-
             await _signInManager.SignInAsync(user, isPersistent: false);
         }
 
-        public async Task<SignInResult> LoginWithRecoveryCode(string recoveryCode)
+        public async Task<SignInResult> SignInWithRecoveryCode(string recoveryCode)
         {
             return await _signInManager.TwoFactorRecoveryCodeSignInAsync(recoveryCode);
         }
@@ -71,6 +56,15 @@ namespace CoreTemplate.Managers.Managers
         public async Task SignOut()
         {
             await _signInManager.SignOutAsync();
+        }
+        #endregion
+
+        #region Token Generation
+        public async Task<string> GetEmailConfirmationToken(string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+
+            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
         }
 
         public async Task<string> GetPasswordResetToken(string email)
@@ -84,76 +78,188 @@ namespace CoreTemplate.Managers.Managers
 
             return await _userManager.GeneratePasswordResetTokenAsync(user);
         }
+        #endregion
 
-        public async Task<string> GetEmailConfirmationToken(string email)
+        #region Account Management
+        public async Task<IndexViewModel> GetIndex(ClaimsPrincipal identityUser)
         {
-            var user = await _userManager.FindByEmailAsync(email);
+            var user = await GetApplicationUser(identityUser);
 
-            return await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var vm = new IndexViewModel
+            {
+                Username = user.UserName,
+                Email = user.Email,
+                PhoneNumber = user.PhoneNumber,
+                IsEmailConfirmed = user.EmailConfirmed
+            };
+
+            return vm;
         }
 
-        public async Task<string> GetUserId(string email)
+        public async Task<IdentityResult> CreateUser(RegisterViewModel vm)
         {
-            var user =  await _userManager.FindByEmailAsync(email);
+            var user = _userManager.CreateUser(vm.Email);
+
+            var result = await _userManager.CreateAsync(user, vm.Password);
+
+            return result;
+        }
+
+        public async Task UpdateUser(ClaimsPrincipal identityUser, IndexViewModel vm)
+        {
+            var user = await GetApplicationUser(identityUser);
+
+            var email = user.Email;
+            if (vm.Email != email)
+            {
+                var setEmailResult = await _userManager.SetEmailAsync(user, vm.Email);
+                if (!setEmailResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
+                }
+            }
+
+            var phoneNumber = user.PhoneNumber;
+            if (vm.PhoneNumber != phoneNumber)
+            {
+                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, vm.PhoneNumber);
+                if (!setPhoneResult.Succeeded)
+                {
+                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
+                }
+            }
+        }
+
+        public async Task<IdentityResult> ChangePassword(ClaimsPrincipal identityUser, ChangePasswordViewModel vm)
+        {
+            var user = await GetApplicationUser(identityUser);
+
+            var changePasswordResult = await _userManager.ChangePasswordAsync(user, vm.OldPassword, vm.NewPassword);
+
+            if (changePasswordResult.Succeeded)
+            {
+                await _signInManager.SignInAsync(user, isPersistent: false);
+
+                _logger.LogInformation("User changed their password successfully.");
+            }
+
+            return changePasswordResult;
+        }
+
+        public async Task<IdentityResult> SetPassword(ClaimsPrincipal identityUser, SetPasswordViewModel vm)
+        {
+            var user = await GetApplicationUser(identityUser);
+
+            var addPasswordResult = await _userManager.AddPasswordAsync(user, vm.NewPassword);
+
+            await _signInManager.SignInAsync(user, isPersistent: false);
+
+            return addPasswordResult;
+        }
+
+        public async Task<IdentityResult> ResetPassword(ResetPasswordViewModel vm)
+        {
+            var user = await _userManager.FindByEmailAsync(vm.Email);
 
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load user.");
+                return null;
+            }
+
+            var result = await _userManager.ResetPasswordAsync(user, vm.Code, vm.Password);
+
+            return result;
+        }
+
+        public async Task<IdentityResult> ConfirmEmail(string userId, string code)
+        {
+            var user = await _userManager.FindByIdAsync(userId);
+
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{userId}'.");
+            }
+
+            var result = await _userManager.ConfirmEmailAsync(user, code);
+
+            return result;
+        }
+        #endregion
+
+        #region Two-Factor Authentication
+        public async Task<string> Get2faUserId()
+        {
+            // Ensure the user has gone through the username & password screen first
+            var user = await _signInManager.GetTwoFactorAuthenticationUserAsync();
+
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load two-factor authentication user.");
             }
 
             return user.Id;
         }
 
-        public async Task<string> GetUserId(ClaimsPrincipal identityUser)
+        public async Task<SignInResult> LoginWith2fa(string authenticatorCode, bool rememberMe, bool rememberMachine)
+        {
+            return await _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe, rememberMachine);
+        }
+
+        public async Task<TwoFactorAuthenticationViewModel> GetTwoFactorAuthentication(ClaimsPrincipal identityUser)
         {
             var user = await GetApplicationUser(identityUser);
 
-            return user.Id;
-        }
-
-        public async Task<ExternalLoginInfo> GetExternalLoginInfo()
-        {
-            return await _signInManager.GetExternalLoginInfoAsync();
-        }
-
-        public async Task<bool> UserHasPassword(ClaimsPrincipal identityUser)
-        {
-            var user = await GetApplicationUser(identityUser);
-
-            return await _userManager.HasPasswordAsync(user);
-        }
-
-        public async Task RemoveLogin(ClaimsPrincipal identityUser, string loginProvider, string providerKey)
-        {
-            var user = await GetApplicationUser(identityUser);
-
-            var result = await _userManager.RemoveLoginAsync(user, loginProvider, providerKey);
-
-            if (!result.Succeeded)
+            var vm = new TwoFactorAuthenticationViewModel
             {
-                throw new ApplicationException($"Unexpected error occurred removing external login for user with ID '{user.Id}'.");
+                HasAuthenticator = await _userManager.GetAuthenticatorKeyAsync(user) != null,
+                Is2faEnabled = user.TwoFactorEnabled,
+                RecoveryCodesLeft = await _userManager.CountRecoveryCodesAsync(user),
+            };
+
+            return vm;
+        }
+
+        public async Task<EnableAuthenticatorViewModel> GetEnableAuthenticator(ClaimsPrincipal identityUser)
+        {
+            var user = await GetApplicationUser(identityUser);
+
+            var unformattedKey = await _userManager.GetAuthenticatorKeyAsync(user);
+
+            if (string.IsNullOrEmpty(unformattedKey))
+            {
+                await _userManager.ResetAuthenticatorKeyAsync(user);
+                unformattedKey = await _userManager.GetAuthenticatorKeyAsync(user);
             }
 
-            await _signInManager.SignInAsync(user, isPersistent: false);
+            var vm = new EnableAuthenticatorViewModel
+            {
+                SharedKey = FormatKey(unformattedKey),
+                AuthenticatorUri = GenerateQrCodeUri(user.Email, unformattedKey)
+            };
+
+            return vm;
         }
 
-        public async Task AddLogin(ClaimsPrincipal identityUser)
+        public async Task<bool> EnableAuthenticator(ClaimsPrincipal identityUser, EnableAuthenticatorViewModel vm)
         {
             var user = await GetApplicationUser(identityUser);
 
-            var info = await GetExternalLoginInfo();
+            // Strip spaces and hypens
+            var verificationCode = vm.Code.Replace(" ", string.Empty).Replace("-", string.Empty);
 
-            if (info == null)
+            var is2faTokenValid = await _userManager.VerifyTwoFactorTokenAsync(
+                user, _userManager.Options.Tokens.AuthenticatorTokenProvider, verificationCode);
+
+            if (is2faTokenValid)
             {
-                throw new ApplicationException($"Unexpected error occurred loading external login info for user with ID '{user.Id}'.");
+                var result = await _userManager.SetTwoFactorEnabledAsync(user, true);
+
+                _logger.LogInformation("User with ID {UserId} has enabled 2FA with an authenticator app.", user.Id);
+
+                return result.Succeeded;
             }
 
-            var result = await _userManager.AddLoginAsync(user, info);
-
-            if (!result.Succeeded)
-            {
-                throw new ApplicationException($"Unexpected error occurred adding external login for user with ID '{user.Id}'.");
-            }
+            return false;
         }
 
         public async Task ResetAuthenticator(ClaimsPrincipal identityUser)
@@ -165,6 +271,24 @@ namespace CoreTemplate.Managers.Managers
             await _userManager.ResetAuthenticatorKeyAsync(user);
 
             _logger.LogInformation("User with id '{UserId}' has reset their authentication app key.", user.Id);
+        }
+
+        public async Task<GenerateRecoveryCodesViewModel> GetGenerateRecoveryCodes(ClaimsPrincipal identityUser)
+        {
+            var user = await GetApplicationUser(identityUser);
+
+            if (!user.TwoFactorEnabled)
+            {
+                throw new ApplicationException($"Cannot generate recovery codes for user with ID '{user.Id}' as they do not have 2FA enabled.");
+            }
+
+            var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
+
+            var vm = new GenerateRecoveryCodesViewModel { RecoveryCodes = recoveryCodes.ToArray() };
+
+            _logger.LogInformation("User with ID {UserId} has generated new 2FA recovery codes.", user.Id);
+
+            return vm;
         }
 
         public async Task Disable2faWarning(ClaimsPrincipal identityUser)
@@ -190,10 +314,12 @@ namespace CoreTemplate.Managers.Managers
 
             _logger.LogInformation("User with ID {UserId} has disabled 2fa.", user.Id);
         }
+        #endregion
 
-        public async Task<SignInResult> LoginWith2fa(string authenticatorCode, bool rememberMe, bool rememberMachine)
+        #region External Authentication
+        public async Task<ExternalLoginInfo> GetExternalLoginInfo()
         {
-            return await _signInManager.TwoFactorAuthenticatorSignInAsync(authenticatorCode, rememberMe, rememberMachine);
+            return await _signInManager.GetExternalLoginInfoAsync();
         }
 
         public async Task<SignInResult> LoginExternal(ExternalLoginInfo info)
@@ -201,126 +327,55 @@ namespace CoreTemplate.Managers.Managers
             return await _signInManager.ExternalLoginSignInAsync(info.LoginProvider, info.ProviderKey, isPersistent: false, bypassTwoFactor: true);
         }
 
-        public async Task<AuthenticationProperties> ConfigureExternalAuthenticationProperties(string provider, string redirectUrl, ClaimsPrincipal identityUser = null)
-        {
-            string userId = null;
-
-            if (identityUser != null)
-            {
-                var user = await GetApplicationUser(identityUser);
-
-                userId = user.Id;
-            }
-
-            return _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, userId);
-        }
-
-        public async Task<GenerateRecoveryCodesViewModel> GetGenerateRecoveryCodesViewModel(ClaimsPrincipal identityUser)
+        public async Task<ExternalLoginsViewModel> GetExternalLogins(ClaimsPrincipal identityUser)
         {
             var user = await GetApplicationUser(identityUser);
 
-            if (!user.TwoFactorEnabled)
-            {
-                throw new ApplicationException($"Cannot generate recovery codes for user with ID '{user.Id}' as they do not have 2FA enabled.");
-            }
+            var vm = new ExternalLoginsViewModel { CurrentLogins = await _userManager.GetLoginsAsync(user) };
 
-            var recoveryCodes = await _userManager.GenerateNewTwoFactorRecoveryCodesAsync(user, 10);
-
-            var model = new GenerateRecoveryCodesViewModel { RecoveryCodes = recoveryCodes.ToArray() };
-
-            _logger.LogInformation("User with ID {UserId} has generated new 2FA recovery codes.", user.Id);
-
-            return model;
-        }
-
-        public async Task<TwoFactorAuthenticationViewModel> GetTwoFactorAuthenticationViewModel(ClaimsPrincipal identityUser)
-        {
-            var user = await GetApplicationUser(identityUser);
-
-            var model = new TwoFactorAuthenticationViewModel
-            {
-                HasAuthenticator = await _userManager.GetAuthenticatorKeyAsync(user) != null,
-                Is2faEnabled = user.TwoFactorEnabled,
-                RecoveryCodesLeft = await _userManager.CountRecoveryCodesAsync(user),
-            };
-
-            return model;
-        }
-
-        public async Task<EnableAuthenticatorViewModel> GetEnableAuthenticatorViewModel(ClaimsPrincipal identityUser)
-        {
-            var user = await GetApplicationUser(identityUser);
-
-            var unformattedKey = await _userManager.GetAuthenticatorKeyAsync(user);
-            if (string.IsNullOrEmpty(unformattedKey))
-            {
-                await _userManager.ResetAuthenticatorKeyAsync(user);
-                unformattedKey = await _userManager.GetAuthenticatorKeyAsync(user);
-            }
-
-            var model = new EnableAuthenticatorViewModel
-            {
-                SharedKey = FormatKey(unformattedKey),
-                AuthenticatorUri = GenerateQrCodeUri(user.Email, unformattedKey)
-            };
-
-            return model;
-        }
-
-        public async Task<ExternalLoginsViewModel> GetExternalLoginsViewModel(ClaimsPrincipal identityUser)
-        {
-            var user = await GetApplicationUser(identityUser);
-
-            var model = new ExternalLoginsViewModel { CurrentLogins = await _userManager.GetLoginsAsync(user) };
-            model.OtherLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync())
-                .Where(auth => model.CurrentLogins.All(ul => auth.Name != ul.LoginProvider))
+            vm.OtherLogins = (await _signInManager.GetExternalAuthenticationSchemesAsync())
+                .Where(auth => vm.CurrentLogins.All(ul => auth.Name != ul.LoginProvider))
                 .ToList();
-            model.ShowRemoveButton = await _userManager.HasPasswordAsync(user) || model.CurrentLogins.Count > 1;
 
-            return model;
+            vm.ShowRemoveButton = await _userManager.HasPasswordAsync(user) || vm.CurrentLogins.Count > 1;
+
+            return vm;
         }
 
-        public async Task<IndexViewModel> GetIndexViewModel(ClaimsPrincipal identityUser)
+        public async Task AddExternalLogin(ClaimsPrincipal identityUser)
         {
             var user = await GetApplicationUser(identityUser);
 
-            var model = new IndexViewModel
-            {
-                Username = user.UserName,
-                Email = user.Email,
-                PhoneNumber = user.PhoneNumber,
-                IsEmailConfirmed = user.EmailConfirmed
-            };
+            var info = await GetExternalLoginInfo();
 
-            return model;
+            if (info == null)
+            {
+                throw new ApplicationException($"Unexpected error occurred loading external login info for user with ID '{user.Id}'.");
+            }
+
+            var result = await _userManager.AddLoginAsync(user, info);
+
+            if (!result.Succeeded)
+            {
+                throw new ApplicationException($"Unexpected error occurred adding external login for user with ID '{user.Id}'.");
+            }
         }
 
-        public async Task UpdateUser(ClaimsPrincipal identityUser, IndexViewModel model)
+        public async Task RemoveExternalLogin(ClaimsPrincipal identityUser, string loginProvider, string providerKey)
         {
             var user = await GetApplicationUser(identityUser);
 
-            var email = user.Email;
-            if (model.Email != email)
+            var result = await _userManager.RemoveLoginAsync(user, loginProvider, providerKey);
+
+            if (!result.Succeeded)
             {
-                var setEmailResult = await _userManager.SetEmailAsync(user, model.Email);
-                if (!setEmailResult.Succeeded)
-                {
-                    throw new ApplicationException($"Unexpected error occurred setting email for user with ID '{user.Id}'.");
-                }
+                throw new ApplicationException($"Unexpected error occurred removing external login for user with ID '{user.Id}'.");
             }
 
-            var phoneNumber = user.PhoneNumber;
-            if (model.PhoneNumber != phoneNumber)
-            {
-                var setPhoneResult = await _userManager.SetPhoneNumberAsync(user, model.PhoneNumber);
-                if (!setPhoneResult.Succeeded)
-                {
-                    throw new ApplicationException($"Unexpected error occurred setting phone number for user with ID '{user.Id}'.");
-                }
-            }
+            await _signInManager.SignInAsync(user, isPersistent: false);
         }
 
-        public async Task<IdentityResult> CreateUserExternal(ExternalLoginViewModel model)
+        public async Task<IdentityResult> CreateUserExternal(ExternalLoginViewModel vm)
         {
             // Get the information about the user from the external login provider
             var info = await GetExternalLoginInfo();
@@ -330,7 +385,7 @@ namespace CoreTemplate.Managers.Managers
                 throw new ApplicationException("Error loading external login information during confirmation.");
             }
 
-            var user = _userManager.CreateUser(model.Email);
+            var user = _userManager.CreateUser(vm.Email);
 
             var createUserResult = await _userManager.CreateAsync(user);
 
@@ -348,91 +403,41 @@ namespace CoreTemplate.Managers.Managers
             return createUserResult;
         }
 
-        public async Task<IdentityResult> CreateUser(RegisterViewModel model)
+        public async Task<AuthenticationProperties> ConfigureExternalAuthenticationProperties(string provider, string redirectUrl, ClaimsPrincipal identityUser = null)
         {
-            var user = _userManager.CreateUser(model.Email);
+            string userId = null;
 
-            var result = await _userManager.CreateAsync(user, model.Password);
-
-            return result;
-        }
-
-        public async Task<IdentityResult> ChangePassword(ClaimsPrincipal identityUser, ChangePasswordViewModel model)
-        {
-            var user = await GetApplicationUser(identityUser);
-
-            var changePasswordResult = await _userManager.ChangePasswordAsync(user, model.OldPassword, model.NewPassword);
-
-            if (changePasswordResult.Succeeded)
+            if (identityUser != null)
             {
-                await _signInManager.SignInAsync(user, isPersistent: false);
+                var user = await GetApplicationUser(identityUser);
 
-                _logger.LogInformation("User changed their password successfully.");
+                userId = user.Id;
             }
 
-            return changePasswordResult;
+            return _signInManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, userId);
         }
+        #endregion
 
-        public async Task<IdentityResult> SetPassword(ClaimsPrincipal identityUser, SetPasswordViewModel model)
+        #region Account Utilities
+        public async Task<string> GetUserId(string email)
         {
-            var user = await GetApplicationUser(identityUser);
-
-            var addPasswordResult = await _userManager.AddPasswordAsync(user, model.NewPassword);
-
-            await _signInManager.SignInAsync(user, isPersistent: false);
-
-            return addPasswordResult;
-        }
-
-        public async Task<IdentityResult> ResetPassword(ResetPasswordViewModel model)
-        {
-            var user = await _userManager.FindByEmailAsync(model.Email);
+            var user = await _userManager.FindByEmailAsync(email);
 
             if (user == null)
             {
-                return null;
+                throw new ApplicationException($"Unable to load user.");
             }
 
-            var result = await _userManager.ResetPasswordAsync(user, model.Code, model.Password);
-
-            return result;
+            return user.Id;
         }
 
-        public async Task<IdentityResult> ConfirmEmail(string userId, string code)
-        {
-            var user = await _userManager.FindByIdAsync(userId);
-
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{userId}'.");
-            }
-
-            var result = await _userManager.ConfirmEmailAsync(user, code);
-
-            return result;
-        }
-
-        public async Task<bool> EnableAuthenticator(ClaimsPrincipal identityUser, EnableAuthenticatorViewModel model)
+        public async Task<bool> UserHasPassword(ClaimsPrincipal identityUser)
         {
             var user = await GetApplicationUser(identityUser);
 
-            // Strip spaces and hypens
-            var verificationCode = model.Code.Replace(" ", string.Empty).Replace("-", string.Empty);
-
-            var is2faTokenValid = await _userManager.VerifyTwoFactorTokenAsync(
-                user, _userManager.Options.Tokens.AuthenticatorTokenProvider, verificationCode);
-
-            if (is2faTokenValid)
-            {
-                var result = await _userManager.SetTwoFactorEnabledAsync(user, true);
-
-                _logger.LogInformation("User with ID {UserId} has enabled 2FA with an authenticator app.", user.Id);
-
-                return result.Succeeded;
-            }
-
-            return false;
+            return await _userManager.HasPasswordAsync(user);
         }
+        #endregion
 
         #region Helpers
         private async Task<ApplicationUser> GetApplicationUser(ClaimsPrincipal identityUser)
@@ -441,7 +446,7 @@ namespace CoreTemplate.Managers.Managers
 
             if (user == null)
             {
-                throw new ApplicationException($"Unable to load user with ID '{_userManager.GetUserId(identityUser)}'.");
+                throw new ApplicationException($"Unable to load user with ID '{user.Id}'.");
             }
 
             return user;

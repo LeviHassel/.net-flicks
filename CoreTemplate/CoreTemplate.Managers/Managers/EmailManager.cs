@@ -1,4 +1,5 @@
 ﻿using CoreTemplate.Managers.Interfaces;
+using System.Net.Mail;
 using System.Threading.Tasks;
 
 namespace CoreTemplate.Managers.Managers
@@ -9,6 +10,10 @@ namespace CoreTemplate.Managers.Managers
     {
         public Task SendEmailAsync(string email, string subject, string message)
         {
+            var client = new SmtpClient("127.0.0.1", 25);
+
+            client.Send("test@coretemplate.com", email, subject, message);
+
             return Task.CompletedTask;
         }
     }

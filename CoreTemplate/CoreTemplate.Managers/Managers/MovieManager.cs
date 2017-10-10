@@ -48,7 +48,6 @@ namespace CoreTemplate.Managers.Managers
         public MovieViewModel DeleteMovie(int id)
         {
             var dto = _movieAccessor.Delete(id);
-
             var vm = Mapper.Map<MovieViewModel>(dto);
 
             return vm;

@@ -27,6 +27,7 @@ namespace CoreTemplate.Web.Controllers
         [TempData]
         public string StatusMessage { get; set; }
 
+        #region Account Management
         [HttpGet]
         public async Task<IActionResult> Index()
         {
@@ -142,52 +143,9 @@ namespace CoreTemplate.Web.Controllers
             StatusMessage = "Your password has been set.";
             return RedirectToAction(nameof(SetPassword));
         }
+        #endregion
 
-        [HttpGet]
-        public async Task<IActionResult> ExternalLogins()
-        {
-            var vm = await _accountManager.GetExternalLogins(User);
-
-            vm.StatusMessage = StatusMessage;
-
-            return View(vm);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> LinkLogin(string provider)
-        {
-            // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
-            // Request a redirect to the external login provider to link a login for the current user
-            var redirectUrl = Url.Action(nameof(LinkLoginCallback));
-            var properties = await _accountManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, User);
-            return new ChallengeResult(provider, properties);
-        }
-
-        [HttpGet]
-        public async Task<IActionResult> LinkLoginCallback()
-        {
-            await _accountManager.AddExternalLogin(User);
-
-            // Clear the existing external cookie to ensure a clean login process
-            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
-
-            StatusMessage = "The external login was added.";
-            return RedirectToAction(nameof(ExternalLogins));
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> RemoveExternalLogin(RemoveLoginViewModel vm)
-        {
-            await _accountManager.RemoveExternalLogin(User, vm.LoginProvider, vm.ProviderKey);
-
-            StatusMessage = "The external login was removed.";
-            return RedirectToAction(nameof(ExternalLogins));
-        }
-
+        #region Two-Factor Authentication
         [HttpGet]
         public async Task<IActionResult> TwoFactorAuthentication()
         {
@@ -212,7 +170,7 @@ namespace CoreTemplate.Web.Controllers
 
             return RedirectToAction(nameof(TwoFactorAuthentication));
         }
-
+        
         [HttpGet]
         public async Task<IActionResult> EnableAuthenticator()
         {
@@ -264,9 +222,58 @@ namespace CoreTemplate.Web.Controllers
 
             return View(vm);
         }
+        #endregion
+
+        #region External Authentication
+        [HttpGet]
+        public async Task<IActionResult> ExternalLogins()
+        {
+            var vm = await _accountManager.GetExternalLogins(User);
+
+            vm.StatusMessage = StatusMessage;
+
+            return View(vm);
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> LinkLogin(string provider)
+        {
+            // Clear the existing external cookie to ensure a clean login process
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            // Request a redirect to the external login provider to link a login for the current user
+            var redirectUrl = Url.Action(nameof(LinkLoginCallback));
+
+            var properties = await _accountManager.ConfigureExternalAuthenticationProperties(provider, redirectUrl, User);
+
+            return new ChallengeResult(provider, properties);
+        }
+
+        [HttpGet]
+        public async Task<IActionResult> LinkLoginCallback()
+        {
+            await _accountManager.AddExternalLogin(User);
+
+            // Clear the existing external cookie to ensure a clean login process
+            await HttpContext.SignOutAsync(IdentityConstants.ExternalScheme);
+
+            StatusMessage = "The external login was added.";
+            return RedirectToAction(nameof(ExternalLogins));
+        }
+
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> RemoveExternalLogin(RemoveLoginViewModel vm)
+        {
+            await _accountManager.RemoveExternalLogin(User, vm.LoginProvider, vm.ProviderKey);
+
+            StatusMessage = "The external login was removed.";
+            return RedirectToAction(nameof(ExternalLogins));
+        }
+        #endregion
 
         #region Helpers
-
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -274,7 +281,6 @@ namespace CoreTemplate.Web.Controllers
                 ModelState.AddModelError(string.Empty, error.Description);
             }
         }
-
         #endregion
     }
 }

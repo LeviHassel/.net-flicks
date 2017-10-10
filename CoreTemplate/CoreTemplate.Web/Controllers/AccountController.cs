@@ -33,6 +33,7 @@ namespace CoreTemplate.Web.Controllers
         [TempData]
         public string ErrorMessage { get; set; }
 
+        #region Sign In/Out
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> Login(string returnUrl = null)
@@ -79,6 +80,174 @@ namespace CoreTemplate.Web.Controllers
             return View(vm);
         }
 
+        [HttpPost]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Logout()
+        {
+            await _accountManager.SignOut();
+            _logger.LogInformation("User logged out.");
+            return RedirectToAction(nameof(HomeController.Index), "Home");
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Lockout()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        public IActionResult AccessDenied()
+        {
+            return View();
+        }
+        #endregion
+
+        #region Registration
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult Register(string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> Register(RegisterViewModel vm, string returnUrl = null)
+        {
+            ViewData["ReturnUrl"] = returnUrl;
+            if (ModelState.IsValid)
+            {
+                var result = await _accountManager.CreateUser(vm);
+
+                if (result.Succeeded)
+                {
+                    _logger.LogInformation("User created a new account with password.");
+
+                    var code = await _accountManager.GetEmailConfirmationToken(vm.Email);
+                    var userId = await _accountManager.GetUserId(vm.Email);
+                    var callbackUrl = Url.EmailConfirmationLink(userId, code, Request.Scheme);
+
+                    await _emailManager.SendEmailConfirmationAsync(vm.Email, callbackUrl);
+                    await _accountManager.SignInWithEmail(vm.Email);
+
+                    _logger.LogInformation("User created a new account with password.");
+                    return RedirectToLocal(returnUrl);
+                }
+
+                AddErrors(result);
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(vm);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string code)
+        {
+            if (userId == null || code == null)
+            {
+                return RedirectToAction(nameof(HomeController.Index), "Home");
+            }
+
+            var result = await _accountManager.ConfirmEmail(userId, code);
+
+            return View(result.Succeeded ? "ConfirmEmail" : "Error");
+        }
+        #endregion
+
+        #region Forgot/Reset Password
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ForgotPassword()
+        {
+            return View();
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel vm)
+        {
+            if (ModelState.IsValid)
+            {
+                // For more information on how to enable account confirmation and password reset please
+                // visit https://go.microsoft.com/fwlink/?LinkID=532713
+
+                var code = await _accountManager.GetPasswordResetToken(vm.Email);
+
+                if (code != null)
+                {
+                    var userId = await _accountManager.GetUserId(vm.Email);
+                    var callbackUrl = Url.ResetPasswordCallbackLink(userId, code, Request.Scheme);
+
+                    await _emailManager.SendEmailAsync(vm.Email, "Reset Password",
+                       $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+                }
+
+                // Don't reveal that the user does not exist or is not confirmed
+                return RedirectToAction(nameof(ForgotPasswordConfirmation));
+            }
+
+            // If we got this far, something failed, redisplay form
+            return View(vm);
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ForgotPasswordConfirmation()
+        {
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPassword(string code = null)
+        {
+            if (code == null)
+            {
+                throw new ApplicationException("A code must be supplied for password reset.");
+            }
+
+            var vm = new ResetPasswordViewModel { Code = code };
+            return View(vm);
+        }
+
+        [HttpPost]
+        [AllowAnonymous]
+        [ValidateAntiForgeryToken]
+        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel vm)
+        {
+            if (!ModelState.IsValid)
+            {
+                return View(vm);
+            }
+
+            var result = await _accountManager.ResetPassword(vm);
+
+            // In order to not reveal a user's existence, take them to the confirmation page
+            // if the password was successfully reset or if the account doesn't exist
+            if (result == null || result.Succeeded)
+            {
+                return RedirectToAction(nameof(ResetPasswordConfirmation));
+            }
+
+            AddErrors(result);
+            return View();
+        }
+
+        [HttpGet]
+        [AllowAnonymous]
+        public IActionResult ResetPasswordConfirmation()
+        {
+            return View();
+        }
+        #endregion
+
+        #region Two-Factor Authentication
         [HttpGet]
         [AllowAnonymous]
         public async Task<IActionResult> LoginWith2fa(bool rememberMe, string returnUrl = null)
@@ -169,63 +338,9 @@ namespace CoreTemplate.Web.Controllers
                 return View();
             }
         }
+        #endregion
 
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Lockout()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult Register(string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            return View();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Register(RegisterViewModel vm, string returnUrl = null)
-        {
-            ViewData["ReturnUrl"] = returnUrl;
-            if (ModelState.IsValid)
-            {
-                var result = await _accountManager.CreateUser(vm);
-
-                if (result.Succeeded)
-                {
-                    _logger.LogInformation("User created a new account with password.");
-
-                    var code = await _accountManager.GetEmailConfirmationToken(vm.Email);
-                    var userId = await _accountManager.GetUserId(vm.Email);
-                    var callbackUrl = Url.EmailConfirmationLink(userId, code, Request.Scheme);
-
-                    await _emailManager.SendEmailConfirmationAsync(vm.Email, callbackUrl);
-                    await _accountManager.SignInWithEmail(vm.Email);
-
-                    _logger.LogInformation("User created a new account with password.");
-                    return RedirectToLocal(returnUrl);
-                }
-
-                AddErrors(result);
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(vm);
-        }
-
-        [HttpPost]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Logout()
-        {
-            await _accountManager.SignOut();
-            _logger.LogInformation("User logged out.");
-            return RedirectToAction(nameof(HomeController.Index), "Home");
-        }
-
+        #region External Authentication
         [HttpPost]
         [AllowAnonymous]
         [ValidateAntiForgeryToken]
@@ -289,122 +404,16 @@ namespace CoreTemplate.Web.Controllers
                 {
                     return RedirectToLocal(returnUrl);
                 }
-                
+
                 AddErrors(result);
             }
 
             ViewData["ReturnUrl"] = returnUrl;
             return View(nameof(ExternalLogin), vm);
         }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId, string code)
-        {
-            if (userId == null || code == null)
-            {
-                return RedirectToAction(nameof(HomeController.Index), "Home");
-            }
-
-            var result = await _accountManager.ConfirmEmail(userId, code);
-
-            return View(result.Succeeded ? "ConfirmEmail" : "Error");
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult ForgotPassword()
-        {
-            return View();
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ForgotPassword(ForgotPasswordViewModel vm)
-        {
-            if (ModelState.IsValid)
-            {
-                // For more information on how to enable account confirmation and password reset please
-                // visit https://go.microsoft.com/fwlink/?LinkID=532713
-
-                var code = await _accountManager.GetPasswordResetToken(vm.Email);
-
-                if (code != null)
-                {
-                    var userId = await _accountManager.GetUserId(vm.Email);
-                    var callbackUrl = Url.ResetPasswordCallbackLink(userId, code, Request.Scheme);
-
-                    await _emailManager.SendEmailAsync(vm.Email, "Reset Password",
-                       $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
-                }
-
-                // Don't reveal that the user does not exist or is not confirmed
-                return RedirectToAction(nameof(ForgotPasswordConfirmation));
-            }
-
-            // If we got this far, something failed, redisplay form
-            return View(vm);
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult ForgotPasswordConfirmation()
-        {
-            return View();
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult ResetPassword(string code = null)
-        {
-            if (code == null)
-            {
-                throw new ApplicationException("A code must be supplied for password reset.");
-            }
-            var vm = new ResetPasswordViewModel { Code = code };
-            return View(vm);
-        }
-
-        [HttpPost]
-        [AllowAnonymous]
-        [ValidateAntiForgeryToken]
-        public async Task<IActionResult> ResetPassword(ResetPasswordViewModel vm)
-        {
-            if (!ModelState.IsValid)
-            {
-                return View(vm);
-            }
-
-            var result = await _accountManager.ResetPassword(vm);
-
-            // In order to not reveal a user's existence, take them to the confirmation page
-            // if the password was successfully reset or if the account doesn't exist
-            if (result == null || result.Succeeded)
-            {
-                return RedirectToAction(nameof(ResetPasswordConfirmation));
-            }
-
-            AddErrors(result);
-            return View();
-        }
-
-        [HttpGet]
-        [AllowAnonymous]
-        public IActionResult ResetPasswordConfirmation()
-        {
-            return View();
-        }
-
-
-        [HttpGet]
-        public IActionResult AccessDenied()
-        {
-            return View();
-        }
+        #endregion
 
         #region Helpers
-
         private void AddErrors(IdentityResult result)
         {
             foreach (var error in result.Errors)
@@ -424,7 +433,6 @@ namespace CoreTemplate.Web.Controllers
                 return RedirectToAction(nameof(HomeController.Index), "Home");
             }
         }
-
         #endregion
     }
 }

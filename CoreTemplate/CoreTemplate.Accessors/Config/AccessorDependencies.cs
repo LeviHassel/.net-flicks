@@ -19,9 +19,6 @@ namespace CoreTemplate.Accessors.Config
             services.AddTransient<DbContext, CoreTemplateContext>();
             services.AddTransient<IMovieAccessor, MovieAccessor>();
 
-            //TODO: Port over needed Ninject dependencies (see if not having these causes any problems):
-            //Kernel.Bind<CoreTemplateContext>().ToSelf().InRequestScope();
-
             return services;
         }
     }

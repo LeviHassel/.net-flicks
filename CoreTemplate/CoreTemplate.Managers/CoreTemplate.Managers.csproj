@@ -16,7 +16,7 @@
 	<PackageReference Include="AutoMapper" Version="6.1.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoreTemplate.Accessors\CoreTemplate.Accessors.csproj" />
+    <ProjectReference Include="..\CoreTemplate.Accessors\CoreTemplate.Accessors.csproj"/>
   </ItemGroup>
 
 </Project>

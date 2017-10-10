@@ -36,19 +36,18 @@ namespace CoreTemplate.Managers.Managers
             return new MoviesViewModel { Movies = movieVms };
         }
 
-        public MovieViewModel SaveMovie(MovieViewModel viewModel)
+        public MovieViewModel SaveMovie(MovieViewModel vm)
         {
-            var dto = Mapper.Map<MovieDTO>(viewModel);
-            var dbDto = _movieAccessor.Save(dto);
-            var vm = Mapper.Map<MovieViewModel>(dbDto);
+            var dto = Mapper.Map<MovieDTO>(vm);
+            var dtoNew = _movieAccessor.Save(dto);
+            var vmNew = Mapper.Map<MovieViewModel>(dtoNew);
 
-            return vm;
+            return vmNew;
         }
 
         public MovieViewModel DeleteMovie(int id)
         {
             var dto = _movieAccessor.Delete(id);
-
             var vm = Mapper.Map<MovieViewModel>(dto);
 
             return vm;

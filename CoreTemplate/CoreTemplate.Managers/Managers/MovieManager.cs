@@ -31,18 +31,18 @@ namespace CoreTemplate.Managers.Managers
         public MoviesViewModel GetAllMovies()
         {
             var dtos = _movieAccessor.GetAll();
-            var movieVms = Mapper.Map<List<MovieViewModel>>(dtos);
+            var vms = Mapper.Map<List<MovieViewModel>>(dtos);
 
-            return new MoviesViewModel { Movies = movieVms };
+            return new MoviesViewModel { Movies = vms };
         }
 
         public MovieViewModel SaveMovie(MovieViewModel vm)
         {
             var dto = Mapper.Map<MovieDTO>(vm);
-            var dtoNew = _movieAccessor.Save(dto);
-            var vmNew = Mapper.Map<MovieViewModel>(dtoNew);
+            dto = _movieAccessor.Save(dto);
+            vm = Mapper.Map<MovieViewModel>(dto);
 
-            return vmNew;
+            return vm;
         }
 
         public MovieViewModel DeleteMovie(int id)

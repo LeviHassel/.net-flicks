@@ -36,8 +36,8 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoreTemplate.Managers\CoreTemplate.Managers.csproj" />
-    <ProjectReference Include="..\CoreTemplate.ViewModels\CoreTemplate.ViewModels.csproj" />
+    <ProjectReference Include="..\CoreTemplate.Managers\Managers.csproj" />
+    <ProjectReference Include="..\CoreTemplate.ViewModels\ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

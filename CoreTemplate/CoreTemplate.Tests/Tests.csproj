@@ -23,10 +23,10 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
   </ItemGroup>
   <ItemGroup>
-    <ProjectReference Include="..\CoreTemplate.Accessors\CoreTemplate.Accessors.csproj" />
-    <ProjectReference Include="..\CoreTemplate.Managers\CoreTemplate.Managers.csproj" />
-    <ProjectReference Include="..\CoreTemplate.ViewModels\CoreTemplate.ViewModels.csproj" />
-    <ProjectReference Include="..\CoreTemplate.Web\CoreTemplate.Web.csproj" />
+    <ProjectReference Include="..\CoreTemplate.Accessors\Accessors.csproj" />
+    <ProjectReference Include="..\CoreTemplate.Managers\Managers.csproj" />
+    <ProjectReference Include="..\CoreTemplate.ViewModels\ViewModels.csproj" />
+    <ProjectReference Include="..\CoreTemplate.Web\Web.csproj" />
   </ItemGroup>
 
 </Project>

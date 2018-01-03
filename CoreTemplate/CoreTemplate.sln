@@ -3,7 +3,7 @@ Microsoft Visual Studio Solution File, Format Version 12.00
 # Visual Studio 15
 VisualStudioVersion = 15.0.27004.2009
 MinimumVisualStudioVersion = 10.0.40219.1
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTemplate.Web", "CoreTemplate.Web\CoreTemplate.Web.csproj", "{86EA2254-BCD2-4269-B8F2-067FD5E8A8CD}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Web", "CoreTemplate.Web\Web.csproj", "{86EA2254-BCD2-4269-B8F2-067FD5E8A8CD}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE} = {C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}
 	EndProjectSection
@@ -16,27 +16,27 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Accessors", "5. Accessor
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Tests", "6. Tests", "{A605FFCD-9A67-4278-97D9-93F7FCEFD6DD}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTemplate.Managers", "CoreTemplate.Managers\CoreTemplate.Managers.csproj", "{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Managers", "CoreTemplate.Managers\Managers.csproj", "{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}"
 	ProjectSection(ProjectDependencies) = postProject
 		{5021DB16-CFD2-4299-8F9D-E2E182F20779} = {5021DB16-CFD2-4299-8F9D-E2E182F20779}
 	EndProjectSection
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTemplate.Accessors", "CoreTemplate.Accessors\CoreTemplate.Accessors.csproj", "{5021DB16-CFD2-4299-8F9D-E2E182F20779}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accessors", "CoreTemplate.Accessors\Accessors.csproj", "{5021DB16-CFD2-4299-8F9D-E2E182F20779}"
 EndProject
-Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTemplate.Tests", "CoreTemplate.Tests\CoreTemplate.Tests.csproj", "{11737A2D-160F-4744-99DD-60F025274755}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Tests", "CoreTemplate.Tests\Tests.csproj", "{11737A2D-160F-4744-99DD-60F025274755}"
 	ProjectSection(ProjectDependencies) = postProject
 		{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE} = {C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}
 		{5021DB16-CFD2-4299-8F9D-E2E182F20779} = {5021DB16-CFD2-4299-8F9D-E2E182F20779}
 		{86EA2254-BCD2-4269-B8F2-067FD5E8A8CD} = {86EA2254-BCD2-4269-B8F2-067FD5E8A8CD}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTemplate.ViewModels", "CoreTemplate.ViewModels\CoreTemplate.ViewModels.csproj", "{E02D1701-9A02-4810-AFCB-3C58F7DAFE6B}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ViewModels", "CoreTemplate.ViewModels\ViewModels.csproj", "{E02D1701-9A02-4810-AFCB-3C58F7DAFE6B}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Common", "1. Common", "{4853CE5E-8934-4E48-B2D3-E4AACB721619}"
 EndProject
 Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Engines", "4. Engines", "{AA9FF6A7-F336-4838-AC27-3F441A515FBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTemplate.Common", "CoreTemplate.Common\CoreTemplate.Common.csproj", "{448207F4-4CC6-4776-8E44-DC912FBDFCD6}"
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Common", "CoreTemplate.Common\Common.csproj", "{448207F4-4CC6-4776-8E44-DC912FBDFCD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution

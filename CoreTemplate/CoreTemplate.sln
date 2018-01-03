@@ -8,13 +8,13 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTemplate.Web", "CoreTem
 		{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE} = {C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}
 	EndProjectSection
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Clients", "1. Clients", "{9C885ACC-50A7-41E1-8393-9D2F839772F8}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Clients", "2. Clients", "{9C885ACC-50A7-41E1-8393-9D2F839772F8}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "2. Managers", "2. Managers", "{5B0E4EE7-0E9E-445F-996F-B79D42AD5E80}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Managers", "3. Managers", "{5B0E4EE7-0E9E-445F-996F-B79D42AD5E80}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "3. Accessors", "3. Accessors", "{CC7AA74F-201C-46A3-B36F-67285D44BD01}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "5. Accessors", "5. Accessors", "{CC7AA74F-201C-46A3-B36F-67285D44BD01}"
 EndProject
-Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Tests", "4. Tests", "{A605FFCD-9A67-4278-97D9-93F7FCEFD6DD}"
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "6. Tests", "6. Tests", "{A605FFCD-9A67-4278-97D9-93F7FCEFD6DD}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTemplate.Managers", "CoreTemplate.Managers\CoreTemplate.Managers.csproj", "{C623DF11-A9C7-49C0-AFCF-F9AF0BEEC0EE}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -31,6 +31,12 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "CoreTemplate.Tests", "CoreT
 	EndProjectSection
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTemplate.ViewModels", "CoreTemplate.ViewModels\CoreTemplate.ViewModels.csproj", "{E02D1701-9A02-4810-AFCB-3C58F7DAFE6B}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "1. Common", "1. Common", "{4853CE5E-8934-4E48-B2D3-E4AACB721619}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Engines", "4. Engines", "{AA9FF6A7-F336-4838-AC27-3F441A515FBC}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CoreTemplate.Common", "CoreTemplate.Common\CoreTemplate.Common.csproj", "{448207F4-4CC6-4776-8E44-DC912FBDFCD6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -58,6 +64,10 @@ Global
 		{E02D1701-9A02-4810-AFCB-3C58F7DAFE6B}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E02D1701-9A02-4810-AFCB-3C58F7DAFE6B}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E02D1701-9A02-4810-AFCB-3C58F7DAFE6B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{448207F4-4CC6-4776-8E44-DC912FBDFCD6}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{448207F4-4CC6-4776-8E44-DC912FBDFCD6}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{448207F4-4CC6-4776-8E44-DC912FBDFCD6}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{448207F4-4CC6-4776-8E44-DC912FBDFCD6}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
@@ -68,6 +78,7 @@ Global
 		{5021DB16-CFD2-4299-8F9D-E2E182F20779} = {CC7AA74F-201C-46A3-B36F-67285D44BD01}
 		{11737A2D-160F-4744-99DD-60F025274755} = {A605FFCD-9A67-4278-97D9-93F7FCEFD6DD}
 		{E02D1701-9A02-4810-AFCB-3C58F7DAFE6B} = {5B0E4EE7-0E9E-445F-996F-B79D42AD5E80}
+		{448207F4-4CC6-4776-8E44-DC912FBDFCD6} = {4853CE5E-8934-4E48-B2D3-E4AACB721619}
 	EndGlobalSection
 	GlobalSection(ExtensibilityGlobals) = postSolution
 		SolutionGuid = {B3CA54DD-37CA-42C0-917D-5E4AABA6FBB3}

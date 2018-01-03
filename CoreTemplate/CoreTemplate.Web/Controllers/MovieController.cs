@@ -1,5 +1,5 @@
 ﻿using CoreTemplate.Managers.Interfaces;
-using CoreTemplate.Managers.ViewModels.Movie;
+using CoreTemplate.ViewModels.Movie;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreTemplate.Web.Controllers

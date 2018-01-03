@@ -1,4 +1,4 @@
-namespace CoreTemplate.Managers.ViewModels
+namespace CoreTemplate.ViewModels
 {
     public class ErrorViewModel
     {

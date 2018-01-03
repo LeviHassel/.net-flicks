@@ -1,4 +1,4 @@
-﻿using CoreTemplate.Managers.ViewModels;
+﻿using CoreTemplate.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 using System.Diagnostics;
 

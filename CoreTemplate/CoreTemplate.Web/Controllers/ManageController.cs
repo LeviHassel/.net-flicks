@@ -1,5 +1,5 @@
 ﻿using CoreTemplate.Managers.Interfaces;
-using CoreTemplate.Managers.ViewModels.Manage;
+using CoreTemplate.ViewModels.Manage;
 using CoreTemplate.Web.Extensions;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Authorization;

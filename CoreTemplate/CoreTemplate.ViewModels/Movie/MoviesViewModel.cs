@@ -1,6 +1,6 @@
 ﻿using System.Collections.Generic;
 
-namespace CoreTemplate.Managers.ViewModels.Movie
+namespace CoreTemplate.ViewModels.Movie
 {
     public class MoviesViewModel
     {

@@ -1,6 +1,6 @@
 using System.ComponentModel.DataAnnotations;
 
-namespace CoreTemplate.Managers.ViewModels.Account
+namespace CoreTemplate.ViewModels.Account
 {
     public class ExternalLoginViewModel
     {

@@ -17,6 +17,7 @@
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\CoreTemplate.Accessors\CoreTemplate.Accessors.csproj" />
+    <ProjectReference Include="..\CoreTemplate.ViewModels\CoreTemplate.ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

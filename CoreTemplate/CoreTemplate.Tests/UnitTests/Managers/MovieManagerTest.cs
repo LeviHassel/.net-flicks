@@ -2,7 +2,7 @@
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Managers.Managers;
-using CoreTemplate.Managers.ViewModels.Movie;
+using CoreTemplate.ViewModels.Movie;
 using CoreTemplate.Tests.Config;
 using CoreTemplate.Tests.Helpers;
 using Microsoft.AspNetCore.Hosting;

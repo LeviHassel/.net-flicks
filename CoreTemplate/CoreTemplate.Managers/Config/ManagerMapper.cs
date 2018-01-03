@@ -1,6 +1,6 @@
 ﻿using AutoMapper;
 using CoreTemplate.Accessors.Models.DTO;
-using CoreTemplate.Managers.ViewModels.Movie;
+using CoreTemplate.ViewModels.Movie;
 
 namespace CoreTemplate.Managers.Config
 {

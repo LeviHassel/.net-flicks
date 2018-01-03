@@ -1,4 +1,4 @@
-﻿namespace CoreTemplate.Managers.ViewModels.Base
+﻿namespace CoreTemplate.ViewModels.Base
 {
     public class EntityViewModel
     {

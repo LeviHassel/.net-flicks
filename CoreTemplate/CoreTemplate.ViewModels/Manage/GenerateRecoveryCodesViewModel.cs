@@ -1,4 +1,4 @@
-﻿namespace CoreTemplate.Managers.ViewModels.Manage
+﻿namespace CoreTemplate.ViewModels.Manage
 {
     public class GenerateRecoveryCodesViewModel
     {

@@ -1,5 +1,5 @@
-﻿using CoreTemplate.Managers.ViewModels.Account;
-using CoreTemplate.Managers.ViewModels.Manage;
+﻿using CoreTemplate.ViewModels.Account;
+using CoreTemplate.ViewModels.Manage;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
 using System.Security.Claims;

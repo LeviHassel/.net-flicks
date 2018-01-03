@@ -1,4 +1,4 @@
-﻿using CoreTemplate.Managers.ViewModels.Movie;
+﻿using CoreTemplate.ViewModels.Movie;
 
 namespace CoreTemplate.Managers.Interfaces
 {

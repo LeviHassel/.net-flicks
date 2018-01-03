@@ -2,7 +2,7 @@
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Managers.Interfaces;
-using CoreTemplate.Managers.ViewModels.Movie;
+using CoreTemplate.ViewModels.Movie;
 using System.Collections.Generic;
 
 /*

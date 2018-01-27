@@ -1,5 +1,6 @@
 ﻿using CoreTemplate.Accessors.Database;
 using CoreTemplate.Accessors.Models.EF.Base;
+using Microsoft.EntityFrameworkCore;
 
 namespace CoreTemplate.Accessors.Accessors.Base
 {
@@ -9,6 +10,9 @@ namespace CoreTemplate.Accessors.Accessors.Base
 
         public EntityAccessor(CoreTemplateContext db)
         {
+            //Disable global tracking: https://docs.microsoft.com/en-us/ef/core/querying/tracking
+            db.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
+
             _db = db;
         }
     }

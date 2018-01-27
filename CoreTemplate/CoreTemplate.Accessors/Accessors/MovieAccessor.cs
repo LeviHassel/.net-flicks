@@ -6,11 +6,8 @@ using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Accessors.Models.EF;
 using CoreTemplate.Accessors.Models.EF.Base;
 using Microsoft.EntityFrameworkCore;
-using System;
 using System.Collections.Generic;
 using System.Linq;
-
-//TODO: Refactor to be my own
 
 namespace CoreTemplate.Accessors.Accessors
 {
@@ -22,9 +19,7 @@ namespace CoreTemplate.Accessors.Accessors
 
         public MovieDTO Get(int id)
         {
-            var entity = _db.Movies
-                .AsNoTracking()
-                .Single(x => x.Id == id);
+            var entity = _db.Movies.Single(x => x.Id == id);
 
             var dto = Mapper.Map<MovieDTO>(entity);
 
@@ -33,9 +28,7 @@ namespace CoreTemplate.Accessors.Accessors
 
         public List<MovieDTO> GetAll()
         {
-            var entities = _db.Movies
-              .AsNoTracking()
-              .ToList();
+            var entities = _db.Movies.ToList();
 
             var dtos = Mapper.Map<List<MovieDTO>>(entities);
 
@@ -59,9 +52,9 @@ namespace CoreTemplate.Accessors.Accessors
 
             _db.SaveChanges();
 
-            var returnDto = Mapper.Map<MovieDTO>(entity);
+            dto = Mapper.Map<MovieDTO>(entity);
 
-            return returnDto;
+            return dto;
         }
 
         public MovieDTO Delete(int id)

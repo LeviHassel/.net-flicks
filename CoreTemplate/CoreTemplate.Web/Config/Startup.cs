@@ -1,6 +1,12 @@
-﻿using CoreTemplate.Managers.Config;
+﻿using AutoMapper;
+using CoreTemplate.Accessors.Config;
+using CoreTemplate.Accessors.Database;
+using CoreTemplate.Accessors.Identity;
+using CoreTemplate.Managers.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
@@ -18,15 +24,34 @@ namespace CoreTemplate.Web.Config
         // This method gets called by the runtime. Use this method to add services to the container.
         public virtual void ConfigureServices(IServiceCollection services)
         {
-            services.ConfigureDatabase(Configuration);
+            //Set up Configuration (for access to appsettings.json)
+            //services.AddOptions();
+            //services.Configure(Configuration);
 
+            //Set up database
+            services.AddDbContext<CoreTemplateContext>(options =>
+                options.UseSqlServer(Configuration.GetConnectionString("CoreTemplateConnection")));
+
+            //Set up Identity
+            services.AddIdentity<ApplicationUser, IdentityRole>()
+                .AddEntityFrameworkStores<CoreTemplateContext>()
+                .AddDefaultTokenProviders();
+
+            //Set up "ELM" (Error Logging Middleware)
             services.AddElm();
 
+            //Set up MVC
             services.AddMvc();
 
-            services.ConfigureDependencies();
+            // Set up dependency injection
+            services.AddManagerDependencies();
+            services.AddAccessorDependencies();
 
-            CoreTemplateConfiguration.AddAutoMapper();
+            //Set up all AutoMapper mappings
+            Mapper.Initialize(config => {
+                config.AddProfile<AccessorMapper>();
+                config.AddProfile<ManagerMapper>();
+            });
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

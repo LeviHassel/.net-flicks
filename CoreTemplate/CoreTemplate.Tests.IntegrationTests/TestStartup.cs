@@ -1,10 +1,12 @@
-﻿using CoreTemplate.Accessors.Database;
+﻿using AutoMapper;
+using CoreTemplate.Accessors.Config;
+using CoreTemplate.Accessors.Database;
 using CoreTemplate.Managers.Config;
 using CoreTemplate.Web.Config;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 
-namespace CoreTemplate.Tests.Config
+namespace CoreTemplate.Tests.IntegrationTests
 {
     public class TestStartup : Startup
     {
@@ -19,11 +21,17 @@ namespace CoreTemplate.Tests.Config
         {
             //services.ConfigureDatabase(Configuration);
 
+            //Set up MVC
             services.AddMvc();
 
-            services.ConfigureDependencies();
+            // Set up dependency injection
+            services.AddManagerDependencies();
+            services.AddAccessorDependencies();
 
-            CoreTemplateConfiguration.AddAutoMapper();
+            Mapper.Initialize(config => {
+                config.AddProfile<AccessorMapper>();
+                config.AddProfile<ManagerMapper>();
+            });
         }
     }
 }

@@ -18,13 +18,14 @@
     <OutputTypeEx>library</OutputTypeEx>
     <StartupObject>CoreTemplate.Web.Config.Program</StartupObject>
     <AssemblyName>CoreTemplate.Web</AssemblyName>
+    <RootNamespace>CoreTemplate.Web</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
     <Content Remove="wwwroot\.gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.3" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.5" />
 	<PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="BuildBundlerMinifier" Version="2.6.362" />
     <PackageReference Include="BundlerMinifier.Core" Version="2.6.362" />
@@ -36,6 +37,7 @@
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
+    <ProjectReference Include="..\CoreTemplate.Common\Common.csproj" />
     <ProjectReference Include="..\CoreTemplate.Managers\Managers.csproj" />
     <ProjectReference Include="..\CoreTemplate.ViewModels\ViewModels.csproj" />
   </ItemGroup>

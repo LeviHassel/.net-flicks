@@ -2,6 +2,7 @@
 using CoreTemplate.Accessors.Config;
 using CoreTemplate.Accessors.Database;
 using CoreTemplate.Accessors.Identity;
+using CoreTemplate.Common.Configuration;
 using CoreTemplate.Managers.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,8 +26,8 @@ namespace CoreTemplate.Web.Config
         public virtual void ConfigureServices(IServiceCollection services)
         {
             //Set up Configuration (for access to appsettings.json)
-            //services.AddOptions();
-            //services.Configure(Configuration);
+            services.AddOptions();
+            services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
 
             //Set up database
             services.AddDbContext<CoreTemplateContext>(options =>

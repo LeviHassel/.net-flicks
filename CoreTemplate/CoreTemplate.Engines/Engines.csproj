@@ -2,8 +2,8 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>CoreTemplate.Managers</AssemblyName>
-    <RootNamespace>CoreTemplate.Managers</RootNamespace>
+    <AssemblyName>CoreTemplate.Engines</AssemblyName>
+    <RootNamespace>CoreTemplate.Engines</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
@@ -13,7 +13,6 @@
   <ItemGroup>
     <ProjectReference Include="..\CoreTemplate.Accessors\Accessors.csproj" />
     <ProjectReference Include="..\CoreTemplate.Common\Common.csproj" />
-    <ProjectReference Include="..\CoreTemplate.Engines\Engines.csproj" />
     <ProjectReference Include="..\CoreTemplate.ViewModels\ViewModels.csproj" />
   </ItemGroup>
 

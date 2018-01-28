@@ -1,30 +1,30 @@
-﻿using CoreTemplate.Accessors.Database;
-using CoreTemplate.Accessors.Models.EF;
-using CoreTemplate.Tests.Config;
+using CoreTemplate.Accessors.Database;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.Sqlite;
 using Microsoft.EntityFrameworkCore;
-using Ploeh.AutoFixture;
 using System;
-using System.Collections.Generic;
 using System.Net.Http;
 
-namespace CoreTemplate.Tests.Helpers
+namespace CoreTemplate.Tests.IntegrationTests
 {
-    public class AccessorHelper : IDisposable
+    public class IntegrationHelper : IDisposable
     {
+        /* Currently this does nothing- it's only a template becuase I know I'll need a client and server */
+
         public CoreTemplateContext Context { get; private set; }
 
         private readonly TestServer _server;
 
         private readonly HttpClient _client;
 
-        public AccessorHelper()
+        public IntegrationHelper()
         {
             var builder = new WebHostBuilder()
                 .UseStartup<TestStartup>();
 
+            //Server and client are needed for integration testing
+            //https://docs.microsoft.com/en-us/aspnet/core/testing/integration-testing
             _server = new TestServer(builder);
 
             _client = _server.CreateClient();
@@ -53,33 +53,6 @@ namespace CoreTemplate.Tests.Helpers
             Context.Database.CloseConnection();
             _server.Dispose();
             _client.Dispose();
-        }
-
-        /*
-         * TODO: Revise SeedMovies to look less like the original code and be more efficient
-         */
-        internal List<Movie> SeedMovies(int count = 1)
-        {
-            //Set up Fixture to populate random data
-            Fixture fixture = new Fixture();
-
-            var entities = new List<Movie>(count);
-
-            for (int i = 0; i < count; i++)
-            {
-                entities.Add(fixture.Create<Movie>());
-            }
-
-            Context.Movies.AddRange(entities);
-            Context.SaveChanges();
-
-            //Detach created entities so that tests don't run into EF conflicts
-            foreach (var e in entities)
-            {
-                Context.Entry(e).State = EntityState.Detached;
-            }
-
-            return entities;
         }
     }
 }

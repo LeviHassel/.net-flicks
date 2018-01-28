@@ -1,0 +1,36 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netcoreapp2.0</TargetFramework>
+
+    <IsPackable>false</IsPackable>
+
+    <AssemblyName>CoreTemplate.Tests.EngineTests</AssemblyName>
+
+    <RootNamespace>CoreTemplate.Tests.EngineTests</RootNamespace>
+
+    <ApplicationIcon />
+
+    <OutputType>Library</OutputType>
+
+    <StartupObject />
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="AutoFixture" Version="4.0.1" />
+    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="FluentAssertions" Version="4.19.4" />
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.5.0" />
+    <PackageReference Include="xunit" Version="2.3.1" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.3.1" />
+    <DotNetCliToolReference Include="dotnet-xunit" Version="2.3.1" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\CoreTemplate.Common\Common.csproj" />
+    <ProjectReference Include="..\CoreTemplate.Engines\Engines.csproj" />
+    <ProjectReference Include="..\CoreTemplate.Tests.Mocks\Mocks.csproj" />
+    <ProjectReference Include="..\CoreTemplate.ViewModels\ViewModels.csproj" />
+  </ItemGroup>
+
+</Project>

@@ -2,19 +2,17 @@
 
   <PropertyGroup>
     <TargetFramework>netcoreapp2.0</TargetFramework>
-    <AssemblyName>CoreTemplate.Managers</AssemblyName>
-    <RootNamespace>CoreTemplate.Managers</RootNamespace>
+    <AssemblyName>CoreTemplate.Tests.Mocks</AssemblyName>
+    <RootNamespace>CoreTemplate.Tests.Mocks</RootNamespace>
   </PropertyGroup>
 
   <ItemGroup>
-    <PackageReference Include="AutoMapper" Version="6.2.2" />
+    <PackageReference Include="Moq" Version="4.8.1" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\CoreTemplate.Accessors\Accessors.csproj" />
     <ProjectReference Include="..\CoreTemplate.Common\Common.csproj" />
-    <ProjectReference Include="..\CoreTemplate.Engines\Engines.csproj" />
-    <ProjectReference Include="..\CoreTemplate.ViewModels\ViewModels.csproj" />
   </ItemGroup>
 
 </Project>

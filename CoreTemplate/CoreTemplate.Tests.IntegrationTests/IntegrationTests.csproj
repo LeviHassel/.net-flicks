@@ -32,7 +32,6 @@
     <ProjectReference Include="..\CoreTemplate.Common\Common.csproj" />
     <ProjectReference Include="..\CoreTemplate.Engines\Engines.csproj" />
     <ProjectReference Include="..\CoreTemplate.Managers\Managers.csproj" />
-    <ProjectReference Include="..\CoreTemplate.Tests.Mocks\Mocks.csproj" />
     <ProjectReference Include="..\CoreTemplate.ViewModels\ViewModels.csproj" />
     <ProjectReference Include="..\CoreTemplate.Web\Web.csproj" />
   </ItemGroup>

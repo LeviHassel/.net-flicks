@@ -57,14 +57,6 @@ namespace CoreTemplate.Tests.AccessorTests
 
             Context.Movies.AddRange(movies);
 
-            Context.SaveChanges();
-
-            //Because the context remains open between tests, every newly created entity needs to be detached
-            foreach (var movie in movies)
-            {
-                Context.ChangeTracker.TrackGraph(movie, x => x.Entry.State = EntityState.Detached);
-            }
-
             return UpdateDatabase(movies);
         }
 

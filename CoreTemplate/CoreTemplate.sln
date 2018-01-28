@@ -21,21 +21,19 @@ Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "4. Engines", "4. Engines", 
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Common", "CoreTemplate.Common\Common.csproj", "{448207F4-4CC6-4776-8E44-DC912FBDFCD6}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Engines", "CoreTemplate.Engines\Engines.csproj", "{D0768596-ECF8-4FB8-88AC-CF871D1CD064}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Engines", "CoreTemplate.Engines\Engines.csproj", "{D0768596-ECF8-4FB8-88AC-CF871D1CD064}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "ManagerTests", "CoreTemplate.Tests.ManagerTests\ManagerTests.csproj", "{8E106856-9A8C-442F-8097-BF9A3A3B41AA}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "ManagerTests", "CoreTemplate.Tests.ManagerTests\ManagerTests.csproj", "{8E106856-9A8C-442F-8097-BF9A3A3B41AA}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "EngineTests", "CoreTemplate.Tests.EngineTests\EngineTests.csproj", "{81037DB8-F36C-48AE-ABD1-7183D2FB5DBC}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "EngineTests", "CoreTemplate.Tests.EngineTests\EngineTests.csproj", "{81037DB8-F36C-48AE-ABD1-7183D2FB5DBC}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "AccessorTests", "CoreTemplate.Tests.AccessorTests\AccessorTests.csproj", "{617A2677-3B8F-448D-8C47-B46192B3EF19}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "AccessorTests", "CoreTemplate.Tests.AccessorTests\AccessorTests.csproj", "{617A2677-3B8F-448D-8C47-B46192B3EF19}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "IntegrationTests", "CoreTemplate.Tests.IntegrationTests\IntegrationTests.csproj", "{1FF081F8-5F9B-4FB1-A448-BAA02CBD9E4C}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "IntegrationTests", "CoreTemplate.Tests.IntegrationTests\IntegrationTests.csproj", "{1FF081F8-5F9B-4FB1-A448-BAA02CBD9E4C}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Mocks", "CoreTemplate.Tests.Mocks\Mocks.csproj", "{2200496B-E5C3-4EA3-9A6B-403BD29E822A}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Managers", "CoreTemplate.Managers\Managers.csproj", "{14162DA6-0DCA-44CA-B8E5-0CD3FB711655}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Managers", "CoreTemplate.Managers\Managers.csproj", "{14162DA6-0DCA-44CA-B8E5-0CD3FB711655}"
-EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Accessors", "CoreTemplate.Accessors\Accessors.csproj", "{1552DA19-3625-41E3-A768-E3E85546B2B6}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "Accessors", "CoreTemplate.Accessors\Accessors.csproj", "{1552DA19-3625-41E3-A768-E3E85546B2B6}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -75,10 +73,6 @@ Global
 		{1FF081F8-5F9B-4FB1-A448-BAA02CBD9E4C}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{1FF081F8-5F9B-4FB1-A448-BAA02CBD9E4C}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{1FF081F8-5F9B-4FB1-A448-BAA02CBD9E4C}.Release|Any CPU.Build.0 = Release|Any CPU
-		{2200496B-E5C3-4EA3-9A6B-403BD29E822A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
-		{2200496B-E5C3-4EA3-9A6B-403BD29E822A}.Debug|Any CPU.Build.0 = Debug|Any CPU
-		{2200496B-E5C3-4EA3-9A6B-403BD29E822A}.Release|Any CPU.ActiveCfg = Release|Any CPU
-		{2200496B-E5C3-4EA3-9A6B-403BD29E822A}.Release|Any CPU.Build.0 = Release|Any CPU
 		{14162DA6-0DCA-44CA-B8E5-0CD3FB711655}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
 		{14162DA6-0DCA-44CA-B8E5-0CD3FB711655}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{14162DA6-0DCA-44CA-B8E5-0CD3FB711655}.Release|Any CPU.ActiveCfg = Release|Any CPU
@@ -100,7 +94,6 @@ Global
 		{81037DB8-F36C-48AE-ABD1-7183D2FB5DBC} = {A605FFCD-9A67-4278-97D9-93F7FCEFD6DD}
 		{617A2677-3B8F-448D-8C47-B46192B3EF19} = {A605FFCD-9A67-4278-97D9-93F7FCEFD6DD}
 		{1FF081F8-5F9B-4FB1-A448-BAA02CBD9E4C} = {A605FFCD-9A67-4278-97D9-93F7FCEFD6DD}
-		{2200496B-E5C3-4EA3-9A6B-403BD29E822A} = {A605FFCD-9A67-4278-97D9-93F7FCEFD6DD}
 		{14162DA6-0DCA-44CA-B8E5-0CD3FB711655} = {5B0E4EE7-0E9E-445F-996F-B79D42AD5E80}
 		{1552DA19-3625-41E3-A768-E3E85546B2B6} = {CC7AA74F-201C-46A3-B36F-67285D44BD01}
 	EndGlobalSection

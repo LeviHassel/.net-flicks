@@ -44,14 +44,14 @@ namespace CoreTemplate.Web.Config
             //Set up MVC
             services.AddMvc();
 
-            // Set up dependency injection
+            //Set up dependency injection
             services.AddManagerDependencies();
             services.AddAccessorDependencies();
 
             //Set up all AutoMapper mappings
             Mapper.Initialize(config => {
-                config.AddProfile<AccessorMapper>();
                 config.AddProfile<ManagerMapper>();
+                config.AddProfile<AccessorMapper>();
             });
         }
 

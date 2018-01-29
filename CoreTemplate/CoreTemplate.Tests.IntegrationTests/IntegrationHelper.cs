@@ -1,4 +1,8 @@
+using AutoFixture;
+using AutoMapper;
+using CoreTemplate.Accessors.Config;
 using CoreTemplate.Accessors.Database;
+using CoreTemplate.Managers.Config;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.TestHost;
 using Microsoft.Data.Sqlite;
@@ -10,31 +14,40 @@ namespace CoreTemplate.Tests.IntegrationTests
 {
     public class IntegrationHelper : IDisposable
     {
-        /* Currently this does nothing- it's only a template becuase I know I'll need a client and server */
-
         public CoreTemplateContext Context { get; private set; }
 
         private readonly TestServer _server;
 
         private readonly HttpClient _client;
 
+        private Fixture _fixture;
+
         public IntegrationHelper()
         {
+            //Configure server and client for integration testing: https://docs.microsoft.com/en-us/aspnet/core/testing/integration-testing
             var builder = new WebHostBuilder()
                 .UseStartup<TestStartup>();
 
-            //Server and client are needed for integration testing
-            //https://docs.microsoft.com/en-us/aspnet/core/testing/integration-testing
             _server = new TestServer(builder);
 
             _client = _server.CreateClient();
 
             CreateTestDatabase();
+
+            //Set up a Fixture to populate random data: https://github.com/AutoFixture/AutoFixture
+            _fixture = new Fixture();
+
+            //Set up AutoMapper
+            Mapper.Initialize(config =>
+            {
+                config.AddProfile<ManagerMapper>();
+                config.AddProfile<AccessorMapper>();
+            });
         }
 
         public void CreateTestDatabase()
         {
-            //For more information about testing with SQLite, go here: https://docs.microsoft.com/en-us/ef/core/miscellaneous/testing/sqlite
+            //Set up a SQLite in-memory connection: https://docs.microsoft.com/en-us/ef/core/miscellaneous/testing/sqlite
             var connection = new SqliteConnection("DataSource=:memory:");
             connection.Open();
 

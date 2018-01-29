@@ -3,6 +3,7 @@ using CoreTemplate.Accessors.Accessors;
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Accessors.Models.EF;
+using CoreTemplate.Tests.AccessorTests.Config;
 using FluentAssertions;
 using System;
 using System.Linq;

@@ -1,5 +1,4 @@
 ﻿using AutoFixture;
-using AutoFixture.AutoMoq;
 using AutoMapper;
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
@@ -16,11 +15,22 @@ namespace CoreTemplate.Tests.ManagerTests
     [Collection("Managers")]
     public class MovieManagerTest
     {
-        internal IFixture _fixture;
+        private Fixture _fixture;
 
+        private MovieManager _movieManager;
+
+        private Mock<IMovieAccessor> _movieAccessorMock;
+
+        //This is method is called before the start of every test in this class
         public MovieManagerTest()
         {
-            _fixture = new Fixture().Customize(new AutoMoqCustomization());
+            _fixture = new Fixture();
+
+            _movieAccessorMock = new Mock<IMovieAccessor>();
+
+            _movieManager = new MovieManager(
+                _movieAccessorMock.Object
+            );
         }
 
         [Fact]
@@ -30,15 +40,12 @@ namespace CoreTemplate.Tests.ManagerTests
             var expectedMovieDto = _fixture.Create<MovieDTO>();
             var expectedMovieVm = Mapper.Map<MovieViewModel>(expectedMovieDto);
 
-            var movieAccessorMock = _fixture.Freeze<Mock<IMovieAccessor>>();
-            var movieManager = _fixture.Create<MovieManager>();
-
-            movieAccessorMock
+            _movieAccessorMock
                 .Setup(x => x.Get(expectedMovieDto.Id))
                 .Returns(expectedMovieDto);
 
             //Act
-            var actualMovieVm = movieManager.GetMovie(expectedMovieDto.Id);
+            var actualMovieVm = _movieManager.GetMovie(expectedMovieDto.Id);
 
             //Assert
             actualMovieVm.ShouldBeEquivalentTo(expectedMovieVm);
@@ -50,15 +57,12 @@ namespace CoreTemplate.Tests.ManagerTests
             //Arrange
             var expectedMovieDtos = _fixture.Create<List<MovieDTO>>();
 
-            var movieAccessorMock = _fixture.Freeze<Mock<IMovieAccessor>>();
-            var movieManager = _fixture.Create<MovieManager>();
-
-            movieAccessorMock
+            _movieAccessorMock
               .Setup(x => x.GetAll())
               .Returns(expectedMovieDtos);
 
             //Act
-            var actualMoviesVm = movieManager.GetAllMovies();
+            var actualMoviesVm = _movieManager.GetAllMovies();
 
             //Assert
             foreach (var actualMovieVm in actualMoviesVm.Movies)
@@ -77,15 +81,12 @@ namespace CoreTemplate.Tests.ManagerTests
             var expectedMovieVm = _fixture.Create<MovieViewModel>();
             var expectedMovieDto = Mapper.Map<MovieDTO>(expectedMovieVm);
 
-            var movieAccessorMock = _fixture.Freeze<Mock<IMovieAccessor>>();
-            var movieManager = _fixture.Create<MovieManager>();
-
-            movieAccessorMock
+            _movieAccessorMock
               .Setup(x => x.Save(It.IsAny<MovieDTO>()))
               .Returns(expectedMovieDto);
 
             //Act
-            var actualMovieVm = movieManager.SaveMovie(expectedMovieVm);
+            var actualMovieVm = _movieManager.SaveMovie(expectedMovieVm);
 
             //Assert
             actualMovieVm.ShouldBeEquivalentTo(expectedMovieVm);

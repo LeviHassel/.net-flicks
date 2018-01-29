@@ -1,18 +1,11 @@
 ﻿using AutoMapper;
 using CoreTemplate.Accessors.Config;
-using CoreTemplate.Accessors.Interfaces;
-using CoreTemplate.Managers.Managers;
-using Moq;
-using Xunit;
+using System;
 
-namespace CoreTemplate.Tests.ManagerTests
+namespace CoreTemplate.Tests.ManagerTests.Config
 {
-    public class ManagerHelper
+    public class ManagerHelper : IDisposable
     {
-        public MovieManager MovieManager;
-
-        public Mock<IMovieAccessor> MovieAccessorMock;
-
         public ManagerHelper()
         {
             //Set up AutoMapper
@@ -20,10 +13,10 @@ namespace CoreTemplate.Tests.ManagerTests
             {
                 config.AddProfile<AccessorMapper>();
             });
+        }
 
-            MovieAccessorMock = new Mock<IMovieAccessor>();
-
-            MovieManager = new MovieManager(MovieAccessorMock.Object);
+        public void Dispose()
+        {
         }
     }
 }

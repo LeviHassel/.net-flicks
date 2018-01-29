@@ -4,12 +4,10 @@
   ViewBag.Title = string.Format("Delete {0}", Model.Name);
 }
 
-<div class="page-header">
-    <h2>@ViewBag.Title</h2>
-</div>
-
-<h3>Are you sure you want to delete @Model.Name?</h3>
+<h1>@ViewBag.Title</h1>
+<p class="lead">Are you sure you want to delete @Model.Name?</p>
 <br /><br />
+
 <div>
     @using (Html.BeginForm()) {
         @Html.AntiForgeryToken()

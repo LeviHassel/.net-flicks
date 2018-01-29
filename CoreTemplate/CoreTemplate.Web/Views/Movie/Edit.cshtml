@@ -1,12 +1,11 @@
 ﻿@model CoreTemplate.ViewModels.Movie.MovieViewModel
 
 @{
-  ViewBag.Title = Model.Id > 0 ? string.Format("Edit {0}", Model.Name) : "New Movie";
+    ViewBag.Title = Model.Id > 0 ? string.Format("Edit {0}", Model.Name) : "New Movie";
 }
 
-<div class="page-header">
-    <h2>@ViewBag.Title</h2>
-</div>
+<h1>@ViewBag.Title</h1>
+<br /><br />
 
 @using (Html.BeginForm("Edit", "Movie", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
 {
@@ -48,9 +47,9 @@
         <br />
 
         <div class="form-group">
-            <button class="btn btn-success" type="submit">Save</button>
+            <button class="btn btn-primary" type="submit">Save</button>
             <br /><br />
             @Html.ActionLink("Back to List", "Index")
         </div>
     </div>
-    }
+}

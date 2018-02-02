@@ -29,6 +29,7 @@ namespace CoreTemplate.Tests.AccessorTests.Config
             Context = new CoreTemplateContext(options) { };
             Context.Database.OpenConnection();
             Context.Database.EnsureCreated();
+            Context.ChangeTracker.QueryTrackingBehavior = QueryTrackingBehavior.NoTracking;
 
             //Set up a Fixture to populate random data: https://github.com/AutoFixture/AutoFixture
             _fixture = new Fixture();

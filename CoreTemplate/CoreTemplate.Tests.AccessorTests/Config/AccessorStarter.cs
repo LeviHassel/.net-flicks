@@ -2,11 +2,11 @@
 using CoreTemplate.Accessors.Config;
 using System;
 
-namespace CoreTemplate.Tests.ManagerTests.Config
+namespace CoreTemplate.Tests.AccessorTests.Config
 {
-    public class ManagerHelper : IDisposable
+    public class AccessorStarter : IDisposable
     {
-        public ManagerHelper()
+        public AccessorStarter()
         {
             //Set up AutoMapper
             Mapper.Initialize(config =>

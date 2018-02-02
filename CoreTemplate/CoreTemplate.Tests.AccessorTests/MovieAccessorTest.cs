@@ -17,9 +17,9 @@ namespace CoreTemplate.Tests.AccessorTests
         private IMovieAccessor _movieAccessor;
         private AccessorHelper _accessorHelper;
 
-        public MovieAccessorTest(AccessorHelper accessorHelper)
+        public MovieAccessorTest()
         {
-            _accessorHelper = accessorHelper;
+            _accessorHelper = new AccessorHelper();
             _movieAccessor = new MovieAccessor(_accessorHelper.Context);
         }
 

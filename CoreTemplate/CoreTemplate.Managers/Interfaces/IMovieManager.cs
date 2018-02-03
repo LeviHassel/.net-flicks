@@ -4,12 +4,12 @@ namespace CoreTemplate.Managers.Interfaces
 {
     public interface IMovieManager
     {
-        MovieViewModel GetMovie(int id);
+        MovieViewModel Get(int id);
 
-        MoviesViewModel GetAllMovies();
+        MoviesViewModel GetAll();
 
-        MovieViewModel SaveMovie(MovieViewModel vm);
+        MovieViewModel Save(MovieViewModel vm);
 
-        MovieViewModel DeleteMovie(int id);
+        MovieViewModel Delete(int id);
     }
 }

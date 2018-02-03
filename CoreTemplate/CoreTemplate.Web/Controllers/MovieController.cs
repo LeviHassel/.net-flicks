@@ -15,7 +15,7 @@ namespace CoreTemplate.Web.Controllers
 
         public ActionResult Index()
         {
-            var vm = _movieManager.GetAllMovies();
+            var vm = _movieManager.GetAll();
 
             return View(vm);
         }
@@ -30,7 +30,7 @@ namespace CoreTemplate.Web.Controllers
             }
             else
             {
-                var vm = _movieManager.GetMovie(id.Value);
+                var vm = _movieManager.Get(id.Value);
 
                 return View(vm);
             }
@@ -40,14 +40,14 @@ namespace CoreTemplate.Web.Controllers
         [HttpPost]
         public ActionResult Edit(MovieViewModel vm)
         {
-            _movieManager.SaveMovie(vm);
+            _movieManager.Save(vm);
 
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)
         {
-            var vm = _movieManager.GetMovie(id);
+            var vm = _movieManager.Get(id);
 
             return View(vm);
         }
@@ -56,7 +56,7 @@ namespace CoreTemplate.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _movieManager.DeleteMovie(id);
+            _movieManager.Delete(id);
 
             return RedirectToAction("Index");
         }

@@ -24,17 +24,16 @@ namespace CoreTemplate.Tests.ManagerTests
         //This is method is called before the start of every test in this class
         public MovieManagerTest()
         {
-            _fixture = new Fixture();
-
             _movieAccessorMock = new Mock<IMovieAccessor>();
 
-            _movieManager = new MovieManager(
-                _movieAccessorMock.Object
-            );
+            _movieManager = new MovieManager(_movieAccessorMock.Object);
+
+            //Set up a Fixture to populate random data: https://github.com/AutoFixture/AutoFixture
+            _fixture = new Fixture();
         }
 
         [Fact]
-        public void GetMovie()
+        public void Get()
         {
             //Arrange
             var expectedMovieDto = _fixture.Create<MovieDTO>();
@@ -45,14 +44,14 @@ namespace CoreTemplate.Tests.ManagerTests
                 .Returns(expectedMovieDto);
 
             //Act
-            var actualMovieVm = _movieManager.GetMovie(expectedMovieDto.Id);
+            var actualMovieVm = _movieManager.Get(expectedMovieDto.Id);
 
             //Assert
             actualMovieVm.ShouldBeEquivalentTo(expectedMovieVm);
         }
 
         [Fact]
-        public void GetAllMovies()
+        public void GetAll()
         {
             //Arrange
             var expectedMovieDtos = _fixture.Create<List<MovieDTO>>();
@@ -62,7 +61,7 @@ namespace CoreTemplate.Tests.ManagerTests
               .Returns(expectedMovieDtos);
 
             //Act
-            var actualMoviesVm = _movieManager.GetAllMovies();
+            var actualMoviesVm = _movieManager.GetAll();
 
             //Assert
             foreach (var actualMovieVm in actualMoviesVm.Movies)
@@ -75,7 +74,7 @@ namespace CoreTemplate.Tests.ManagerTests
         }
 
         [Fact]
-        public void SaveMovie()
+        public void Save()
         {
             //Arrange
             var expectedMovieVm = _fixture.Create<MovieViewModel>();
@@ -86,7 +85,7 @@ namespace CoreTemplate.Tests.ManagerTests
               .Returns(expectedMovieDto);
 
             //Act
-            var actualMovieVm = _movieManager.SaveMovie(expectedMovieVm);
+            var actualMovieVm = _movieManager.Save(expectedMovieVm);
 
             //Assert
             actualMovieVm.ShouldBeEquivalentTo(expectedMovieVm);

@@ -17,6 +17,7 @@ namespace CoreTemplate.Tests.AccessorTests
         private IMovieAccessor _movieAccessor;
         private DatabaseHelper _databaseHelper;
 
+        //This is method is called before the start of every test in this class
         public MovieAccessorTest()
         {
             _databaseHelper = new DatabaseHelper();

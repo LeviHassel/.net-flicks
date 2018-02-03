@@ -36,6 +36,18 @@ namespace CoreTemplate.Accessors.Database
             this.Entry(entity).State = state;
         }
 
+        /// <summary>
+        /// Detach all entries in the Context's Change Tracker.
+        /// Very useful for avoiding tracking errors in testing.
+        /// </summary>
+        public virtual void DetachAll()
+        {
+            foreach (var entry in this.ChangeTracker.Entries().ToList())
+            {
+                entry.State = EntityState.Detached;
+            }
+        }
+
         public DbSet<Movie> Movies { get; set; }
     }
 }

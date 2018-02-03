@@ -15,19 +15,19 @@ namespace CoreTemplate.Tests.AccessorTests
     public class MovieAccessorTest
     {
         private IMovieAccessor _movieAccessor;
-        private AccessorHelper _accessorHelper;
+        private DatabaseHelper _databaseHelper;
 
         public MovieAccessorTest()
         {
-            _accessorHelper = new AccessorHelper();
-            _movieAccessor = new MovieAccessor(_accessorHelper.Context);
+            _databaseHelper = new DatabaseHelper();
+            _movieAccessor = new MovieAccessor(_databaseHelper.Context);
         }
 
         [Fact]
         public void Get()
         {
             //Arrange
-            var expectedMovie = _accessorHelper.SeedMovies().First();
+            var expectedMovie = _databaseHelper.SeedMovies().First();
 
             //Act
             var actualMovieDto = _movieAccessor.Get(expectedMovie.Id);
@@ -42,7 +42,7 @@ namespace CoreTemplate.Tests.AccessorTests
         public void GetAll()
         {
             //Arrange
-            var expectedMovies = _accessorHelper.SeedMovies(10);
+            var expectedMovies = _databaseHelper.SeedMovies(10);
 
             //Act
             var actualMovieDtos = _movieAccessor.GetAll();
@@ -66,7 +66,7 @@ namespace CoreTemplate.Tests.AccessorTests
         public void Save()
         {
             //Arrange
-            var expectedMovie = _accessorHelper.SeedMovies().First();
+            var expectedMovie = _databaseHelper.SeedMovies().First();
 
             var originalName = expectedMovie.Name;
 
@@ -80,7 +80,7 @@ namespace CoreTemplate.Tests.AccessorTests
             _movieAccessor.Save(expectedMovieDto);
 
             //Assert
-            var actualMovie = _accessorHelper.Context.Movies.Single(x => x.Id == expectedMovie.Id);
+            var actualMovie = _databaseHelper.Context.Movies.Single(x => x.Id == expectedMovie.Id);
 
             Assert.NotEqual(originalName, actualMovie.Name);
 

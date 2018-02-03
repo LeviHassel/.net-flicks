@@ -9,13 +9,13 @@ using System.Linq;
 
 namespace CoreTemplate.Tests.AccessorTests.Config
 {
-    public class AccessorHelper : IDisposable
+    public class DatabaseHelper : IDisposable
     {
         public CoreTemplateContext Context { get; private set; }
 
         private Fixture _fixture;
 
-        public AccessorHelper()
+        public DatabaseHelper()
         {
             //Set up a SQLite in-memory connection: https://docs.microsoft.com/en-us/ef/core/miscellaneous/testing/sqlite
             var connection = new SqliteConnection("DataSource=:memory:");

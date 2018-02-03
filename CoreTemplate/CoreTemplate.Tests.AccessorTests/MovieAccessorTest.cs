@@ -24,7 +24,7 @@ namespace CoreTemplate.Tests.AccessorTests
         }
 
         [Fact]
-        public void MovieAccessor_Get()
+        public void Get()
         {
             //Arrange
             var expectedMovie = _accessorHelper.SeedMovies().First();
@@ -39,7 +39,7 @@ namespace CoreTemplate.Tests.AccessorTests
         }
 
         [Fact]
-        public void MovieAccessor_GetAll()
+        public void GetAll()
         {
             //Arrange
             var expectedMovies = _accessorHelper.SeedMovies(10);
@@ -63,7 +63,7 @@ namespace CoreTemplate.Tests.AccessorTests
         }
 
         [Fact]
-        public void MovieAccessor_Save()
+        public void Save()
         {
             //Arrange
             var expectedMovie = _accessorHelper.SeedMovies().First();

@@ -34,7 +34,7 @@ namespace CoreTemplate.Tests.ManagerTests
         }
 
         [Fact]
-        public void MovieManager_GetMovie()
+        public void GetMovie()
         {
             //Arrange
             var expectedMovieDto = _fixture.Create<MovieDTO>();
@@ -52,7 +52,7 @@ namespace CoreTemplate.Tests.ManagerTests
         }
 
         [Fact]
-        public void MovieManager_GetAllMovies()
+        public void GetAllMovies()
         {
             //Arrange
             var expectedMovieDtos = _fixture.Create<List<MovieDTO>>();
@@ -75,7 +75,7 @@ namespace CoreTemplate.Tests.ManagerTests
         }
 
         [Fact]
-        public void MovieManager_SaveMovie()
+        public void SaveMovie()
         {
             //Arrange
             var expectedMovieVm = _fixture.Create<MovieViewModel>();

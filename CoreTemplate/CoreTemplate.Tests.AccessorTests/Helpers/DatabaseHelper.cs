@@ -44,7 +44,7 @@ namespace CoreTemplate.Tests.AccessorTests.Config
         {
             //TODO: Remove .With once I have an example of it elsewhere
             var movies = _fixture.Build<Movie>()
-                .With(x => x.Genre, "something")
+                .With(x => x.ImageUrl, "something.com")
                 .CreateMany(count)
                 .ToList();
 

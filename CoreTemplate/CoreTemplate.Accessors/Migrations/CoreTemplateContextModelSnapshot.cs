@@ -3,6 +3,9 @@ using CoreTemplate.Accessors.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
+using Microsoft.EntityFrameworkCore.Storage;
+using Microsoft.EntityFrameworkCore.Storage.Internal;
 using System;
 
 namespace CoreTemplate.Accessors.Migrations
@@ -14,10 +17,10 @@ namespace CoreTemplate.Accessors.Migrations
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.0.0-rtm-26452")
+                .HasAnnotation("ProductVersion", "2.0.1-rtm-125")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("CoreTemplate.Accessors.Models.ApplicationUser", b =>
+            modelBuilder.Entity("CoreTemplate.Accessors.Identity.ApplicationUser", b =>
                 {
                     b.Property<string>("Id")
                         .ValueGeneratedOnAdd();
@@ -68,19 +71,30 @@ namespace CoreTemplate.Accessors.Migrations
                     b.ToTable("AspNetUsers");
                 });
 
+            modelBuilder.Entity("CoreTemplate.Accessors.Models.EF.Genre", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Genre");
+                });
+
             modelBuilder.Entity("CoreTemplate.Accessors.Models.EF.Movie", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
-                    b.Property<string>("Director")
-                        .IsRequired();
+                    b.Property<string>("ImageUrl");
 
-                    b.Property<string>("Genre")
-                        .IsRequired();
+                    b.Property<string>("Name");
 
-                    b.Property<string>("Name")
-                        .IsRequired();
+                    b.Property<int>("PurchaseCost");
+
+                    b.Property<int>("RentCost");
 
                     b.Property<int>("Runtime");
 
@@ -89,6 +103,74 @@ namespace CoreTemplate.Accessors.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Movies");
+                });
+
+            modelBuilder.Entity("CoreTemplate.Accessors.Models.EF.MovieGenre", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("GenreId");
+
+                    b.Property<int>("MovieId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("GenreId");
+
+                    b.HasIndex("MovieId");
+
+                    b.ToTable("MovieGenre");
+                });
+
+            modelBuilder.Entity("CoreTemplate.Accessors.Models.EF.MoviePerson", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<int>("MovieId");
+
+                    b.Property<int>("PersonId");
+
+                    b.Property<int>("RoleId");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("MovieId");
+
+                    b.HasIndex("PersonId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("MoviePerson");
+                });
+
+            modelBuilder.Entity("CoreTemplate.Accessors.Models.EF.Person", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("FirstName");
+
+                    b.Property<string>("ImageUrl");
+
+                    b.Property<string>("LastName");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Person");
+                });
+
+            modelBuilder.Entity("CoreTemplate.Accessors.Models.EF.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Name");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Role");
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole", b =>
@@ -199,6 +281,37 @@ namespace CoreTemplate.Accessors.Migrations
                     b.ToTable("AspNetUserTokens");
                 });
 
+            modelBuilder.Entity("CoreTemplate.Accessors.Models.EF.MovieGenre", b =>
+                {
+                    b.HasOne("CoreTemplate.Accessors.Models.EF.Genre", "Genre")
+                        .WithMany()
+                        .HasForeignKey("GenreId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("CoreTemplate.Accessors.Models.EF.Movie", "Movie")
+                        .WithMany("MovieGenres")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
+            modelBuilder.Entity("CoreTemplate.Accessors.Models.EF.MoviePerson", b =>
+                {
+                    b.HasOne("CoreTemplate.Accessors.Models.EF.Movie", "Movie")
+                        .WithMany("MoviePeople")
+                        .HasForeignKey("MovieId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("CoreTemplate.Accessors.Models.EF.Person", "Person")
+                        .WithMany("MoviePersons")
+                        .HasForeignKey("PersonId")
+                        .OnDelete(DeleteBehavior.Restrict);
+
+                    b.HasOne("CoreTemplate.Accessors.Models.EF.Role", "Role")
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Restrict);
+                });
+
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<string>", b =>
                 {
                     b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole")
@@ -209,7 +322,7 @@ namespace CoreTemplate.Accessors.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserClaim<string>", b =>
                 {
-                    b.HasOne("CoreTemplate.Accessors.Models.ApplicationUser")
+                    b.HasOne("CoreTemplate.Accessors.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -217,7 +330,7 @@ namespace CoreTemplate.Accessors.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<string>", b =>
                 {
-                    b.HasOne("CoreTemplate.Accessors.Models.ApplicationUser")
+                    b.HasOne("CoreTemplate.Accessors.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -230,7 +343,7 @@ namespace CoreTemplate.Accessors.Migrations
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Restrict);
 
-                    b.HasOne("CoreTemplate.Accessors.Models.ApplicationUser")
+                    b.HasOne("CoreTemplate.Accessors.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);
@@ -238,7 +351,7 @@ namespace CoreTemplate.Accessors.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<string>", b =>
                 {
-                    b.HasOne("CoreTemplate.Accessors.Models.ApplicationUser")
+                    b.HasOne("CoreTemplate.Accessors.Identity.ApplicationUser")
                         .WithMany()
                         .HasForeignKey("UserId")
                         .OnDelete(DeleteBehavior.Restrict);

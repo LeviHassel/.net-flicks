@@ -4,7 +4,7 @@ using Microsoft.EntityFrameworkCore;
 
 namespace CoreTemplate.Accessors.Accessors.Base
 {
-    public class EntityAccessor<TEntity> where TEntity : Entity
+    public abstract class EntityAccessor<TEntity> where TEntity : Entity
     {
         protected readonly CoreTemplateContext _db;
 

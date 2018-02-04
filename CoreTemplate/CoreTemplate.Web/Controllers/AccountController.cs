@@ -185,7 +185,7 @@ namespace CoreTemplate.Web.Controllers
                     var callbackUrl = Url.ResetPasswordCallbackLink(userId, code, Request.Scheme);
 
                     await _emailManager.SendEmailAsync(vm.Email, "Reset Password",
-                       $"Please reset your password by clicking here: <a href='{callbackUrl}'>link</a>");
+                       $"Please reset your password by clicking <a href='{callbackUrl}'>here</a>.");
                 }
 
                 // Don't reveal that the user does not exist or is not confirmed

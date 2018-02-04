@@ -4,6 +4,8 @@
     {
         public string MailServer { get; set; }
 
+        public int MailServerPort { get; set; }
+
         public string MailServerUsername { get; set; }
 
         public string MailServerPassword { get; set; }
@@ -12,6 +14,6 @@
 
         public string SenderEmail { get; set; }
 
-        public string AdminSenderEmail { get; set; }
+        public bool EnableSsl { get; set; }
     }
 }

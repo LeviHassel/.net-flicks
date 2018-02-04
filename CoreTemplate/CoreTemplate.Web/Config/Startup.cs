@@ -27,7 +27,7 @@ namespace CoreTemplate.Web.Config
         {
             //Set up Configuration (for access to appsettings.json)
             services.AddOptions();
-            services.Configure<EmailConfiguration>(Configuration.GetSection("EmailConfiguration"));
+            services.Configure<EmailConfiguration>(Configuration.GetSection("Email"));
 
             //Set up database
             services.AddDbContext<CoreTemplateContext>(options =>

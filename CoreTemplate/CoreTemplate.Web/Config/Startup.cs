@@ -3,6 +3,7 @@ using CoreTemplate.Accessors.Config;
 using CoreTemplate.Accessors.Database;
 using CoreTemplate.Accessors.Identity;
 using CoreTemplate.Common.Configuration;
+using CoreTemplate.Engines.Config;
 using CoreTemplate.Managers.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -26,6 +27,8 @@ namespace CoreTemplate.Web.Config
         public virtual void ConfigureServices(IServiceCollection services)
         {
             //Set up Configuration (for access to appsettings.json)
+            //Note: CoreTemplate uses a local SMTP server, but in production, you'd want to use
+            //something like SendGrid, which offers 100 free emails a day: https://sendgrid.com/free/
             services.AddOptions();
             services.Configure<EmailConfiguration>(Configuration.GetSection("Email"));
 
@@ -46,6 +49,7 @@ namespace CoreTemplate.Web.Config
 
             //Set up dependency injection
             services.AddManagerDependencies();
+            services.AddEngineDependencies();
             services.AddAccessorDependencies();
 
             //Set up all AutoMapper mappings

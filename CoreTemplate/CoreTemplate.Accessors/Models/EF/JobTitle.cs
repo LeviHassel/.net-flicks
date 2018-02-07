@@ -2,7 +2,7 @@
 
 namespace CoreTemplate.Accessors.Models.EF
 {
-    public class Role : Entity
+    public class JobTitle : Entity
     {
         public string Name { get; set; }
     }

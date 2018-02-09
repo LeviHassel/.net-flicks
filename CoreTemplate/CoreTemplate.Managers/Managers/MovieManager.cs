@@ -5,10 +5,6 @@ using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Movie;
 using System.Collections.Generic;
 
-/*
- * TODO: Make this my own
- */
-
 namespace CoreTemplate.Managers.Managers
 {
     public class MovieManager : IMovieManager
@@ -20,9 +16,9 @@ namespace CoreTemplate.Managers.Managers
             _movieAccessor = movieAccessor;
         }
 
-        public MovieViewModel Get(int id)
+        public MovieViewModel Get(int? id)
         {
-            var dto = _movieAccessor.Get(id);
+            var dto = id.HasValue ? _movieAccessor.Get(id.Value) : new MovieDTO();
             var vm = Mapper.Map<MovieViewModel>(dto);
 
             return vm;

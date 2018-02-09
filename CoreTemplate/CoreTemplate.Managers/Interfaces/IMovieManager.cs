@@ -4,7 +4,7 @@ namespace CoreTemplate.Managers.Interfaces
 {
     public interface IMovieManager
     {
-        MovieViewModel Get(int id);
+        MovieViewModel Get(int? id);
 
         MoviesViewModel GetAll();
 

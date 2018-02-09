@@ -18,10 +18,11 @@ namespace CoreTemplate.Managers.Config
             services.AddTransient<ApplicationUserManager>();
             services.AddTransient<ApplicationSignInManager>();
 
-            services.AddTransient<IEmailManager, EmailManager>();
             services.AddTransient<IAccountManager, AccountManager>();
+            services.AddTransient<IEmailManager, EmailManager>();
+            services.AddTransient<IGenreManager, GenreManager>();
             services.AddTransient<IMovieManager, MovieManager>();
-
+            
             return services;
         }
     }

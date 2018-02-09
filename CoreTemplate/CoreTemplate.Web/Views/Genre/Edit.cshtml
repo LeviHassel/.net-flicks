@@ -1,0 +1,31 @@
+﻿@model CoreTemplate.ViewModels.Genre.GenreViewModel
+
+@{
+    ViewBag.Title = Model.Id > 0 ? string.Format("Edit {0}", Model.Name) : "New Movie";
+}
+
+<h1>@ViewBag.Title</h1>
+<br /><br />
+
+@using (Html.BeginForm("Edit", "Genre", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(x => x.Id)
+
+    <div class="container">
+        <div class="form-group">
+            @Html.LabelFor(x => x.Name, new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Save</button>
+            <br /><br />
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+}

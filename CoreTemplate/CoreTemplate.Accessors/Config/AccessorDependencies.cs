@@ -17,7 +17,11 @@ namespace CoreTemplate.Accessors.Config
             }
 
             services.AddTransient<DbContext, CoreTemplateContext>();
+
+            services.AddTransient<IGenreAccessor, GenreAccessor>();
+            services.AddTransient<IJobTitleAccessor, JobTitleAccessor>();
             services.AddTransient<IMovieAccessor, MovieAccessor>();
+            services.AddTransient<IPersonAccessor, PersonAccessor>();
 
             return services;
         }

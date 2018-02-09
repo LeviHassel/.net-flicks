@@ -1,44 +1,44 @@
 ﻿using CoreTemplate.Managers.Interfaces;
-using CoreTemplate.ViewModels.Movie;
+using CoreTemplate.ViewModels.Genre;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreTemplate.Web.Controllers
 {
-    public class MovieController : Controller
+    public class GenreController : Controller
     {
-        private IMovieManager _movieManager;
+        private IGenreManager _genreManager;
 
-        public MovieController(IMovieManager movieManager)
+        public GenreController(IGenreManager genreManager)
         {
-            _movieManager = movieManager;
+            _genreManager = genreManager;
         }
 
         public ActionResult Index()
         {
-            var vm = _movieManager.GetAll();
+            var vm = _genreManager.GetAll();
 
             return View(vm);
         }
 
         public ActionResult Edit(int? id)
         {
-            var vm = _movieManager.Get(id);
+            var vm = _genreManager.Get(id);
 
             return View(vm);
         }
 
         [ValidateAntiForgeryToken]
         [HttpPost]
-        public ActionResult Edit(MovieViewModel vm)
+        public ActionResult Edit(GenreViewModel vm)
         {
-            _movieManager.Save(vm);
+            _genreManager.Save(vm);
 
             return RedirectToAction("Index");
         }
 
         public ActionResult Delete(int id)
         {
-            var vm = _movieManager.Get(id);
+            var vm = _genreManager.Get(id);
 
             return View(vm);
         }
@@ -47,7 +47,7 @@ namespace CoreTemplate.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _movieManager.Delete(id);
+            _genreManager.Delete(id);
 
             return RedirectToAction("Index");
         }

@@ -2,7 +2,7 @@
 
 namespace CoreTemplate.Accessors.Models.DTO
 {
-    public class JobTitleDTO : EntityDTO
+    public class JobDTO : EntityDTO
     {
         public string Name { get; set; }
     }

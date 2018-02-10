@@ -11,38 +11,38 @@ using System.Linq;
 
 namespace CoreTemplate.Accessors.Accessors
 {
-    public class JobTitleAccessor : EntityAccessor<Entity>, IJobTitleAccessor
+    public class JobAccessor : EntityAccessor<Entity>, IJobAccessor
     {
-        public JobTitleAccessor(CoreTemplateContext db) : base(db)
+        public JobAccessor(CoreTemplateContext db) : base(db)
         {
         }
 
-        public JobTitleDTO Get(int id)
+        public JobDTO Get(int id)
         {
-            var entity = _db.JobTitles.Single(x => x.Id == id);
+            var entity = _db.Jobs.Single(x => x.Id == id);
 
-            var dto = Mapper.Map<JobTitleDTO>(entity);
+            var dto = Mapper.Map<JobDTO>(entity);
 
             return dto;
         }
 
-        public List<JobTitleDTO> GetAll()
+        public List<JobDTO> GetAll()
         {
-            var entities = _db.JobTitles.ToList();
+            var entities = _db.Jobs.ToList();
 
-            var dtos = Mapper.Map<List<JobTitleDTO>>(entities);
+            var dtos = Mapper.Map<List<JobDTO>>(entities);
 
             return dtos;
         }
 
-        public JobTitleDTO Save(JobTitleDTO dto)
+        public JobDTO Save(JobDTO dto)
         {
-            var entity = Mapper.Map<JobTitle>(dto);
+            var entity = Mapper.Map<Job>(dto);
 
             if (dto.Id == 0)
             {
                 //Create new entry
-                _db.JobTitles.Add(entity);
+                _db.Jobs.Add(entity);
             }
             else
             {
@@ -52,19 +52,19 @@ namespace CoreTemplate.Accessors.Accessors
 
             _db.SaveChanges();
 
-            dto = Mapper.Map<JobTitleDTO>(entity);
+            dto = Mapper.Map<JobDTO>(entity);
 
             return dto;
         }
 
-        public JobTitleDTO Delete(int id)
+        public JobDTO Delete(int id)
         {
-            var entity = _db.JobTitles.Single(x => x.Id == id);
+            var entity = _db.Jobs.Single(x => x.Id == id);
 
-            _db.JobTitles.Remove(entity);
+            _db.Jobs.Remove(entity);
             _db.SaveChanges();
 
-            var dto = Mapper.Map<JobTitleDTO>(entity);
+            var dto = Mapper.Map<JobDTO>(entity);
 
             return dto;
         }

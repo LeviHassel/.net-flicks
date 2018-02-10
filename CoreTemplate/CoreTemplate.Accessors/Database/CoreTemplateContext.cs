@@ -53,7 +53,7 @@ namespace CoreTemplate.Accessors.Database
         public DbSet<Genre> Genres { get; set; }
         public DbSet<MovieGenre> MovieGenres { get; set; }
         public DbSet<Person> Persons { get; set; }
-        public DbSet<JobTitle> JobTitles { get; set; }
+        public DbSet<Job> Jobs { get; set; }
         public DbSet<MoviePerson> MoviePersons { get; set; }
     }
 }

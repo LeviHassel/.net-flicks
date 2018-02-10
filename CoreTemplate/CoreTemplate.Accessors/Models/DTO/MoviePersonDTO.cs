@@ -12,8 +12,8 @@ namespace CoreTemplate.Accessors.Models.DTO
 
         public PersonDTO Person { get; set; }
 
-        public int JobTitleId { get; set; }
+        public int JobId { get; set; }
 
-        public JobTitleDTO JobTitle { get; set; }
+        public JobDTO Job { get; set; }
     }
 }

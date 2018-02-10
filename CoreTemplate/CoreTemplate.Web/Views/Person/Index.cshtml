@@ -1,0 +1,50 @@
+﻿@model CoreTemplate.ViewModels.Person.PersonsViewModel
+
+@{
+    ViewBag.Title = "Persons";
+}
+
+<div class="btn-toolbar float-right">
+    @Html.ActionLink("New", "Edit", "Person", null, new { @class = "btn btn-primary" })
+</div>
+<h1>@ViewBag.Title</h1>
+
+<br /><br />
+
+<div>
+    <table class="table table-hover">
+        <thead>
+            <tr>
+                <th><h5>@Html.DisplayNameFor(x => Model.Persons.FirstOrDefault().FirstName)</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.Persons.FirstOrDefault().LastName)</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.Persons.FirstOrDefault().ImageUrl)</h5></th>
+                <th></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model.Persons)
+            {
+                <tr>
+                    <td style="vertical-align: middle">@Html.DisplayFor(x => i.FirstName)</td>
+                    <td style="vertical-align: middle">@Html.DisplayFor(x => i.LastName)</td>
+                    <td style="vertical-align: middle">
+                        @if (!string.IsNullOrEmpty(i.ImageUrl))
+                        {
+                            <i class="fas fa-image"></i>
+                        }
+                    </td>
+                    <td>
+                        <div class="btn-toolbar float-right">
+                            <a class="btn btn-primary" style="margin-left: 10px" asp-area="" asp-controller="Person" asp-action="Edit" asp-route-id="@i.Id">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a class="btn btn-primary" style="margin-left: 10px" asp-area="" asp-controller="Person" asp-action="Delete" asp-route-id="@i.Id">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

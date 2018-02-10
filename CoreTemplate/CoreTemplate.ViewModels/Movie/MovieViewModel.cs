@@ -5,7 +5,7 @@ namespace CoreTemplate.ViewModels.Movie
 {
     public class MovieViewModel : EntityViewModel
     {
-        [Required]
+        [Required(AllowEmptyStrings = false)]
         public string Name { get; set; }
 
         [Required]

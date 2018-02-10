@@ -8,7 +8,13 @@ namespace CoreTemplate.Accessors.Config
     {
         public AccessorMapper()
         {
+            CreateMap<Genre, GenreDTO>().ReverseMap();
+            CreateMap<Job, JobDTO>().ReverseMap();
             CreateMap<Movie, MovieDTO>().ReverseMap();
+            CreateMap<MovieGenre, MovieGenreDTO>().ReverseMap();
+            CreateMap<MoviePerson, MoviePersonDTO>().ReverseMap();
+            CreateMap<Person, PersonDTO>().ReverseMap();
+            CreateMap<UserMovie, UserMovieDTO>().ReverseMap();
         }
 
         public override string ProfileName

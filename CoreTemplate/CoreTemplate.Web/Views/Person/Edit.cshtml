@@ -1,0 +1,43 @@
+﻿@model CoreTemplate.ViewModels.Person.PersonViewModel
+
+@{
+    ViewBag.Title = Model.Id > 0 ? string.Format("Edit {0} {1}", Model.FirstName, Model.LastName) : "New Person";
+}
+
+<h1>@ViewBag.Title</h1>
+<br /><br />
+
+@using (Html.BeginForm("Edit", "Person", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
+{
+    @Html.AntiForgeryToken()
+    @Html.ValidationSummary(true)
+    @Html.HiddenFor(x => x.Id)
+
+    <div class="container">
+        <div class="form-group">
+            @Html.LabelFor(x => x.FirstName, new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.LastName, new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-danger" })
+        </div>
+
+        <div class="form-group">
+            @Html.LabelFor(x => x.ImageUrl, new { @class = "control-label" })
+            @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control" })
+            @Html.ValidationMessageFor(x => x.ImageUrl, "", new { @class = "text-danger" })
+        </div>
+
+        <br />
+
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Save</button>
+            <br /><br />
+            @Html.ActionLink("Back to List", "Index")
+        </div>
+    </div>
+}

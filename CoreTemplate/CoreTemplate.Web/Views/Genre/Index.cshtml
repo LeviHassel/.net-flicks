@@ -12,11 +12,11 @@
 <br /><br />
 
 <div>
-    <table class="table table-hover">
+    <table class="table sortable">
         <thead>
             <tr>
-                <th><h5>@Html.DisplayNameFor(x => Model.Genres.FirstOrDefault().Name)</h5></th>
-                <th></th>
+                <th data-defaultsort="asc"><h5>@Html.DisplayNameFor(x => Model.Genres.FirstOrDefault().Name)</h5></th>
+                <th data-defaultsort="disabled"></th>
             </tr>
         </thead>
         <tbody>

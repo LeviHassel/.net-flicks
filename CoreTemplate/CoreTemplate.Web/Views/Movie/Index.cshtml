@@ -12,15 +12,15 @@
 <br /><br />
 
 <div>
-    <table class="table table-hover">
+    <table class="table sortable">
         <thead>
             <tr>
-                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Name)</h5></th>
+                <th data-defaultsort="asc"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Name)</h5></th>
                 <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Genre)</h5></th>
                 <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Director)</h5></th>
                 <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Runtime)</h5></th>
                 <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Year)</h5></th>
-                <th></th>
+                <th data-defaultsort="disabled"></th>
             </tr>
         </thead>
         <tbody>

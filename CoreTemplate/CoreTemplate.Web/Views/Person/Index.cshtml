@@ -12,13 +12,13 @@
 <br /><br />
 
 <div>
-    <table class="table table-hover">
+    <table class="table sortable">
         <thead>
             <tr>
-                <th><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().FirstName)</h5></th>
+                <th data-defaultsort="asc"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().FirstName)</h5></th>
                 <th><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().LastName)</h5></th>
-                <th><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().ImageUrl)</h5></th>
-                <th></th>
+                <th><h5>Image</h5></th>
+                <th data-defaultsort="disabled"></th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
                 <tr>
                     <td style="vertical-align: middle">@Html.DisplayFor(x => i.FirstName)</td>
                     <td style="vertical-align: middle">@Html.DisplayFor(x => i.LastName)</td>
-                    <td style="vertical-align: middle">
+                    <td style="vertical-align: middle" data-value=@(!string.IsNullOrEmpty(i.ImageUrl))>
                         @if (!string.IsNullOrEmpty(i.ImageUrl))
                         {
                             <i class="fas fa-image"></i>

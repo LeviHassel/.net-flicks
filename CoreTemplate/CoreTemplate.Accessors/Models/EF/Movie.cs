@@ -19,6 +19,6 @@ namespace CoreTemplate.Accessors.Models.EF
 
         public virtual ICollection<MovieGenre> Genres { get; set; }
 
-        public virtual ICollection<MoviePerson> Persons { get; set; }
+        public virtual ICollection<MoviePerson> People { get; set; }
     }
 }

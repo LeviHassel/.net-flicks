@@ -1,7 +1,7 @@
-﻿@model CoreTemplate.ViewModels.Person.PersonsViewModel
+﻿@model CoreTemplate.ViewModels.Person.PeopleViewModel
 
 @{
-    ViewBag.Title = "Persons";
+    ViewBag.Title = "People";
 }
 
 <div class="btn-toolbar float-right">
@@ -15,14 +15,14 @@
     <table class="table table-hover">
         <thead>
             <tr>
-                <th><h5>@Html.DisplayNameFor(x => Model.Persons.FirstOrDefault().FirstName)</h5></th>
-                <th><h5>@Html.DisplayNameFor(x => Model.Persons.FirstOrDefault().LastName)</h5></th>
-                <th><h5>@Html.DisplayNameFor(x => Model.Persons.FirstOrDefault().ImageUrl)</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().FirstName)</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().LastName)</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().ImageUrl)</h5></th>
                 <th></th>
             </tr>
         </thead>
         <tbody>
-            @foreach (var i in Model.Persons)
+            @foreach (var i in Model.People)
             {
                 <tr>
                     <td style="vertical-align: middle">@Html.DisplayFor(x => i.FirstName)</td>

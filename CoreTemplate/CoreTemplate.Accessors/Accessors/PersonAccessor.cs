@@ -19,7 +19,7 @@ namespace CoreTemplate.Accessors.Accessors
 
         public PersonDTO Get(int id)
         {
-            var entity = _db.Persons.Single(x => x.Id == id);
+            var entity = _db.People.Single(x => x.Id == id);
 
             var dto = Mapper.Map<PersonDTO>(entity);
 
@@ -28,7 +28,7 @@ namespace CoreTemplate.Accessors.Accessors
 
         public List<PersonDTO> GetAll()
         {
-            var entities = _db.Persons.ToList();
+            var entities = _db.People.ToList();
 
             var dtos = Mapper.Map<List<PersonDTO>>(entities);
 
@@ -42,7 +42,7 @@ namespace CoreTemplate.Accessors.Accessors
             if (dto.Id == 0)
             {
                 //Create new entry
-                _db.Persons.Add(entity);
+                _db.People.Add(entity);
             }
             else
             {
@@ -59,9 +59,9 @@ namespace CoreTemplate.Accessors.Accessors
 
         public PersonDTO Delete(int id)
         {
-            var entity = _db.Persons.Single(x => x.Id == id);
+            var entity = _db.People.Single(x => x.Id == id);
 
-            _db.Persons.Remove(entity);
+            _db.People.Remove(entity);
             _db.SaveChanges();
 
             var dto = Mapper.Map<PersonDTO>(entity);

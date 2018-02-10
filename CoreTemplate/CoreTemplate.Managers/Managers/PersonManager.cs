@@ -24,12 +24,12 @@ namespace CoreTemplate.Managers.Managers
             return vm;
         }
 
-        public PersonsViewModel GetAll()
+        public PeopleViewModel GetAll()
         {
             var dtos = _personAccessor.GetAll();
             var vms = Mapper.Map<List<PersonViewModel>>(dtos);
 
-            return new PersonsViewModel { Persons = vms };
+            return new PeopleViewModel { People = vms };
         }
 
         public PersonViewModel Save(PersonViewModel vm)

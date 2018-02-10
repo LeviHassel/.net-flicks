@@ -2,8 +2,8 @@
 
 namespace CoreTemplate.ViewModels.Person
 {
-    public class PersonsViewModel
+    public class PeopleViewModel
     {
-        public List<PersonViewModel> Persons { get; set; }
+        public List<PersonViewModel> People { get; set; }
     }
 }

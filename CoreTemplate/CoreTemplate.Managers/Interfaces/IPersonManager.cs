@@ -6,7 +6,7 @@ namespace CoreTemplate.Managers.Interfaces
     {
         PersonViewModel Get(int? id);
 
-        PersonsViewModel GetAll();
+        PeopleViewModel GetAll();
 
         PersonViewModel Save(PersonViewModel vm);
 

@@ -19,6 +19,6 @@ namespace CoreTemplate.Accessors.Models.DTO
 
         public ICollection<MovieGenreDTO> Genres { get; set; }
 
-        public ICollection<MoviePersonDTO> Persons { get; set; }
+        public ICollection<MoviePersonDTO> People { get; set; }
     }
 }

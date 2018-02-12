@@ -13,6 +13,7 @@ namespace CoreTemplate.ViewModels.Movie
         public string Name { get; set; }
 
         [Required]
+        [DataType(DataType.Date)]
         [Display(Name = "Release Date")]
         public DateTime ReleaseDate { get; set; }
 

@@ -8,7 +8,7 @@ namespace CoreTemplate.Accessors.Models.DTO
     {
         public string Name { get; set; }
 
-        public DateTime ReleaseDate { get; set; }
+        public DateTime ReleaseDate { get; set; } = DateTime.UtcNow;
 
         public TimeSpan Runtime { get; set; }
 

@@ -1,0 +1,23 @@
+.bd-navbar {
+    background-color: #144287;
+}
+
+.bd-masthead {
+    color: #8FA5C4;
+}
+
+    .bd-masthead h1 {
+        color: #144287;
+    }
+
+    .bd-masthead #getstarted {
+        font-weight: 500;
+        color: #144287;
+        border-color: #144287;
+    }
+    
+        .bd-masthead #getstarted:active, .bd-masthead #getstarted:hover {
+            color: #fff;
+            background-color: #144287;
+            border-color: #144287;
+        }

@@ -1,4 +1,5 @@
 ﻿using CoreTemplate.Accessors.Models.DTO.Base;
+using System;
 using System.Collections.Generic;
 
 namespace CoreTemplate.Accessors.Models.DTO
@@ -7,7 +8,7 @@ namespace CoreTemplate.Accessors.Models.DTO
     {
         public string Name { get; set; }
 
-        public int Year { get; set; }
+        public DateTime ReleaseDate { get; set; }
 
         public int Runtime { get; set; }
 

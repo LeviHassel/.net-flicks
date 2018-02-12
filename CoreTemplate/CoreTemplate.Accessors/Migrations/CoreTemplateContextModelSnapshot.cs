@@ -106,11 +106,11 @@ namespace CoreTemplate.Accessors.Migrations
 
                     b.Property<int>("PurchaseCost");
 
+                    b.Property<DateTime>("ReleaseDate");
+
                     b.Property<int>("RentCost");
 
                     b.Property<int>("Runtime");
-
-                    b.Property<int>("Year");
 
                     b.HasKey("Id");
 

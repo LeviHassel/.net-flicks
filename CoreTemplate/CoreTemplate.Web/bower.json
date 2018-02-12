@@ -6,7 +6,8 @@
     "jquery-validation": "1.17.0",
     "jquery-validation-unobtrusive": "3.2.6",
     "bootstrap": "v4.0.0",
-    "bootstrap-sortable": "2.1.0"
+    "bootstrap-sortable": "2.1.0",
+    "tempusdominus-bootstrap-4": "5.0.0-alpha.16"
   },
   "resolutions": {
     "jquery": "3.3.1",

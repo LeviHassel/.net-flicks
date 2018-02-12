@@ -19,14 +19,18 @@ namespace CoreTemplate.Tests.ManagerTests
 
         private MovieManager _movieManager;
 
+        private Mock<IGenreAccessor> _genreAccessorMock;
         private Mock<IMovieAccessor> _movieAccessorMock;
+        private Mock<IMovieGenreAccessor> _movieGenreAccessorMock;
 
         //This is method is called before the start of every test in this class
         public MovieManagerTest()
         {
             _movieAccessorMock = new Mock<IMovieAccessor>();
 
-            _movieManager = new MovieManager(_movieAccessorMock.Object);
+            _movieManager = new MovieManager(_genreAccessorMock.Object,
+                _movieAccessorMock.Object,
+                _movieGenreAccessorMock.Object);
 
             //Set up a Fixture to populate random data: https://github.com/AutoFixture/AutoFixture
             _fixture = new Fixture();

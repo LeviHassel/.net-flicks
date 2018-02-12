@@ -21,9 +21,14 @@
                 @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
             </div>
             <div class="col">
-                @Html.LabelFor(x => x.Year, new { @class = "control-label" })
-                @Html.TextBoxFor(x => x.Year, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.Year, "", new { @class = "text-danger" })
+                @Html.LabelFor(x => x.ReleaseDate, new { @class = "control-label" })
+                <div class="input-group date" id="datetimepicker" data-target-input="nearest">
+                    @Html.TextBoxFor(x => x.ReleaseDate, new { @class = "form-control datetimepicker-input", @data_target = "#datetimepicker" })
+                    <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
+                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
+                    </div>
+                </div>
+                @Html.ValidationMessageFor(x => x.ReleaseDate, "", new { @class = "text-danger" })
             </div>
         </div>
         <div class="row mb-4">

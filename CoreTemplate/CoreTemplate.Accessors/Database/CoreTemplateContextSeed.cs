@@ -34,7 +34,7 @@ namespace CoreTemplate.Accessors.Database
                     Name = "Inception",
                     //Director = "Christopher Nolan",
                     //Genre = "Action",
-                    Year = 2010,
+                    //Year = 2010,
                     Runtime = 148
                 },
                 new Movie()
@@ -42,7 +42,7 @@ namespace CoreTemplate.Accessors.Database
                     Name = "Airplane!",
                     //Director = "David Zucker",
                     //Genre = "Comedy",
-                    Year = 1980,
+                    //Year = 1980,
                     Runtime = 88
                 },
                 new Movie()
@@ -50,7 +50,7 @@ namespace CoreTemplate.Accessors.Database
                     Name = "Toy Story",
                     //Director = "John Lasseter",
                     //Genre = "Animation",
-                    Year = 1995,
+                    //Year = 1995,
                     Runtime = 81
                 }
             };

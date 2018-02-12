@@ -1,4 +1,5 @@
 ﻿using CoreTemplate.Accessors.Models.EF.Base;
+using System;
 using System.Collections.Generic;
 
 namespace CoreTemplate.Accessors.Models.EF
@@ -7,7 +8,7 @@ namespace CoreTemplate.Accessors.Models.EF
     {
         public string Name { get; set; }
 
-        public int Year { get; set; }
+        public DateTime ReleaseDate { get; set; }
 
         public int Runtime { get; set; }
 

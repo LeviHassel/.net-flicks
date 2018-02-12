@@ -1,6 +1,7 @@
 ﻿using CoreTemplate.ViewModels.Base;
 using CoreTemplate.ViewModels.Genre;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
@@ -12,7 +13,8 @@ namespace CoreTemplate.ViewModels.Movie
         public string Name { get; set; }
 
         [Required]
-        public int Year { get; set; }
+        [Display(Name = "Release Date")]
+        public DateTime ReleaseDate { get; set; }
 
         [Required]
         public int Runtime { get; set; }

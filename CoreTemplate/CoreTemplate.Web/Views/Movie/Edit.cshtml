@@ -21,6 +21,13 @@
                 @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
             </div>
             <div class="col">
+                @Html.LabelFor(x => x.GenresSelectList, new { @class = "control-label" })
+                @Html.ListBoxFor(x => x.GenreIds, Model.GenresSelectList, new { @class = "form-control" })
+            </div>
+        </div>
+        @* TODO: Description/Overview goes here, probably gets entire row *@
+        <div class="row mb-4">
+            <div class="col">
                 @Html.LabelFor(x => x.ReleaseDate, new { @class = "control-label" })
                 <div class="input-group date" id="datetimepicker" data-target-input="nearest">
                     @Html.TextBoxFor(x => x.ReleaseDate, new { @class = "form-control datetimepicker-input", @data_target = "#datetimepicker" })
@@ -30,8 +37,6 @@
                 </div>
                 @Html.ValidationMessageFor(x => x.ReleaseDate, "", new { @class = "text-danger" })
             </div>
-        </div>
-        <div class="row mb-4">
             <div class="col">
                 @Html.LabelFor(x => x.Runtime, new { @class = "control-label" })
                 <div class="input-group">
@@ -73,10 +78,11 @@
                 @Html.ValidationMessageFor(x => x.ImageUrl, "", new { @class = "text-danger" })
             </div>
             <div class="col">
-                @Html.LabelFor(x => x.GenresSelectList, new { @class = "control-label" })
-                @Html.ListBoxFor(x => x.GenreIds, Model.GenresSelectList, new { @class = "form-control" })
+                @* TODO: TrailerUrl goes here *@
             </div>
         </div>
+
+        @* TODO: Crew section goes here, gets entire row *@
 
         <br />
 

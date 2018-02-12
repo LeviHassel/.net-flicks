@@ -1,4 +1,7 @@
 ﻿using CoreTemplate.ViewModels.Base;
+using CoreTemplate.ViewModels.Genre;
+using Microsoft.AspNetCore.Mvc.Rendering;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CoreTemplate.ViewModels.Movie
@@ -9,15 +12,27 @@ namespace CoreTemplate.ViewModels.Movie
         public string Name { get; set; }
 
         [Required]
-        public string Genre { get; set; }
-
-        [Required]
-        public string Director { get; set; }
+        public int Year { get; set; }
 
         [Required]
         public int Runtime { get; set; }
 
+        [Display(Name = "Image URL")]
+        public string ImageUrl { get; set; }
+
         [Required]
-        public int Year { get; set; }
+        [Display(Name = "Purchase Cost")]
+        public int PurchaseCost { get; set; }
+
+        [Required]
+        [Display(Name = "Rent Cost")]
+        public int RentCost { get; set; }
+
+        [Display(Name = "Genres")]
+        public MultiSelectList GenresSelectList { get; set; }
+
+        public List<int> GenreIds { get; set; }
+
+        public List<MoviePersonViewModel> People { get; set; }
     }
 }

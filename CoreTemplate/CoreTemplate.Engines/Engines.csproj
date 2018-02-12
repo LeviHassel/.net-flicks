@@ -16,4 +16,9 @@
     <ProjectReference Include="..\CoreTemplate.ViewModels\ViewModels.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Engines\" />
+    <Folder Include="Interfaces\" />
+  </ItemGroup>
+
 </Project>

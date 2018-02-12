@@ -10,7 +10,7 @@ namespace CoreTemplate.Accessors.Models.DTO
 
         public DateTime ReleaseDate { get; set; }
 
-        public int Runtime { get; set; }
+        public TimeSpan Runtime { get; set; }
 
         public string ImageUrl { get; set; }
 

@@ -11,9 +11,10 @@ using System;
 namespace CoreTemplate.Accessors.Migrations
 {
     [DbContext(typeof(CoreTemplateContext))]
-    partial class CoreTemplateContextModelSnapshot : ModelSnapshot
+    [Migration("20180212060543_Add_Runtime")]
+    partial class Add_Runtime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

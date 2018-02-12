@@ -17,16 +17,18 @@ namespace CoreTemplate.ViewModels.Movie
         public DateTime ReleaseDate { get; set; }
 
         [Required]
-        public int Runtime { get; set; }
+        public TimeSpan Runtime { get; set; }
 
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }
 
         [Required]
+        [DataType(DataType.Currency)]
         [Display(Name = "Purchase Cost")]
         public int PurchaseCost { get; set; }
 
         [Required]
+        [DataType(DataType.Currency)]
         [Display(Name = "Rent Cost")]
         public int RentCost { get; set; }
 

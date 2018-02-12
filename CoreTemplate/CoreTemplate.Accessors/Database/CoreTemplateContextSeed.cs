@@ -35,7 +35,7 @@ namespace CoreTemplate.Accessors.Database
                     //Director = "Christopher Nolan",
                     //Genre = "Action",
                     //Year = 2010,
-                    Runtime = 148
+                    //Runtime = 148
                 },
                 new Movie()
                 {
@@ -43,7 +43,7 @@ namespace CoreTemplate.Accessors.Database
                     //Director = "David Zucker",
                     //Genre = "Comedy",
                     //Year = 1980,
-                    Runtime = 88
+                    //Runtime = 88
                 },
                 new Movie()
                 {
@@ -51,7 +51,7 @@ namespace CoreTemplate.Accessors.Database
                     //Director = "John Lasseter",
                     //Genre = "Animation",
                     //Year = 1995,
-                    Runtime = 81
+                    //Runtime = 81
                 }
             };
         }

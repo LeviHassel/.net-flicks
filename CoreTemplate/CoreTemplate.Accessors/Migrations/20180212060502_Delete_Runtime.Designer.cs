@@ -11,9 +11,10 @@ using System;
 namespace CoreTemplate.Accessors.Migrations
 {
     [DbContext(typeof(CoreTemplateContext))]
-    partial class CoreTemplateContextModelSnapshot : ModelSnapshot
+    [Migration("20180212060502_Delete_Runtime")]
+    partial class Delete_Runtime
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -109,8 +110,6 @@ namespace CoreTemplate.Accessors.Migrations
                     b.Property<DateTime>("ReleaseDate");
 
                     b.Property<int>("RentCost");
-
-                    b.Property<TimeSpan>("Runtime");
 
                     b.HasKey("Id");
 

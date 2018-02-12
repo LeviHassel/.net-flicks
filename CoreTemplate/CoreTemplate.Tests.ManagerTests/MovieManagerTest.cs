@@ -51,7 +51,7 @@ namespace CoreTemplate.Tests.ManagerTests
             var actualMovieVm = _movieManager.Get(expectedMovieDto.Id);
 
             //Assert
-            actualMovieVm.ShouldBeEquivalentTo(expectedMovieVm);
+            actualMovieVm.Should().BeEquivalentTo(expectedMovieVm);
         }
 
         [Fact]
@@ -73,7 +73,7 @@ namespace CoreTemplate.Tests.ManagerTests
                 var expectedMovieDto = expectedMovieDtos.Single(x => x.Id == actualMovieVm.Id);
                 var expectedMovieVm = Mapper.Map<MovieViewModel>(expectedMovieDto);
 
-                actualMovieVm.ShouldBeEquivalentTo(expectedMovieVm);
+                actualMovieVm.Should().BeEquivalentTo(expectedMovieVm);
             }
         }
 
@@ -92,7 +92,7 @@ namespace CoreTemplate.Tests.ManagerTests
             var actualMovieVm = _movieManager.Save(expectedMovieVm);
 
             //Assert
-            actualMovieVm.ShouldBeEquivalentTo(expectedMovieVm);
+            actualMovieVm.Should().BeEquivalentTo(expectedMovieVm);
         }
     }
 }

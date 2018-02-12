@@ -36,7 +36,7 @@ namespace CoreTemplate.Tests.AccessorTests
             //Assert
             var actualMovie = Mapper.Map<Movie>(actualMovieDto);
 
-            actualMovie.ShouldBeEquivalentTo(expectedMovie);
+            actualMovie.Should().BeEquivalentTo(expectedMovie);
         }
 
         [Fact]
@@ -59,7 +59,7 @@ namespace CoreTemplate.Tests.AccessorTests
 
                 var actualMovie = Mapper.Map<Movie>(actualMovieDto);
 
-                actualMovie.ShouldBeEquivalentTo(expectedMovie);
+                actualMovie.Should().BeEquivalentTo(expectedMovie);
             }
         }
 
@@ -87,7 +87,7 @@ namespace CoreTemplate.Tests.AccessorTests
 
             Assert.Equal(newName, actualMovie.Name);
 
-            actualMovie.ShouldBeEquivalentTo(expectedMovie);
+            actualMovie.Should().BeEquivalentTo(expectedMovie);
         }
     }
 }

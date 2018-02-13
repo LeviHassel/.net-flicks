@@ -50,5 +50,17 @@ namespace CoreTemplate.Accessors.Accessors
 
             return dtos;
         }
+
+        public List<MovieGenreDTO> DeleteAllByMovie(int movieId)
+        {
+            var entities = _db.MovieGenres.Where(x => x.MovieId == movieId).ToList();
+
+            _db.MovieGenres.RemoveRange(entities);
+            _db.SaveChanges();
+
+            var dtos = Mapper.Map<List<MovieGenreDTO>>(entities);
+
+            return dtos;
+        }
     }
 }

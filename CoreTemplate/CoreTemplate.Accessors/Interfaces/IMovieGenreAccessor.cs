@@ -8,5 +8,7 @@ namespace CoreTemplate.Accessors.Interfaces
         List<MovieGenreDTO> GetAllByMovie(int movieId);
 
         List<MovieGenreDTO> SaveAll(int movieId, List<int> genreIds);
+
+        List<MovieGenreDTO> DeleteAllByMovie(int movieId);
     }
 }

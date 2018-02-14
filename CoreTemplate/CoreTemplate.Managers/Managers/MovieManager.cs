@@ -48,9 +48,12 @@ namespace CoreTemplate.Managers.Managers
 
             vm.People = Mapper.Map<List<MoviePersonViewModel>>(moviePersonDtos);
 
+            //TODO: Better name?
+            var personValues = personDtos.Select(x => new { Id = x.Id, Name = x.FirstName + " " + x.LastName });
+
             foreach (var personVm in vm.People)
             {
-                personVm.People = new SelectList(personDtos, "Id", "Name", personVm.PersonId);
+                personVm.People = new SelectList(personValues, "Id", "Name", personVm.PersonId);
                 personVm.Jobs = new SelectList(jobDtos, "Id", "Name", personVm.JobId);
             }
 
@@ -70,10 +73,13 @@ namespace CoreTemplate.Managers.Managers
             var personDtos = _personAccessor.GetAll();
             var jobDtos = _jobAccessor.GetAll();
 
+            //TODO: Better name?
+            var personValues = personDtos.Select(x => new { Id = x.Id, Name = x.FirstName + " " + x.LastName });
+
             var vm = new MoviePersonViewModel
             {
                 Index = index,
-                People = new SelectList(personDtos, "Id", "Name"),
+                People = new SelectList(personValues, "Id", "Name"),
                 Jobs = new SelectList(jobDtos, "Id", "Name")
             };
 
@@ -87,6 +93,20 @@ namespace CoreTemplate.Managers.Managers
             dto = _movieAccessor.Save(dto);
 
             _movieGenreAccessor.SaveAll(dto.Id, vm.GenreIds);
+
+            //TODO: Figure out why IsDeleted isn't working
+            var moviePersonDtos = vm.People
+                .Where(x => !x.IsDeleted)
+                .Select(x => new MoviePersonDTO
+                {
+                    Id = x.Id,
+                    MovieId = vm.Id,
+                    PersonId = x.PersonId,
+                    JobId = x.JobId
+                })
+                .ToList();
+
+            _moviePersonAccessor.SaveAll(moviePersonDtos);
 
             vm = Mapper.Map<MovieViewModel>(dto);
 

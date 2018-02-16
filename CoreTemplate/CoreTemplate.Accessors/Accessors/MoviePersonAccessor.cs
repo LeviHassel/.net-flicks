@@ -28,28 +28,30 @@ namespace CoreTemplate.Accessors.Accessors
 
         public List<MoviePersonDTO> SaveAll(List<MoviePersonDTO> dtos)
         {
-            //This sucks because it assumes people will only pass in dtos for ONE movie
-            var entities = _db.MoviePeople.Where(x => x.MovieId == dtos.First().MovieId).ToList();
-            /*
-            //Ensure genre list exists to avoid null value errors
-            genreIds = genreIds ?? new List<int>();
+            //TODO: Improve names and structure
 
-            //Create new entries from genre list
-            var newGenreIds = genreIds.Except(entities.Select(x => x.GenreId));
-            var newEntities = newGenreIds.Select(x => new MoviePerson { MovieId = movieId, GenreId = x }).ToList();
+            //TODO: Make sure people will only pass in dtos for ONE movie by restricting it or leaving a comment
+            var entities = _db.MoviePeople.Where(x => x.MovieId == dtos.First().MovieId).ToList();
+
+            //Ensure DTO list exists to avoid null value errors
+            dtos = dtos ?? new List<MoviePersonDTO>();
+
+            //Create new entries from DTO list
+            var newDtos = dtos.Where(x => !entities.Any(y => y.MovieId == x.MovieId && y.PersonId == x.PersonId && y.JobId == x.JobId));
+            var newEntities = newDtos.Select(x => new MoviePerson { MovieId = x.MovieId, PersonId = x.PersonId, JobId = x.JobId }).ToList();
             entities.AddRange(newEntities);
             _db.MoviePeople.AddRange(newEntities);
 
-            //Delete existing entries not in genre list
-            var entitiesToRemove = entities.Where(x => !genreIds.Contains(x.GenreId));
+            //Delete existing entries not in DTO list
+            var entitiesToRemove = entities.Where(x => !dtos.Any(y => y.MovieId == x.MovieId && y.PersonId == x.PersonId && y.JobId == x.JobId));
             entities = entities.Except(entitiesToRemove).ToList();
             _db.MoviePeople.RemoveRange(entitiesToRemove);
 
             _db.SaveChanges();
-            */
-            var dtos2 = Mapper.Map<List<MoviePersonDTO>>(entities);
 
-            return dtos2;
+            dtos = Mapper.Map<List<MoviePersonDTO>>(entities);
+
+            return dtos;
         }
 
         public List<MoviePersonDTO> DeleteAllByMovie(int movieId)

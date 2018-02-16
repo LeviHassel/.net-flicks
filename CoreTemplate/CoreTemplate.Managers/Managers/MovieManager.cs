@@ -44,17 +44,19 @@ namespace CoreTemplate.Managers.Managers
 
             var vm = Mapper.Map<MovieViewModel>(movieDto);
 
-            vm.GenresSelectList = new MultiSelectList(genreDtos, "Id", "Name", movieGenreDtos.Select(x => x.GenreId).ToList());
-
-            vm.People = Mapper.Map<List<MoviePersonViewModel>>(moviePersonDtos);
+            vm.GenresSelectList = new MultiSelectList(genreDtos.OrderBy(x => x.Name), "Id", "Name", movieGenreDtos.Select(x => x.GenreId).ToList());
 
             //TODO: Better name?
             var personValues = personDtos.Select(x => new { Id = x.Id, Name = x.FirstName + " " + x.LastName });
 
+            vm.People = Mapper.Map<List<MoviePersonViewModel>>(moviePersonDtos)
+                .OrderBy(x => personValues.Single(y => y.Id == x.PersonId).Name)
+                .ToList();
+
             foreach (var personVm in vm.People)
             {
-                personVm.People = new SelectList(personValues, "Id", "Name", personVm.PersonId);
-                personVm.Jobs = new SelectList(jobDtos, "Id", "Name", personVm.JobId);
+                personVm.People = new SelectList(personValues.OrderBy(x => x.Name), "Id", "Name", personVm.PersonId);
+                personVm.Jobs = new SelectList(jobDtos.OrderBy(x => x.Name), "Id", "Name", personVm.JobId);
             }
 
             return vm;
@@ -94,7 +96,6 @@ namespace CoreTemplate.Managers.Managers
 
             _movieGenreAccessor.SaveAll(dto.Id, vm.GenreIds);
 
-            //TODO: Figure out why IsDeleted isn't working
             var moviePersonDtos = vm.People
                 .Where(x => !x.IsDeleted)
                 .Select(x => new MoviePersonDTO

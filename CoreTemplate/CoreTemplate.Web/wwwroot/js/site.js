@@ -20,7 +20,8 @@
 
     //Delete Person in Edit Crew modal
     $("#people-table").on("click", ".delete-person", function () {
+        $(this).closest("td").find("input").val("true");
         $(this).closest("tr").hide();
-        $(this).prev("input").val("true");
+        
     });
 });

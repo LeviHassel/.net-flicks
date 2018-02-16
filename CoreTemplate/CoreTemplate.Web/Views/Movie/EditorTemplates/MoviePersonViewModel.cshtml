@@ -8,6 +8,7 @@
         <select asp-for="JobId" asp-items="@Model.Jobs" class="form-control"></select>
     </td>
     <td>
+        <input asp-for="IsDeleted" type="hidden" />
         <div class="btn-toolbar float-right">
             <a class="btn btn-danger delete-person" style="margin-left: 10px">
                 <i class="fas fa-trash" style="color: white"></i>

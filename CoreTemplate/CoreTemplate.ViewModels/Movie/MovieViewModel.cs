@@ -33,9 +33,9 @@ namespace CoreTemplate.ViewModels.Movie
         [Display(Name = "Rent Cost")]
         public int RentCost { get; set; }
 
-        [Display(Name = "Genres")]
         public MultiSelectList GenresSelectList { get; set; }
 
+        [Display(Name = "Genres")]
         public List<int> GenreIds { get; set; }
 
         public List<MoviePersonViewModel> People { get; set; }

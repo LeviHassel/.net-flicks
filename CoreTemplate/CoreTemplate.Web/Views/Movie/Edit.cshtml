@@ -7,84 +7,115 @@
 <h1>@ViewBag.Title</h1>
 <br /><br />
 
-@using (Html.BeginForm("Edit", "Movie", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    @Html.HiddenFor(x => x.Id)
+<form asp-controller="Movie" asp-action="Edit" asp-route-returnurl="@ViewBag.ReturnUrl" method="post" class="form-horizontal" role="form">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <input asp-for="Id" type="hidden" />
 
     <div class="container">
         <div class="row mb-4">
-            <div class="col">
-                @Html.LabelFor(x => x.Name, new { @class = "control-label" })
-                @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+            <div class="col-md-4">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="col">
-                @Html.LabelFor(x => x.GenresSelectList, new { @class = "control-label" })
-                @Html.ListBoxFor(x => x.GenreIds, Model.GenresSelectList, new { @class = "form-control" })
+            <div class="col-md-4 offset-2">
+                <label asp-for="GenreIds" class="control-label"></label>
+                <select asp-for="GenreIds" asp-items="@Model.GenresSelectList" class="form-control selectpicker" data-max-options="3"></select>
             </div>
         </div>
         @* TODO: Description/Overview goes here, probably gets entire row *@
         <div class="row mb-4">
-            <div class="col">
-                @Html.LabelFor(x => x.ReleaseDate, new { @class = "control-label" })
-                <div class="input-group date" id="datetimepicker" data-target-input="nearest">
-                    @Html.TextBoxFor(x => x.ReleaseDate, new { @class = "form-control datetimepicker-input", @data_target = "#datetimepicker" })
-                    <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
-                @Html.ValidationMessageFor(x => x.ReleaseDate, "", new { @class = "text-danger" })
+            <div class="col-md-4">
+                <label asp-for="ReleaseDate" class="control-label"></label>
+                <input asp-for="ReleaseDate" class="form-control" />
+                <span asp-validation-for="ReleaseDate" class="text-danger"></span>
             </div>
-            <div class="col">
-                @Html.LabelFor(x => x.Runtime, new { @class = "control-label" })
-                @Html.TextBoxFor(x => x.Runtime, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.Runtime, "", new { @class = "text-danger" })
+            <div class="col-md-4 offset-2">
+                <label asp-for="Runtime" class="control-label"></label>
+                <input asp-for="Runtime" class="form-control" />
+                <span asp-validation-for="Runtime" class="text-danger"></span>
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col">
-                @Html.LabelFor(x => x.PurchaseCost, new { @class = "control-label" })
+            <div class="col-md-4">
+                <label asp-for="PurchaseCost" class="control-label"></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                     </div>
-                    @Html.TextBoxFor(x => x.PurchaseCost, new { @class = "form-control" })
+                    <input asp-for="PurchaseCost" class="form-control" />
                 </div>
-                @Html.ValidationMessageFor(x => x.PurchaseCost, "", new { @class = "text-danger" })
+                <span asp-validation-for="PurchaseCost" class="text-danger"></span>
             </div>
-            <div class="col">
-                @Html.LabelFor(x => x.RentCost, new { @class = "control-label" })
+            <div class="col-md-4 offset-2">
+                <label asp-for="RentCost" class="control-label"></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
                         <div class="input-group-text">$</div>
                     </div>
-                    @Html.TextBoxFor(x => x.RentCost, new { @class = "form-control" })
+                    <input asp-for="RentCost" class="form-control" />
                 </div>
-                @Html.ValidationMessageFor(x => x.RentCost, "", new { @class = "text-danger" })
+                <span asp-validation-for="RentCost" class="text-danger"></span>
             </div>
         </div>
 
         <div class="row mb-4">
-            <div class="col">
-                @Html.LabelFor(x => x.ImageUrl, new { @class = "control-label" })
-                @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control" })
-                @Html.ValidationMessageFor(x => x.ImageUrl, "", new { @class = "text-danger" })
+            <div class="col-md-4">
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
-            <div class="col">
+            <div class="col-md-4 offset-2">
                 @* TODO: TrailerUrl goes here *@
             </div>
         </div>
 
-        @* TODO: Crew section goes here, gets entire row *@
+        <button type="button" class="btn btn-primary" data-toggle="modal" data-target=".crew-modal">Edit Crew</button>
 
-        <br />
+        <div class="modal fade crew-modal" tabindex="-1" role="dialog">
+            <div class="modal-dialog modal-lg">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h2 class="modal-title">Edit Crew</h2>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        <div class="container-fluid">
+                            <table class="table" id="people-table">
+                                <thead>
+                                    <tr>
+                                        <th scope="col">Person</th>
+                                        <th scope="col">Job</th>
+                                        <th></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @for (int i = 0; i < Model.People.Count; i++)
+                                    {
+                                        @Html.EditorFor(x => x.People[i])
+                                    }
+                                </tbody>
+                            </table>
+                            <br />
+                            <button type="button" class="btn btn-primary add-person" data-toggle="modal">Add Person</button>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Update Crew</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <br /><br />
 
         <div class="form-group">
             <button class="btn btn-primary" type="submit">Save</button>
             <br /><br />
-            @Html.ActionLink("Back to List", "Index")
+            <a asp-action="Index">Back to List</a>
         </div>
     </div>
-}
+</form>

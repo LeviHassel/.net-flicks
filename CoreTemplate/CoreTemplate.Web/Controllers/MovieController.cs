@@ -51,5 +51,14 @@ namespace CoreTemplate.Web.Controllers
 
             return RedirectToAction("Index");
         }
+
+        public ActionResult AddPerson(int index)
+        {
+            var vm = _movieManager.GetNewPerson(index);
+
+            ViewData.TemplateInfo.HtmlFieldPrefix = string.Format("People[{0}]", index);
+
+            return PartialView("../Movie/EditorTemplates/MoviePersonViewModel", vm);
+        }
     }
 }

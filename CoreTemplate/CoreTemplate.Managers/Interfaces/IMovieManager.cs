@@ -8,6 +8,8 @@ namespace CoreTemplate.Managers.Interfaces
 
         MoviesViewModel GetAll();
 
+        MoviePersonViewModel GetNewPerson(int index);
+
         MovieViewModel Save(MovieViewModel vm);
 
         MovieViewModel Delete(int id);

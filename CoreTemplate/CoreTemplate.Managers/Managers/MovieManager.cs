@@ -92,10 +92,6 @@ namespace CoreTemplate.Managers.Managers
         {
             var dto = Mapper.Map<MovieDTO>(vm);
 
-            dto = _movieAccessor.Save(dto);
-
-            _movieGenreAccessor.SaveAll(dto.Id, vm.GenreIds);
-
             var moviePersonDtos = vm.People
                 .Where(x => !x.IsDeleted)
                 .Select(x => new MoviePersonDTO
@@ -106,6 +102,12 @@ namespace CoreTemplate.Managers.Managers
                     JobId = x.JobId
                 })
                 .ToList();
+
+            dto.People = null;
+
+            dto = _movieAccessor.Save(dto);
+
+            _movieGenreAccessor.SaveAll(dto.Id, vm.GenreIds);
 
             _moviePersonAccessor.SaveAll(moviePersonDtos);
 

@@ -14,36 +14,31 @@
 
     <div class="container">
         <div class="row mb-4">
-            <div class="col">
+            <div class="col-md-4">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="col">
+            <div class="col-md-4 offset-2">
                 <label asp-for="GenreIds" class="control-label"></label>
-                <select asp-for="GenreIds" asp-items="@Model.GenresSelectList" class="form-control"></select>
+                <select asp-for="GenreIds" asp-items="@Model.GenresSelectList" class="form-control selectpicker" data-max-options="3"></select>
             </div>
         </div>
         @* TODO: Description/Overview goes here, probably gets entire row *@
         <div class="row mb-4">
-            <div class="col">
+            <div class="col-md-4">
                 <label asp-for="ReleaseDate" class="control-label"></label>
-                <div class="input-group date" id="datetimepicker" data-target-input="nearest">
-                    <input asp-for="ReleaseDate" class="form-control datetimepicker-input" data-target="#datetimepicker" />
-                    <div class="input-group-append" data-target="#datetimepicker" data-toggle="datetimepicker">
-                        <div class="input-group-text"><i class="fa fa-calendar"></i></div>
-                    </div>
-                </div>
+                <input asp-for="ReleaseDate" class="form-control" />
                 <span asp-validation-for="ReleaseDate" class="text-danger"></span>
             </div>
-            <div class="col">
+            <div class="col-md-4 offset-2">
                 <label asp-for="Runtime" class="control-label"></label>
                 <input asp-for="Runtime" class="form-control" />
                 <span asp-validation-for="Runtime" class="text-danger"></span>
             </div>
         </div>
         <div class="row mb-4">
-            <div class="col">
+            <div class="col-md-4">
                 <label asp-for="PurchaseCost" class="control-label"></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -53,7 +48,7 @@
                 </div>
                 <span asp-validation-for="PurchaseCost" class="text-danger"></span>
             </div>
-            <div class="col">
+            <div class="col-md-4 offset-2">
                 <label asp-for="RentCost" class="control-label"></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -66,12 +61,12 @@
         </div>
 
         <div class="row mb-4">
-            <div class="col">
+            <div class="col-md-4">
                 <label asp-for="ImageUrl" class="control-label"></label>
                 <input asp-for="ImageUrl" class="form-control" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
-            <div class="col">
+            <div class="col-md-4 offset-2">
                 @* TODO: TrailerUrl goes here *@
             </div>
         </div>
@@ -94,6 +89,7 @@
                                     <tr>
                                         <th scope="col">Person</th>
                                         <th scope="col">Job</th>
+                                        <th></th>
                                     </tr>
                                 </thead>
                                 <tbody>

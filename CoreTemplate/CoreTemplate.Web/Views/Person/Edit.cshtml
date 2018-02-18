@@ -7,37 +7,36 @@
 <h1>@ViewBag.Title</h1>
 <br /><br />
 
-@using (Html.BeginForm("Edit", "Person", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    @Html.HiddenFor(x => x.Id)
+<form asp-controller="Person" asp-action="Edit" method="post" class="form-horizontal" role="form">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <input asp-for="Id" type="hidden" />
 
     <div class="container">
         <div class="form-group">
-            @Html.LabelFor(x => x.FirstName, new { @class = "control-label" })
-            @Html.TextBoxFor(x => x.FirstName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.FirstName, "", new { @class = "text-danger" })
+            <label asp-for="FirstName" class="control-label"></label>
+            <input asp-for="FirstName" class="form-control" />
+            <span asp-validation-for="FirstName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.LastName, new { @class = "control-label" })
-            @Html.TextBoxFor(x => x.LastName, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.LastName, "", new { @class = "text-danger" })
+            <label asp-for="LastName" class="control-label"></label>
+            <input asp-for="LastName" class="form-control" />
+            <span asp-validation-for="LastName" class="text-danger"></span>
         </div>
 
         <div class="form-group">
-            @Html.LabelFor(x => x.ImageUrl, new { @class = "control-label" })
-            @Html.TextBoxFor(x => x.ImageUrl, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.ImageUrl, "", new { @class = "text-danger" })
+            <label asp-for="ImageUrl" class="control-label"></label>
+            <input asp-for="ImageUrl" class="form-control" />
+            <span asp-validation-for="ImageUrl" class="text-danger"></span>
         </div>
 
-        <br />
+        <br /><br />
 
         <div class="form-group">
             <button class="btn btn-primary" type="submit">Save</button>
             <br /><br />
-            @Html.ActionLink("Back to List", "Index")
+            <a asp-action="Index">Back to List</a>
         </div>
     </div>
-}
+</form>

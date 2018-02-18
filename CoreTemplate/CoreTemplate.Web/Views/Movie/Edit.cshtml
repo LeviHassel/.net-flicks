@@ -7,7 +7,7 @@
 <h1>@ViewBag.Title</h1>
 <br /><br />
 
-<form asp-controller="Movie" asp-action="Edit" asp-route-returnurl="@ViewBag.ReturnUrl" method="post" class="form-horizontal" role="form">
+<form asp-controller="Movie" asp-action="Edit" method="post" class="form-horizontal" role="form">
     <div asp-validation-summary="All" class="text-danger"></div>
 
     <input asp-for="Id" type="hidden" />

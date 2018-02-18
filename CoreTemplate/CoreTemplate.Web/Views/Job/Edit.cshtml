@@ -7,25 +7,24 @@
 <h1>@ViewBag.Title</h1>
 <br /><br />
 
-@using (Html.BeginForm("Edit", "Job", FormMethod.Post, new { @class = "form-horizontal", role = "form" }))
-{
-    @Html.AntiForgeryToken()
-    @Html.ValidationSummary(true)
-    @Html.HiddenFor(x => x.Id)
+<form asp-controller="Job" asp-action="Edit" method="post" class="form-horizontal" role="form">
+    <div asp-validation-summary="All" class="text-danger"></div>
+
+    <input asp-for="Id" type="hidden" />
 
     <div class="container">
         <div class="form-group">
-            @Html.LabelFor(x => x.Name, new { @class = "control-label" })
-            @Html.TextBoxFor(x => x.Name, new { @class = "form-control" })
-            @Html.ValidationMessageFor(x => x.Name, "", new { @class = "text-danger" })
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
         </div>
 
-        <br />
+        <br /><br />
 
         <div class="form-group">
             <button class="btn btn-primary" type="submit">Save</button>
             <br /><br />
-            @Html.ActionLink("Back to List", "Index")
+            <a asp-action="Index">Back to List</a>
         </div>
     </div>
-}
+</form>

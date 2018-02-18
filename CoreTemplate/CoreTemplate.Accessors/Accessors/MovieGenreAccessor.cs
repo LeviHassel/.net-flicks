@@ -26,6 +26,12 @@ namespace CoreTemplate.Accessors.Accessors
             return dtos;
         }
 
+        /// <summary>
+        /// For the given Movie, create all new MovieGenres in list and delete all MovieGenres not in list
+        /// </summary>
+        /// <param name="movieId"></param>
+        /// <param name="genreIds"></param>
+        /// <returns></returns>
         public List<MovieGenreDTO> SaveAll(int movieId, List<int> genreIds)
         {
             var entities = _db.MovieGenres.Where(x => x.MovieId == movieId).ToList();

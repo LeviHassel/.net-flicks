@@ -36,27 +36,24 @@ namespace CoreTemplate.Managers.Managers
         public MovieViewModel Get(int? id)
         {
             var movieDto = id.HasValue ? _movieAccessor.Get(id.Value) : new MovieDTO();
-            var jobDtos = _jobAccessor.GetAll();
-            var genreDtos = _genreAccessor.GetAll();
+            var jobDtos = _jobAccessor.GetAll().OrderBy(x => x.Name);
+            var genreDtos = _genreAccessor.GetAll().OrderBy(x => x.Name);
             var movieGenreDtos = _movieGenreAccessor.GetAllByMovie(movieDto.Id);
             var moviePersonDtos = _moviePersonAccessor.GetAllByMovie(movieDto.Id);
-            var personDtos = _personAccessor.GetAll();
+            var personDtos = _personAccessor.GetAll().OrderBy(x => x.FirstName);
 
             var vm = Mapper.Map<MovieViewModel>(movieDto);
 
-            vm.GenresSelectList = new MultiSelectList(genreDtos.OrderBy(x => x.Name), "Id", "Name", movieGenreDtos.Select(x => x.GenreId).ToList());
-
-            //TODO: Better name?
-            var personValues = personDtos.Select(x => new { Id = x.Id, Name = x.FirstName + " " + x.LastName });
+            vm.GenresSelectList = new MultiSelectList(genreDtos, "Id", "Name", movieGenreDtos.Select(x => x.GenreId).ToList());
 
             vm.People = Mapper.Map<List<MoviePersonViewModel>>(moviePersonDtos)
-                .OrderBy(x => personValues.Single(y => y.Id == x.PersonId).Name)
+                .OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName)
                 .ToList();
 
             foreach (var personVm in vm.People)
             {
-                personVm.People = new SelectList(personValues.OrderBy(x => x.Name), "Id", "Name", personVm.PersonId);
-                personVm.Jobs = new SelectList(jobDtos.OrderBy(x => x.Name), "Id", "Name", personVm.JobId);
+                personVm.People = new SelectList(personDtos, "Id", "FullName", personVm.PersonId);
+                personVm.Jobs = new SelectList(jobDtos, "Id", "Name", personVm.JobId);
             }
 
             return vm;
@@ -72,16 +69,13 @@ namespace CoreTemplate.Managers.Managers
 
         public MoviePersonViewModel GetNewPerson(int index)
         {
-            var personDtos = _personAccessor.GetAll();
-            var jobDtos = _jobAccessor.GetAll();
-
-            //TODO: Better name?
-            var personValues = personDtos.Select(x => new { Id = x.Id, Name = x.FirstName + " " + x.LastName });
+            var personDtos = _personAccessor.GetAll().OrderBy(x => x.FirstName);
+            var jobDtos = _jobAccessor.GetAll().OrderBy(x => x.Name);
 
             var vm = new MoviePersonViewModel
             {
                 Index = index,
-                People = new SelectList(personValues, "Id", "Name"),
+                People = new SelectList(personDtos, "Id", "FullName"),
                 Jobs = new SelectList(jobDtos, "Id", "Name")
             };
 
@@ -91,25 +85,27 @@ namespace CoreTemplate.Managers.Managers
         public MovieViewModel Save(MovieViewModel vm)
         {
             var dto = Mapper.Map<MovieDTO>(vm);
-
-            var moviePersonDtos = vm.People
-                .Where(x => !x.IsDeleted)
-                .Select(x => new MoviePersonDTO
-                {
-                    Id = x.Id,
-                    MovieId = vm.Id,
-                    PersonId = x.PersonId,
-                    JobId = x.JobId
-                })
-                .ToList();
-
             dto.People = null;
 
             dto = _movieAccessor.Save(dto);
 
-            _movieGenreAccessor.SaveAll(dto.Id, vm.GenreIds);
+            var moviePersonDtos = new List<MoviePersonDTO>();
 
-            _moviePersonAccessor.SaveAll(moviePersonDtos);
+            if (vm.People != null && vm.People.Any())
+            {
+                moviePersonDtos.AddRange(vm.People
+                    .Where(x => !x.IsDeleted && x.PersonId != 0 && x.JobId != 0)
+                    .Select(x => new MoviePersonDTO
+                    {
+                        Id = x.Id,
+                        MovieId = dto.Id,
+                        PersonId = x.PersonId,
+                        JobId = x.JobId
+                    }));
+            }
+
+            _movieGenreAccessor.SaveAll(dto.Id, vm.GenreIds);
+            _moviePersonAccessor.SaveAll(dto.Id, moviePersonDtos);
 
             vm = Mapper.Map<MovieViewModel>(dto);
 

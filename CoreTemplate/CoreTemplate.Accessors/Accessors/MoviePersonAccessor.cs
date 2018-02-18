@@ -26,19 +26,22 @@ namespace CoreTemplate.Accessors.Accessors
             return dtos;
         }
 
-        public List<MoviePersonDTO> SaveAll(List<MoviePersonDTO> dtos)
+        /// <summary>
+        /// For the given Movie, create all new MoviePeople in list and delete all MoviePeople not in list
+        /// </summary>
+        /// <param name="movieId"></param>
+        /// <param name="dtos"></param>
+        /// <returns></returns>
+        public List<MoviePersonDTO> SaveAll(int movieId, List<MoviePersonDTO> dtos)
         {
-            //TODO: Improve names and structure
-
-            //TODO: Make sure people will only pass in dtos for ONE movie by restricting it or leaving a comment
-            var entities = _db.MoviePeople.Where(x => x.MovieId == dtos.First().MovieId).ToList();
+            var entities = _db.MoviePeople.Where(x => x.MovieId == movieId).ToList();
 
             //Ensure DTO list exists to avoid null value errors
             dtos = dtos ?? new List<MoviePersonDTO>();
 
             //Create new entries from DTO list
             var newDtos = dtos.Where(x => !entities.Any(y => y.MovieId == x.MovieId && y.PersonId == x.PersonId && y.JobId == x.JobId));
-            var newEntities = newDtos.Select(x => new MoviePerson { MovieId = x.MovieId, PersonId = x.PersonId, JobId = x.JobId }).ToList();
+            var newEntities = Mapper.Map<List<MoviePerson>>(newDtos);
             entities.AddRange(newEntities);
             _db.MoviePeople.AddRange(newEntities);
 

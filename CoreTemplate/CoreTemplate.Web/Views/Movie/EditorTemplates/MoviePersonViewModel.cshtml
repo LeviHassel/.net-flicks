@@ -2,10 +2,14 @@
 
 <tr>
     <td style="vertical-align: middle">
-        <select asp-for="PersonId" asp-items="@Model.People" class="form-control selectpicker" data-live-search="true"></select>
+        <select asp-for="PersonId" asp-items="@Model.People" class="form-control selectpicker" data-live-search="true">
+            <option disabled selected>Select</option>
+        </select>
     </td>
     <td style="vertical-align: middle">
-        <select asp-for="JobId" asp-items="@Model.Jobs" class="form-control selectpicker" data-live-search="true"></select>
+        <select asp-for="JobId" asp-items="@Model.Jobs" class="form-control selectpicker" data-live-search="true">
+            <option disabled selected>Select</option>
+        </select>
     </td>
     <td>
         <input asp-for="IsDeleted" type="hidden" />

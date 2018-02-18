@@ -7,5 +7,10 @@ namespace CoreTemplate.ViewModels.Job
     {
         [Required(AllowEmptyStrings = false)]
         public string Name { get; set; }
+
+        public int PeopleCount { get; set; }
+
+        [Display(Name = "People")]
+        public string PeopleTooltip { get; set; }
     }
 }

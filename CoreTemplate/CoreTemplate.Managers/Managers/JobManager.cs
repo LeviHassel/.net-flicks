@@ -1,19 +1,24 @@
 ﻿using AutoMapper;
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
+using CoreTemplate.Common.Helpers;
 using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Job;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CoreTemplate.Managers.Managers
 {
     public class JobManager : IJobManager
     {
         private IJobAccessor _jobAccessor;
+        private IMoviePersonAccessor _moviePersonAccessor;
 
-        public JobManager(IJobAccessor jobAccessor)
+        public JobManager(IJobAccessor jobAccessor,
+            IMoviePersonAccessor moviePersonAccessor)
         {
             _jobAccessor = jobAccessor;
+            _moviePersonAccessor = moviePersonAccessor;
         }
 
         public JobViewModel Get(int? id)
@@ -26,8 +31,21 @@ namespace CoreTemplate.Managers.Managers
 
         public JobsViewModel GetAll()
         {
-            var dtos = _jobAccessor.GetAll();
-            var vms = Mapper.Map<List<JobViewModel>>(dtos);
+            var jobDtos = _jobAccessor.GetAll();
+            var moviePersonDtos = _moviePersonAccessor.GetAll().OrderBy(x => x.Person.FirstName);
+
+            var vms = Mapper.Map<List<JobViewModel>>(jobDtos);
+
+            foreach (var vm in vms)
+            {
+                var people = moviePersonDtos.Where(x => x.JobId == vm.Id);
+
+                if (people != null && people.Any())
+                {
+                    vm.PeopleCount = people.Count();
+                    vm.PeopleTooltip = TooltipHelper.GetTooltipFormattedList(people.Select(x => string.Format("{0} ({1})", x.Person.FullName, x.Movie.Name)).ToList());
+                }
+            }
 
             return new JobsViewModel { Jobs = vms };
         }

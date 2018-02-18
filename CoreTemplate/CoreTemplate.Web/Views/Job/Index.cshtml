@@ -16,6 +16,7 @@
         <thead>
             <tr>
                 <th data-defaultsort="asc"><h5>@Html.DisplayNameFor(x => Model.Jobs.FirstOrDefault().Name)</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.Jobs.FirstOrDefault().PeopleTooltip)</h5></th>
                 <th data-defaultsort="disabled"></th>
             </tr>
         </thead>
@@ -24,6 +25,11 @@
             {
                 <tr>
                     <td style="vertical-align: middle">@Html.DisplayFor(x => i.Name)</td>
+                    <td>
+                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.PeopleTooltip">
+                            @i.PeopleCount
+                        </button>
+                    </td>
                     <td>
                         <div class="btn-toolbar float-right">
                             <a class="btn btn-primary" style="margin-left: 10px" asp-area="" asp-controller="Job" asp-action="Edit" asp-route-id="@i.Id">

@@ -7,5 +7,10 @@ namespace CoreTemplate.ViewModels.Genre
     {
         [Required(AllowEmptyStrings = false)]
         public string Name { get; set; }
+
+        public int MoviesCount { get; set; }
+
+        [Display(Name = "Movies")]
+        public string MoviesTooltip { get; set; }
     }
 }

@@ -1,4 +1,7 @@
 ﻿$(function () {
+    //Set up Bootstrap tooltips
+    $('[data-toggle="tooltip"]').tooltip();
+
     //Add New Person in Edit Crew modal
     $(document).on("click", ".add-person", function () {
         var nextIndex = $("#people-table tbody tr").length;

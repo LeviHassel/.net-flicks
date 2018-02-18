@@ -5,6 +5,8 @@ namespace CoreTemplate.Accessors.Interfaces
 {
     public interface IMovieGenreAccessor
     {
+        List<MovieGenreDTO> GetAll();
+
         List<MovieGenreDTO> GetAllByMovie(int movieId);
 
         /// <summary>

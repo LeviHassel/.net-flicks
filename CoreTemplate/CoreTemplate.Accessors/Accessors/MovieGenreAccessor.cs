@@ -17,6 +17,17 @@ namespace CoreTemplate.Accessors.Accessors
         {
         }
 
+        public List<MovieGenreDTO> GetAll()
+        {
+            var entities = _db.MovieGenres
+                .Include(x => x.Movie)
+                .ToList();
+
+            var dtos = Mapper.Map<List<MovieGenreDTO>>(entities);
+
+            return dtos;
+        }
+
         public List<MovieGenreDTO> GetAllByMovie(int movieId)
         {
             var entities = _db.MovieGenres.Where(x => x.MovieId == movieId).ToList();

@@ -38,17 +38,18 @@ namespace CoreTemplate.Managers.Managers
             var movieDto = id.HasValue ? _movieAccessor.Get(id.Value) : new MovieDTO();
             var jobDtos = _jobAccessor.GetAll().OrderBy(x => x.Name);
             var genreDtos = _genreAccessor.GetAll().OrderBy(x => x.Name);
-            var movieGenreDtos = _movieGenreAccessor.GetAllByMovie(movieDto.Id);
-            var moviePersonDtos = _moviePersonAccessor.GetAllByMovie(movieDto.Id);
             var personDtos = _personAccessor.GetAll().OrderBy(x => x.FirstName);
 
             var vm = Mapper.Map<MovieViewModel>(movieDto);
 
-            vm.GenresSelectList = new MultiSelectList(genreDtos, "Id", "Name", movieGenreDtos.Select(x => x.GenreId).ToList());
+            vm.GenresSelectList = new MultiSelectList(genreDtos, "Id", "Name", movieDto.Genres != null ? movieDto.Genres.Select(x => x.GenreId).ToList() : null);
 
-            vm.People = Mapper.Map<List<MoviePersonViewModel>>(moviePersonDtos)
+            if (movieDto.People != null && movieDto.People.Any())
+            {
+                vm.People = Mapper.Map<List<MoviePersonViewModel>>(movieDto.People)
                 .OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName)
                 .ToList();
+            }
 
             foreach (var personVm in vm.People)
             {

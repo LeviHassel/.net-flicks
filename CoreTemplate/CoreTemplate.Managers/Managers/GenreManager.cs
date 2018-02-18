@@ -1,19 +1,24 @@
 ﻿using AutoMapper;
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
+using CoreTemplate.Common.Helpers;
 using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Genre;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CoreTemplate.Managers.Managers
 {
     public class GenreManager : IGenreManager
     {
         private IGenreAccessor _genreAccessor;
+        private IMovieGenreAccessor _movieGenreAccessor;
 
-        public GenreManager(IGenreAccessor genreAccessor)
+        public GenreManager(IGenreAccessor genreAccessor,
+            IMovieGenreAccessor movieGenreAccessor)
         {
             _genreAccessor = genreAccessor;
+            _movieGenreAccessor = movieGenreAccessor;
         }
 
         public GenreViewModel Get(int? id)
@@ -26,8 +31,21 @@ namespace CoreTemplate.Managers.Managers
 
         public GenresViewModel GetAll()
         {
-            var dtos = _genreAccessor.GetAll();
-            var vms = Mapper.Map<List<GenreViewModel>>(dtos);
+            var genreDtos = _genreAccessor.GetAll();
+            var movieGenreDtos = _movieGenreAccessor.GetAll().OrderBy(x => x.Movie.Name);
+
+            var vms = Mapper.Map<List<GenreViewModel>>(genreDtos);
+
+            foreach (var vm in vms)
+            {
+                var movies = movieGenreDtos.Where(x => x.GenreId == vm.Id);
+
+                if (movies != null && movies.Any())
+                {
+                    vm.MoviesCount = movies.Count();
+                    vm.MoviesTooltip = TooltipHelper.GetTooltipFormattedList(movies.Select(x => x.Movie.Name).ToList());
+                }
+            }
 
             return new GenresViewModel { Genres = vms };
         }

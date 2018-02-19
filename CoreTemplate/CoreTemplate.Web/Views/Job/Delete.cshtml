@@ -1,21 +1,17 @@
 ﻿@model CoreTemplate.ViewModels.Job.JobViewModel
 
 @{
-  ViewBag.Title = string.Format("Delete {0}", Model.Name);
+    ViewBag.Title = string.Format("Delete {0}", Model.Name);
 }
 
 <h1>@ViewBag.Title</h1>
 <p class="lead">Are you sure you want to delete @Model.Name?</p>
 <br /><br />
 
-<div>
-    @using (Html.BeginForm()) {
-        @Html.AntiForgeryToken()
-
-        <div class="form-actions no-color">
-            <input type="submit" value="Delete" class="btn btn-danger" />
-            <br /><br />
-            @Html.ActionLink("Back to List", "Index")
-        </div>
-    }
-</div>
+<form asp-controller="Job" asp-action="Delete" method="post" class="form-horizontal" role="form">
+    <div class="form-actions no-color">
+        <input type="submit" value="Delete" class="btn btn-danger" />
+        <br /><br />
+        <a asp-action="Index">Back to List</a>
+    </div>
+</form>

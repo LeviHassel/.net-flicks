@@ -23,8 +23,16 @@ namespace CoreTemplate.Managers.Managers
 
         public GenreViewModel Get(int? id)
         {
-            var dto = id.HasValue ? _genreAccessor.Get(id.Value) : new GenreDTO();
-            var vm = Mapper.Map<GenreViewModel>(dto);
+            var genreDto = id.HasValue ? _genreAccessor.Get(id.Value) : new GenreDTO();
+            var movieGenreDtos = id.HasValue ? _movieGenreAccessor.GetAllByGenre(genreDto.Id) : new List<MovieGenreDTO>();
+
+            var vm = Mapper.Map<GenreViewModel>(genreDto);
+
+            if (movieGenreDtos != null && movieGenreDtos.Any())
+            {
+                vm.MoviesCount = movieGenreDtos.Count();
+                vm.MoviesTooltip = ListHelper.GetBulletedList(movieGenreDtos.Select(x => x.Movie.Name).ToList());
+            }
 
             return vm;
         }
@@ -43,7 +51,7 @@ namespace CoreTemplate.Managers.Managers
                 if (movies != null && movies.Any())
                 {
                     vm.MoviesCount = movies.Count();
-                    vm.MoviesTooltip = TooltipHelper.GetTooltipFormattedList(movies.Select(x => x.Movie.Name).ToList());
+                    vm.MoviesTooltip = ListHelper.GetTooltipList(movies.Select(x => x.Movie.Name).ToList());
                 }
             }
 

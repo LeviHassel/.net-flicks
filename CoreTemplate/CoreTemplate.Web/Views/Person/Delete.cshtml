@@ -10,7 +10,15 @@
 
 <form asp-controller="Person" asp-action="Delete" method="post" class="form-horizontal" role="form">
     <div class="form-actions no-color">
-        <input type="submit" value="Delete" class="btn btn-danger" />
+        @if (Model.MoviesCount > 0)
+        {
+            <h4 class="text-danger">@Model.FirstName @Model.LastName cannot be deleted because they are part of the crew for @Model.MoviesCount movies: </h4>
+            <p>@Html.Raw(Model.MoviesTooltip)</p>
+        }
+        else
+        {
+            <input type="submit" value="Delete" class="btn btn-danger" />
+        }
         <br /><br />
         <a asp-action="Index">Back to List</a>
     </div>

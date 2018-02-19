@@ -23,8 +23,16 @@ namespace CoreTemplate.Managers.Managers
 
         public JobViewModel Get(int? id)
         {
-            var dto = id.HasValue ? _jobAccessor.Get(id.Value) : new JobDTO();
-            var vm = Mapper.Map<JobViewModel>(dto);
+            var jobDto = id.HasValue ? _jobAccessor.Get(id.Value) : new JobDTO();
+            var moviePersonDtos = id.HasValue ? _moviePersonAccessor.GetAllByJob(jobDto.Id) : new List<MoviePersonDTO>();
+
+            var vm = Mapper.Map<JobViewModel>(jobDto);
+
+            if (moviePersonDtos != null && moviePersonDtos.Any())
+            {
+                vm.PeopleCount = moviePersonDtos.Count();
+                vm.PeopleTooltip = ListHelper.GetBulletedList(moviePersonDtos.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Movie.Name)).ToList());
+            }
 
             return vm;
         }
@@ -43,7 +51,7 @@ namespace CoreTemplate.Managers.Managers
                 if (people != null && people.Any())
                 {
                     vm.PeopleCount = people.Count();
-                    vm.PeopleTooltip = TooltipHelper.GetTooltipFormattedList(people.Select(x => string.Format("{0} ({1})", x.Person.FullName, x.Movie.Name)).ToList());
+                    vm.PeopleTooltip = ListHelper.GetTooltipList(people.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Movie.Name)).ToList());
                 }
             }
 

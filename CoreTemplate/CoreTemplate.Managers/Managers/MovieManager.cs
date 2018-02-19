@@ -73,13 +73,13 @@ namespace CoreTemplate.Managers.Managers
                 if (dto.Genres != null && dto.Genres.Any())
                 {
                     vm.GenresCount = dto.Genres.Count();
-                    vm.GenresTooltip = TooltipHelper.GetTooltipFormattedList(dto.Genres.Select(x => x.Genre.Name).OrderBy(y => y).ToList());
+                    vm.GenresTooltip = ListHelper.GetTooltipList(dto.Genres.Select(x => x.Genre.Name).OrderBy(y => y).ToList());
                 }
 
                 if (dto.People != null && dto.People.Any())
                 {
                     vm.PeopleCount = dto.People.Count();
-                    vm.PeopleTooltip = TooltipHelper.GetTooltipFormattedList(dto.People.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Job.Name)).OrderBy(y => y).ToList());
+                    vm.PeopleTooltip = ListHelper.GetTooltipList(dto.People.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Job.Name)).OrderBy(y => y).ToList());
                 }
             }
 

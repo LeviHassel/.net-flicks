@@ -17,7 +17,7 @@
             <tr>
                 <th data-defaultsort="asc"><h5>@Html.DisplayNameFor(x => Model.Jobs.FirstOrDefault().Name)</h5></th>
                 <th class="d-none d-sm-table-cell"><h5>@Html.DisplayNameFor(x => Model.Jobs.FirstOrDefault().PeopleTooltip)</h5></th>
-                <th data-defaultsort="disabled"></th>
+                <th width="116" data-defaultsort="disabled"></th>
             </tr>
         </thead>
         <tbody>
@@ -32,7 +32,7 @@
                     </td>
                     <td>
                         <div class="btn-toolbar float-right">
-                            <a class="btn btn-primary ml-2" asp-area="" asp-controller="Job" asp-action="Edit" asp-route-id="@i.Id">
+                            <a class="btn btn-primary" asp-area="" asp-controller="Job" asp-action="Edit" asp-route-id="@i.Id">
                                 <i class="fas fa-edit"></i>
                             </a>
                             <a class="btn btn-primary ml-2" asp-area="" asp-controller="Job" asp-action="Delete" asp-route-id="@i.Id">

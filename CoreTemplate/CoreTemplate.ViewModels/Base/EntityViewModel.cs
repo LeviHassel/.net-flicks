@@ -1,7 +1,10 @@
-﻿namespace CoreTemplate.ViewModels.Base
+﻿using Microsoft.AspNetCore.Mvc;
+
+namespace CoreTemplate.ViewModels.Base
 {
     public abstract class EntityViewModel
     {
-        public virtual int Id { get; set; }
+        [HiddenInput]
+        public int Id { get; set; }
     }
 }

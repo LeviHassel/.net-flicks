@@ -21,6 +21,8 @@
                 <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().PurchaseCost)</h5></th>
                 <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().RentCost)</h5></th>
                 <th><h5>Image</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().GenresTooltip)</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().PeopleTooltip)</h5></th>
                 <th data-defaultsort="disabled"></th>
             </tr>
         </thead>
@@ -38,6 +40,16 @@
                         {
                             <i class="fas fa-image"></i>
                         }
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.GenresTooltip">
+                            @i.GenresCount
+                        </button>
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.PeopleTooltip">
+                            @i.PeopleCount
+                        </button>
                     </td>
                     <td>
                         <div class="btn-toolbar float-right">

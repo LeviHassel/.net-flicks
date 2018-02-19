@@ -39,5 +39,15 @@ namespace CoreTemplate.ViewModels.Movie
         public List<int> GenreIds { get; set; }
 
         public List<MoviePersonViewModel> People { get; set; }
+
+        public int GenresCount { get; set; }
+
+        [Display(Name = "Genres")]
+        public string GenresTooltip { get; set; }
+
+        public int PeopleCount { get; set; }
+
+        [Display(Name = "Crew")]
+        public string PeopleTooltip { get; set; }
     }
 }

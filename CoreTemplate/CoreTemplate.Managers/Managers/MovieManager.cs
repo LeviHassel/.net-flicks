@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
+using CoreTemplate.Common.Helpers;
 using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Movie;
 using Microsoft.AspNetCore.Mvc.Rendering;
@@ -64,6 +65,23 @@ namespace CoreTemplate.Managers.Managers
         {
             var dtos = _movieAccessor.GetAll();
             var vms = Mapper.Map<List<MovieViewModel>>(dtos);
+
+            foreach (var vm in vms)
+            {
+                var dto = dtos.Single(x => x.Id == vm.Id);
+
+                if (dto.Genres != null && dto.Genres.Any())
+                {
+                    vm.GenresCount = dto.Genres.Count();
+                    vm.GenresTooltip = TooltipHelper.GetTooltipFormattedList(dto.Genres.Select(x => x.Genre.Name).ToList());
+                }
+
+                if (dto.People != null && dto.People.Any())
+                {
+                    vm.PeopleCount = dto.People.Count();
+                    vm.PeopleTooltip = TooltipHelper.GetTooltipFormattedList(dto.People.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Job.Name)).ToList());
+                }
+            }
 
             return new MoviesViewModel { Movies = vms };
         }

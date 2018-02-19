@@ -37,6 +37,15 @@ namespace CoreTemplate.Accessors.Accessors
             return dtos;
         }
 
+        public List<MovieGenreDTO> GetAllByGenre(int genreId)
+        {
+            var entities = _db.MovieGenres.Where(x => x.GenreId == genreId).ToList();
+
+            var dtos = Mapper.Map<List<MovieGenreDTO>>(entities);
+
+            return dtos;
+        }
+
         /// <summary>
         /// For the given Movie, create all new MovieGenres in list and delete all MovieGenres not in list
         /// </summary>

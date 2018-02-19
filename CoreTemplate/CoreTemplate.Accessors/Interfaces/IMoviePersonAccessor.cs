@@ -9,6 +9,10 @@ namespace CoreTemplate.Accessors.Interfaces
 
         List<MoviePersonDTO> GetAllByMovie(int movieId);
 
+        List<MoviePersonDTO> GetAllByPerson(int personId);
+
+        List<MoviePersonDTO> GetAllByJob(int jobId);
+
         /// <summary>
         /// For the given Movie, create all new MoviePeople in list and delete all MoviePeople not in list
         /// </summary>

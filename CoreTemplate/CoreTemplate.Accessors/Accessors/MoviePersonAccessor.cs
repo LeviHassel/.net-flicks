@@ -32,7 +32,40 @@ namespace CoreTemplate.Accessors.Accessors
 
         public List<MoviePersonDTO> GetAllByMovie(int movieId)
         {
-            var entities = _db.MoviePeople.Where(x => x.MovieId == movieId).ToList();
+            var entities = _db.MoviePeople
+                .Include(x => x.Movie)
+                .Include(x => x.Person)
+                .Include(x => x.Job)
+                .Where(x => x.MovieId == movieId)
+                .ToList();
+
+            var dtos = Mapper.Map<List<MoviePersonDTO>>(entities);
+
+            return dtos;
+        }
+
+        public List<MoviePersonDTO> GetAllByPerson(int personId)
+        {
+            var entities = _db.MoviePeople
+                .Include(x => x.Movie)
+                .Include(x => x.Person)
+                .Include(x => x.Job)
+                .Where(x => x.PersonId == personId)
+                .ToList();
+
+            var dtos = Mapper.Map<List<MoviePersonDTO>>(entities);
+
+            return dtos;
+        }
+
+        public List<MoviePersonDTO> GetAllByJob(int jobId)
+        {
+            var entities = _db.MoviePeople
+                .Include(x => x.Movie)
+                .Include(x => x.Person)
+                .Include(x => x.Job)
+                .Where(x => x.JobId == jobId)
+                .ToList();
 
             var dtos = Mapper.Map<List<MoviePersonDTO>>(entities);
 

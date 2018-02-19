@@ -9,7 +9,7 @@
 <br /><br />
 
 <form asp-controller="Job" asp-action="Delete" method="post" class="form-horizontal" role="form">
-    <div class="form-actions no-color">
+    <div class="container form-actions no-color">
         @if (Model.PeopleCount > 0)
         {
             <h4 class="text-danger">@Model.Name cannot be deleted because @Model.PeopleCount people use it: </h4>

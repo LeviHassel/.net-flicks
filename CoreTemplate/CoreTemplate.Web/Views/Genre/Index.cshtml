@@ -16,7 +16,7 @@
         <thead>
             <tr>
                 <th data-defaultsort="asc"><h5>@Html.DisplayNameFor(x => Model.Genres.FirstOrDefault().Name)</h5></th>
-                <th><h5>@Html.DisplayNameFor(x => Model.Genres.FirstOrDefault().MoviesTooltip)</h5></th>
+                <th class="d-none d-sm-table-cell"><h5>@Html.DisplayNameFor(x => Model.Genres.FirstOrDefault().MoviesTooltip)</h5></th>
                 <th data-defaultsort="disabled"></th>
             </tr>
         </thead>
@@ -25,17 +25,17 @@
             {
                 <tr>
                     <td style="vertical-align: middle">@Html.DisplayFor(x => i.Name)</td>
-                    <td>
+                    <td class="d-none d-sm-table-cell">
                         <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.MoviesTooltip">
                             @i.MoviesCount
                         </button>
                     </td>
                     <td>
                         <div class="btn-toolbar float-right">
-                            <a class="btn btn-primary" style="margin-left: 10px" asp-area="" asp-controller="Genre" asp-action="Edit" asp-route-id="@i.Id">
+                            <a class="btn btn-primary ml-2" asp-area="" asp-controller="Genre" asp-action="Edit" asp-route-id="@i.Id">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a class="btn btn-primary" style="margin-left: 10px" asp-area="" asp-controller="Genre" asp-action="Delete" asp-route-id="@i.Id">
+                            <a class="btn btn-primary ml-2" asp-area="" asp-controller="Genre" asp-action="Delete" asp-route-id="@i.Id">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </div>

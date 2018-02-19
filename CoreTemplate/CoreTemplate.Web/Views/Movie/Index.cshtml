@@ -16,13 +16,13 @@
         <thead>
             <tr>
                 <th data-defaultsort="asc"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Name)</h5></th>
-                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().ReleaseDate)</h5></th>
-                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Runtime)</h5></th>
-                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().PurchaseCost)</h5></th>
-                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().RentCost)</h5></th>
-                <th><h5>Image</h5></th>
-                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().GenresTooltip)</h5></th>
-                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().PeopleTooltip)</h5></th>
+                <th class="d-none d-lg-table-cell"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().ReleaseDate)</h5></th>
+                <th class="d-none d-lg-table-cell"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Runtime)</h5></th>
+                <th class="d-none d-xl-table-cell"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().PurchaseCost)</h5></th>
+                <th class="d-none d-xl-table-cell"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().RentCost)</h5></th>
+                <th class="d-none d-xl-table-cell"><h5>Image</h5></th>
+                <th class="d-none d-md-table-cell"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().GenresTooltip)</h5></th>
+                <th class="d-none d-md-table-cell"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().PeopleTooltip)</h5></th>
                 <th data-defaultsort="disabled"></th>
             </tr>
         </thead>
@@ -31,32 +31,32 @@
             {
                 <tr>
                     <td style="vertical-align: middle">@Html.DisplayFor(x => i.Name)</td>
-                    <td data-dateformat="MM-DD-YYYY" style="vertical-align: middle">@Html.DisplayFor(x => i.ReleaseDate)</td>
-                    <td style="vertical-align: middle">@Html.DisplayFor(x => i.Runtime)</td>
-                    <td style="vertical-align: middle">@Html.DisplayFor(x => i.PurchaseCost)</td>
-                    <td style="vertical-align: middle">@Html.DisplayFor(x => i.RentCost)</td>
-                    <td style="vertical-align: middle" data-value=@(!string.IsNullOrEmpty(i.ImageUrl))>
+                    <td class="d-none d-lg-table-cell" style="vertical-align: middle" data-dateformat="MM-DD-YYYY">@Html.DisplayFor(x => i.ReleaseDate)</td>
+                    <td class="d-none d-lg-table-cell" style="vertical-align: middle">@Html.DisplayFor(x => i.Runtime)</td>
+                    <td class="d-none d-xl-table-cell" style="vertical-align: middle">@Html.DisplayFor(x => i.PurchaseCost)</td>
+                    <td class="d-none d-xl-table-cell" style="vertical-align: middle">@Html.DisplayFor(x => i.RentCost)</td>
+                    <td class="d-none d-xl-table-cell" style="vertical-align: middle" data-value=@(!string.IsNullOrEmpty(i.ImageUrl))>
                         @if (!string.IsNullOrEmpty(i.ImageUrl))
                         {
                             <i class="fas fa-image"></i>
                         }
                     </td>
-                    <td>
+                    <td class="d-none d-md-table-cell">
                         <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.GenresTooltip">
                             @i.GenresCount
                         </button>
                     </td>
-                    <td>
+                    <td class="d-none d-md-table-cell">
                         <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.PeopleTooltip">
                             @i.PeopleCount
                         </button>
                     </td>
                     <td>
                         <div class="btn-toolbar float-right">
-                            <a class="btn btn-primary" style="margin-left: 10px" asp-area="" asp-controller="Movie" asp-action="Edit" asp-route-id="@i.Id">
+                            <a class="btn btn-primary ml-2" asp-area="" asp-controller="Movie" asp-action="Edit" asp-route-id="@i.Id">
                                 <i class="fas fa-edit"></i>
                             </a>
-                            <a class="btn btn-primary" style="margin-left: 10px" asp-area="" asp-controller="Movie" asp-action="Delete" asp-route-id="@i.Id">
+                            <a class="btn btn-primary ml-2" asp-area="" asp-controller="Movie" asp-action="Delete" asp-route-id="@i.Id">
                                 <i class="fas fa-trash"></i>
                             </a>
                         </div>

@@ -18,6 +18,7 @@
                 <th data-defaultsort="asc"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().FirstName)</h5></th>
                 <th><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().LastName)</h5></th>
                 <th><h5>Image</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().MoviesTooltip)</h5></th>
                 <th data-defaultsort="disabled"></th>
             </tr>
         </thead>
@@ -32,6 +33,11 @@
                         {
                             <i class="fas fa-image"></i>
                         }
+                    </td>
+                    <td>
+                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.MoviesTooltip">
+                            @i.MoviesCount
+                        </button>
                     </td>
                     <td>
                         <div class="btn-toolbar float-right">

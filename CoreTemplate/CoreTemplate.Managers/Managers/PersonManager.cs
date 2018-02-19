@@ -1,18 +1,23 @@
 ﻿using AutoMapper;
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
+using CoreTemplate.Common.Helpers;
 using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Person;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CoreTemplate.Managers.Managers
 {
     public class PersonManager : IPersonManager
     {
+        private IMoviePersonAccessor _moviePersonAccessor;
         private IPersonAccessor _personAccessor;
 
-        public PersonManager(IPersonAccessor personAccessor)
+        public PersonManager(IMoviePersonAccessor moviePersonAccessor,
+            IPersonAccessor personAccessor)
         {
+            _moviePersonAccessor = moviePersonAccessor;
             _personAccessor = personAccessor;
         }
 
@@ -26,8 +31,21 @@ namespace CoreTemplate.Managers.Managers
 
         public PeopleViewModel GetAll()
         {
-            var dtos = _personAccessor.GetAll();
-            var vms = Mapper.Map<List<PersonViewModel>>(dtos);
+            var personDtos = _personAccessor.GetAll();
+            var moviePersonDtos = _moviePersonAccessor.GetAll().OrderBy(x => x.Movie.Name);
+
+            var vms = Mapper.Map<List<PersonViewModel>>(personDtos);
+
+            foreach (var vm in vms)
+            {
+                var movies = moviePersonDtos.Where(x => x.PersonId == vm.Id);
+
+                if (movies != null && movies.Any())
+                {
+                    vm.MoviesCount = movies.Count();
+                    vm.MoviesTooltip = TooltipHelper.GetTooltipFormattedList(movies.Select(x => string.Format("{0} ({1})", x.Movie.Name, x.Job.Name)).ToList());
+                }
+            }
 
             return new PeopleViewModel { People = vms };
         }

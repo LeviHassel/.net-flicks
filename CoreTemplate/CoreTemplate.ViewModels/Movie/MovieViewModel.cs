@@ -14,7 +14,7 @@ namespace CoreTemplate.ViewModels.Movie
 
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Release Date")]
+        [Display(Name = "Date")]
         public DateTime ReleaseDate { get; set; }
 
         [Required]
@@ -25,12 +25,12 @@ namespace CoreTemplate.ViewModels.Movie
 
         [Required]
         [DataType(DataType.Currency)]
-        [Display(Name = "Purchase Cost")]
+        [Display(Name = "Purchase")]
         public int PurchaseCost { get; set; }
 
         [Required]
         [DataType(DataType.Currency)]
-        [Display(Name = "Rent Cost")]
+        [Display(Name = "Rent")]
         public int RentCost { get; set; }
 
         public MultiSelectList GenresSelectList { get; set; }

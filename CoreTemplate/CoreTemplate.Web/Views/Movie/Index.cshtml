@@ -38,7 +38,9 @@
                     <td class="d-none d-xl-table-cell" style="vertical-align: middle" data-value=@(!string.IsNullOrEmpty(i.ImageUrl))>
                         @if (!string.IsNullOrEmpty(i.ImageUrl))
                         {
-                            <i class="fas fa-image"></i>
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".image-modal" data-title="@i.Name" data-img-src="@i.ImageUrl">
+                                <i class="fas fa-image"></i>
+                            </button>
                         }
                     </td>
                     <td class="d-none d-md-table-cell">
@@ -65,4 +67,20 @@
             }
         </tbody>
     </table>
+
+    <div class="modal fade image-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"></h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <img alt="Image" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

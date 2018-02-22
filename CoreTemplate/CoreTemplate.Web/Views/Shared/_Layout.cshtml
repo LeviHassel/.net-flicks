@@ -30,9 +30,20 @@
         </button>
 
         <div class="collapse navbar-collapse" id="navbarSupportedContent" role="tablist">
-            <ul class="navbar-nav mr-auto">
+            <ul class="navbar-nav m-auto">
+                <li class="navbar-text">
+                    <b>User</b> |
+                </li>
                 <li class="nav-item">
-                    <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Home</a>
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">Browse Movies</a>
+                </li>
+                <li class="nav-item">
+                    <a asp-area="" asp-controller="Home" asp-action="Index" class="nav-link">My Movies</a>
+                </li>
+            </ul>
+            <ul class="navbar-nav m-auto">
+                <li class="navbar-text">
+                    <b>Admin</b> |
                 </li>
                 <li class="nav-item">
                     <a asp-area="" asp-controller="Movie" asp-action="Index" class="nav-link">Movies</a>

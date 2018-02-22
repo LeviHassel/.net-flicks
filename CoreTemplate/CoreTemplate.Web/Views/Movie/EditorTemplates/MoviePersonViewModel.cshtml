@@ -1,7 +1,7 @@
 ﻿@model CoreTemplate.ViewModels.Movie.MoviePersonViewModel
 
 <tr class="row">
-    <td class="col-5 col-lg-6" style="vertical-align: middle">
+    <td class="col-5" style="vertical-align: middle">
         <select asp-for="PersonId" asp-items="@Model.People" class="form-control selectpicker" data-live-search="true">
             <option disabled selected>Select</option>
         </select>
@@ -11,7 +11,7 @@
             <option disabled selected>Select</option>
         </select>
     </td>
-    <td class="col-2 col-lg-1">
+    <td class="col-2">
         <input asp-for="IsDeleted" type="hidden" />
         <div class="btn-toolbar float-right">
             <a class="btn btn-danger delete-person">

@@ -1,9 +1,11 @@
 ﻿using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Job;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreTemplate.Web.Controllers
 {
+    [Authorize]
     public class JobController : Controller
     {
         private IJobManager _jobManager;

@@ -1,9 +1,11 @@
 ﻿using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Person;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreTemplate.Web.Controllers
 {
+    [Authorize]
     public class PersonController : Controller
     {
         private IPersonManager _personManager;

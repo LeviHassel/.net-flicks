@@ -1,9 +1,11 @@
 ﻿using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Genre;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreTemplate.Web.Controllers
 {
+    [Authorize]
     public class GenreController : Controller
     {
         private IGenreManager _genreManager;

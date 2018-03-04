@@ -1,9 +1,11 @@
 ﻿using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Movie;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreTemplate.Web.Controllers
 {
+    [Authorize]
     public class MovieController : Controller
     {
         private IMovieManager _movieManager;

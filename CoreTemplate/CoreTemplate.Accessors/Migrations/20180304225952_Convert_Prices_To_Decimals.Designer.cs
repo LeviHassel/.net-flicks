@@ -11,9 +11,10 @@ using System;
 namespace CoreTemplate.Accessors.Migrations
 {
     [DbContext(typeof(CoreTemplateContext))]
-    partial class CoreTemplateContextModelSnapshot : ModelSnapshot
+    [Migration("20180304225952_Convert_Prices_To_Decimals")]
+    partial class Convert_Prices_To_Decimals
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

@@ -14,9 +14,9 @@ namespace CoreTemplate.Accessors.Models.DTO
 
         public string ImageUrl { get; set; }
 
-        public int PurchaseCost { get; set; }
+        public decimal PurchaseCost { get; set; }
 
-        public int RentCost { get; set; }
+        public decimal RentCost { get; set; }
 
         public ICollection<MovieGenreDTO> Genres { get; set; }
 

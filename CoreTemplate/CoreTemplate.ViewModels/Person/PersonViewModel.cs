@@ -13,6 +13,7 @@ namespace CoreTemplate.ViewModels.Person
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
 
+        [Url]
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }
 

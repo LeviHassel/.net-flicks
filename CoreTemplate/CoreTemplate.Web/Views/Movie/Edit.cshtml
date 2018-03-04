@@ -8,8 +8,6 @@
 <br /><br />
 
 <form asp-controller="Movie" asp-action="Edit" method="post" class="form-horizontal" role="form">
-    <div asp-validation-summary="All" class="text-danger"></div>
-
     <div class="container">
         <div class="row mb-4">
             <div class="col-md-4">
@@ -17,7 +15,7 @@
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="col-md-2"><br/></div>
+            <div class="col-md-2"><br /></div>
             <div class="col-md-4">
                 <label asp-for="GenreIds" class="control-label"></label>
                 <select asp-for="GenreIds" asp-items="@Model.GenresSelectList" class="form-control selectpicker" data-max-options="3"></select>
@@ -95,9 +93,12 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @for (int i = 0; i < Model.People.Count; i++)
+                                    @if (Model.People != null)
                                     {
-                                        @Html.EditorFor(x => x.People[i])
+                                        @for (int i = 0; i < Model.People.Count; i++)
+                                        {
+                                            @Html.EditorFor(x => x.People[i])
+                                        }
                                     }
                                 </tbody>
                             </table>

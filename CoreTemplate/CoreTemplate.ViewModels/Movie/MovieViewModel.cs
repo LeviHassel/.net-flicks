@@ -1,5 +1,4 @@
 ﻿using CoreTemplate.ViewModels.Base;
-using CoreTemplate.ViewModels.Genre;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
@@ -14,24 +13,27 @@ namespace CoreTemplate.ViewModels.Movie
 
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Date")]
+        [Display(Name = "Release Date")]
         public DateTime ReleaseDate { get; set; }
 
         [Required]
         public TimeSpan Runtime { get; set; }
 
+        [Url]
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }
 
         [Required]
+        [Range(0, 1000)]
         [DataType(DataType.Currency)]
         [Display(Name = "Purchase")]
-        public int PurchaseCost { get; set; }
+        public decimal PurchaseCost { get; set; }
 
         [Required]
+        [Range(0, 1000)]
         [DataType(DataType.Currency)]
         [Display(Name = "Rent")]
-        public int RentCost { get; set; }
+        public decimal RentCost { get; set; }
 
         public MultiSelectList GenresSelectList { get; set; }
 

@@ -29,13 +29,17 @@ namespace CoreTemplate.Web.Controllers
             return View(vm);
         }
 
-        [ValidateAntiForgeryToken]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(GenreViewModel vm)
         {
-            _genreManager.Save(vm);
+            if (ModelState.IsValid)
+            {
+                _genreManager.Save(vm);
+                return RedirectToAction("Index");
+            }
 
-            return RedirectToAction("Index");
+            return View(vm);
         }
 
         public ActionResult Delete(int id)

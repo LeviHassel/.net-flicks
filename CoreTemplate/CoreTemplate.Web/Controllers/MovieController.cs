@@ -29,13 +29,17 @@ namespace CoreTemplate.Web.Controllers
             return View(vm);
         }
 
-        [ValidateAntiForgeryToken]
         [HttpPost]
+        [ValidateAntiForgeryToken]
         public ActionResult Edit(MovieViewModel vm)
         {
-            _movieManager.Save(vm);
+            if (ModelState.IsValid)
+            {
+                _movieManager.Save(vm);
+                return RedirectToAction("Index");
+            }
 
-            return RedirectToAction("Index");
+            return View(vm);
         }
 
         public ActionResult Delete(int id)

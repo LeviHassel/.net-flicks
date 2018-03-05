@@ -27,6 +27,8 @@ namespace CoreTemplate.ViewModels.Person
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }
 
+        public string Age { get; set; }
+
         public int MoviesCount { get; set; }
 
         [Display(Name = "Movies")]

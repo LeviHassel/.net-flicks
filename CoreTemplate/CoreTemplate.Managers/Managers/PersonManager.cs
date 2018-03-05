@@ -46,6 +46,8 @@ namespace CoreTemplate.Managers.Managers
 
             foreach (var vm in vms)
             {
+                vm.Age = AgeHelper.GetAge(vm.BirthDate, vm.DeathDate);
+
                 var movies = moviePersonDtos.Where(x => x.PersonId == vm.Id);
 
                 if (movies != null && movies.Any())

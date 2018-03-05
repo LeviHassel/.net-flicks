@@ -8,11 +8,15 @@ namespace CoreTemplate.Accessors.Models.DTO
     {
         public string Name { get; set; }
 
-        public DateTime ReleaseDate { get; set; } = DateTime.UtcNow;
+        public string Description { get; set; }
+
+        public DateTime ReleaseDate { get; set; }
 
         public TimeSpan Runtime { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public string TrailerUrl { get; set; }
 
         public decimal PurchaseCost { get; set; }
 

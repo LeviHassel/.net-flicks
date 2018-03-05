@@ -11,6 +11,9 @@ namespace CoreTemplate.ViewModels.Movie
         [Required(AllowEmptyStrings = false)]
         public string Name { get; set; }
 
+        [Required(AllowEmptyStrings = false)]
+        public string Description { get; set; }
+
         [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Release Date")]
@@ -22,6 +25,10 @@ namespace CoreTemplate.ViewModels.Movie
         [Url]
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }
+
+        [Url]
+        [Display(Name = "Trailer URL")]
+        public string TrailerUrl { get; set; }
 
         [Required]
         [Range(0, 1000)]

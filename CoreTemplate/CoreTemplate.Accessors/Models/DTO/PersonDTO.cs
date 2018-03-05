@@ -1,4 +1,5 @@
 ﻿using CoreTemplate.Accessors.Models.DTO.Base;
+using System;
 using System.Collections.Generic;
 
 namespace CoreTemplate.Accessors.Models.DTO
@@ -8,6 +9,10 @@ namespace CoreTemplate.Accessors.Models.DTO
         public string FirstName { get; set; }
 
         public string LastName { get; set; }
+
+        public DateTime BirthDate { get; set; }
+
+        public DateTime? DeathDate { get; set; }
 
         public string ImageUrl { get; set; }
 

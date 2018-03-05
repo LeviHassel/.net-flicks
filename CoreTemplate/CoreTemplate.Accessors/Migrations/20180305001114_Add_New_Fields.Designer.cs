@@ -11,9 +11,10 @@ using System;
 namespace CoreTemplate.Accessors.Migrations
 {
     [DbContext(typeof(CoreTemplateContext))]
-    partial class CoreTemplateContextModelSnapshot : ModelSnapshot
+    [Migration("20180305001114_Add_New_Fields")]
+    partial class Add_New_Fields
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -168,7 +169,7 @@ namespace CoreTemplate.Accessors.Migrations
 
                     b.Property<DateTime>("BirthDate");
 
-                    b.Property<DateTime?>("DeathDate");
+                    b.Property<DateTime>("DeathDate");
 
                     b.Property<string>("FirstName");
 

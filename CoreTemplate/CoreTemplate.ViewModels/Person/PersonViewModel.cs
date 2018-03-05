@@ -1,4 +1,5 @@
 ﻿using CoreTemplate.ViewModels.Base;
+using System;
 using System.ComponentModel.DataAnnotations;
 
 namespace CoreTemplate.ViewModels.Person
@@ -12,6 +13,15 @@ namespace CoreTemplate.ViewModels.Person
         [Required(AllowEmptyStrings = false)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [Required]
+        [DataType(DataType.Date)]
+        [Display(Name = "Birth Date")]
+        public DateTime BirthDate { get; set; }
+
+        [DataType(DataType.Date)]
+        [Display(Name = "Death Date (Optional)")]
+        public DateTime? DeathDate { get; set; }
 
         [Url]
         [Display(Name = "Image URL")]

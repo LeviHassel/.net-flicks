@@ -8,11 +8,15 @@ namespace CoreTemplate.Accessors.Models.EF
     {
         public string Name { get; set; }
 
+        public string Description { get; set; }
+
         public DateTime ReleaseDate { get; set; }
 
         public TimeSpan Runtime { get; set; }
 
         public string ImageUrl { get; set; }
+
+        public string TrailerUrl { get; set; }
 
         public decimal PurchaseCost { get; set; }
 

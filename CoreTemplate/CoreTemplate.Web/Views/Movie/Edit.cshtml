@@ -9,34 +9,37 @@
 
 <form asp-controller="Movie" asp-action="Edit" method="post" class="form-horizontal" role="form">
     <div class="container">
-        <div class="row mb-4">
-            <div class="col-md-4">
+        <div class="row">
+            <div class="col mb-4">
                 <label asp-for="Name" class="control-label"></label>
                 <input asp-for="Name" class="form-control" />
                 <span asp-validation-for="Name" class="text-danger"></span>
             </div>
-            <div class="col-md-2"><br /></div>
-            <div class="col-md-4">
+            <div class="col mb-4">
                 <label asp-for="GenreIds" class="control-label"></label>
                 <select asp-for="GenreIds" asp-items="@Model.GenresSelectList" class="form-control selectpicker" data-max-options="3"></select>
             </div>
         </div>
-        @* TODO: Description/Overview goes here, probably gets entire row *@
-        <div class="row mb-4">
-            <div class="col-md-4">
+        <div class="form-group">
+            <label asp-for="Description" class="control-label"></label>
+            <textarea asp-for="Description" class="form-control"></textarea>
+            <span asp-validation-for="Description" class="text-danger"></span>
+        </div>
+        <div class="row">
+            <div class="col mb-4">
                 <label asp-for="ReleaseDate" class="control-label"></label>
-                <input asp-for="ReleaseDate" class="form-control" />
+                <!-- The logic below is used to display "mm/dd/yyyy" instead of "01/01/0001" as the default date for new entities -->
+                <input asp-for="ReleaseDate" value="@(Model.ReleaseDate == DateTime.MinValue ? "" : Model.ReleaseDate.ToString("yyyy-MM-dd"))" class="form-control" />
                 <span asp-validation-for="ReleaseDate" class="text-danger"></span>
             </div>
-            <div class="col-md-2"><br /></div>
-            <div class="col-md-4">
+            <div class="col mb-4">
                 <label asp-for="Runtime" class="control-label"></label>
                 <input asp-for="Runtime" class="form-control" />
                 <span asp-validation-for="Runtime" class="text-danger"></span>
             </div>
         </div>
-        <div class="row mb-4">
-            <div class="col-md-4">
+        <div class="row">
+            <div class="col mb-4">
                 <label asp-for="PurchaseCost" class="control-label"></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -46,8 +49,7 @@
                 </div>
                 <span asp-validation-for="PurchaseCost" class="text-danger"></span>
             </div>
-            <div class="col-md-2"><br /></div>
-            <div class="col-md-4">
+            <div class="col mb-4">
                 <label asp-for="RentCost" class="control-label"></label>
                 <div class="input-group">
                     <div class="input-group-prepend">
@@ -59,15 +61,16 @@
             </div>
         </div>
 
-        <div class="row mb-4">
-            <div class="col-md-4">
+        <div class="row">
+            <div class="col mb-4">
                 <label asp-for="ImageUrl" class="control-label"></label>
                 <input asp-for="ImageUrl" class="form-control" />
                 <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
-            <div class="col-md-2"><br /></div>
-            <div class="col-md-4">
-                @* TODO: TrailerUrl goes here *@
+            <div class="col mb-4">
+                <label asp-for="TrailerUrl" class="control-label"></label>
+                <input asp-for="TrailerUrl" class="form-control" />
+                <span asp-validation-for="TrailerUrl" class="text-danger"></span>
             </div>
         </div>
 

@@ -10,25 +10,25 @@
 <form asp-controller="Person" asp-action="Edit" method="post" class="form-horizontal" role="form">
     <div class="container">
         <div class="row">
-            <div class="col mb-4">
+            <div class="col-md-6 mb-4">
                 <label asp-for="FirstName" class="control-label"></label>
                 <input asp-for="FirstName" class="form-control" />
                 <span asp-validation-for="FirstName" class="text-danger"></span>
             </div>
-            <div class="col mb-4">
+            <div class="col-md-6 mb-4">
                 <label asp-for="LastName" class="control-label"></label>
                 <input asp-for="LastName" class="form-control" />
                 <span asp-validation-for="LastName" class="text-danger"></span>
             </div>
         </div>
         <div class="row">
-            <div class="col mb-4">
+            <div class="col-md-6 mb-4">
                 <label asp-for="BirthDate" class="control-label"></label>
                 <!-- The logic below is used to display "mm/dd/yyyy" instead of "01/01/0001" as the default date for new entities -->
                 <input asp-for="BirthDate" value="@(Model.BirthDate == DateTime.MinValue ? "" : Model.BirthDate.ToString("yyyy-MM-dd"))" class="form-control" />
                 <span asp-validation-for="BirthDate" class="text-danger"></span>
             </div>
-            <div class="col mb-4">
+            <div class="col-md-6 mb-4">
                 <label asp-for="DeathDate" class="control-label"></label>
                 <input asp-for="DeathDate" class="form-control" />
                 <span asp-validation-for="DeathDate" class="text-danger"></span>

@@ -1,0 +1,66 @@
+﻿@model CoreTemplate.ViewModels.Movie.MovieViewModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<div class="jumbotron" style="padding: 32px">
+    <div class="row">
+        <div class="col-md-4">
+            <img src=@Model.ImageUrl class="img-fluid" />
+        </div>
+        <div class="col-md-8">
+            <h1 class="display-4">@ViewBag.Title</h1>
+            <p>@Model.Description</p>
+            <hr class="my-4">
+            <p>
+                <strong>Genres: </strong>
+                @foreach (var genre in Model.GenresSelectList.Where(x => x.Selected))
+                {
+                    <a class="badge badge-secondary" asp-controller="Genre" asp-action="View" asp-route-id="@genre.Value">@genre.Text</a>
+                }
+            </p>
+            <p><strong>Release Date: </strong>@Model.ReleaseDate.ToLongDateString()</p>
+            <p><strong>Runtime: </strong>@Html.DisplayFor(x => x.Runtime)</p>
+            <p class="lead">
+                <a class="btn btn-primary btn-lg" href="#" role="button">Buy ($@Model.PurchaseCost)</a>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Rent ($@Model.RentCost)</a>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Watch</a>
+            </p>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <h2>Crew<span class="float-right"><small>Total: @Html.DisplayFor(x => x.PeopleCount)</small></span></h2>
+    <br />
+    <table class="table sortable">
+        <thead>
+            <tr>
+                <th data-defaultsort="asc"><h5>Name</h5></th>
+                <th><h5>Role</h5></th>
+                <th data-defaultsort="disabled"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var person in Model.People)
+            {
+                var selectedPerson = person.People.Single(x => x.Selected);
+                var personId = selectedPerson.Value;
+                var personName = selectedPerson.Text;
+                var personJob = person.Jobs.Single(x => x.Selected).Text;
+                <tr>
+                    <td style="vertical-align: middle">@personName</td>
+                    <td style="vertical-align: middle">@personJob</td>
+                    <td>
+                        <div class="btn-toolbar float-right">
+                            <a class="btn btn-primary" asp-controller="Person" asp-action="View" asp-route-id="@personId">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+</div>

@@ -20,6 +20,7 @@ namespace CoreTemplate.ViewModels.Movie
         public DateTime ReleaseDate { get; set; }
 
         [Required]
+        [DisplayFormat(DataFormatString = "{0:%h}h {0:%m}m")]
         public TimeSpan Runtime { get; set; }
 
         [Url]

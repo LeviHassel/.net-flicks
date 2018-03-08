@@ -1,13 +1,13 @@
-﻿@model CoreTemplate.ViewModels.Job.JobViewModel
+﻿@model CoreTemplate.ViewModels.Department.DepartmentViewModel
 
 @{
-    ViewBag.Title = Model.Id > 0 ? string.Format("Edit {0}", Model.Name) : "New Job";
+    ViewBag.Title = Model.Id > 0 ? string.Format("Edit {0}", Model.Name) : "New Department";
 }
 
 <h1>@ViewBag.Title</h1>
 <br /><br />
 
-<form asp-controller="Job" asp-action="Edit" method="post" class="form-horizontal" role="form">
+<form asp-controller="Department" asp-action="Edit" method="post" class="form-horizontal" role="form">
     <div class="container">
         <div class="form-group">
             <label asp-for="Name" class="control-label"></label>

@@ -1,41 +1,41 @@
 ﻿using CoreTemplate.Managers.Interfaces;
-using CoreTemplate.ViewModels.Job;
+using CoreTemplate.ViewModels.Department;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CoreTemplate.Web.Controllers
 {
     [Authorize]
-    public class JobController : Controller
+    public class DepartmentController : Controller
     {
-        private IJobManager _jobManager;
+        private IDepartmentManager _departmentManager;
 
-        public JobController(IJobManager jobManager)
+        public DepartmentController(IDepartmentManager departmentManager)
         {
-            _jobManager = jobManager;
+            _departmentManager = departmentManager;
         }
 
         public ActionResult Index()
         {
-            var vm = _jobManager.GetAll();
+            var vm = _departmentManager.GetAll();
 
             return View(vm);
         }
 
         public ActionResult Edit(int? id)
         {
-            var vm = _jobManager.Get(id);
+            var vm = _departmentManager.Get(id);
 
             return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(JobViewModel vm)
+        public ActionResult Edit(DepartmentViewModel vm)
         {
             if (ModelState.IsValid)
             {
-                _jobManager.Save(vm);
+                _departmentManager.Save(vm);
                 return RedirectToAction("Index");
             }
 
@@ -44,7 +44,7 @@ namespace CoreTemplate.Web.Controllers
 
         public ActionResult Delete(int id)
         {
-            var vm = _jobManager.Get(id);
+            var vm = _departmentManager.Get(id);
 
             return View(vm);
         }
@@ -53,7 +53,7 @@ namespace CoreTemplate.Web.Controllers
         [ValidateAntiForgeryToken]
         public ActionResult DeleteConfirmed(int id)
         {
-            _jobManager.Delete(id);
+            _departmentManager.Delete(id);
 
             return RedirectToAction("Index");
         }

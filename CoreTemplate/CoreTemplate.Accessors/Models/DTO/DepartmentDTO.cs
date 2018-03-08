@@ -2,8 +2,10 @@
 
 namespace CoreTemplate.Accessors.Models.DTO
 {
-    public class JobDTO : EntityDTO
+    public class DepartmentDTO : EntityDTO
     {
         public string Name { get; set; }
+
+        public bool IsDirecting { get; set; }
     }
 }

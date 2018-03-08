@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.ViewModels.Genre;
-using CoreTemplate.ViewModels.Job;
+using CoreTemplate.ViewModels.Department;
 using CoreTemplate.ViewModels.Movie;
 using CoreTemplate.ViewModels.Person;
 
@@ -12,7 +12,7 @@ namespace CoreTemplate.Managers.Config
         public ManagerMapper()
         {
             CreateMap<GenreDTO, GenreViewModel>().ReverseMap();
-            CreateMap<JobDTO, JobViewModel>().ReverseMap();
+            CreateMap<DepartmentDTO, DepartmentViewModel>().ReverseMap();
             CreateMap<MovieDTO, MovieViewModel>().ReverseMap();
             CreateMap<MoviePersonDTO, MoviePersonViewModel>().ReverseMap();
             CreateMap<PersonDTO, PersonViewModel>().ReverseMap();

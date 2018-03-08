@@ -14,10 +14,10 @@ namespace CoreTemplate.ViewModels.Movie
         public int PersonId { get; set; }
 
         [Required]
-        public int JobId { get; set; }
+        public int DepartmentId { get; set; }
 
         public SelectList People { get; set; }
 
-        public SelectList Jobs { get; set; }
+        public SelectList Departments { get; set; }
     }
 }

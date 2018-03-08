@@ -13,21 +13,21 @@ namespace CoreTemplate.Managers.Managers
     public class MovieManager : IMovieManager
     {
         private IGenreAccessor _genreAccessor;
-        private IJobAccessor _jobAccessor;
+        private IDepartmentAccessor _departmentAccessor;
         private IMovieAccessor _movieAccessor;
         private IMovieGenreAccessor _movieGenreAccessor;
         private IMoviePersonAccessor _moviePersonAccessor;
         private IPersonAccessor _personAccessor;
 
         public MovieManager(IGenreAccessor genreAccessor,
-            IJobAccessor jobAccessor,
+            IDepartmentAccessor departmentAccessor,
             IMovieAccessor movieAccessor,
             IMovieGenreAccessor movieGenreAccessor,
             IMoviePersonAccessor moviePersonAccessor,
             IPersonAccessor personAccessor)
         {
             _genreAccessor = genreAccessor;
-            _jobAccessor = jobAccessor;
+            _departmentAccessor = departmentAccessor;
             _movieAccessor = movieAccessor;
             _movieGenreAccessor = movieGenreAccessor;
             _moviePersonAccessor = moviePersonAccessor;
@@ -37,7 +37,7 @@ namespace CoreTemplate.Managers.Managers
         public MovieViewModel Get(int? id)
         {
             var movieDto = id.HasValue ? _movieAccessor.Get(id.Value) : new MovieDTO();
-            var jobDtos = _jobAccessor.GetAll().OrderBy(x => x.Name);
+            var departmentDtos = _departmentAccessor.GetAll().OrderBy(x => x.Name);
             var genreDtos = _genreAccessor.GetAll().OrderBy(x => x.Name);
             var personDtos = _personAccessor.GetAll().OrderBy(x => x.FirstName);
 
@@ -55,7 +55,7 @@ namespace CoreTemplate.Managers.Managers
             foreach (var personVm in vm.People)
             {
                 personVm.People = new SelectList(personDtos, "Id", "FullName", personVm.PersonId);
-                personVm.Jobs = new SelectList(jobDtos, "Id", "Name", personVm.JobId);
+                personVm.Departments = new SelectList(departmentDtos, "Id", "Name", personVm.DepartmentId);
             }
 
             return vm;
@@ -79,7 +79,7 @@ namespace CoreTemplate.Managers.Managers
                 if (dto.People != null && dto.People.Any())
                 {
                     vm.PeopleCount = dto.People.Count();
-                    vm.PeopleTooltip = ListHelper.GetTooltipList(dto.People.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Job.Name)).OrderBy(y => y).ToList());
+                    vm.PeopleTooltip = ListHelper.GetTooltipList(dto.People.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Department.Name)).OrderBy(y => y).ToList());
                 }
             }
 
@@ -89,13 +89,13 @@ namespace CoreTemplate.Managers.Managers
         public MoviePersonViewModel GetNewPerson(int index)
         {
             var personDtos = _personAccessor.GetAll().OrderBy(x => x.FirstName);
-            var jobDtos = _jobAccessor.GetAll().OrderBy(x => x.Name);
+            var departmentDtos = _departmentAccessor.GetAll().OrderBy(x => x.Name);
 
             var vm = new MoviePersonViewModel
             {
                 Index = index,
                 People = new SelectList(personDtos, "Id", "FullName"),
-                Jobs = new SelectList(jobDtos, "Id", "Name")
+                Departments = new SelectList(departmentDtos, "Id", "Name")
             };
 
             return vm;
@@ -113,13 +113,13 @@ namespace CoreTemplate.Managers.Managers
             if (vm.People != null && vm.People.Any())
             {
                 moviePersonDtos.AddRange(vm.People
-                    .Where(x => !x.IsDeleted && x.PersonId != 0 && x.JobId != 0)
+                    .Where(x => !x.IsDeleted && x.PersonId != 0 && x.DepartmentId != 0)
                     .Select(x => new MoviePersonDTO
                     {
                         Id = x.Id,
                         MovieId = dto.Id,
                         PersonId = x.PersonId,
-                        JobId = x.JobId
+                        DepartmentId = x.DepartmentId
                     }));
             }
 

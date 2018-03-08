@@ -20,7 +20,7 @@ namespace CoreTemplate.Tests.ManagerTests
         private MovieManager _movieManager;
 
         private Mock<IGenreAccessor> _genreAccessorMock;
-        private Mock<IJobAccessor> _jobAccessorMock;
+        private Mock<IDepartmentAccessor> _departmentAccessorMock;
         private Mock<IMovieAccessor> _movieAccessorMock;
         private Mock<IMovieGenreAccessor> _movieGenreAccessorMock;
         private Mock<IMoviePersonAccessor> _moviePersonAccessorMock;
@@ -32,7 +32,7 @@ namespace CoreTemplate.Tests.ManagerTests
             _movieAccessorMock = new Mock<IMovieAccessor>();
 
             _movieManager = new MovieManager(_genreAccessorMock.Object,
-                _jobAccessorMock.Object,
+                _departmentAccessorMock.Object,
                 _movieAccessorMock.Object,
                 _movieGenreAccessorMock.Object,
                 _moviePersonAccessorMock.Object,

@@ -1,4 +1,4 @@
-﻿@model CoreTemplate.ViewModels.Job.JobViewModel
+﻿@model CoreTemplate.ViewModels.Department.DepartmentViewModel
 
 @{
     ViewBag.Title = string.Format("Delete {0}", Model.Name);
@@ -8,7 +8,7 @@
 <p class="lead">Are you sure you want to delete @Model.Name?</p>
 <br /><br />
 
-<form asp-controller="Job" asp-action="Delete" method="post" class="form-horizontal" role="form">
+<form asp-controller="Department" asp-action="Delete" method="post" class="form-horizontal" role="form">
     <div class="container form-actions no-color">
         @if (Model.PeopleCount > 0)
         {

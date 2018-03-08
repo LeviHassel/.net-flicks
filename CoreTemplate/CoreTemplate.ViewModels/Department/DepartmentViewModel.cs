@@ -1,9 +1,9 @@
 ﻿using CoreTemplate.ViewModels.Base;
 using System.ComponentModel.DataAnnotations;
 
-namespace CoreTemplate.ViewModels.Job
+namespace CoreTemplate.ViewModels.Department
 {
-    public class JobViewModel : EntityViewModel
+    public class DepartmentViewModel : EntityViewModel
     {
         [Required(AllowEmptyStrings = false)]
         public string Name { get; set; }

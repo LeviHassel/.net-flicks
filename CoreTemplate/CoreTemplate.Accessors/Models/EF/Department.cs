@@ -2,8 +2,10 @@
 
 namespace CoreTemplate.Accessors.Models.EF
 {
-    public class Job : Entity
+    public class Department : Entity
     {
         public string Name { get; set; }
+
+        public bool IsDirecting { get; set; }
     }
 }

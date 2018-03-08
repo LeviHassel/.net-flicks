@@ -31,7 +31,7 @@ namespace CoreTemplate.Managers.Managers
             if (moviePersonDtos != null && moviePersonDtos.Any())
             {
                 vm.MoviesCount = moviePersonDtos.Count();
-                vm.MoviesTooltip = ListHelper.GetBulletedList(moviePersonDtos.Select(x => string.Format("{0} ({1})", x.Movie.Name, x.Job.Name)).ToList());
+                vm.MoviesTooltip = ListHelper.GetBulletedList(moviePersonDtos.Select(x => string.Format("{0} ({1})", x.Movie.Name, x.Department.Name)).ToList());
             }
 
             return vm;
@@ -53,7 +53,7 @@ namespace CoreTemplate.Managers.Managers
                 if (movies != null && movies.Any())
                 {
                     vm.MoviesCount = movies.Count();
-                    vm.MoviesTooltip = ListHelper.GetTooltipList(movies.Select(x => string.Format("{0} ({1})", x.Movie.Name, x.Job.Name)).ToList());
+                    vm.MoviesTooltip = ListHelper.GetTooltipList(movies.Select(x => string.Format("{0} ({1})", x.Movie.Name, x.Department.Name)).ToList());
                 }
             }
 

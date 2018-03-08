@@ -48,10 +48,10 @@
                 var selectedPerson = person.People.Single(x => x.Selected);
                 var personId = selectedPerson.Value;
                 var personName = selectedPerson.Text;
-                var personJob = person.Jobs.Single(x => x.Selected).Text;
+                var personDepartment = person.Departments.Single(x => x.Selected).Text;
                 <tr>
                     <td style="vertical-align: middle">@personName</td>
-                    <td style="vertical-align: middle">@personJob</td>
+                    <td style="vertical-align: middle">@personDepartment</td>
                     <td>
                         <div class="btn-toolbar float-right">
                             <a class="btn btn-primary" asp-controller="Person" asp-action="View" asp-route-id="@personId">

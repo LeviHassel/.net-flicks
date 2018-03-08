@@ -8,8 +8,8 @@ namespace CoreTemplate.Accessors.Config
     {
         public AccessorMapper()
         {
+            CreateMap<Department, DepartmentDTO>().ReverseMap();
             CreateMap<Genre, GenreDTO>().ReverseMap();
-            CreateMap<Job, JobDTO>().ReverseMap();
             CreateMap<Movie, MovieDTO>().ReverseMap();
             CreateMap<MovieGenre, MovieGenreDTO>().ReverseMap();
             CreateMap<MoviePerson, MoviePersonDTO>().ReverseMap();

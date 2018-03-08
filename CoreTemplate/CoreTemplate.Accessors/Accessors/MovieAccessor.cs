@@ -34,7 +34,7 @@ namespace CoreTemplate.Accessors.Accessors
             var entities = _db.Movies
                 .Include(x => x.Genres).ThenInclude(x => x.Genre)
                 .Include(x => x.People).ThenInclude(x => x.Person)
-                .Include(x => x.People).ThenInclude(x => x.Job)
+                .Include(x => x.People).ThenInclude(x => x.Department)
                 .ToList();
 
             var dtos = Mapper.Map<List<MovieDTO>>(entities);

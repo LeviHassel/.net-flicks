@@ -11,38 +11,38 @@ using System.Linq;
 
 namespace CoreTemplate.Accessors.Accessors
 {
-    public class JobAccessor : EntityAccessor<Entity>, IJobAccessor
+    public class DepartmentAccessor : EntityAccessor<Entity>, IDepartmentAccessor
     {
-        public JobAccessor(CoreTemplateContext db) : base(db)
+        public DepartmentAccessor(CoreTemplateContext db) : base(db)
         {
         }
 
-        public JobDTO Get(int id)
+        public DepartmentDTO Get(int id)
         {
-            var entity = _db.Jobs.Single(x => x.Id == id);
+            var entity = _db.Departments.Single(x => x.Id == id);
 
-            var dto = Mapper.Map<JobDTO>(entity);
+            var dto = Mapper.Map<DepartmentDTO>(entity);
 
             return dto;
         }
 
-        public List<JobDTO> GetAll()
+        public List<DepartmentDTO> GetAll()
         {
-            var entities = _db.Jobs.ToList();
+            var entities = _db.Departments.ToList();
 
-            var dtos = Mapper.Map<List<JobDTO>>(entities);
+            var dtos = Mapper.Map<List<DepartmentDTO>>(entities);
 
             return dtos;
         }
 
-        public JobDTO Save(JobDTO dto)
+        public DepartmentDTO Save(DepartmentDTO dto)
         {
-            var entity = Mapper.Map<Job>(dto);
+            var entity = Mapper.Map<Department>(dto);
 
             if (dto.Id == 0)
             {
                 //Create new entry
-                _db.Jobs.Add(entity);
+                _db.Departments.Add(entity);
             }
             else
             {
@@ -52,19 +52,19 @@ namespace CoreTemplate.Accessors.Accessors
 
             _db.SaveChanges();
 
-            dto = Mapper.Map<JobDTO>(entity);
+            dto = Mapper.Map<DepartmentDTO>(entity);
 
             return dto;
         }
 
-        public JobDTO Delete(int id)
+        public DepartmentDTO Delete(int id)
         {
-            var entity = _db.Jobs.Single(x => x.Id == id);
+            var entity = _db.Departments.Single(x => x.Id == id);
 
-            _db.Jobs.Remove(entity);
+            _db.Departments.Remove(entity);
             _db.SaveChanges();
 
-            var dto = Mapper.Map<JobDTO>(entity);
+            var dto = Mapper.Map<DepartmentDTO>(entity);
 
             return dto;
         }

@@ -12,8 +12,8 @@ namespace CoreTemplate.Accessors.Models.EF
 
         public virtual Person Person { get; set; }
 
-        public int JobId { get; set; }
+        public int DepartmentId { get; set; }
 
-        public virtual Job Job { get; set; }
+        public virtual Department Department { get; set; }
     }
 }

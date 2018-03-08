@@ -22,7 +22,7 @@ namespace CoreTemplate.Accessors.Accessors
             var entities = _db.MoviePeople
                 .Include(x => x.Movie)
                 .Include(x => x.Person)
-                .Include(x => x.Job)
+                .Include(x => x.Department)
                 .ToList();
 
             var dtos = Mapper.Map<List<MoviePersonDTO>>(entities);
@@ -35,7 +35,7 @@ namespace CoreTemplate.Accessors.Accessors
             var entities = _db.MoviePeople
                 .Include(x => x.Movie)
                 .Include(x => x.Person)
-                .Include(x => x.Job)
+                .Include(x => x.Department)
                 .Where(x => x.MovieId == movieId)
                 .ToList();
 
@@ -49,7 +49,7 @@ namespace CoreTemplate.Accessors.Accessors
             var entities = _db.MoviePeople
                 .Include(x => x.Movie)
                 .Include(x => x.Person)
-                .Include(x => x.Job)
+                .Include(x => x.Department)
                 .Where(x => x.PersonId == personId)
                 .ToList();
 
@@ -58,13 +58,13 @@ namespace CoreTemplate.Accessors.Accessors
             return dtos;
         }
 
-        public List<MoviePersonDTO> GetAllByJob(int jobId)
+        public List<MoviePersonDTO> GetAllByDepartment(int departmentId)
         {
             var entities = _db.MoviePeople
                 .Include(x => x.Movie)
                 .Include(x => x.Person)
-                .Include(x => x.Job)
-                .Where(x => x.JobId == jobId)
+                .Include(x => x.Department)
+                .Where(x => x.DepartmentId == departmentId)
                 .ToList();
 
             var dtos = Mapper.Map<List<MoviePersonDTO>>(entities);
@@ -86,13 +86,13 @@ namespace CoreTemplate.Accessors.Accessors
             dtos = dtos ?? new List<MoviePersonDTO>();
 
             //Create new entries from DTO list
-            var newDtos = dtos.Where(x => !entities.Any(y => y.MovieId == x.MovieId && y.PersonId == x.PersonId && y.JobId == x.JobId));
+            var newDtos = dtos.Where(x => !entities.Any(y => y.MovieId == x.MovieId && y.PersonId == x.PersonId && y.DepartmentId == x.DepartmentId));
             var newEntities = Mapper.Map<List<MoviePerson>>(newDtos);
             entities.AddRange(newEntities);
             _db.MoviePeople.AddRange(newEntities);
 
             //Delete existing entries not in DTO list
-            var entitiesToRemove = entities.Where(x => !dtos.Any(y => y.MovieId == x.MovieId && y.PersonId == x.PersonId && y.JobId == x.JobId));
+            var entitiesToRemove = entities.Where(x => !dtos.Any(y => y.MovieId == x.MovieId && y.PersonId == x.PersonId && y.DepartmentId == x.DepartmentId));
             entities = entities.Except(entitiesToRemove).ToList();
             _db.MoviePeople.RemoveRange(entitiesToRemove);
 

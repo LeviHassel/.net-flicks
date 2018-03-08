@@ -3,30 +3,30 @@ using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Common.Helpers;
 using CoreTemplate.Managers.Interfaces;
-using CoreTemplate.ViewModels.Job;
+using CoreTemplate.ViewModels.Department;
 using System.Collections.Generic;
 using System.Linq;
 
 namespace CoreTemplate.Managers.Managers
 {
-    public class JobManager : IJobManager
+    public class DepartmentManager : IDepartmentManager
     {
-        private IJobAccessor _jobAccessor;
+        private IDepartmentAccessor _departmentAccessor;
         private IMoviePersonAccessor _moviePersonAccessor;
 
-        public JobManager(IJobAccessor jobAccessor,
+        public DepartmentManager(IDepartmentAccessor departmentAccessor,
             IMoviePersonAccessor moviePersonAccessor)
         {
-            _jobAccessor = jobAccessor;
+            _departmentAccessor = departmentAccessor;
             _moviePersonAccessor = moviePersonAccessor;
         }
 
-        public JobViewModel Get(int? id)
+        public DepartmentViewModel Get(int? id)
         {
-            var jobDto = id.HasValue ? _jobAccessor.Get(id.Value) : new JobDTO();
-            var moviePersonDtos = id.HasValue ? _moviePersonAccessor.GetAllByJob(jobDto.Id) : new List<MoviePersonDTO>();
+            var departmentDto = id.HasValue ? _departmentAccessor.Get(id.Value) : new DepartmentDTO();
+            var moviePersonDtos = id.HasValue ? _moviePersonAccessor.GetAllByDepartment(departmentDto.Id) : new List<MoviePersonDTO>();
 
-            var vm = Mapper.Map<JobViewModel>(jobDto);
+            var vm = Mapper.Map<DepartmentViewModel>(departmentDto);
 
             if (moviePersonDtos != null && moviePersonDtos.Any())
             {
@@ -37,16 +37,16 @@ namespace CoreTemplate.Managers.Managers
             return vm;
         }
 
-        public JobsViewModel GetAll()
+        public DepartmentsViewModel GetAll()
         {
-            var jobDtos = _jobAccessor.GetAll();
+            var departmentDtos = _departmentAccessor.GetAll();
             var moviePersonDtos = _moviePersonAccessor.GetAll().OrderBy(x => x.Person.FirstName);
 
-            var vms = Mapper.Map<List<JobViewModel>>(jobDtos);
+            var vms = Mapper.Map<List<DepartmentViewModel>>(departmentDtos);
 
             foreach (var vm in vms)
             {
-                var people = moviePersonDtos.Where(x => x.JobId == vm.Id);
+                var people = moviePersonDtos.Where(x => x.DepartmentId == vm.Id);
 
                 if (people != null && people.Any())
                 {
@@ -55,22 +55,22 @@ namespace CoreTemplate.Managers.Managers
                 }
             }
 
-            return new JobsViewModel { Jobs = vms };
+            return new DepartmentsViewModel { Departments = vms };
         }
 
-        public JobViewModel Save(JobViewModel vm)
+        public DepartmentViewModel Save(DepartmentViewModel vm)
         {
-            var dto = Mapper.Map<JobDTO>(vm);
-            dto = _jobAccessor.Save(dto);
-            vm = Mapper.Map<JobViewModel>(dto);
+            var dto = Mapper.Map<DepartmentDTO>(vm);
+            dto = _departmentAccessor.Save(dto);
+            vm = Mapper.Map<DepartmentViewModel>(dto);
 
             return vm;
         }
 
-        public JobViewModel Delete(int id)
+        public DepartmentViewModel Delete(int id)
         {
-            var dto = _jobAccessor.Delete(id);
-            var vm = Mapper.Map<JobViewModel>(dto);
+            var dto = _departmentAccessor.Delete(id);
+            var vm = Mapper.Map<DepartmentViewModel>(dto);
 
             return vm;
         }

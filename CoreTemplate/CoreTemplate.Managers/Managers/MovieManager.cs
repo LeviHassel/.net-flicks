@@ -45,17 +45,17 @@ namespace CoreTemplate.Managers.Managers
 
             vm.GenresSelectList = new MultiSelectList(genreDtos, "Id", "Name", movieDto.Genres != null ? movieDto.Genres.Select(x => x.GenreId).ToList() : null);
 
-            if (movieDto.People != null && movieDto.People.Any())
+            if (movieDto.Crew != null && movieDto.Crew.Any())
             {
-                vm.People = Mapper.Map<List<CrewMemberViewModel>>(movieDto.People)
+                vm.Crew = Mapper.Map<List<CrewMemberViewModel>>(movieDto.Crew)
                 .OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName)
                 .ToList();
             }
 
-            foreach (var personVm in vm.People)
+            foreach (var crewMemberVm in vm.Crew)
             {
-                personVm.People = new SelectList(personDtos, "Id", "FullName", personVm.PersonId);
-                personVm.Departments = new SelectList(departmentDtos, "Id", "Name", personVm.DepartmentId);
+                crewMemberVm.People = new SelectList(personDtos, "Id", "FullName", crewMemberVm.PersonId);
+                crewMemberVm.Departments = new SelectList(departmentDtos, "Id", "Name", crewMemberVm.DepartmentId);
             }
 
             return vm;
@@ -76,10 +76,10 @@ namespace CoreTemplate.Managers.Managers
                     vm.GenresTooltip = ListHelper.GetTooltipList(dto.Genres.Select(x => x.Genre.Name).OrderBy(y => y).ToList());
                 }
 
-                if (dto.People != null && dto.People.Any())
+                if (dto.Crew != null && dto.Crew.Any())
                 {
-                    vm.PeopleCount = dto.People.Count();
-                    vm.PeopleTooltip = ListHelper.GetTooltipList(dto.People.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Department.Name)).OrderBy(y => y).ToList());
+                    vm.CrewCount = dto.Crew.Count();
+                    vm.CrewTooltip = ListHelper.GetTooltipList(dto.Crew.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Department.Name)).OrderBy(y => y).ToList());
                 }
             }
 
@@ -104,15 +104,15 @@ namespace CoreTemplate.Managers.Managers
         public MovieViewModel Save(MovieViewModel vm)
         {
             var dto = Mapper.Map<MovieDTO>(vm);
-            dto.People = null;
+            dto.Crew = null;
 
             dto = _movieAccessor.Save(dto);
 
             var crewMemberDtos = new List<CrewMemberDTO>();
 
-            if (vm.People != null && vm.People.Any())
+            if (vm.Crew != null && vm.Crew.Any())
             {
-                crewMemberDtos.AddRange(vm.People
+                crewMemberDtos.AddRange(vm.Crew
                     .Where(x => !x.IsDeleted && x.PersonId != 0 && x.DepartmentId != 0 && !string.IsNullOrWhiteSpace(x.Position))
                     .Select(x => new CrewMemberDTO
                     {

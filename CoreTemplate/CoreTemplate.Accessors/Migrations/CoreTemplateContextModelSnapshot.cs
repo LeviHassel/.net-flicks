@@ -323,12 +323,12 @@ namespace CoreTemplate.Accessors.Migrations
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("CoreTemplate.Accessors.Models.EF.Movie", "Movie")
-                        .WithMany("People")
+                        .WithMany("Crew")
                         .HasForeignKey("MovieId")
                         .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("CoreTemplate.Accessors.Models.EF.Person", "Person")
-                        .WithMany("Movies")
+                        .WithMany("CrewRoles")
                         .HasForeignKey("PersonId")
                         .OnDelete(DeleteBehavior.Restrict);
                 });

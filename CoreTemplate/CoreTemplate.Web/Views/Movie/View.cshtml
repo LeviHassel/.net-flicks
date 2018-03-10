@@ -32,7 +32,7 @@
 </div>
 
 <div class="container">
-    <h2>Crew<span class="float-right"><small>Total: @Html.DisplayFor(x => x.PeopleCount)</small></span></h2>
+    <h2>Crew<span class="float-right"><small>Total: @Html.DisplayFor(x => x.CrewCount)</small></span></h2>
     <br />
     <table class="table sortable">
         <thead>
@@ -43,7 +43,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var person in Model.People)
+            @foreach (var person in Model.Crew)
             {
                 var selectedPerson = person.People.Single(x => x.Selected);
                 var personId = selectedPerson.Value;

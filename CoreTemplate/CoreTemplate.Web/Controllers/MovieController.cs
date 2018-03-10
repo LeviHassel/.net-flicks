@@ -69,7 +69,7 @@ namespace CoreTemplate.Web.Controllers
         {
             var vm = _movieManager.GetNewPerson(index);
 
-            ViewData.TemplateInfo.HtmlFieldPrefix = string.Format("People[{0}]", index);
+            ViewData.TemplateInfo.HtmlFieldPrefix = string.Format("Crew[{0}]", index);
 
             return PartialView("../Movie/EditorTemplates/CrewMemberViewModel", vm);
         }

@@ -97,11 +97,11 @@
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @if (Model.People != null)
+                                    @if (Model.Crew != null)
                                     {
-                                        @for (int i = 0; i < Model.People.Count; i++)
+                                        @for (int i = 0; i < Model.Crew.Count; i++)
                                         {
-                                            @Html.EditorFor(x => x.People[i])
+                                            @Html.EditorFor(x => x.Crew[i])
                                         }
                                     }
                                 </tbody>

@@ -73,27 +73,20 @@ namespace CoreTemplate.Accessors.Accessors
         }
 
         /// <summary>
-        /// For the given Movie, create all new CrewMembers in list and delete all CrewMembers not in list
+        /// For the given Movie, create/update all CrewMembers in list and delete all CrewMembers not in list
         /// </summary>
         /// <param name="movieId"></param>
         /// <param name="dtos"></param>
         /// <returns></returns>
         public List<CrewMemberDTO> SaveAll(int movieId, List<CrewMemberDTO> dtos)
         {
-            var entities = _db.CrewMembers.Where(x => x.MovieId == movieId).ToList();
+            //Create/update entries from given list
+            var entities = Mapper.Map<List<CrewMember>>(dtos ?? new List<CrewMemberDTO>());
+            _db.CrewMembers.UpdateRange(entities);
 
-            //Ensure DTO list exists to avoid null value errors
-            dtos = dtos ?? new List<CrewMemberDTO>();
-
-            //Create new entries from DTO list
-            var newDtos = dtos.Where(x => !entities.Any(y => y.MovieId == x.MovieId && y.PersonId == x.PersonId && y.DepartmentId == x.DepartmentId));
-            var newEntities = Mapper.Map<List<CrewMember>>(newDtos);
-            entities.AddRange(newEntities);
-            _db.CrewMembers.AddRange(newEntities);
-
-            //Delete existing entries not in DTO list
-            var entitiesToRemove = entities.Where(x => !dtos.Any(y => y.MovieId == x.MovieId && y.PersonId == x.PersonId && y.DepartmentId == x.DepartmentId));
-            entities = entities.Except(entitiesToRemove).ToList();
+            //Delete existing entries not in given list
+            var entityIds = entities.Select(x => x.Id);
+            var entitiesToRemove = _db.CrewMembers.Where(x => x.MovieId == movieId && !entityIds.Contains(x.Id)).ToList();
             _db.CrewMembers.RemoveRange(entitiesToRemove);
 
             _db.SaveChanges();

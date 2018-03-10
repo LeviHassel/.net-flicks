@@ -10,13 +10,10 @@ namespace CoreTemplate.ViewModels.Movie
 
         public bool IsDeleted { get; set; }
 
-        [Required]
         public int PersonId { get; set; }
 
-        [Required]
         public int DepartmentId { get; set; }
 
-        [Required]
         public string Position { get; set; }
 
         public SelectList People { get; set; }

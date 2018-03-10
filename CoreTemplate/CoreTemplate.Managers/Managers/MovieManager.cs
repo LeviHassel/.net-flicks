@@ -113,7 +113,7 @@ namespace CoreTemplate.Managers.Managers
             if (vm.People != null && vm.People.Any())
             {
                 crewMemberDtos.AddRange(vm.People
-                    .Where(x => !x.IsDeleted && x.PersonId != 0 && x.DepartmentId != 0)
+                    .Where(x => !x.IsDeleted && x.PersonId != 0 && x.DepartmentId != 0 && !string.IsNullOrWhiteSpace(x.Position))
                     .Select(x => new CrewMemberDTO
                     {
                         Id = x.Id,

@@ -14,7 +14,7 @@ namespace CoreTemplate.Accessors.Interfaces
         List<CrewMemberDTO> GetAllByDepartment(int departmentId);
 
         /// <summary>
-        /// For the given Movie, create all new CrewMembers in list and delete all CrewMembers not in list
+        /// For the given Movie, create/update all CrewMembers in list and delete all CrewMembers not in list
         /// </summary>
         /// <param name="movieId"></param>
         /// <param name="dtos"></param>

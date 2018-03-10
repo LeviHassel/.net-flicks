@@ -46,17 +46,7 @@ namespace CoreTemplate.Accessors.Accessors
         {
             var entity = Mapper.Map<Movie>(dto);
 
-            if (dto.Id == 0)
-            {
-                //Create new entry
-                _db.Movies.Add(entity);
-            }
-            else
-            {
-                //Modify existing entry
-                _db.Entry(entity).State = EntityState.Modified;
-            }
-
+            _db.Movies.Update(entity);
             _db.SaveChanges();
 
             dto = Mapper.Map<MovieDTO>(entity);

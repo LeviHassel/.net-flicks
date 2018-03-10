@@ -5,7 +5,6 @@ using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Accessors.Models.EF;
 using CoreTemplate.Accessors.Models.EF.Base;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -39,17 +38,7 @@ namespace CoreTemplate.Accessors.Accessors
         {
             var entity = Mapper.Map<Person>(dto);
 
-            if (dto.Id == 0)
-            {
-                //Create new entry
-                _db.People.Add(entity);
-            }
-            else
-            {
-                //Modify existing entry
-                _db.Entry(entity).State = EntityState.Modified;
-            }
-
+            _db.People.Update(entity);
             _db.SaveChanges();
 
             dto = Mapper.Map<PersonDTO>(entity);

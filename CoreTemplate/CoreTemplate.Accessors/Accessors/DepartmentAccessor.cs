@@ -39,17 +39,7 @@ namespace CoreTemplate.Accessors.Accessors
         {
             var entity = Mapper.Map<Department>(dto);
 
-            if (dto.Id == 0)
-            {
-                //Create new entry
-                _db.Departments.Add(entity);
-            }
-            else
-            {
-                //Modify existing entry
-                _db.Entry(entity).State = EntityState.Modified;
-            }
-
+            _db.Departments.Update(entity);
             _db.SaveChanges();
 
             dto = Mapper.Map<DepartmentDTO>(entity);

@@ -39,17 +39,7 @@ namespace CoreTemplate.Accessors.Accessors
         {
             var entity = Mapper.Map<Genre>(dto);
 
-            if (dto.Id == 0)
-            {
-                //Create new entry
-                _db.Genres.Add(entity);
-            }
-            else
-            {
-                //Modify existing entry
-                _db.Entry(entity).State = EntityState.Modified;
-            }
-
+            _db.Genres.Update(entity);
             _db.SaveChanges();
 
             dto = Mapper.Map<GenreDTO>(entity);

@@ -19,9 +19,9 @@ namespace CoreTemplate.Managers.Config
             services.AddTransient<ApplicationSignInManager>();
 
             services.AddTransient<IAccountManager, AccountManager>();
+            services.AddTransient<IDepartmentManager, DepartmentManager>();
             services.AddTransient<IEmailManager, EmailManager>();
             services.AddTransient<IGenreManager, GenreManager>();
-            services.AddTransient<IDepartmentManager, DepartmentManager>();
             services.AddTransient<IMovieManager, MovieManager>();
             services.AddTransient<IPersonManager, PersonManager>();
 

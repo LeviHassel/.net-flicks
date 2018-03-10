@@ -8,7 +8,9 @@ namespace CoreTemplate.Managers.Interfaces
 
         MoviesViewModel GetAll();
 
-        CrewMemberViewModel GetNewPerson(int index);
+        CastMemberViewModel GetNewCastMember(int index);
+
+        CrewMemberViewModel GetNewCrewMember(int index);
 
         MovieViewModel Save(MovieViewModel vm);
 

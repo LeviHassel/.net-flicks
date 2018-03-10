@@ -65,9 +65,18 @@ namespace CoreTemplate.Web.Controllers
             return RedirectToAction("Index");
         }
 
-        public ActionResult AddPerson(int index)
+        public ActionResult AddCastMember(int index)
         {
-            var vm = _movieManager.GetNewPerson(index);
+            var vm = _movieManager.GetNewCastMember(index);
+
+            ViewData.TemplateInfo.HtmlFieldPrefix = string.Format("Cast[{0}]", index);
+
+            return PartialView("../Movie/EditorTemplates/CastMemberViewModel", vm);
+        }
+
+        public ActionResult AddCrewMember(int index)
+        {
+            var vm = _movieManager.GetNewCrewMember(index);
 
             ViewData.TemplateInfo.HtmlFieldPrefix = string.Format("Crew[{0}]", index);
 

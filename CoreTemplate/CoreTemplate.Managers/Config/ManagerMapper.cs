@@ -11,10 +11,11 @@ namespace CoreTemplate.Managers.Config
     {
         public ManagerMapper()
         {
-            CreateMap<GenreDTO, GenreViewModel>().ReverseMap();
-            CreateMap<DepartmentDTO, DepartmentViewModel>().ReverseMap();
-            CreateMap<MovieDTO, MovieViewModel>().ReverseMap();
+            CreateMap<CastMemberDTO, CastMemberViewModel>().ReverseMap();
             CreateMap<CrewMemberDTO, CrewMemberViewModel>().ReverseMap();
+            CreateMap<DepartmentDTO, DepartmentViewModel>().ReverseMap();
+            CreateMap<GenreDTO, GenreViewModel>().ReverseMap();
+            CreateMap<MovieDTO, MovieViewModel>().ReverseMap();
             CreateMap<PersonDTO, PersonViewModel>().ReverseMap();
         }
 

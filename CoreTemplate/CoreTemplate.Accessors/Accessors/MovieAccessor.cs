@@ -21,6 +21,7 @@ namespace CoreTemplate.Accessors.Accessors
         {
             var entity = _db.Movies
                 .Include(x => x.Genres)
+                .Include(x => x.Cast)
                 .Include(x => x.Crew)
                 .Single(x => x.Id == id);
 
@@ -33,6 +34,7 @@ namespace CoreTemplate.Accessors.Accessors
         {
             var entities = _db.Movies
                 .Include(x => x.Genres).ThenInclude(x => x.Genre)
+                .Include(x => x.Cast).ThenInclude(x => x.Person)
                 .Include(x => x.Crew).ThenInclude(x => x.Person)
                 .Include(x => x.Crew).ThenInclude(x => x.Department)
                 .ToList();

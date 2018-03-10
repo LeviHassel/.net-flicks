@@ -1,9 +1,11 @@
 ﻿using CoreTemplate.ViewModels.Base;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using System;
+using System.ComponentModel.DataAnnotations;
 
 namespace CoreTemplate.ViewModels.Movie
 {
-    public class CrewMemberViewModel : EntityViewModel
+    public class CastMemberViewModel : EntityViewModel
     {
         public int Index { get; set; }
 
@@ -11,12 +13,12 @@ namespace CoreTemplate.ViewModels.Movie
 
         public int PersonId { get; set; }
 
-        public int DepartmentId { get; set; }
+        public string Role { get; set; }
 
-        public string Position { get; set; }
+        [Required]
+        [DisplayFormat(DataFormatString = "{0:%h}h {0:%m}m")]
+        public TimeSpan ScreenTime { get; set; }
 
         public SelectList People { get; set; }
-
-        public SelectList Departments { get; set; }
     }
 }

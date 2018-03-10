@@ -43,21 +43,23 @@ namespace CoreTemplate.ViewModels.Movie
         [Display(Name = "Rent")]
         public decimal RentCost { get; set; }
 
-        public MultiSelectList GenresSelectList { get; set; }
-
-        [Display(Name = "Genres")]
-        public List<int> GenreIds { get; set; }
+        public List<CastMemberViewModel> Cast { get; set; }
 
         public List<CrewMemberViewModel> Crew { get; set; }
-
-        public int GenresCount { get; set; }
-
-        [Display(Name = "Genres")]
-        public string GenresTooltip { get; set; }
 
         public int CrewCount { get; set; }
 
         [Display(Name = "Crew")]
         public string CrewTooltip { get; set; }
+
+        [Display(Name = "Genres")]
+        public List<int> GenreIds { get; set; }
+
+        public MultiSelectList GenresSelectList { get; set; }
+
+        public int GenresCount { get; set; }
+
+        [Display(Name = "Genres")]
+        public string GenresTooltip { get; set; }
     }
 }

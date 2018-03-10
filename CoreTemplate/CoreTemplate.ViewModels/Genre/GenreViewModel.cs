@@ -1,4 +1,6 @@
 ﻿using CoreTemplate.ViewModels.Base;
+using CoreTemplate.ViewModels.Movie;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CoreTemplate.ViewModels.Genre
@@ -7,6 +9,8 @@ namespace CoreTemplate.ViewModels.Genre
     {
         [Required(AllowEmptyStrings = false)]
         public string Name { get; set; }
+
+        public List<MovieViewModel> Movies { get; set; }
 
         public int MoviesCount { get; set; }
 

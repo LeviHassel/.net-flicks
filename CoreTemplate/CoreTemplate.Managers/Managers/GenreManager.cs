@@ -4,6 +4,7 @@ using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Common.Helpers;
 using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Genre;
+using CoreTemplate.ViewModels.Movie;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,17 +22,25 @@ namespace CoreTemplate.Managers.Managers
             _movieGenreAccessor = movieGenreAccessor;
         }
 
-        public GenreViewModel Get(int? id)
+        public GenreViewModel Get(int? id, bool includeMovies = false)
         {
             var genreDto = id.HasValue ? _genreAccessor.Get(id.Value) : new GenreDTO();
             var movieGenreDtos = id.HasValue ? _movieGenreAccessor.GetAllByGenre(genreDto.Id) : new List<MovieGenreDTO>();
 
             var vm = Mapper.Map<GenreViewModel>(genreDto);
-
-            if (movieGenreDtos != null && movieGenreDtos.Any())
+            
+            if (movieGenreDtos.Any())
             {
                 vm.MoviesCount = movieGenreDtos.Count();
-                vm.MoviesTooltip = ListHelper.GetBulletedList(movieGenreDtos.Select(x => x.Movie.Name).ToList());
+
+                if (includeMovies)
+                {
+                    vm.Movies = Mapper.Map<List<MovieViewModel>>(movieGenreDtos.Select(x => x.Movie));
+                }
+                else
+                {
+                    vm.MoviesTooltip = ListHelper.GetBulletedList(movieGenreDtos.Select(x => x.Movie.Name).ToList());
+                }
             }
 
             return vm;

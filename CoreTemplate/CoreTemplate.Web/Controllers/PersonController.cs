@@ -22,6 +22,13 @@ namespace CoreTemplate.Web.Controllers
             return View(vm);
         }
 
+        public ActionResult View(int id)
+        {
+            var vm = _personManager.Get(id);
+
+            return View(vm);
+        }
+
         public ActionResult Edit(int? id)
         {
             var vm = _personManager.Get(id);

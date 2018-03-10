@@ -3,6 +3,7 @@ using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Common.Helpers;
 using CoreTemplate.Managers.Interfaces;
+using CoreTemplate.ViewModels.Movie;
 using CoreTemplate.ViewModels.Person;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,12 +12,15 @@ namespace CoreTemplate.Managers.Managers
 {
     public class PersonManager : IPersonManager
     {
+        private ICastMemberAccessor _castMemberAccessor;
         private ICrewMemberAccessor _crewMemberAccessor;
         private IPersonAccessor _personAccessor;
 
-        public PersonManager(ICrewMemberAccessor crewMemberAccessor,
+        public PersonManager(ICastMemberAccessor castMemberAccessor,
+            ICrewMemberAccessor crewMemberAccessor,
             IPersonAccessor personAccessor)
         {
+            _castMemberAccessor = castMemberAccessor;
             _crewMemberAccessor = crewMemberAccessor;
             _personAccessor = personAccessor;
         }
@@ -24,6 +28,7 @@ namespace CoreTemplate.Managers.Managers
         public PersonViewModel Get(int? id)
         {
             var personDto = id.HasValue ? _personAccessor.Get(id.Value) : new PersonDTO();
+            var castMemberDtos = id.HasValue ? _castMemberAccessor.GetAllByPerson(personDto.Id) : new List<CastMemberDTO>();
             var crewMemberDtos = id.HasValue ? _crewMemberAccessor.GetAllByPerson(personDto.Id) : new List<CrewMemberDTO>();
 
             var vm = Mapper.Map<PersonViewModel>(personDto);
@@ -33,6 +38,9 @@ namespace CoreTemplate.Managers.Managers
                 vm.MoviesCount = crewMemberDtos.Count();
                 vm.MoviesTooltip = ListHelper.GetBulletedList(crewMemberDtos.Select(x => string.Format("{0} ({1})", x.Movie.Name, x.Department.Name)).ToList());
             }
+
+            vm.Age = DateHelper.GetAge(vm.BirthDate, vm.DeathDate);
+            vm.Movies = Mapper.Map<List<MovieViewModel>>(crewMemberDtos.Select(x => x.Movie));
 
             return vm;
         }
@@ -46,7 +54,7 @@ namespace CoreTemplate.Managers.Managers
 
             foreach (var vm in vms)
             {
-                vm.Age = AgeHelper.GetAge(vm.BirthDate, vm.DeathDate);
+                vm.Age = DateHelper.GetAge(vm.BirthDate, vm.DeathDate);
 
                 var movies = crewMemberDtos.Where(x => x.PersonId == vm.Id);
 

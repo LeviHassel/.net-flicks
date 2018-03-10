@@ -22,6 +22,13 @@ namespace CoreTemplate.Web.Controllers
             return View(vm);
         }
 
+        public ActionResult View(int id)
+        {
+            var vm = _genreManager.Get(id, true);
+
+            return View(vm);
+        }
+
         public ActionResult Edit(int? id)
         {
             var vm = _genreManager.Get(id);

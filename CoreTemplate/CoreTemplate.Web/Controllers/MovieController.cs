@@ -22,6 +22,13 @@ namespace CoreTemplate.Web.Controllers
             return View(vm);
         }
 
+        public ActionResult ViewAll()
+        {
+            var vm = _movieManager.GetAll();
+
+            return View(vm);
+        }
+
         public ActionResult View(int id)
         {
             var vm = _movieManager.Get(id);

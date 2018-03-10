@@ -2,8 +2,18 @@
 
 namespace CoreTemplate.Common.Helpers
 {
-    public static class AgeHelper
+    public static class DateHelper
     {
+        /// <summary>
+        /// Returns a long date string without the day of the week (example: January 1st, 2000)
+        /// </summary>
+        /// <param name="date"></param>
+        /// <returns></returns>
+        public static string ToCustomDateString(this DateTime date)
+        {
+            return date.ToLongDateString().Replace(date.DayOfWeek.ToString() + ", ", "");
+        }
+
         /// <summary>
         /// Return a string containing either current age or age before death (including years alive)
         /// </summary>

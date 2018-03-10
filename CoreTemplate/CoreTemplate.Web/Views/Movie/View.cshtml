@@ -1,4 +1,6 @@
-﻿@model CoreTemplate.ViewModels.Movie.MovieViewModel
+﻿@using CoreTemplate.Common.Helpers
+
+@model CoreTemplate.ViewModels.Movie.MovieViewModel
 
 @{
     ViewBag.Title = Model.Name;
@@ -20,7 +22,7 @@
                     <a class="badge badge-secondary" asp-controller="Genre" asp-action="View" asp-route-id="@genre.Value">@genre.Text</a>
                 }
             </p>
-            <p><strong>Release Date: </strong>@Model.ReleaseDate.ToLongDateString()</p>
+            <p><strong>Release Date: </strong>@Model.ReleaseDate.ToCustomDateString()</p>
             <p><strong>Runtime: </strong>@Html.DisplayFor(x => x.Runtime)</p>
             <p class="lead">
                 <a class="btn btn-primary btn-lg" href="#" role="button">Buy ($@Model.PurchaseCost)</a>
@@ -44,11 +46,13 @@
                         var personId = selectedPerson.Value;
                         var personName = selectedPerson.Text;
 
-                        <tr>
-                            <td style="vertical-align: middle">
+                        <tr class="row">
+                            <td class="col-md-6" style="vertical-align: middle">
                                 <a asp-controller="Person" asp-action="View" asp-route-id="@personId">@personName</a>
                             </td>
-                            <td style="vertical-align: middle">@person.Role</td>
+                            <td class="col-md-6" style="vertical-align: middle">
+                                @person.Role
+                            </td>
                         </tr>
                     }
                 </tbody>
@@ -69,12 +73,14 @@
                             var selectedPerson = person.People.Single(x => x.Selected);
                             var personId = selectedPerson.Value;
                             var personName = selectedPerson.Text;
-                            
-                            <tr>
-                                <td style="vertical-align: middle">
+
+                            <tr class="row">
+                                <td class="col-md-6" style="vertical-align: middle">
                                     <a asp-controller="Person" asp-action="View" asp-route-id="@personId">@personName</a>
                                 </td>
-                                <td style="vertical-align: middle">@person.Position</td>
+                                <td class="col-md-6" style="vertical-align: middle">
+                                    @person.Position
+                                </td>
                             </tr>
                         }
                     </tbody>

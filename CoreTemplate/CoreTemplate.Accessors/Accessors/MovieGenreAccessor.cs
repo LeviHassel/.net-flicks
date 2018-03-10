@@ -30,7 +30,9 @@ namespace CoreTemplate.Accessors.Accessors
 
         public List<MovieGenreDTO> GetAllByMovie(int movieId)
         {
-            var entities = _db.MovieGenres.Where(x => x.MovieId == movieId).ToList();
+            var entities = _db.MovieGenres
+                .Where(x => x.MovieId == movieId)
+                .ToList();
 
             var dtos = Mapper.Map<List<MovieGenreDTO>>(entities);
 

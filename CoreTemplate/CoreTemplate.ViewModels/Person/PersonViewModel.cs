@@ -1,5 +1,7 @@
 ﻿using CoreTemplate.ViewModels.Base;
+using CoreTemplate.ViewModels.Movie;
 using System;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 
 namespace CoreTemplate.ViewModels.Person
@@ -28,6 +30,8 @@ namespace CoreTemplate.ViewModels.Person
         public string ImageUrl { get; set; }
 
         public string Age { get; set; }
+
+        public List<MovieViewModel> Movies { get; set; }
 
         public int MoviesCount { get; set; }
 

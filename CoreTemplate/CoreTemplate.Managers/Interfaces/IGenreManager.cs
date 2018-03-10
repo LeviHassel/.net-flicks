@@ -4,7 +4,7 @@ namespace CoreTemplate.Managers.Interfaces
 {
     public interface IGenreManager
     {
-        GenreViewModel Get(int? id);
+        GenreViewModel Get(int? id, bool includeMovies = false);
 
         GenresViewModel GetAll();
 

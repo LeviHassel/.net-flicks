@@ -23,6 +23,7 @@ namespace CoreTemplate.ViewModels.Movie
         [DisplayFormat(DataFormatString = "{0:%h}h {0:%m}m")]
         public TimeSpan Runtime { get; set; }
 
+        [Required]
         [Url]
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }

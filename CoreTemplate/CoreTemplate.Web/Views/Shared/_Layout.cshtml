@@ -13,10 +13,10 @@
     </environment>
     <environment exclude="Development">
         <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
-            asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
-            asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
-            integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
-            crossorigin="anonymous" />
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous" />
         <link rel="stylesheet" href="~/lib/bootstrap-sortable/Contents/bootstrap-sortable.css" />
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.0-beta/css/bootstrap-select.min.css">
         <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
@@ -25,41 +25,43 @@
 <body>
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark fixed-top">
         <a asp-controller="Home" asp-action="Index" class="navbar-brand mb-0 h1">Core Template</a>
-        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content">
             <span class="navbar-toggler-icon"></span>
         </button>
 
-        <div class="collapse navbar-collapse" id="navbarSupportedContent" role="tablist">
+        <div class="collapse navbar-collapse" id="navbar-content" role="tablist">
             @if (User.Identity.IsAuthenticated)
             {
-                <ul class="navbar-nav m-auto">
-                    <li class="navbar-text">
-                        <b>User</b> |
-                    </li>
-                    <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Index" class="nav-link">Browse Movies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-controller="Home" asp-action="Index" class="nav-link">My Movies</a>
-                    </li>
-                </ul>
-                <ul class="navbar-nav m-auto">
-                    <li class="navbar-text">
-                        <b>Admin</b> |
-                    </li>
-                    <li class="nav-item">
-                        <a asp-controller="Movie" asp-action="Index" class="nav-link">Movies</a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-controller="Genre" asp-action="Index" class="nav-link">Genres</a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-controller="Person" asp-action="Index" class="nav-link">People</a>
-                    </li>
-                    <li class="nav-item">
-                        <a asp-controller="Department" asp-action="Index" class="nav-link">Departments</a>
-                    </li>
-                </ul>
+                <div class="container navbar-nav mx-auto">
+                    <ul class="navbar-nav m-auto">
+                        <li class="navbar-text">
+                            <b>User</b> |
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Movie" asp-action="ViewAll" class="nav-link">Browse Movies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="Index" class="nav-link">My Movies</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav m-auto">
+                        <li class="navbar-text">
+                            <b>Admin</b> |
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Movie" asp-action="Index" class="nav-link">Movies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Genre" asp-action="Index" class="nav-link">Genres</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Person" asp-action="Index" class="nav-link">People</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Department" asp-action="Index" class="nav-link">Departments</a>
+                        </li>
+                    </ul>
+                </div>
             }
             @await Html.PartialAsync("_LoginPartial")
         </div>

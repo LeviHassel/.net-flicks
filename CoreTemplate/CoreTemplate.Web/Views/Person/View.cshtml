@@ -1,0 +1,23 @@
+﻿@model CoreTemplate.ViewModels.Person.PersonViewModel
+
+@{
+    ViewBag.Title = Model.FirstName + " " + Model.LastName;
+}
+
+<div class="jumbotron" style="padding: 32px">
+    <div class="row">
+        <div class="col-md-4">
+            <img src=@Model.ImageUrl class="img-fluid" />
+        </div>
+        <div class="col-md-8">
+            <h1 class="display-4">@ViewBag.Title</h1>
+            <hr class="my-4">
+            <p><strong>Age: </strong>@Html.DisplayFor(x => x.Age)</p>
+            <p><strong>Born: </strong>@Model.BirthDate.ToLongDateString()</p>
+            @if (Model.DeathDate.HasValue)
+            {
+                <p><strong>Died: </strong>@Model.DeathDate.Value.ToLongDateString()</p>
+            }
+        </div>
+    </div>
+</div>

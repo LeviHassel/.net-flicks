@@ -22,7 +22,7 @@ namespace CoreTemplate.Accessors.Config
             services.AddTransient<IDepartmentAccessor, DepartmentAccessor>();
             services.AddTransient<IMovieAccessor, MovieAccessor>();
             services.AddTransient<IMovieGenreAccessor, MovieGenreAccessor>();
-            services.AddTransient<IMoviePersonAccessor, MoviePersonAccessor>();
+            services.AddTransient<ICrewMemberAccessor, CrewMemberAccessor>();
             services.AddTransient<IPersonAccessor, PersonAccessor>();
 
             return services;

@@ -2,7 +2,7 @@
 
 namespace CoreTemplate.Accessors.Models.EF
 {
-    public class MoviePerson : Entity
+    public class CrewMember : Entity
     {
         public int MovieId { get; set; }
 
@@ -15,5 +15,7 @@ namespace CoreTemplate.Accessors.Models.EF
         public int DepartmentId { get; set; }
 
         public virtual Department Department { get; set; }
+
+        public string Position { get; set; }
     }
 }

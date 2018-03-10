@@ -23,7 +23,7 @@ namespace CoreTemplate.Tests.ManagerTests
         private Mock<IDepartmentAccessor> _departmentAccessorMock;
         private Mock<IMovieAccessor> _movieAccessorMock;
         private Mock<IMovieGenreAccessor> _movieGenreAccessorMock;
-        private Mock<IMoviePersonAccessor> _moviePersonAccessorMock;
+        private Mock<ICrewMemberAccessor> _crewMemberAccessorMock;
         private Mock<IPersonAccessor> _personAccessorMock;
 
         //This is method is called before the start of every test in this class
@@ -35,7 +35,7 @@ namespace CoreTemplate.Tests.ManagerTests
                 _departmentAccessorMock.Object,
                 _movieAccessorMock.Object,
                 _movieGenreAccessorMock.Object,
-                _moviePersonAccessorMock.Object,
+                _crewMemberAccessorMock.Object,
                 _personAccessorMock.Object);
 
             //Set up a Fixture to populate random data: https://github.com/AutoFixture/AutoFixture

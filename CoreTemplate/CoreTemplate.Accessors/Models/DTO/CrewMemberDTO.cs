@@ -2,7 +2,7 @@
 
 namespace CoreTemplate.Accessors.Models.DTO
 {
-    public class MoviePersonDTO : EntityDTO
+    public class CrewMemberDTO : EntityDTO
     {
         public int MovieId { get; set; }
 
@@ -15,5 +15,7 @@ namespace CoreTemplate.Accessors.Models.DTO
         public int DepartmentId { get; set; }
 
         public DepartmentDTO Department { get; set; }
+
+        public string Position { get; set; }
     }
 }

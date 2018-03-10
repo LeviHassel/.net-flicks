@@ -1,15 +1,18 @@
-﻿@model CoreTemplate.ViewModels.Movie.MoviePersonViewModel
+﻿@model CoreTemplate.ViewModels.Movie.CrewMemberViewModel
 
 <tr class="row">
-    <td class="col-5" style="vertical-align: middle">
+    <td class="col-3" style="vertical-align: middle">
         <select asp-for="PersonId" asp-items="@Model.People" class="form-control selectpicker" data-live-search="true">
             <option disabled selected>Select</option>
         </select>
     </td>
-    <td class="col-5" style="vertical-align: middle">
+    <td class="col-3" style="vertical-align: middle">
         <select asp-for="DepartmentId" asp-items="@Model.Departments" class="form-control selectpicker" data-live-search="true">
             <option disabled selected>Select</option>
         </select>
+    </td>
+    <td class="col-4" style="vertical-align: middle">
+        <input asp-for="Position" class="form-control" />
     </td>
     <td class="col-2">
         <input asp-for="IsDeleted" type="hidden" />

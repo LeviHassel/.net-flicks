@@ -16,21 +16,21 @@ namespace CoreTemplate.Managers.Managers
         private IDepartmentAccessor _departmentAccessor;
         private IMovieAccessor _movieAccessor;
         private IMovieGenreAccessor _movieGenreAccessor;
-        private IMoviePersonAccessor _moviePersonAccessor;
+        private ICrewMemberAccessor _crewMemberAccessor;
         private IPersonAccessor _personAccessor;
 
         public MovieManager(IGenreAccessor genreAccessor,
             IDepartmentAccessor departmentAccessor,
             IMovieAccessor movieAccessor,
             IMovieGenreAccessor movieGenreAccessor,
-            IMoviePersonAccessor moviePersonAccessor,
+            ICrewMemberAccessor crewMemberAccessor,
             IPersonAccessor personAccessor)
         {
             _genreAccessor = genreAccessor;
             _departmentAccessor = departmentAccessor;
             _movieAccessor = movieAccessor;
             _movieGenreAccessor = movieGenreAccessor;
-            _moviePersonAccessor = moviePersonAccessor;
+            _crewMemberAccessor = crewMemberAccessor;
             _personAccessor = personAccessor;
         }
 
@@ -47,7 +47,7 @@ namespace CoreTemplate.Managers.Managers
 
             if (movieDto.People != null && movieDto.People.Any())
             {
-                vm.People = Mapper.Map<List<MoviePersonViewModel>>(movieDto.People)
+                vm.People = Mapper.Map<List<CrewMemberViewModel>>(movieDto.People)
                 .OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName)
                 .ToList();
             }
@@ -86,12 +86,12 @@ namespace CoreTemplate.Managers.Managers
             return new MoviesViewModel { Movies = vms };
         }
 
-        public MoviePersonViewModel GetNewPerson(int index)
+        public CrewMemberViewModel GetNewPerson(int index)
         {
             var personDtos = _personAccessor.GetAll().OrderBy(x => x.FirstName);
             var departmentDtos = _departmentAccessor.GetAll().OrderBy(x => x.Name);
 
-            var vm = new MoviePersonViewModel
+            var vm = new CrewMemberViewModel
             {
                 Index = index,
                 People = new SelectList(personDtos, "Id", "FullName"),
@@ -108,23 +108,24 @@ namespace CoreTemplate.Managers.Managers
 
             dto = _movieAccessor.Save(dto);
 
-            var moviePersonDtos = new List<MoviePersonDTO>();
+            var crewMemberDtos = new List<CrewMemberDTO>();
 
             if (vm.People != null && vm.People.Any())
             {
-                moviePersonDtos.AddRange(vm.People
+                crewMemberDtos.AddRange(vm.People
                     .Where(x => !x.IsDeleted && x.PersonId != 0 && x.DepartmentId != 0)
-                    .Select(x => new MoviePersonDTO
+                    .Select(x => new CrewMemberDTO
                     {
                         Id = x.Id,
                         MovieId = dto.Id,
                         PersonId = x.PersonId,
-                        DepartmentId = x.DepartmentId
+                        DepartmentId = x.DepartmentId,
+                        Position = x.Position
                     }));
             }
 
             _movieGenreAccessor.SaveAll(dto.Id, vm.GenreIds);
-            _moviePersonAccessor.SaveAll(dto.Id, moviePersonDtos);
+            _crewMemberAccessor.SaveAll(dto.Id, crewMemberDtos);
 
             vm = Mapper.Map<MovieViewModel>(dto);
 
@@ -134,7 +135,7 @@ namespace CoreTemplate.Managers.Managers
         public MovieViewModel Delete(int id)
         {
             _movieGenreAccessor.DeleteAllByMovie(id);
-            _moviePersonAccessor.DeleteAllByMovie(id);
+            _crewMemberAccessor.DeleteAllByMovie(id);
 
             var dto = _movieAccessor.Delete(id);
             var vm = Mapper.Map<MovieViewModel>(dto);

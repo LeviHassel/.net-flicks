@@ -11,27 +11,27 @@ namespace CoreTemplate.Managers.Managers
 {
     public class PersonManager : IPersonManager
     {
-        private IMoviePersonAccessor _moviePersonAccessor;
+        private ICrewMemberAccessor _crewMemberAccessor;
         private IPersonAccessor _personAccessor;
 
-        public PersonManager(IMoviePersonAccessor moviePersonAccessor,
+        public PersonManager(ICrewMemberAccessor crewMemberAccessor,
             IPersonAccessor personAccessor)
         {
-            _moviePersonAccessor = moviePersonAccessor;
+            _crewMemberAccessor = crewMemberAccessor;
             _personAccessor = personAccessor;
         }
 
         public PersonViewModel Get(int? id)
         {
             var personDto = id.HasValue ? _personAccessor.Get(id.Value) : new PersonDTO();
-            var moviePersonDtos = id.HasValue ? _moviePersonAccessor.GetAllByPerson(personDto.Id) : new List<MoviePersonDTO>();
+            var crewMemberDtos = id.HasValue ? _crewMemberAccessor.GetAllByPerson(personDto.Id) : new List<CrewMemberDTO>();
 
             var vm = Mapper.Map<PersonViewModel>(personDto);
 
-            if (moviePersonDtos != null && moviePersonDtos.Any())
+            if (crewMemberDtos != null && crewMemberDtos.Any())
             {
-                vm.MoviesCount = moviePersonDtos.Count();
-                vm.MoviesTooltip = ListHelper.GetBulletedList(moviePersonDtos.Select(x => string.Format("{0} ({1})", x.Movie.Name, x.Department.Name)).ToList());
+                vm.MoviesCount = crewMemberDtos.Count();
+                vm.MoviesTooltip = ListHelper.GetBulletedList(crewMemberDtos.Select(x => string.Format("{0} ({1})", x.Movie.Name, x.Department.Name)).ToList());
             }
 
             return vm;
@@ -40,7 +40,7 @@ namespace CoreTemplate.Managers.Managers
         public PeopleViewModel GetAll()
         {
             var personDtos = _personAccessor.GetAll();
-            var moviePersonDtos = _moviePersonAccessor.GetAll().OrderBy(x => x.Movie.Name);
+            var crewMemberDtos = _crewMemberAccessor.GetAll().OrderBy(x => x.Movie.Name);
 
             var vms = Mapper.Map<List<PersonViewModel>>(personDtos);
 
@@ -48,7 +48,7 @@ namespace CoreTemplate.Managers.Managers
             {
                 vm.Age = AgeHelper.GetAge(vm.BirthDate, vm.DeathDate);
 
-                var movies = moviePersonDtos.Where(x => x.PersonId == vm.Id);
+                var movies = crewMemberDtos.Where(x => x.PersonId == vm.Id);
 
                 if (movies != null && movies.Any())
                 {

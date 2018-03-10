@@ -16,6 +16,6 @@ namespace CoreTemplate.Accessors.Models.EF
 
         public string ImageUrl { get; set; }
 
-        public virtual ICollection<MoviePerson> Movies { get; set; }
+        public virtual ICollection<CrewMember> Movies { get; set; }
     }
 }

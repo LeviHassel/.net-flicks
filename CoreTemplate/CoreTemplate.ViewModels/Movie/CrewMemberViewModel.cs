@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 
 namespace CoreTemplate.ViewModels.Movie
 {
-    public class MoviePersonViewModel : EntityViewModel
+    public class CrewMemberViewModel : EntityViewModel
     {
         public int Index { get; set; }
 
@@ -15,6 +15,9 @@ namespace CoreTemplate.ViewModels.Movie
 
         [Required]
         public int DepartmentId { get; set; }
+
+        [Required]
+        public string Position { get; set; }
 
         public SelectList People { get; set; }
 

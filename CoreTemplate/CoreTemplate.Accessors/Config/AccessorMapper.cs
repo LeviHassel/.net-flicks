@@ -12,7 +12,7 @@ namespace CoreTemplate.Accessors.Config
             CreateMap<Genre, GenreDTO>().ReverseMap();
             CreateMap<Movie, MovieDTO>().ReverseMap();
             CreateMap<MovieGenre, MovieGenreDTO>().ReverseMap();
-            CreateMap<MoviePerson, MoviePersonDTO>().ReverseMap();
+            CreateMap<CrewMember, CrewMemberDTO>().ReverseMap();
             CreateMap<Person, PersonDTO>().ReverseMap();
             CreateMap<UserMovie, UserMovieDTO>().ReverseMap();
         }

@@ -16,7 +16,7 @@ namespace CoreTemplate.Accessors.Models.DTO
 
         public string ImageUrl { get; set; }
 
-        public ICollection<MoviePersonDTO> Movies { get; set; }
+        public ICollection<CrewMemberDTO> Movies { get; set; }
 
         public string FullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
     }

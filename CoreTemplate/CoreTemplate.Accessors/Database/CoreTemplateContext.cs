@@ -52,7 +52,7 @@ namespace CoreTemplate.Accessors.Database
         public DbSet<Genre> Genres { get; set; }
         public DbSet<Movie> Movies { get; set; }
         public DbSet<MovieGenre> MovieGenres { get; set; }
-        public DbSet<MoviePerson> MoviePeople { get; set; }
+        public DbSet<CrewMember> CrewMembers { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<UserMovie> UserMovies { get; set; }
     }

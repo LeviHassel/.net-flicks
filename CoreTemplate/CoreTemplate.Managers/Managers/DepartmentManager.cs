@@ -12,26 +12,26 @@ namespace CoreTemplate.Managers.Managers
     public class DepartmentManager : IDepartmentManager
     {
         private IDepartmentAccessor _departmentAccessor;
-        private IMoviePersonAccessor _moviePersonAccessor;
+        private ICrewMemberAccessor _crewMemberAccessor;
 
         public DepartmentManager(IDepartmentAccessor departmentAccessor,
-            IMoviePersonAccessor moviePersonAccessor)
+            ICrewMemberAccessor crewMemberAccessor)
         {
             _departmentAccessor = departmentAccessor;
-            _moviePersonAccessor = moviePersonAccessor;
+            _crewMemberAccessor = crewMemberAccessor;
         }
 
         public DepartmentViewModel Get(int? id)
         {
             var departmentDto = id.HasValue ? _departmentAccessor.Get(id.Value) : new DepartmentDTO();
-            var moviePersonDtos = id.HasValue ? _moviePersonAccessor.GetAllByDepartment(departmentDto.Id) : new List<MoviePersonDTO>();
+            var crewMemberDtos = id.HasValue ? _crewMemberAccessor.GetAllByDepartment(departmentDto.Id) : new List<CrewMemberDTO>();
 
             var vm = Mapper.Map<DepartmentViewModel>(departmentDto);
 
-            if (moviePersonDtos != null && moviePersonDtos.Any())
+            if (crewMemberDtos != null && crewMemberDtos.Any())
             {
-                vm.PeopleCount = moviePersonDtos.Count();
-                vm.PeopleTooltip = ListHelper.GetBulletedList(moviePersonDtos.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Movie.Name)).ToList());
+                vm.PeopleCount = crewMemberDtos.Count();
+                vm.PeopleTooltip = ListHelper.GetBulletedList(crewMemberDtos.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Movie.Name)).ToList());
             }
 
             return vm;
@@ -40,13 +40,13 @@ namespace CoreTemplate.Managers.Managers
         public DepartmentsViewModel GetAll()
         {
             var departmentDtos = _departmentAccessor.GetAll();
-            var moviePersonDtos = _moviePersonAccessor.GetAll().OrderBy(x => x.Person.FirstName);
+            var crewMemberDtos = _crewMemberAccessor.GetAll().OrderBy(x => x.Person.FirstName);
 
             var vms = Mapper.Map<List<DepartmentViewModel>>(departmentDtos);
 
             foreach (var vm in vms)
             {
-                var people = moviePersonDtos.Where(x => x.DepartmentId == vm.Id);
+                var people = crewMemberDtos.Where(x => x.DepartmentId == vm.Id);
 
                 if (people != null && people.Any())
                 {

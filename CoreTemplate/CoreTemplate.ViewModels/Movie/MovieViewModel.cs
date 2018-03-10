@@ -48,7 +48,7 @@ namespace CoreTemplate.ViewModels.Movie
         [Display(Name = "Genres")]
         public List<int> GenreIds { get; set; }
 
-        public List<MoviePersonViewModel> People { get; set; }
+        public List<CrewMemberViewModel> People { get; set; }
 
         public int GenresCount { get; set; }
 

@@ -71,7 +71,7 @@ namespace CoreTemplate.Web.Controllers
 
             ViewData.TemplateInfo.HtmlFieldPrefix = string.Format("People[{0}]", index);
 
-            return PartialView("../Movie/EditorTemplates/MoviePersonViewModel", vm);
+            return PartialView("../Movie/EditorTemplates/CrewMemberViewModel", vm);
         }
     }
 }

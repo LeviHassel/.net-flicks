@@ -14,7 +14,7 @@ namespace CoreTemplate.Managers.Config
             CreateMap<GenreDTO, GenreViewModel>().ReverseMap();
             CreateMap<DepartmentDTO, DepartmentViewModel>().ReverseMap();
             CreateMap<MovieDTO, MovieViewModel>().ReverseMap();
-            CreateMap<MoviePersonDTO, MoviePersonViewModel>().ReverseMap();
+            CreateMap<CrewMemberDTO, CrewMemberViewModel>().ReverseMap();
             CreateMap<PersonDTO, PersonViewModel>().ReverseMap();
         }
 

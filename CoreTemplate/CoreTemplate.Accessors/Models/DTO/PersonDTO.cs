@@ -16,6 +16,8 @@ namespace CoreTemplate.Accessors.Models.DTO
 
         public string ImageUrl { get; set; }
 
+        public ICollection<CastMemberDTO> CastRoles { get; set; }
+
         public ICollection<CrewMemberDTO> CrewRoles { get; set; }
 
         public string FullName { get { return string.Format("{0} {1}", FirstName, LastName); } }

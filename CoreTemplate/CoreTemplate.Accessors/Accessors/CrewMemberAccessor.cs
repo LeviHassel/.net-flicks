@@ -80,11 +80,11 @@ namespace CoreTemplate.Accessors.Accessors
         /// <returns></returns>
         public List<CrewMemberDTO> SaveAll(int movieId, List<CrewMemberDTO> dtos)
         {
-            //Create/update entries from given list
+            //Create/update entries from crew list
             var entities = Mapper.Map<List<CrewMember>>(dtos ?? new List<CrewMemberDTO>());
             _db.CrewMembers.UpdateRange(entities);
 
-            //Delete existing entries not in given list
+            //Delete existing entries not in crew list
             var entityIds = entities.Select(x => x.Id);
             var entitiesToRemove = _db.CrewMembers.Where(x => x.MovieId == movieId && !entityIds.Contains(x.Id)).ToList();
             _db.CrewMembers.RemoveRange(entitiesToRemove);

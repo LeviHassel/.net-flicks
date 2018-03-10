@@ -32,35 +32,56 @@
 </div>
 
 <div class="container">
-    <h2>Crew<span class="float-right"><small>Total: @Html.DisplayFor(x => x.CrewCount)</small></span></h2>
-    <br />
-    <table class="table sortable">
-        <thead>
-            <tr>
-                <th data-defaultsort="asc"><h5>Name</h5></th>
-                <th><h5>Role</h5></th>
-                <th data-defaultsort="disabled"></th>
-            </tr>
-        </thead>
-        <tbody>
-            @foreach (var person in Model.Crew)
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Cast <small>(@Html.DisplayFor(x => x.CrewCount))</small></h2>
+            <br />
+            <table class="table">
+                <tbody>
+                    @foreach (var person in Model.Cast)
+                    {
+                        var selectedPerson = person.People.Single(x => x.Selected);
+                        var personId = selectedPerson.Value;
+                        var personName = selectedPerson.Text;
+
+                        <tr>
+                            <td style="vertical-align: middle">
+                                <a asp-controller="Person" asp-action="View" asp-route-id="@personId">@personName</a>
+                            </td>
+                            <td style="vertical-align: middle">@person.Role</td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div class="col-md-6">
+            <h2>Crew <small>(@Html.DisplayFor(x => x.CrewCount))</small></h2>
+            <br />
+
+            @foreach (var department in Model.Crew.GroupBy(x => x.DepartmentId))
             {
-                var selectedPerson = person.People.Single(x => x.Selected);
-                var personId = selectedPerson.Value;
-                var personName = selectedPerson.Text;
-                var personDepartment = person.Departments.Single(x => x.Selected).Text;
-                <tr>
-                    <td style="vertical-align: middle">@personName</td>
-                    <td style="vertical-align: middle">@personDepartment</td>
-                    <td>
-                        <div class="btn-toolbar float-right">
-                            <a class="btn btn-primary" asp-controller="Person" asp-action="View" asp-route-id="@personId">
-                                <i class="fas fa-eye"></i>
-                            </a>
-                        </div>
-                    </td>
-                </tr>
+                var departmentName = department.First().Departments.Single(x => x.Selected).Text;
+                <p>@departmentName</p>
+                <table class="table">
+                    <tbody>
+                        @foreach (var person in department)
+                        {
+                            var selectedPerson = person.People.Single(x => x.Selected);
+                            var personId = selectedPerson.Value;
+                            var personName = selectedPerson.Text;
+                            
+                            <tr>
+                                <td style="vertical-align: middle">
+                                    <a asp-controller="Person" asp-action="View" asp-route-id="@personId">@personName</a>
+                                </td>
+                                <td style="vertical-align: middle">@person.Position</td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <br />
             }
-        </tbody>
-    </table>
+
+        </div>
+    </div>
 </div>

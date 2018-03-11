@@ -1,13 +1,12 @@
 ﻿using AutoMapper;
 using CoreTemplate.Accessors.Models.DTO;
-using CoreTemplate.ViewModels.Genre;
 using CoreTemplate.ViewModels.Department;
+using CoreTemplate.ViewModels.Genre;
 using CoreTemplate.ViewModels.Movie;
 using CoreTemplate.ViewModels.Person;
 using CoreTemplate.ViewModels.Shared;
-using System.Linq;
-using CoreTemplate.Common.Helpers;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CoreTemplate.Managers.Config
 {
@@ -18,7 +17,7 @@ namespace CoreTemplate.Managers.Config
             CreateMap<CastMemberDTO, CastMemberViewModel>().ReverseMap();
 
             CreateMap<CastMemberDTO, MovieRoleViewModel>()
-                .ForMember(dest => dest.PersonId, opt => opt.MapFrom(src => src.Person.Id))
+                .ForMember(dest => dest.PersonId, opt => opt.MapFrom(src => src.PersonId))
                 .ForMember(dest => dest.PersonName, opt => opt.MapFrom(src => src.Person.FullName))
                 .ForMember(dest => dest.MovieId, opt => opt.MapFrom(src => src.MovieId))
                 .ForMember(dest => dest.MovieName, opt => opt.MapFrom(src => src.Movie.Name))
@@ -28,7 +27,7 @@ namespace CoreTemplate.Managers.Config
             CreateMap<CrewMemberDTO, CrewMemberViewModel>().ReverseMap();
 
             CreateMap<CrewMemberDTO, MovieRoleViewModel>()
-                .ForMember(dest => dest.PersonId, opt => opt.MapFrom(src => src.Person.Id))
+                .ForMember(dest => dest.PersonId, opt => opt.MapFrom(src => src.PersonId))
                 .ForMember(dest => dest.PersonName, opt => opt.MapFrom(src => src.Person.FullName))
                 .ForMember(dest => dest.MovieId, opt => opt.MapFrom(src => src.MovieId))
                 .ForMember(dest => dest.MovieName, opt => opt.MapFrom(src => src.Movie.Name))

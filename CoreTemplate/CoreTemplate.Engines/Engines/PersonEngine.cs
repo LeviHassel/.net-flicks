@@ -22,8 +22,15 @@ namespace CoreTemplate.Engines.Engines
 
         public void UpdateCast(List<CastMemberViewModel> castMemberVms, int movieId)
         {
-            //Filter out deleted or incomplete cast members
-            castMemberVms = castMemberVms.Where(x => !x.IsDeleted && x.PersonId != 0 && !string.IsNullOrWhiteSpace(x.Role)).ToList();
+            if (castMemberVms == null)
+            {
+                castMemberVms = new List<CastMemberViewModel>();
+            }
+            else
+            {
+                //Filter out deleted or incomplete cast members
+                castMemberVms = castMemberVms.Where(x => !x.IsDeleted && x.PersonId != 0 && !string.IsNullOrWhiteSpace(x.Role)).ToList();
+            }
 
             var castMemberDtos = Mapper.Map<List<CastMemberDTO>>(castMemberVms);
 
@@ -37,8 +44,15 @@ namespace CoreTemplate.Engines.Engines
 
         public void UpdateCrew(List<CrewMemberViewModel> crewMemberVms, int movieId)
         {
-            //Filter out deleted or incomplete crew members
-            crewMemberVms = crewMemberVms.Where(x => !x.IsDeleted && x.PersonId != 0 && x.DepartmentId != 0 && !string.IsNullOrWhiteSpace(x.Position)).ToList();
+            if (crewMemberVms == null)
+            {
+                crewMemberVms = new List<CrewMemberViewModel>();
+            }
+            else
+            {
+                //Filter out deleted or incomplete crew members
+                crewMemberVms = crewMemberVms.Where(x => !x.IsDeleted && x.PersonId != 0 && x.DepartmentId != 0 && !string.IsNullOrWhiteSpace(x.Position)).ToList();
+            }
 
             var crewMemberDtos = Mapper.Map<List<CrewMemberDTO>>(crewMemberVms);
 

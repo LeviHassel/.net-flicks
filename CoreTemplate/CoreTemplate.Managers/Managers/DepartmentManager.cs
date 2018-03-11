@@ -4,6 +4,7 @@ using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Common.Helpers;
 using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Department;
+using CoreTemplate.ViewModels.Shared;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -30,8 +31,7 @@ namespace CoreTemplate.Managers.Managers
 
             if (crewMemberDtos != null && crewMemberDtos.Any())
             {
-                vm.PeopleCount = crewMemberDtos.Count();
-                vm.PeopleTooltip = ListHelper.GetBulletedList(crewMemberDtos.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Movie.Name)).ToList());
+                vm.People = Mapper.Map<List<MovieRoleViewModel>>(crewMemberDtos);
             }
 
             return vm;
@@ -50,8 +50,7 @@ namespace CoreTemplate.Managers.Managers
 
                 if (people != null && people.Any())
                 {
-                    vm.PeopleCount = people.Count();
-                    vm.PeopleTooltip = ListHelper.GetTooltipList(people.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Movie.Name)).ToList());
+                    vm.People = Mapper.Map<List<MovieRoleViewModel>>(people);
                 }
             }
 

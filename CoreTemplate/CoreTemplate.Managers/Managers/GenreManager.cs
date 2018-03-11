@@ -22,7 +22,7 @@ namespace CoreTemplate.Managers.Managers
             _movieGenreAccessor = movieGenreAccessor;
         }
 
-        public GenreViewModel Get(int? id, bool includeMovies = false)
+        public GenreViewModel Get(int? id)
         {
             var genreDto = id.HasValue ? _genreAccessor.Get(id.Value) : new GenreDTO();
             var movieGenreDtos = id.HasValue ? _movieGenreAccessor.GetAllByGenre(genreDto.Id) : new List<MovieGenreDTO>();
@@ -31,16 +31,7 @@ namespace CoreTemplate.Managers.Managers
             
             if (movieGenreDtos.Any())
             {
-                vm.MoviesCount = movieGenreDtos.Count();
-
-                if (includeMovies)
-                {
-                    vm.Movies = Mapper.Map<List<MovieViewModel>>(movieGenreDtos.Select(x => x.Movie));
-                }
-                else
-                {
-                    vm.MoviesTooltip = ListHelper.GetBulletedList(movieGenreDtos.Select(x => x.Movie.Name).ToList());
-                }
+                vm.Movies = Mapper.Map<List<MovieViewModel>>(movieGenreDtos.Select(x => x.Movie));
             }
 
             return vm;
@@ -55,12 +46,11 @@ namespace CoreTemplate.Managers.Managers
 
             foreach (var vm in vms)
             {
-                var movies = movieGenreDtos.Where(x => x.GenreId == vm.Id);
+                var movies = movieGenreDtos.Where(x => x.GenreId == vm.Id).Select(x => x.Movie);
 
-                if (movies != null && movies.Any())
+                if (movies.Any())
                 {
-                    vm.MoviesCount = movies.Count();
-                    vm.MoviesTooltip = ListHelper.GetTooltipList(movies.Select(x => x.Movie.Name).ToList());
+                    vm.Movies = Mapper.Map<List<MovieViewModel>>(movies);
                 }
             }
 

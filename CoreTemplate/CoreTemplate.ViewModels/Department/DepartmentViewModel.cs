@@ -1,5 +1,9 @@
-﻿using CoreTemplate.ViewModels.Base;
+﻿using CoreTemplate.Common.Helpers;
+using CoreTemplate.ViewModels.Base;
+using CoreTemplate.ViewModels.Shared;
+using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace CoreTemplate.ViewModels.Department
 {
@@ -8,9 +12,10 @@ namespace CoreTemplate.ViewModels.Department
         [Required(AllowEmptyStrings = false)]
         public string Name { get; set; }
 
-        public int PeopleCount { get; set; }
+        public List<MovieRoleViewModel> People { get; set; }
 
-        [Display(Name = "People")]
-        public string PeopleTooltip { get; set; }
+        public string PeopleTooltip { get { return ListHelper.GetTooltipList(People.Select(x => string.Format("{0} - {1}", x.PersonName, x.MovieName)).ToList()); } }
+
+        public string PeopleBulletedList { get { return ListHelper.GetBulletedList(People.Select(x => string.Format("{0} - {1}", x.PersonName, x.MovieName)).ToList()); } }
     }
 }

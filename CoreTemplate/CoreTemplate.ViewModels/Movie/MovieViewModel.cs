@@ -1,9 +1,11 @@
-﻿using CoreTemplate.ViewModels.Base;
+﻿using CoreTemplate.Common.Helpers;
+using CoreTemplate.ViewModels.Base;
 using CoreTemplate.ViewModels.Genre;
 using CoreTemplate.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace CoreTemplate.ViewModels.Movie
 {
@@ -38,11 +40,10 @@ namespace CoreTemplate.ViewModels.Movie
 
         public List<GenreViewModel> Genres { get; set; }
 
-        [Display(Name = "Genres")]
-        public string GenresTooltip { get; set; }
-
         public List<MovieRoleViewModel> Cast { get; set; }
 
         public List<MovieRoleViewModel> Crew { get; set; }
+
+        public string GenresTooltip { get { return ListHelper.GetTooltipList(Genres.Select(x => x.Name).OrderBy(y => y).ToList()); } }
     }
 }

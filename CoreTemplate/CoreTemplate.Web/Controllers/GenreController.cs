@@ -24,7 +24,7 @@ namespace CoreTemplate.Web.Controllers
 
         public ActionResult View(int id)
         {
-            var vm = _genreManager.Get(id, true);
+            var vm = _genreManager.Get(id);
 
             return View(vm);
         }

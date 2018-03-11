@@ -13,7 +13,7 @@
         @if (Model.Roles.Count > 0)
         {
             <h4 class="text-danger">@Model.FirstName @Model.LastName cannot be deleted because they're in the cast or crew for @Model.Roles.Count movies: </h4>
-            <p>@Html.Raw(Model.RolesTooltip)</p>
+            <p>@Html.Raw(Model.RolesBulletedList)</p>
         }
         else
         {

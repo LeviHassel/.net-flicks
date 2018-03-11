@@ -41,8 +41,7 @@ namespace CoreTemplate.Managers.Config
             CreateMap<GenreDTO, GenreViewModel>().ReverseMap();
 
             CreateMap<MovieDTO, MovieViewModel>()
-                .ForMember(dest => dest.Genres, opt => opt.MapFrom(src => src.Genres.Select(x => x.Genre)))
-                .ForMember(dest => dest.GenresTooltip, opt => opt.MapFrom(src => ListHelper.GetTooltipList(src.Genres.Select(x => x.Genre.Name).OrderBy(y => y).ToList())));
+                .ForMember(dest => dest.Genres, opt => opt.MapFrom(src => src.Genres.Select(x => x.Genre)));
 
             CreateMap<MovieViewModel, MovieDTO>();
 

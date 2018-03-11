@@ -1,7 +1,9 @@
-﻿using CoreTemplate.ViewModels.Base;
+﻿using CoreTemplate.Common.Helpers;
+using CoreTemplate.ViewModels.Base;
 using CoreTemplate.ViewModels.Movie;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace CoreTemplate.ViewModels.Genre
 {
@@ -12,9 +14,8 @@ namespace CoreTemplate.ViewModels.Genre
 
         public List<MovieViewModel> Movies { get; set; }
 
-        public int MoviesCount { get; set; }
+        public string MoviesTooltip { get { return ListHelper.GetTooltipList(Movies.Select(x => x.Name).ToList()); } }
 
-        [Display(Name = "Movies")]
-        public string MoviesTooltip { get; set; }
+        public string MoviesBulletedList { get { return ListHelper.GetBulletedList(Movies.Select(x => x.Name).ToList()); } }
     }
 }

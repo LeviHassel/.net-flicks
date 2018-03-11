@@ -20,7 +20,6 @@ namespace CoreTemplate.Managers.Managers
         {
             var dto = id.HasValue ? _departmentAccessor.Get(id.Value) : new DepartmentDTO();
 
-            //TODO: Sort the People list?
             var vm = Mapper.Map<DepartmentViewModel>(dto);
 
             return vm;
@@ -30,7 +29,6 @@ namespace CoreTemplate.Managers.Managers
         {
             var dtos = _departmentAccessor.GetAll();
 
-            //TODO: Order People lists by Person First name
             var vms = Mapper.Map<List<DepartmentViewModel>>(dtos);
 
             return new DepartmentsViewModel { Departments = vms };

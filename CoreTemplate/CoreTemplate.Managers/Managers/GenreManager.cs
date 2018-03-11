@@ -20,7 +20,6 @@ namespace CoreTemplate.Managers.Managers
         {
             var genreDto = id.HasValue ? _genreAccessor.Get(id.Value) : new GenreDTO();
 
-            //TODO: Sort the Genre list?
             var vm = Mapper.Map<GenreViewModel>(genreDto);
 
             return vm;
@@ -30,7 +29,6 @@ namespace CoreTemplate.Managers.Managers
         {
             var genreDtos = _genreAccessor.GetAll();
 
-            //TODO: Order Movie lists by Movie Name?
             var vms = Mapper.Map<List<GenreViewModel>>(genreDtos);
 
             return new GenresViewModel { Genres = vms };

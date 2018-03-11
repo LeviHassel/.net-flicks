@@ -1,12 +1,9 @@
 ﻿using AutoMapper;
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
-using CoreTemplate.Common.Helpers;
 using CoreTemplate.Engines.Interfaces;
 using CoreTemplate.Managers.Interfaces;
-using CoreTemplate.ViewModels.Genre;
 using CoreTemplate.ViewModels.Movie;
-using CoreTemplate.ViewModels.Shared;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;

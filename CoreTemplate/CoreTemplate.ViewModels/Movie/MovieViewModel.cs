@@ -44,6 +44,6 @@ namespace CoreTemplate.ViewModels.Movie
 
         public List<MovieRoleViewModel> Crew { get; set; }
 
-        public string GenresTooltip { get { return ListHelper.GetTooltipList(Genres.Select(x => x.Name).OrderBy(y => y).ToList()); } }
+        public string GenresTooltip { get { return Genres != null ? ListHelper.GetTooltipList(Genres.Select(x => x.Name).OrderBy(y => y).ToList()) : ""; } }
     }
 }

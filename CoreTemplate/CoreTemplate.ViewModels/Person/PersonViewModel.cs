@@ -34,11 +34,11 @@ namespace CoreTemplate.ViewModels.Person
 
         public List<MovieRoleViewModel> Roles { get; set; }
 
-        public string RolesTooltip { get { return ListHelper.GetTooltipList(Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList()); } }
+        public string RolesTooltip { get { return Roles != null ? ListHelper.GetTooltipList(Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList()) : ""; } }
 
-        public string RolesBulletedList { get { return ListHelper.GetBulletedList(Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList()); } }
+        public string RolesBulletedList { get { return Roles != null ? ListHelper.GetBulletedList(Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList()) : ""; } }
 
-        public string KnownFor { get { return Roles.GroupBy(x => x.Category).OrderBy(x => x.Count()).First().Key; } }
+        public string KnownFor { get { return Roles != null && Roles.Any() ? Roles.GroupBy(x => x.Category).OrderBy(x => x.Count()).First().Key : ""; } }
 
         public int Age { get { return DateHelper.GetAge(BirthDate, DeathDate); } }
     }

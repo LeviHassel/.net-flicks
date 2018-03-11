@@ -14,8 +14,8 @@ namespace CoreTemplate.ViewModels.Department
 
         public List<MovieRoleViewModel> People { get; set; }
 
-        public string PeopleTooltip { get { return ListHelper.GetTooltipList(People.Select(x => string.Format("{0} - {1}", x.PersonName, x.MovieName)).ToList()); } }
+        public string PeopleTooltip { get { return People != null ? ListHelper.GetTooltipList(People.Select(x => string.Format("{0} - {1}", x.PersonName, x.MovieName)).ToList()) : ""; } }
 
-        public string PeopleBulletedList { get { return ListHelper.GetBulletedList(People.Select(x => string.Format("{0} - {1}", x.PersonName, x.MovieName)).ToList()); } }
+        public string PeopleBulletedList { get { return People != null ? ListHelper.GetBulletedList(People.Select(x => string.Format("{0} - {1}", x.PersonName, x.MovieName)).ToList()) : ""; } }
     }
 }

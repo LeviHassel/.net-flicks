@@ -20,7 +20,10 @@
             {
                 <p><strong>Died: </strong>@Model.DeathDate.Value.ToCustomDateString()</p>
             }
-            <p><strong>Known For: </strong>@Html.DisplayFor(x => x.KnownFor)</p>
+            @if (!string.IsNullOrEmpty(Model.KnownFor))
+            {
+                <p><strong>Known For: </strong>@Html.DisplayFor(x => x.KnownFor)</p>
+            }
             <p><strong>Credits: </strong>@Html.DisplayFor(x => x.Roles.Count)</p>
         </div>
     </div>

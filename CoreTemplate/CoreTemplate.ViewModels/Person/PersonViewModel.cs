@@ -1,8 +1,11 @@
-﻿using CoreTemplate.ViewModels.Base;
+﻿using CoreTemplate.Common.Helpers;
+using CoreTemplate.ViewModels.Base;
 using CoreTemplate.ViewModels.Movie;
+using CoreTemplate.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
+using System.Linq;
 
 namespace CoreTemplate.ViewModels.Person
 {
@@ -29,13 +32,14 @@ namespace CoreTemplate.ViewModels.Person
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }
 
-        public string Age { get; set; }
+        public List<MovieRoleViewModel> Roles { get; set; }
 
-        public List<MovieViewModel> Movies { get; set; }
+        public string RolesTooltip { get { return ListHelper.GetTooltipList(Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList()); } }
 
-        public int MoviesCount { get; set; }
+        public string RolesBulletedList { get { return ListHelper.GetBulletedList(Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList()); } }
 
-        [Display(Name = "Movies")]
-        public string MoviesTooltip { get; set; }
+        public string KnownFor { get { return Roles.GroupBy(x => x.Category).OrderBy(x => x.Count()).First().Key; } }
+
+        public int Age { get { return DateHelper.GetAge(BirthDate, DeathDate); } }
     }
 }

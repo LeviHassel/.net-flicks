@@ -19,7 +19,7 @@
                 <th class="d-none d-sm-table-cell"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().LastName)</h5></th>
                 <th class="d-table-cell d-sm-none"><h5>Name</h5></th>
                 <th class="d-none d-md-table-cell"><h5>Image</h5></th>
-                <th class="d-none d-md-table-cell"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().MoviesTooltip)</h5></th>
+                <th class="d-none d-md-table-cell"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().RolesTooltip)</h5></th>
                 <th width="168" data-defaultsort="disabled"></th>
             </tr>
         </thead>
@@ -39,8 +39,8 @@
                         }
                     </td>
                     <td class="d-none d-md-table-cell">
-                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.MoviesTooltip">
-                            @i.MoviesCount
+                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.RolesTooltip">
+                            @i.Roles.Count
                         </button>
                     </td>
                     <td>

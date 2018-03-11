@@ -5,6 +5,7 @@ using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Accessors.Models.EF;
 using CoreTemplate.Accessors.Models.EF.Base;
+using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,7 +19,11 @@ namespace CoreTemplate.Accessors.Accessors
 
         public PersonDTO Get(int id)
         {
-            var entity = _db.People.Single(x => x.Id == id);
+            var entity = _db.People
+                .Include(x => x.CastRoles).ThenInclude(x => x.Movie)
+                .Include(x => x.CrewRoles).ThenInclude(x => x.Movie)
+                .Include(x => x.CrewRoles).ThenInclude(x => x.Department)
+                .Single(x => x.Id == id);
 
             var dto = Mapper.Map<PersonDTO>(entity);
 
@@ -27,7 +32,11 @@ namespace CoreTemplate.Accessors.Accessors
 
         public List<PersonDTO> GetAll()
         {
-            var entities = _db.People.ToList();
+            var entities = _db.People
+                .Include(x => x.CastRoles).ThenInclude(x => x.Movie)
+                .Include(x => x.CrewRoles).ThenInclude(x => x.Movie)
+                .Include(x => x.CrewRoles).ThenInclude(x => x.Department)
+                .ToList();
 
             var dtos = Mapper.Map<List<PersonDTO>>(entities);
 

@@ -7,6 +7,7 @@ using CoreTemplate.ViewModels.Person;
 using CoreTemplate.ViewModels.Shared;
 using System.Linq;
 using CoreTemplate.Common.Helpers;
+using System.Collections.Generic;
 
 namespace CoreTemplate.Managers.Config
 {
@@ -51,7 +52,10 @@ namespace CoreTemplate.Managers.Config
                 .ForMember(dest => dest.Cast, opt => opt.Ignore())
                 .ForMember(dest => dest.Crew, opt => opt.Ignore());
 
-            CreateMap<PersonDTO, PersonViewModel>().ReverseMap();
+            CreateMap<PersonDTO, PersonViewModel>()
+                .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => Mapper.Map<List<MovieRoleViewModel>>(src.CastRoles).Concat(Mapper.Map<List<MovieRoleViewModel>>(src.CrewRoles)).ToList()));
+
+            CreateMap<PersonViewModel, PersonDTO>();
         }
 
         public override string ProfileName

@@ -15,12 +15,12 @@ namespace CoreTemplate.Common.Helpers
         }
 
         /// <summary>
-        /// Return a string containing either current age or age before death (including years alive)
+        /// Return an int containing either current age or age before death
         /// </summary>
         /// <param name="birthDate"></param>
         /// <param name="deathDate"></param>
         /// <returns></returns>
-        public static string GetAge(DateTime birthDate, DateTime? deathDate)
+        public static int GetAge(DateTime birthDate, DateTime? deathDate)
         {
             var lastDateAlive = deathDate.HasValue ? deathDate.Value : DateTime.Today;
 
@@ -31,14 +31,7 @@ namespace CoreTemplate.Common.Helpers
                 age--;
             }
 
-            var ageString = age.ToString();
-
-            if (deathDate.HasValue)
-            {
-                ageString += " (" + birthDate.Year + "-" + deathDate.Value.Year + ")";
-            }
-
-            return ageString;
+            return age;
         }
     }
 }

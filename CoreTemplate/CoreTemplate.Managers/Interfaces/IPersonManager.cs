@@ -4,7 +4,7 @@ namespace CoreTemplate.Managers.Interfaces
 {
     public interface IPersonManager
     {
-        PersonViewModel Get(int? id, bool includeMovies = false);
+        PersonViewModel Get(int? id);
 
         PeopleViewModel GetAll();
 

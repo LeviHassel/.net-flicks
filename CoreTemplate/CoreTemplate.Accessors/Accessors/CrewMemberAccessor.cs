@@ -5,7 +5,6 @@ using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Accessors.Models.EF;
 using CoreTemplate.Accessors.Models.EF.Base;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,33 +14,6 @@ namespace CoreTemplate.Accessors.Accessors
     {
         public CrewMemberAccessor(CoreTemplateContext db) : base(db)
         {
-        }
-
-        public List<CrewMemberDTO> GetAll()
-        {
-            var entities = _db.CrewMembers
-                .Include(x => x.Movie)
-                .Include(x => x.Person)
-                .Include(x => x.Department)
-                .ToList();
-
-            var dtos = Mapper.Map<List<CrewMemberDTO>>(entities);
-
-            return dtos;
-        }
-
-        public List<CrewMemberDTO> GetAllByDepartment(int departmentId)
-        {
-            var entities = _db.CrewMembers
-                .Include(x => x.Movie)
-                .Include(x => x.Person)
-                .Include(x => x.Department)
-                .Where(x => x.DepartmentId == departmentId)
-                .ToList();
-
-            var dtos = Mapper.Map<List<CrewMemberDTO>>(entities);
-
-            return dtos;
         }
 
         /// <summary>

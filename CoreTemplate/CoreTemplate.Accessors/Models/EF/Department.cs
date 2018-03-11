@@ -1,4 +1,5 @@
 ﻿using CoreTemplate.Accessors.Models.EF.Base;
+using System.Collections.Generic;
 
 namespace CoreTemplate.Accessors.Models.EF
 {
@@ -7,5 +8,7 @@ namespace CoreTemplate.Accessors.Models.EF
         public string Name { get; set; }
 
         public bool IsDirecting { get; set; }
+
+        public virtual ICollection<CrewMember> Roles { get; set; }
     }
 }

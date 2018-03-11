@@ -1,4 +1,5 @@
 ﻿using CoreTemplate.Accessors.Models.DTO.Base;
+using System.Collections.Generic;
 
 namespace CoreTemplate.Accessors.Models.DTO
 {
@@ -7,5 +8,7 @@ namespace CoreTemplate.Accessors.Models.DTO
         public string Name { get; set; }
 
         public bool IsDirecting { get; set; }
+
+        public ICollection<CrewMemberDTO> Roles { get; set; }
     }
 }

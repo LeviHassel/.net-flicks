@@ -1,38 +1,27 @@
 ﻿using AutoMapper;
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
-using CoreTemplate.Common.Helpers;
 using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Genre;
-using CoreTemplate.ViewModels.Movie;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace CoreTemplate.Managers.Managers
 {
     public class GenreManager : IGenreManager
     {
         private IGenreAccessor _genreAccessor;
-        private IMovieGenreAccessor _movieGenreAccessor;
 
-        public GenreManager(IGenreAccessor genreAccessor,
-            IMovieGenreAccessor movieGenreAccessor)
+        public GenreManager(IGenreAccessor genreAccessor)
         {
             _genreAccessor = genreAccessor;
-            _movieGenreAccessor = movieGenreAccessor;
         }
 
         public GenreViewModel Get(int? id)
         {
             var genreDto = id.HasValue ? _genreAccessor.Get(id.Value) : new GenreDTO();
-            var movieGenreDtos = id.HasValue ? _movieGenreAccessor.GetAllByGenre(genreDto.Id) : new List<MovieGenreDTO>();
 
+            //TODO: Sort the Genre list?
             var vm = Mapper.Map<GenreViewModel>(genreDto);
-            
-            if (movieGenreDtos.Any())
-            {
-                vm.Movies = Mapper.Map<List<MovieViewModel>>(movieGenreDtos.Select(x => x.Movie));
-            }
 
             return vm;
         }
@@ -40,19 +29,9 @@ namespace CoreTemplate.Managers.Managers
         public GenresViewModel GetAll()
         {
             var genreDtos = _genreAccessor.GetAll();
-            var movieGenreDtos = _movieGenreAccessor.GetAll().OrderBy(x => x.Movie.Name);
 
+            //TODO: Order Movie lists by Movie Name?
             var vms = Mapper.Map<List<GenreViewModel>>(genreDtos);
-
-            foreach (var vm in vms)
-            {
-                var movies = movieGenreDtos.Where(x => x.GenreId == vm.Id).Select(x => x.Movie);
-
-                if (movies.Any())
-                {
-                    vm.Movies = Mapper.Map<List<MovieViewModel>>(movies);
-                }
-            }
 
             return new GenresViewModel { Genres = vms };
         }

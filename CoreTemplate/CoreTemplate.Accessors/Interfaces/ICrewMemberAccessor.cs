@@ -5,10 +5,6 @@ namespace CoreTemplate.Accessors.Interfaces
 {
     public interface ICrewMemberAccessor
     {
-        List<CrewMemberDTO> GetAll();
-
-        List<CrewMemberDTO> GetAllByDepartment(int departmentId);
-
         /// <summary>
         /// For the given Movie, create/update all CrewMembers in list and delete all CrewMembers not in list
         /// </summary>

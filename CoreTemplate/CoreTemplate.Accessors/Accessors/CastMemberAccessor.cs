@@ -5,7 +5,6 @@ using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Accessors.Models.EF;
 using CoreTemplate.Accessors.Models.EF.Base;
-using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -15,18 +14,6 @@ namespace CoreTemplate.Accessors.Accessors
     {
         public CastMemberAccessor(CoreTemplateContext db) : base(db)
         {
-        }
-
-        public List<CastMemberDTO> GetAll()
-        {
-            var entities = _db.CastMembers
-                .Include(x => x.Movie)
-                .Include(x => x.Person)
-                .ToList();
-
-            var dtos = Mapper.Map<List<CastMemberDTO>>(entities);
-
-            return dtos;
         }
 
         /// <summary>

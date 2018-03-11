@@ -5,8 +5,6 @@ namespace CoreTemplate.Accessors.Interfaces
 {
     public interface ICastMemberAccessor
     {
-        List<CastMemberDTO> GetAll();
-
         /// <summary>
         /// For the given Movie, create/update all CastMembers in list and delete all CastMembers not in list
         /// </summary>

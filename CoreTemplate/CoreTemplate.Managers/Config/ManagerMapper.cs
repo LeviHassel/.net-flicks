@@ -35,9 +35,15 @@ namespace CoreTemplate.Managers.Config
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Position))
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Department.Name));
 
-            CreateMap<DepartmentDTO, DepartmentViewModel>().ReverseMap();
+            CreateMap<DepartmentDTO, DepartmentViewModel>()
+                .ForMember(dest => dest.People, opt => opt.MapFrom(src => src.Roles));
 
-            CreateMap<GenreDTO, GenreViewModel>().ReverseMap();
+            CreateMap<DepartmentViewModel, DepartmentDTO>();
+
+            CreateMap<GenreDTO, GenreViewModel>()
+                .ForMember(dest => dest.Movies, opt => opt.MapFrom(src => src.Movies.Select(x => x.Movie)));
+
+            CreateMap<GenreViewModel, GenreDTO>();
 
             CreateMap<MovieDTO, MovieViewModel>()
                 .ForMember(dest => dest.Genres, opt => opt.MapFrom(src => src.Genres.Select(x => x.Genre)));

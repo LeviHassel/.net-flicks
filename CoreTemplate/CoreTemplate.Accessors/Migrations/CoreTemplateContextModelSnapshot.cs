@@ -353,7 +353,7 @@ namespace CoreTemplate.Accessors.Migrations
             modelBuilder.Entity("CoreTemplate.Accessors.Models.EF.CrewMember", b =>
                 {
                     b.HasOne("CoreTemplate.Accessors.Models.EF.Department", "Department")
-                        .WithMany()
+                        .WithMany("Roles")
                         .HasForeignKey("DepartmentId")
                         .OnDelete(DeleteBehavior.Restrict);
 
@@ -371,7 +371,7 @@ namespace CoreTemplate.Accessors.Migrations
             modelBuilder.Entity("CoreTemplate.Accessors.Models.EF.MovieGenre", b =>
                 {
                     b.HasOne("CoreTemplate.Accessors.Models.EF.Genre", "Genre")
-                        .WithMany()
+                        .WithMany("Movies")
                         .HasForeignKey("GenreId")
                         .OnDelete(DeleteBehavior.Restrict);
 

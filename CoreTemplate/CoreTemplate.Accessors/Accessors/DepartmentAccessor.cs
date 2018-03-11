@@ -19,7 +19,10 @@ namespace CoreTemplate.Accessors.Accessors
 
         public DepartmentDTO Get(int id)
         {
-            var entity = _db.Departments.Single(x => x.Id == id);
+            var entity = _db.Departments
+                .Include(x => x.Roles).ThenInclude(x => x.Person)
+                .Include(x => x.Roles).ThenInclude(x => x.Movie)
+                .Single(x => x.Id == id);
 
             var dto = Mapper.Map<DepartmentDTO>(entity);
 
@@ -28,7 +31,10 @@ namespace CoreTemplate.Accessors.Accessors
 
         public List<DepartmentDTO> GetAll()
         {
-            var entities = _db.Departments.ToList();
+            var entities = _db.Departments
+                .Include(x => x.Roles).ThenInclude(x => x.Person)
+                .Include(x => x.Roles).ThenInclude(x => x.Movie)
+                .ToList();
 
             var dtos = Mapper.Map<List<DepartmentDTO>>(entities);
 

@@ -20,9 +20,10 @@ namespace CoreTemplate.Accessors.Accessors
         public MovieDTO Get(int id)
         {
             var entity = _db.Movies
-                .Include(x => x.Genres)
-                .Include(x => x.Cast)
-                .Include(x => x.Crew)
+                .Include(x => x.Cast).ThenInclude(x => x.Person)
+                .Include(x => x.Crew).ThenInclude(x => x.Person)
+                .Include(x => x.Crew).ThenInclude(x => x.Department)
+                .Include(x => x.Genres).ThenInclude(x => x.Genre)
                 .Single(x => x.Id == id);
 
             var dto = Mapper.Map<MovieDTO>(entity);
@@ -34,9 +35,6 @@ namespace CoreTemplate.Accessors.Accessors
         {
             var entities = _db.Movies
                 .Include(x => x.Genres).ThenInclude(x => x.Genre)
-                .Include(x => x.Cast).ThenInclude(x => x.Person)
-                .Include(x => x.Crew).ThenInclude(x => x.Person)
-                .Include(x => x.Crew).ThenInclude(x => x.Department)
                 .ToList();
 
             var dtos = Mapper.Map<List<MovieDTO>>(entities);

@@ -1,4 +1,6 @@
-﻿@model CoreTemplate.ViewModels.Person.PersonViewModel
+﻿@using CoreTemplate.Common.Helpers
+
+@model CoreTemplate.ViewModels.Person.PersonViewModel
 
 @{
     ViewBag.Title = Model.FirstName + " " + Model.LastName;
@@ -13,11 +15,13 @@
             <h1 class="display-4">@ViewBag.Title</h1>
             <hr class="my-4">
             <p><strong>Age: </strong>@Html.DisplayFor(x => x.Age)</p>
-            <p><strong>Born: </strong>@Model.BirthDate.ToLongDateString()</p>
+            <p><strong>Born: </strong>@Model.BirthDate.ToCustomDateString()</p>
             @if (Model.DeathDate.HasValue)
             {
-                <p><strong>Died: </strong>@Model.DeathDate.Value.ToLongDateString()</p>
+                <p><strong>Died: </strong>@Model.DeathDate.Value.ToCustomDateString()</p>
             }
+            <p><strong>Known For: </strong>@Html.DisplayFor(x => x.MoviesCount)</p>
+            <p><strong>Credits: </strong>@Html.DisplayFor(x => x.MoviesCount)</p>
         </div>
     </div>
 </div>

@@ -2,6 +2,7 @@
 using AutoMapper;
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
+using CoreTemplate.Engines.Interfaces;
 using CoreTemplate.Managers.Managers;
 using CoreTemplate.ViewModels.Movie;
 using FluentAssertions;
@@ -26,6 +27,7 @@ namespace CoreTemplate.Tests.ManagerTests
         private Mock<IMovieAccessor> _movieAccessorMock;
         private Mock<IMovieGenreAccessor> _movieGenreAccessorMock;
         private Mock<IPersonAccessor> _personAccessorMock;
+        private Mock<IPersonEngine> _personEngineMock;
 
         //This is method is called before the start of every test in this class
         public MovieManagerTest()
@@ -38,7 +40,8 @@ namespace CoreTemplate.Tests.ManagerTests
                 _genreAccessorMock.Object,
                 _movieAccessorMock.Object,
                 _movieGenreAccessorMock.Object,
-                _personAccessorMock.Object);
+                _personAccessorMock.Object,
+                _personEngineMock.Object);
 
             //Set up a Fixture to populate random data: https://github.com/AutoFixture/AutoFixture
             _fixture = new Fixture();
@@ -89,7 +92,7 @@ namespace CoreTemplate.Tests.ManagerTests
         public void Save()
         {
             //Arrange
-            var expectedMovieVm = _fixture.Create<MovieViewModel>();
+            var expectedMovieVm = _fixture.Create<EditMovieViewModel>();
             var expectedMovieDto = Mapper.Map<MovieDTO>(expectedMovieVm);
 
             _movieAccessorMock

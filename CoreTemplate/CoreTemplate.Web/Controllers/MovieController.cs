@@ -38,14 +38,14 @@ namespace CoreTemplate.Web.Controllers
 
         public ActionResult Edit(int? id)
         {
-            var vm = _movieManager.Get(id);
+            var vm = _movieManager.GetForEditing(id);
 
             return View(vm);
         }
 
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit(MovieViewModel vm)
+        public ActionResult Edit(EditMovieViewModel vm)
         {
             if (ModelState.IsValid)
             {

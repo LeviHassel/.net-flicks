@@ -4,7 +4,9 @@ namespace CoreTemplate.Managers.Interfaces
 {
     public interface IMovieManager
     {
-        MovieViewModel Get(int? id);
+        MovieViewModel Get(int id);
+
+        EditMovieViewModel GetForEditing(int? id);
 
         MoviesViewModel GetAll();
 
@@ -12,7 +14,7 @@ namespace CoreTemplate.Managers.Interfaces
 
         CrewMemberViewModel GetNewCrewMember(int index);
 
-        MovieViewModel Save(MovieViewModel vm);
+        EditMovieViewModel Save(EditMovieViewModel vm);
 
         MovieViewModel Delete(int id);
     }

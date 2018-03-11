@@ -17,16 +17,16 @@
             <hr class="my-4">
             <p>
                 <strong>Genres: </strong>
-                @foreach (var genre in Model.GenresSelectList.Where(x => x.Selected))
+                @foreach (var genre in Model.Genres)
                 {
-                    <a class="badge badge-secondary" asp-controller="Genre" asp-action="View" asp-route-id="@genre.Value">@genre.Text</a>
+                    <a class="badge badge-secondary" asp-controller="Genre" asp-action="View" asp-route-id="@genre.Id">@genre.Name</a>
                 }
             </p>
             <p><strong>Release Date: </strong>@Model.ReleaseDate.ToCustomDateString()</p>
             <p><strong>Runtime: </strong>@Html.DisplayFor(x => x.Runtime)</p>
             <p class="lead">
-                <a class="btn btn-primary btn-lg" href="#" role="button">Buy ($@Model.PurchaseCost)</a>
                 <a class="btn btn-primary btn-lg" href="#" role="button">Rent ($@Model.RentCost)</a>
+                <a class="btn btn-primary btn-lg" href="#" role="button">Buy ($@Model.PurchaseCost)</a>
                 <a class="btn btn-primary btn-lg" href="#" role="button">Watch</a>
             </p>
         </div>
@@ -40,18 +40,14 @@
             <br />
             <table class="table">
                 <tbody>
-                    @foreach (var person in Model.Cast)
+                    @foreach (var castMember in Model.Cast)
                     {
-                        var selectedPerson = person.People.Single(x => x.Selected);
-                        var personId = selectedPerson.Value;
-                        var personName = selectedPerson.Text;
-
                         <tr class="row">
                             <td class="col-md-6" style="vertical-align: middle">
-                                <a asp-controller="Person" asp-action="View" asp-route-id="@personId">@personName</a>
+                                <a asp-controller="Person" asp-action="View" asp-route-id="@castMember.PersonId">@castMember.PersonName</a>
                             </td>
                             <td class="col-md-6" style="vertical-align: middle">
-                                @person.Role
+                                @castMember.Role
                             </td>
                         </tr>
                     }
@@ -62,24 +58,19 @@
             <h2>Crew <small>(@Html.DisplayFor(x => x.Crew.Count))</small></h2>
             <br />
 
-            @foreach (var department in Model.Crew.GroupBy(x => x.DepartmentId))
+            @foreach (var department in Model.Crew.GroupBy(x => x.Category))
             {
-                var departmentName = department.First().Departments.Single(x => x.Selected).Text;
-                <p>@departmentName</p>
+                <p>@department.First().Category</p>
                 <table class="table">
                     <tbody>
-                        @foreach (var person in department)
+                        @foreach (var crewMember in department)
                         {
-                            var selectedPerson = person.People.Single(x => x.Selected);
-                            var personId = selectedPerson.Value;
-                            var personName = selectedPerson.Text;
-
                             <tr class="row">
                                 <td class="col-md-6" style="vertical-align: middle">
-                                    <a asp-controller="Person" asp-action="View" asp-route-id="@personId">@personName</a>
+                                    <a asp-controller="Person" asp-action="View" asp-route-id="@crewMember.PersonId">@crewMember.PersonName</a>
                                 </td>
                                 <td class="col-md-6" style="vertical-align: middle">
-                                    @person.Position
+                                    @crewMember.Role
                                 </td>
                             </tr>
                         }

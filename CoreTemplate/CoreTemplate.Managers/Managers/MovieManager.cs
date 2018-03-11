@@ -2,8 +2,11 @@
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Common.Helpers;
+using CoreTemplate.Engines.Interfaces;
 using CoreTemplate.Managers.Interfaces;
+using CoreTemplate.ViewModels.Genre;
 using CoreTemplate.ViewModels.Movie;
+using CoreTemplate.ViewModels.Shared;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System.Collections.Generic;
 using System.Linq;
@@ -19,6 +22,7 @@ namespace CoreTemplate.Managers.Managers
         private IMovieAccessor _movieAccessor;
         private IMovieGenreAccessor _movieGenreAccessor;
         private IPersonAccessor _personAccessor;
+        private IPersonEngine _personEngine;
 
         public MovieManager(ICastMemberAccessor castMemberAccessor,
             ICrewMemberAccessor crewMemberAccessor,
@@ -26,7 +30,8 @@ namespace CoreTemplate.Managers.Managers
             IGenreAccessor genreAccessor,
             IMovieAccessor movieAccessor,
             IMovieGenreAccessor movieGenreAccessor,
-            IPersonAccessor personAccessor)
+            IPersonAccessor personAccessor,
+            IPersonEngine personEngine)
         {
             _castMemberAccessor = castMemberAccessor;
             _crewMemberAccessor = crewMemberAccessor;
@@ -35,17 +40,26 @@ namespace CoreTemplate.Managers.Managers
             _movieAccessor = movieAccessor;
             _movieGenreAccessor = movieGenreAccessor;
             _personAccessor = personAccessor;
+            _personEngine = personEngine;
         }
 
-        public MovieViewModel Get(int? id)
+        public MovieViewModel Get(int id)
+        {
+            var movieDto = _movieAccessor.Get(id);
+
+            var vm = Mapper.Map<MovieViewModel>(movieDto);
+
+            return vm;
+        }
+
+        public EditMovieViewModel GetForEditing(int? id)
         {
             var movieDto = id.HasValue ? _movieAccessor.Get(id.Value) : new MovieDTO();
             var departmentDtos = _departmentAccessor.GetAll().OrderBy(x => x.Name);
             var genreDtos = _genreAccessor.GetAll().OrderBy(x => x.Name);
             var personDtos = _personAccessor.GetAll().OrderBy(x => x.FirstName);
 
-            var vm = Mapper.Map<MovieViewModel>(movieDto);
-
+            var vm = Mapper.Map<EditMovieViewModel>(movieDto);
             vm.GenresSelectList = new MultiSelectList(genreDtos, "Id", "Name", movieDto.Genres != null ? movieDto.Genres.Select(x => x.GenreId).ToList() : null);
 
             if (movieDto.Cast != null && movieDto.Cast.Any())
@@ -79,18 +93,8 @@ namespace CoreTemplate.Managers.Managers
         public MoviesViewModel GetAll()
         {
             var dtos = _movieAccessor.GetAll();
+
             var vms = Mapper.Map<List<MovieViewModel>>(dtos);
-
-            foreach (var vm in vms)
-            {
-                var dto = dtos.Single(x => x.Id == vm.Id);
-
-                if (dto.Genres != null && dto.Genres.Any())
-                {
-                    vm.GenresCount = dto.Genres.Count();
-                    vm.GenresTooltip = ListHelper.GetTooltipList(dto.Genres.Select(x => x.Genre.Name).OrderBy(y => y).ToList());
-                }
-            }
 
             return new MoviesViewModel { Movies = vms };
         }
@@ -98,7 +102,7 @@ namespace CoreTemplate.Managers.Managers
         public CastMemberViewModel GetNewCastMember(int index)
         {
             var personDtos = _personAccessor.GetAll().OrderBy(x => x.FirstName);
- 
+
             var vm = new CastMemberViewModel
             {
                 Index = index,
@@ -123,53 +127,17 @@ namespace CoreTemplate.Managers.Managers
             return vm;
         }
 
-        public MovieViewModel Save(MovieViewModel vm)
+        public EditMovieViewModel Save(EditMovieViewModel vm)
         {
             var dto = Mapper.Map<MovieDTO>(vm);
-            dto.Cast = null;
-            dto.Crew = null;
 
             dto = _movieAccessor.Save(dto);
 
             _movieGenreAccessor.SaveAll(dto.Id, vm.GenreIds);
+            _personEngine.UpdateCast(vm.Cast, dto.Id);
+            _personEngine.UpdateCrew(vm.Crew, dto.Id);
 
-            var castMemberDtos = new List<CastMemberDTO>();
-            
-            if (vm.Cast != null && vm.Cast.Any())
-            {
-                castMemberDtos.AddRange(vm.Cast
-                    .Where(x => !x.IsDeleted && x.PersonId != 0 && !string.IsNullOrWhiteSpace(x.Role))
-                    .Select(x => new CastMemberDTO
-                    {
-                        Id = x.Id,
-                        MovieId = dto.Id,
-                        PersonId = x.PersonId,
-                        Role = x.Role,
-                        ScreenTime = x.ScreenTime
-                    }));
-            }
-
-            _castMemberAccessor.SaveAll(dto.Id, castMemberDtos);
-
-            var crewMemberDtos = new List<CrewMemberDTO>();
-
-            if (vm.Crew != null && vm.Crew.Any())
-            {
-                crewMemberDtos.AddRange(vm.Crew
-                    .Where(x => !x.IsDeleted && x.PersonId != 0 && x.DepartmentId != 0 && !string.IsNullOrWhiteSpace(x.Position))
-                    .Select(x => new CrewMemberDTO
-                    {
-                        Id = x.Id,
-                        MovieId = dto.Id,
-                        PersonId = x.PersonId,
-                        DepartmentId = x.DepartmentId,
-                        Position = x.Position
-                    }));
-            }
-
-            _crewMemberAccessor.SaveAll(dto.Id, crewMemberDtos);
-            
-            vm = Mapper.Map<MovieViewModel>(dto);
+            vm = Mapper.Map<EditMovieViewModel>(dto);
 
             return vm;
         }

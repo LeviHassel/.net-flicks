@@ -2,6 +2,7 @@
 using CoreTemplate.Accessors.Interfaces;
 using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Common.Helpers;
+using CoreTemplate.Engines.Interfaces;
 using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Movie;
 using CoreTemplate.ViewModels.Person;
@@ -15,14 +16,17 @@ namespace CoreTemplate.Managers.Managers
         private ICastMemberAccessor _castMemberAccessor;
         private ICrewMemberAccessor _crewMemberAccessor;
         private IPersonAccessor _personAccessor;
+        private IPersonEngine _personEngine;
 
         public PersonManager(ICastMemberAccessor castMemberAccessor,
             ICrewMemberAccessor crewMemberAccessor,
-            IPersonAccessor personAccessor)
+            IPersonAccessor personAccessor,
+            IPersonEngine personEngine)
         {
             _castMemberAccessor = castMemberAccessor;
             _crewMemberAccessor = crewMemberAccessor;
             _personAccessor = personAccessor;
+            _personEngine = personEngine;
         }
 
         public PersonViewModel Get(int? id, bool includeMovies = false)
@@ -32,15 +36,17 @@ namespace CoreTemplate.Managers.Managers
             var crewMemberDtos = id.HasValue ? _crewMemberAccessor.GetAllByPerson(personDto.Id) : new List<CrewMemberDTO>();
 
             var vm = Mapper.Map<PersonViewModel>(personDto);
-
-            if (crewMemberDtos.Any())
-            {
-                vm.MoviesCount = crewMemberDtos.Count();
-                vm.MoviesTooltip = ListHelper.GetBulletedList(crewMemberDtos.Select(x => string.Format("{0} ({1})", x.Movie.Name, x.Department.Name)).ToList());
-            }
-
             vm.Age = DateHelper.GetAge(vm.BirthDate, vm.DeathDate);
-            vm.Movies = Mapper.Map<List<MovieViewModel>>(crewMemberDtos.Select(x => x.Movie));
+            vm.MoviesCount = castMemberDtos.Count() + crewMemberDtos.Count();
+
+            if (includeMovies)
+            {
+                vm.Movies = Mapper.Map<List<MovieViewModel>>(crewMemberDtos.Select(x => x.Movie));
+            }
+            else
+            {
+                vm.MoviesTooltip = _personEngine.GetMoviesTooltip(castMemberDtos, crewMemberDtos, true);
+            }
 
             return vm;
         }
@@ -48,21 +54,18 @@ namespace CoreTemplate.Managers.Managers
         public PeopleViewModel GetAll()
         {
             var personDtos = _personAccessor.GetAll();
-            var crewMemberDtos = _crewMemberAccessor.GetAll().OrderBy(x => x.Movie.Name);
+            var castMemberDtos = _castMemberAccessor.GetAll();
+            var crewMemberDtos = _crewMemberAccessor.GetAll();
 
             var vms = Mapper.Map<List<PersonViewModel>>(personDtos);
 
             foreach (var vm in vms)
             {
-                vm.Age = DateHelper.GetAge(vm.BirthDate, vm.DeathDate);
+                var castRoles = castMemberDtos.Where(x => x.PersonId == vm.Id).ToList();
+                var crewRoles = crewMemberDtos.Where(x => x.PersonId == vm.Id).ToList();
 
-                var movies = crewMemberDtos.Where(x => x.PersonId == vm.Id);
-
-                if (movies != null && movies.Any())
-                {
-                    vm.MoviesCount = movies.Count();
-                    vm.MoviesTooltip = ListHelper.GetTooltipList(movies.Select(x => string.Format("{0} ({1})", x.Movie.Name, x.Department.Name)).ToList());
-                }
+                vm.MoviesCount = castRoles.Count() + crewRoles.Count();
+                vm.MoviesTooltip = _personEngine.GetMoviesTooltip(castRoles, crewRoles);
             }
 
             return new PeopleViewModel { People = vms };

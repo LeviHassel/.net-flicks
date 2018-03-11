@@ -1,4 +1,6 @@
-﻿using Microsoft.Extensions.DependencyInjection;
+﻿using CoreTemplate.Engines.Engines;
+using CoreTemplate.Engines.Interfaces;
+using Microsoft.Extensions.DependencyInjection;
 using System;
 
 namespace CoreTemplate.Engines.Config
@@ -12,7 +14,7 @@ namespace CoreTemplate.Engines.Config
                 throw new ArgumentNullException(nameof(services));
             }
 
-            //services.AddTransient<ITestEngine, TestEngine>();
+            services.AddTransient<IPersonEngine, PersonEngine>();
 
             return services;
         }

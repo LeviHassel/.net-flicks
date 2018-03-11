@@ -12,7 +12,7 @@
     <div class="container form-actions no-color">
         @if (Model.MoviesCount > 0)
         {
-            <h4 class="text-danger">@Model.FirstName @Model.LastName cannot be deleted because they are part of the crew for @Model.MoviesCount movies: </h4>
+            <h4 class="text-danger">@Model.FirstName @Model.LastName cannot be deleted because they're in the cast or crew for @Model.MoviesCount movies: </h4>
             <p>@Html.Raw(Model.MoviesTooltip)</p>
         }
         else

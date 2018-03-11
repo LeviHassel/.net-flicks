@@ -18,7 +18,6 @@
                 <th class="d-none d-sm-table-cell" data-defaultsort="asc"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().FirstName)</h5></th>
                 <th class="d-none d-sm-table-cell"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().LastName)</h5></th>
                 <th class="d-table-cell d-sm-none"><h5>Name</h5></th>
-                <th class="d-none d-lg-table-cell"><h5>Age</h5></th>
                 <th class="d-none d-md-table-cell"><h5>Image</h5></th>
                 <th class="d-none d-md-table-cell"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().MoviesTooltip)</h5></th>
                 <th width="168" data-defaultsort="disabled"></th>
@@ -31,7 +30,6 @@
                     <td class="d-none d-sm-table-cell" style="vertical-align: middle">@Html.DisplayFor(x => i.FirstName)</td>
                     <td class="d-none d-sm-table-cell" style="vertical-align: middle">@Html.DisplayFor(x => i.LastName)</td>
                     <td class="d-table-cell d-sm-none" style="vertical-align: middle">@Html.DisplayFor(x => i.FirstName) @Html.DisplayFor(x => i.LastName)</td>
-                    <td class="d-none d-lg-table-cell" style="vertical-align: middle">@Html.DisplayFor(x => i.Age)</td>
                     <td class="d-none d-md-table-cell" style="vertical-align: middle" data-value=@(!string.IsNullOrEmpty(i.ImageUrl))>
                         @if (!string.IsNullOrEmpty(i.ImageUrl))
                         {

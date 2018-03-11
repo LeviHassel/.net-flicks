@@ -49,6 +49,9 @@ namespace CoreTemplate.Managers.Managers
 
             var vm = Mapper.Map<MovieViewModel>(movieDto);
 
+            vm.Cast = vm.Cast.OrderByDescending(x => x.ScreenTime).ToList();
+            vm.Crew = vm.Crew.OrderBy(x => x.Category).ThenBy(x => x.PersonName).ToList();
+
             return vm;
         }
 

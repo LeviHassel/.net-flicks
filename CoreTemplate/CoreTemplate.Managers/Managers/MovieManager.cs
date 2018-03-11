@@ -60,24 +60,12 @@ namespace CoreTemplate.Managers.Managers
 
             var vm = Mapper.Map<EditMovieViewModel>(movieDto);
             vm.GenresSelectList = new MultiSelectList(genreDtos, "Id", "Name", movieDto.Genres != null ? movieDto.Genres.Select(x => x.GenreId).ToList() : null);
-
-            if (movieDto.Cast != null && movieDto.Cast.Any())
-            {
-                vm.Cast = Mapper.Map<List<CastMemberViewModel>>(movieDto.Cast)
-                    .OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName)
-                    .ToList();
-            }
+            vm.Cast = vm.Cast.OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName).ToList();
+            vm.Crew = vm.Crew.OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName).ToList();
 
             foreach (var castMemberVm in vm.Cast)
             {
                 castMemberVm.People = new SelectList(personDtos, "Id", "FullName", castMemberVm.PersonId);
-            }
-
-            if (movieDto.Crew != null && movieDto.Crew.Any())
-            {
-                vm.Crew = Mapper.Map<List<CrewMemberViewModel>>(movieDto.Crew)
-                    .OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName)
-                    .ToList();
             }
 
             foreach (var crewMemberVm in vm.Crew)

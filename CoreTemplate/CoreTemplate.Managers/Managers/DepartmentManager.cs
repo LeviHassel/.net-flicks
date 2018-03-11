@@ -19,18 +19,14 @@ namespace CoreTemplate.Managers.Managers
         public DepartmentViewModel Get(int? id)
         {
             var dto = id.HasValue ? _departmentAccessor.Get(id.Value) : new DepartmentDTO();
-
             var vm = Mapper.Map<DepartmentViewModel>(dto);
-
             return vm;
         }
 
         public DepartmentsViewModel GetAll()
         {
             var dtos = _departmentAccessor.GetAll();
-
             var vms = Mapper.Map<List<DepartmentViewModel>>(dtos);
-
             return new DepartmentsViewModel { Departments = vms };
         }
 
@@ -39,7 +35,6 @@ namespace CoreTemplate.Managers.Managers
             var dto = Mapper.Map<DepartmentDTO>(vm);
             dto = _departmentAccessor.Save(dto);
             vm = Mapper.Map<DepartmentViewModel>(dto);
-
             return vm;
         }
 
@@ -47,7 +42,6 @@ namespace CoreTemplate.Managers.Managers
         {
             var dto = _departmentAccessor.Delete(id);
             var vm = Mapper.Map<DepartmentViewModel>(dto);
-
             return vm;
         }
     }

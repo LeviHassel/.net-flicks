@@ -18,19 +18,15 @@ namespace CoreTemplate.Managers.Managers
 
         public GenreViewModel Get(int? id)
         {
-            var genreDto = id.HasValue ? _genreAccessor.Get(id.Value) : new GenreDTO();
-
-            var vm = Mapper.Map<GenreViewModel>(genreDto);
-
+            var dto = id.HasValue ? _genreAccessor.Get(id.Value) : new GenreDTO();
+            var vm = Mapper.Map<GenreViewModel>(dto);
             return vm;
         }
 
         public GenresViewModel GetAll()
         {
-            var genreDtos = _genreAccessor.GetAll();
-
-            var vms = Mapper.Map<List<GenreViewModel>>(genreDtos);
-
+            var dtos = _genreAccessor.GetAll();
+            var vms = Mapper.Map<List<GenreViewModel>>(dtos);
             return new GenresViewModel { Genres = vms };
         }
 
@@ -39,7 +35,6 @@ namespace CoreTemplate.Managers.Managers
             var dto = Mapper.Map<GenreDTO>(vm);
             dto = _genreAccessor.Save(dto);
             vm = Mapper.Map<GenreViewModel>(dto);
-
             return vm;
         }
 
@@ -47,7 +42,6 @@ namespace CoreTemplate.Managers.Managers
         {
             var dto = _genreAccessor.Delete(id);
             var vm = Mapper.Map<GenreViewModel>(dto);
-
             return vm;
         }
     }

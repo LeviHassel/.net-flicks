@@ -7,10 +7,6 @@ namespace CoreTemplate.Accessors.Interfaces
     {
         List<CrewMemberDTO> GetAll();
 
-        List<CrewMemberDTO> GetAllByMovie(int movieId);
-
-        List<CrewMemberDTO> GetAllByPerson(int personId);
-
         List<CrewMemberDTO> GetAllByDepartment(int departmentId);
 
         /// <summary>

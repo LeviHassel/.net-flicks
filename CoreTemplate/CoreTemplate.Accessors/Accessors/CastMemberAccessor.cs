@@ -29,32 +29,6 @@ namespace CoreTemplate.Accessors.Accessors
             return dtos;
         }
 
-        public List<CastMemberDTO> GetAllByMovie(int movieId)
-        {
-            var entities = _db.CastMembers
-                .Include(x => x.Movie)
-                .Include(x => x.Person)
-                .Where(x => x.MovieId == movieId)
-                .ToList();
-
-            var dtos = Mapper.Map<List<CastMemberDTO>>(entities);
-
-            return dtos;
-        }
-
-        public List<CastMemberDTO> GetAllByPerson(int personId)
-        {
-            var entities = _db.CastMembers
-                .Include(x => x.Movie)
-                .Include(x => x.Person)
-                .Where(x => x.PersonId == personId)
-                .ToList();
-
-            var dtos = Mapper.Map<List<CastMemberDTO>>(entities);
-
-            return dtos;
-        }
-
         /// <summary>
         /// For the given Movie, create/update all CastMembers in list and delete all CastMembers not in list
         /// </summary>

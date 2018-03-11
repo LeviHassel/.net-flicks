@@ -7,10 +7,6 @@ namespace CoreTemplate.Accessors.Interfaces
     {
         List<CastMemberDTO> GetAll();
 
-        List<CastMemberDTO> GetAllByMovie(int movieId);
-
-        List<CastMemberDTO> GetAllByPerson(int personId);
-
         /// <summary>
         /// For the given Movie, create/update all CastMembers in list and delete all CastMembers not in list
         /// </summary>

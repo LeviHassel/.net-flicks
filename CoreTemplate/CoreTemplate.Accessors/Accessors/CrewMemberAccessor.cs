@@ -30,34 +30,6 @@ namespace CoreTemplate.Accessors.Accessors
             return dtos;
         }
 
-        public List<CrewMemberDTO> GetAllByMovie(int movieId)
-        {
-            var entities = _db.CrewMembers
-                .Include(x => x.Movie)
-                .Include(x => x.Person)
-                .Include(x => x.Department)
-                .Where(x => x.MovieId == movieId)
-                .ToList();
-
-            var dtos = Mapper.Map<List<CrewMemberDTO>>(entities);
-
-            return dtos;
-        }
-
-        public List<CrewMemberDTO> GetAllByPerson(int personId)
-        {
-            var entities = _db.CrewMembers
-                .Include(x => x.Movie)
-                .Include(x => x.Person)
-                .Include(x => x.Department)
-                .Where(x => x.PersonId == personId)
-                .ToList();
-
-            var dtos = Mapper.Map<List<CrewMemberDTO>>(entities);
-
-            return dtos;
-        }
-
         public List<CrewMemberDTO> GetAllByDepartment(int departmentId)
         {
             var entities = _db.CrewMembers

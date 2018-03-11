@@ -14,15 +14,15 @@
         @foreach (var movie in Model.Movies)
         {
             <div class="col mb-4">
-                <a asp-controller="Movie" asp-action="View" asp-route-id="@movie.Id" style="all: unset">
-                    <div class="card movie-card" style="width: 15rem;">
+                <div class="card movie-card" style="width: 15rem;">
+                    <a asp-controller="Movie" asp-action="View" asp-route-id="@movie.Id" style="all: unset">
                         <img class="card-img-top" src="@movie.ImageUrl">
                         <div class="card-body">
                             <h5 class="card-title mb-0" style="">@movie.Name</h5>
                             <p class="card-text lead" style="font-size: 16px">@movie.ReleaseDate.ToCustomDateString()</p>
                         </div>
-                    </div>
-                </a>
+                    </a>
+                </div>
             </div>
         }
     </div>

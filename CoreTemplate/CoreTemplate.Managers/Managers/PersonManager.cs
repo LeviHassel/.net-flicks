@@ -25,7 +25,7 @@ namespace CoreTemplate.Managers.Managers
             _personAccessor = personAccessor;
         }
 
-        public PersonViewModel Get(int? id)
+        public PersonViewModel Get(int? id, bool includeMovies = false)
         {
             var personDto = id.HasValue ? _personAccessor.Get(id.Value) : new PersonDTO();
             var castMemberDtos = id.HasValue ? _castMemberAccessor.GetAllByPerson(personDto.Id) : new List<CastMemberDTO>();
@@ -33,7 +33,7 @@ namespace CoreTemplate.Managers.Managers
 
             var vm = Mapper.Map<PersonViewModel>(personDto);
 
-            if (crewMemberDtos != null && crewMemberDtos.Any())
+            if (crewMemberDtos.Any())
             {
                 vm.MoviesCount = crewMemberDtos.Count();
                 vm.MoviesTooltip = ListHelper.GetBulletedList(crewMemberDtos.Select(x => string.Format("{0} ({1})", x.Movie.Name, x.Department.Name)).ToList());

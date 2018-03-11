@@ -51,8 +51,8 @@ namespace CoreTemplate.Managers.Managers
             if (movieDto.Cast != null && movieDto.Cast.Any())
             {
                 vm.Cast = Mapper.Map<List<CastMemberViewModel>>(movieDto.Cast)
-                .OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName)
-                .ToList();
+                    .OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName)
+                    .ToList();
             }
 
             foreach (var castMemberVm in vm.Cast)
@@ -63,8 +63,8 @@ namespace CoreTemplate.Managers.Managers
             if (movieDto.Crew != null && movieDto.Crew.Any())
             {
                 vm.Crew = Mapper.Map<List<CrewMemberViewModel>>(movieDto.Crew)
-                .OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName)
-                .ToList();
+                    .OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName)
+                    .ToList();
             }
 
             foreach (var crewMemberVm in vm.Crew)
@@ -89,12 +89,6 @@ namespace CoreTemplate.Managers.Managers
                 {
                     vm.GenresCount = dto.Genres.Count();
                     vm.GenresTooltip = ListHelper.GetTooltipList(dto.Genres.Select(x => x.Genre.Name).OrderBy(y => y).ToList());
-                }
-
-                if (dto.Crew != null && dto.Crew.Any())
-                {
-                    vm.CrewCount = dto.Crew.Count();
-                    vm.CrewTooltip = ListHelper.GetTooltipList(dto.Crew.Select(x => string.Format("{0} - {1}", x.Person.FullName, x.Department.Name)).OrderBy(y => y).ToList());
                 }
             }
 

@@ -45,13 +45,13 @@
             </h5>
         </div>
         <div class="card-body py-0 collapse @(isFirstCategory ? "show" : "")" id="collapse-@(categoryName)">
-            <table class="table">
+            <table class="table mb-0">
                 @foreach (var role in category)
                 {
                     <tr class="row">
-                        <td class="col-md-1">@role.MovieYear</td>
-                        <td class="col-md-1"><i class="far fa-circle fa-xs"></i></td>
-                        <td class="col-md-10">
+                        <td width="70">@role.MovieYear</td>
+                        <td width="50"><i class="far fa-circle fa-xs"></i></td>
+                        <td class="col">
                             <strong><a asp-controller="Movie" asp-action="View" asp-route-id="@role.MovieId" style="color: black">@role.MovieName</a></strong> (@role.Role)
                         </td>
                     </tr>

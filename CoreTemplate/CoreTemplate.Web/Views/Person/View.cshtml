@@ -9,10 +9,13 @@
 
 <div class="jumbotron" style="padding: 32px">
     <div class="row">
-        <div class="col-md-4">
-            <img src=@Model.ImageUrl class="img-fluid" />
-        </div>
-        <div class="col-md-8">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <div class="col-md-4">
+                <img src=@Model.ImageUrl class="img-fluid jumbo-image" />
+            </div>
+        }
+        <div class="col">
             <h1 class="display-4">@ViewBag.Title</h1>
             <hr class="my-4">
             <p><strong>Age@(Model.DeathDate.HasValue ? " at Death" : ""): </strong>@Html.DisplayFor(x => x.Age)</p>

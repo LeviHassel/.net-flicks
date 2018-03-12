@@ -39,21 +39,29 @@
         <div class="col-md-6">
             <h2>Cast <small>(@Html.DisplayFor(x => x.Cast.Count))</small></h2>
             <br />
-            <table class="table">
-                <tbody>
-                    @foreach (var castMember in Model.Cast)
-                    {
-                        <tr class="row">
-                            <td class="col-md-6 align-middle">
-                                <a asp-controller="Person" asp-action="View" asp-route-id="@castMember.PersonId">@castMember.PersonName</a>
-                            </td>
-                            <td class="col-md-6 align-middle">
-                                @castMember.Role
-                            </td>
-                        </tr>
-                    }
-                </tbody>
-            </table>
+
+            <div class="card role-card">
+                <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-cast">
+                    <h5 class="card-title mb-0">
+                        Cast <small>(@Model.Cast.Count())</small><i class="btn-toolbar float-right fas fa-chevron-up" style="margin-top: 2px;"></i>
+                    </h5>
+                </div>
+                <div class="card-body py-0 collapse show" id="collapse-cast">
+                    <table class="table mb-0">
+                        @foreach (var castMember in Model.Cast)
+                        {
+                            <tr class="row">
+                                <td class="col-md-6 align-middle">
+                                    <strong><a asp-controller="Person" asp-action="View" asp-route-id="@castMember.PersonId" style="color: black;">@castMember.PersonName</a></strong>
+                                </td>
+                                <td class="col-md-6 align-middle">
+                                    @castMember.Role
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
         </div>
         <div class="col-md-6">
             <h2>Crew <small>(@Html.DisplayFor(x => x.Crew.Count))</small></h2>
@@ -61,25 +69,32 @@
 
             @foreach (var department in Model.Crew.GroupBy(x => x.Category))
             {
-                <p>@department.First().Category</p>
-                <table class="table">
-                    <tbody>
-                        @foreach (var crewMember in department)
-                        {
-                            <tr class="row">
-                                <td class="col-md-6 align-middle">
-                                    <a asp-controller="Person" asp-action="View" asp-route-id="@crewMember.PersonId">@crewMember.PersonName</a>
-                                </td>
-                                <td class="col-md-6 align-middle">
-                                    @crewMember.Role
-                                </td>
-                            </tr>
-                        }
-                    </tbody>
-                </table>
+                var departmentName = department.First().Category;
+
+                <div class="card role-card">
+                    <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-@(departmentName)">
+                        <h5 class="card-title mb-0">
+                            @departmentName <small>(@department.Count())</small><i class="btn-toolbar float-right fas fa-chevron-up" style="margin-top: 2px;"></i>
+                        </h5>
+                    </div>
+                    <div class="card-body py-0 collapse show" id="collapse-@(departmentName)">
+                        <table class="table mb-0">
+                            @foreach (var crewMember in department)
+                            {
+                                <tr class="row">
+                                    <td class="col-md-6 align-middle">
+                                        <strong><a asp-controller="Person" asp-action="View" asp-route-id="@crewMember.PersonId" style="color: black;">@crewMember.PersonName</a></strong>
+                                    </td>
+                                    <td class="col-md-6 align-middle">
+                                        @crewMember.Role
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
                 <br />
             }
-
         </div>
     </div>
 </div>

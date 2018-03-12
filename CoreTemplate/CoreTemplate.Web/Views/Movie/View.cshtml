@@ -43,10 +43,10 @@
                     @foreach (var castMember in Model.Cast)
                     {
                         <tr class="row">
-                            <td class="col-md-6" style="vertical-align: middle">
+                            <td class="col-md-6 align-middle">
                                 <a asp-controller="Person" asp-action="View" asp-route-id="@castMember.PersonId">@castMember.PersonName</a>
                             </td>
-                            <td class="col-md-6" style="vertical-align: middle">
+                            <td class="col-md-6 align-middle">
                                 @castMember.Role
                             </td>
                         </tr>
@@ -66,10 +66,10 @@
                         @foreach (var crewMember in department)
                         {
                             <tr class="row">
-                                <td class="col-md-6" style="vertical-align: middle">
+                                <td class="col-md-6 align-middle">
                                     <a asp-controller="Person" asp-action="View" asp-route-id="@crewMember.PersonId">@crewMember.PersonName</a>
                                 </td>
-                                <td class="col-md-6" style="vertical-align: middle">
+                                <td class="col-md-6 align-middle">
                                     @crewMember.Role
                                 </td>
                             </tr>

@@ -28,3 +28,30 @@
         </div>
     </div>
 </div>
+
+@foreach (var category in Model.Roles.GroupBy(x => x.Category).OrderBy(x => x.Count()))
+{
+    var categoryName = category.First().Category;
+
+    <div class="card role-card">
+        <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-@(categoryName)">
+            <h5 class="card-title mb-0">
+                @categoryName <i class="btn-toolbar float-right align-middle fas fa-chevron-up"></i>
+            </h5>
+        </div>
+        <div class="card-body py-0 collapse show" id="collapse-@(categoryName)">
+            <table class="table">
+                @foreach (var role in category)
+                {
+                    <tr class="row">
+                        <td class="col-md-1">@role.MovieYear</td>
+                        <td class="col-md-1"><i class="far fa-circle fa-xs"></i></td>
+                        <td class="col-md-10"><strong>@role.MovieName</strong> (@role.Role)</td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <br />
+}
+

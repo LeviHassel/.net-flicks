@@ -2,6 +2,14 @@
     //Set up Bootstrap tooltips
     $('[data-toggle="tooltip"]').tooltip();
 
+    //Toggled open/closed icon on collapsible cards
+    $('.collapse-card').on('click', function () {
+        $(this)
+            .find('[data-fa-i2svg]')
+            .toggleClass('fa-chevron-up')
+            .toggleClass('fa-chevron-down');
+    });
+
     //Update image modals
     $('.image-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);

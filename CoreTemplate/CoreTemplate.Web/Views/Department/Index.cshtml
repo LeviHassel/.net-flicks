@@ -24,7 +24,7 @@
             @foreach (var i in Model.Departments)
             {
                 <tr>
-                    <td style="vertical-align: middle">@Html.DisplayFor(x => i.Name)</td>
+                    <td class="align-middle">@Html.DisplayFor(x => i.Name)</td>
                     <td class="d-none d-sm-table-cell">
                         <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.PeopleTooltip">
                             @i.People.Count

@@ -18,8 +18,8 @@
                     <a asp-controller="Movie" asp-action="View" asp-route-id="@movie.Id" style="all: unset">
                         <img class="card-img-top" src="@movie.ImageUrl">
                         <div class="card-body">
-                            <h5 class="card-title mb-0" style="">@movie.Name</h5>
-                            <p class="card-text lead" style="font-size: 16px">@movie.ReleaseDate.ToCustomDateString()</p>
+                            <h5 class="card-title mb-0">@movie.Name</h5>
+                            <p class="card-text"><small class="text-muted">@movie.ReleaseDate.ToCustomDateString()</small></p>
                         </div>
                     </a>
                 </div>

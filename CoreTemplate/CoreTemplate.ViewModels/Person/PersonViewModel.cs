@@ -1,6 +1,5 @@
 ﻿using CoreTemplate.Common.Helpers;
 using CoreTemplate.ViewModels.Base;
-using CoreTemplate.ViewModels.Movie;
 using CoreTemplate.ViewModels.Shared;
 using System;
 using System.Collections.Generic;
@@ -18,6 +17,9 @@ namespace CoreTemplate.ViewModels.Person
         [Required(AllowEmptyStrings = false)]
         [Display(Name = "Last Name")]
         public string LastName { get; set; }
+
+        [MaxLength(750)]
+        public string Biography { get; set; }
 
         [Required]
         [DataType(DataType.Date)]

@@ -19,6 +19,7 @@
         <div class="col">
             <h1 class="display-4">@ViewBag.Title</h1>
             <hr class="my-4">
+            <p>@Model.Biography</p>
             <p><strong>Age@(Model.DeathDate.HasValue ? " at Death" : ""): </strong>@Html.DisplayFor(x => x.Age)</p>
             <p><strong>Born: </strong>@Model.BirthDate.ToCustomDateString()</p>
             @if (Model.DeathDate.HasValue)

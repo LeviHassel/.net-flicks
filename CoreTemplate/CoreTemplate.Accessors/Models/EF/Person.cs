@@ -10,6 +10,8 @@ namespace CoreTemplate.Accessors.Models.EF
 
         public string LastName { get; set; }
 
+        public string Biography { get; set; }
+
         public DateTime BirthDate { get; set; }
 
         public DateTime? DeathDate { get; set; }

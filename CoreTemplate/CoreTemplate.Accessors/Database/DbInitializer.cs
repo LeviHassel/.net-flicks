@@ -56,7 +56,7 @@ namespace CoreTemplate.Accessors.Database
                     new Genre { Name = "Music" },
                     new Genre { Name = "Mystery" },
                     new Genre { Name = "Romance" },
-                    new Genre { Name = "Sci-Fi" },
+                    new Genre { Name = "Science Fiction" },
                     new Genre { Name = "Thriller" },
                     new Genre { Name = "War" },
                     new Genre { Name = "Western" }

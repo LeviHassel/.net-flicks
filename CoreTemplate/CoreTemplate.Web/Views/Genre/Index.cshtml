@@ -4,12 +4,10 @@
     ViewBag.Title = "Genres";
 }
 
-<div class="btn-toolbar float-right">
-    @Html.ActionLink("New", "Edit", "Genre", null, new { @class = "btn btn-primary" })
+<div class="d-flex mb-5">
+    <h1>@ViewBag.Title</h1>
+    <a class="btn btn-primary ml-auto my-auto" asp-controller="Genre" asp-action="Edit">New</a>
 </div>
-<h1>@ViewBag.Title</h1>
-
-<br /><br />
 
 <div>
     <table class="table sortable">

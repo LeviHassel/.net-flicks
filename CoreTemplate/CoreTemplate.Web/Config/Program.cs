@@ -18,11 +18,12 @@ namespace CoreTemplate.Web.Config
             using (var scope = host.Services.CreateScope())
             {
                 var services = scope.ServiceProvider;
+
                 try
                 {
                     var context = services.GetRequiredService<CoreTemplateContext>();
                     var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-                    CoreTemplateSeed.Initialize(context, userManager);
+                    DbInitializer.Initialize(context, userManager);
                 }
                 catch (Exception ex)
                 {

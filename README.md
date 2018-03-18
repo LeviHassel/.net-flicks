@@ -38,7 +38,7 @@ The Tests layer uses [xUnit](https://xunit.github.io/ "xUnit") along with [Moq](
 ## Getting Started
 1. Download and install all of the requirements listed above.
 2. Download this repository.
-3. In Visual Studio, open Package Manager Console, switch the Default Project to CoreTemplate.Accessors and type the command `update-database` into the window. This should create the application's database, called CoreTemplateDb.
+3. Open the solution in Visual Studio and run the Web project. This will create and seed the application's database, called CoreTemplateDb.
 
 ## Tips
 

@@ -1,29 +1,19 @@
-﻿@using CoreTemplate.Common.Helpers
-
-@model CoreTemplate.ViewModels.Genre.GenreViewModel
+﻿@model CoreTemplate.ViewModels.Genre.GenreViewModel
 
 @{
     ViewBag.Title = Model.Name;
 }
 
-<h1>@ViewBag.Title <small class="float-right">@Model.Movies.Count movies</small></h1>
-<br /><br />
+<div class="d-flex mb-5">
+    <h1>@ViewBag.Title</h1>
+    <h1 class="ml-auto my-auto"><small>@Model.Movies.Count movies</small></h1>
+</div>
 
 <div class="container-fluid">
     <div class="row">
         @foreach (var movie in Model.Movies)
         {
-            <div class="col mb-4">
-                <div class="card movie-card" style="width: 15rem;">
-                    <a asp-controller="Movie" asp-action="View" asp-route-id="@movie.Id" style="all: unset">
-                        <img class="card-img-top" src="@movie.ImageUrl">
-                        <div class="card-body">
-                            <h5 class="card-title mb-0">@movie.Name</h5>
-                            <p class="card-text"><small class="text-muted">@movie.ReleaseDate.ToCustomDateString()</small></p>
-                        </div>
-                    </a>
-                </div>
-            </div>
+            @Html.DisplayFor(x => movie, "MovieCard")
         }
     </div>
 </div>

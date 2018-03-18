@@ -23,12 +23,11 @@ namespace CoreTemplate.Web.Config
 
         public IConfiguration Configuration { get; }
 
-        // This method gets called by the runtime. Use this method to add services to the container.
+        //This method gets called by the runtime. Use this method to add services to the container.
         public virtual void ConfigureServices(IServiceCollection services)
         {
             //Set up Configuration (for access to appsettings.json)
-            //Note: CoreTemplate uses a local SMTP server, but in production, you'd want to use
-            //something like SendGrid, which offers 100 free emails a day: https://sendgrid.com/free/
+            //Note: CoreTemplate uses a local SMTP server, but in production, you'd want to use something like SendGrid, which offers 100 free emails a day: https://sendgrid.com/free/
             services.AddOptions();
             services.Configure<EmailConfiguration>(Configuration.GetSection("Email"));
 
@@ -59,7 +58,7 @@ namespace CoreTemplate.Web.Config
             });
         }
 
-        // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
+        //This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
             if (env.IsDevelopment())
@@ -87,19 +86,6 @@ namespace CoreTemplate.Web.Config
             //Capture errors and add an endpoint to see the error log via "ELM" (Error Logging Middleware)
             app.UseElmPage();
             app.UseElmCapture();
-
-            /*
-             * TODO: Figure out why this doesn't work
-             * //Seed data
-             * CoreTemplateContextSeed.SeedAsync(app).Wait();
-             */
-
-            /*
-             * TODO: Implement this
-             * //Seed user
-             * var defaultUser = new ApplicationUser { UserName = "admin@coretemplate.com", Email = "admin@coretemplate.com" };
-             * userManager.CreateAsync(defaultUser, "Pass@word1").Wait();
-             */
         }
     }
 }

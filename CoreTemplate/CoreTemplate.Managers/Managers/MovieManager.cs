@@ -43,10 +43,11 @@ namespace CoreTemplate.Managers.Managers
         public MovieViewModel Get(int id)
         {
             var dto = _movieAccessor.Get(id);
-
             var vm = Mapper.Map<MovieViewModel>(dto);
+
             vm.Cast = vm.Cast.OrderByDescending(x => x.ScreenTime).ToList();
             vm.Crew = vm.Crew.OrderBy(x => x.Category).ThenBy(x => x.PersonName).ToList();
+            vm.Genres = vm.Genres.OrderBy(x => x.Name).ToList();
 
             return vm;
         }
@@ -81,6 +82,12 @@ namespace CoreTemplate.Managers.Managers
         {
             var dtos = _movieAccessor.GetAll();
             var vms = Mapper.Map<List<MovieViewModel>>(dtos);
+
+            foreach (var vm in vms)
+            {
+                vm.Genres = vm.Genres.OrderBy(x => x.Name).ToList();
+            }
+
             return new MoviesViewModel { Movies = vms };
         }
 

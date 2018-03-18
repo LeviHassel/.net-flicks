@@ -4,6 +4,7 @@ using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Department;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CoreTemplate.Managers.Managers
 {
@@ -20,6 +21,9 @@ namespace CoreTemplate.Managers.Managers
         {
             var dto = id.HasValue ? _departmentAccessor.Get(id.Value) : new DepartmentDTO();
             var vm = Mapper.Map<DepartmentViewModel>(dto);
+
+            vm.People = vm.People.OrderBy(x => x.PersonName).ToList();
+
             return vm;
         }
 
@@ -27,14 +31,22 @@ namespace CoreTemplate.Managers.Managers
         {
             var dtos = _departmentAccessor.GetAll();
             var vms = Mapper.Map<List<DepartmentViewModel>>(dtos);
+
+            foreach (var vm in vms)
+            {
+                vm.People = vm.People.OrderBy(x => x.PersonName).ToList();
+            }
+
             return new DepartmentsViewModel { Departments = vms };
         }
 
         public DepartmentViewModel Save(DepartmentViewModel vm)
         {
             var dto = Mapper.Map<DepartmentDTO>(vm);
+
             dto = _departmentAccessor.Save(dto);
             vm = Mapper.Map<DepartmentViewModel>(dto);
+
             return vm;
         }
 
@@ -42,6 +54,7 @@ namespace CoreTemplate.Managers.Managers
         {
             var dto = _departmentAccessor.Delete(id);
             var vm = Mapper.Map<DepartmentViewModel>(dto);
+
             return vm;
         }
     }

@@ -4,6 +4,7 @@ using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Person;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CoreTemplate.Managers.Managers
 {
@@ -20,6 +21,9 @@ namespace CoreTemplate.Managers.Managers
         {
             var dto = id.HasValue ? _personAccessor.Get(id.Value) : new PersonDTO();
             var vm = Mapper.Map<PersonViewModel>(dto);
+
+            vm.Roles = vm.Roles.OrderBy(x => x.MovieYear).ThenBy(x => x.MovieName).ToList();
+
             return vm;
         }
 
@@ -27,14 +31,22 @@ namespace CoreTemplate.Managers.Managers
         {
             var dtos = _personAccessor.GetAll();
             var vms = Mapper.Map<List<PersonViewModel>>(dtos);
+
+            foreach (var vm in vms)
+            {
+                vm.Roles = vm.Roles.OrderBy(x => x.MovieName).ToList();
+            }
+
             return new PeopleViewModel { People = vms };
         }
 
         public PersonViewModel Save(PersonViewModel vm)
         {
             var dto = Mapper.Map<PersonDTO>(vm);
+
             dto = _personAccessor.Save(dto);
             vm = Mapper.Map<PersonViewModel>(dto);
+
             return vm;
         }
 
@@ -42,6 +54,7 @@ namespace CoreTemplate.Managers.Managers
         {
             var dto = _personAccessor.Delete(id);
             var vm = Mapper.Map<PersonViewModel>(dto);
+
             return vm;
         }
     }

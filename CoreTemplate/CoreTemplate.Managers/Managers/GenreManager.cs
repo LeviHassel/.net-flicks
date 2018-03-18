@@ -4,6 +4,7 @@ using CoreTemplate.Accessors.Models.DTO;
 using CoreTemplate.Managers.Interfaces;
 using CoreTemplate.ViewModels.Genre;
 using System.Collections.Generic;
+using System.Linq;
 
 namespace CoreTemplate.Managers.Managers
 {
@@ -20,6 +21,9 @@ namespace CoreTemplate.Managers.Managers
         {
             var dto = id.HasValue ? _genreAccessor.Get(id.Value) : new GenreDTO();
             var vm = Mapper.Map<GenreViewModel>(dto);
+
+            vm.Movies = vm.Movies.OrderBy(x => x.Name).ToList();
+
             return vm;
         }
 
@@ -27,14 +31,22 @@ namespace CoreTemplate.Managers.Managers
         {
             var dtos = _genreAccessor.GetAll();
             var vms = Mapper.Map<List<GenreViewModel>>(dtos);
+
+            foreach (var vm in vms)
+            {
+                vm.Movies = vm.Movies.OrderBy(x => x.Name).ToList();
+            }
+
             return new GenresViewModel { Genres = vms };
         }
 
         public GenreViewModel Save(GenreViewModel vm)
         {
             var dto = Mapper.Map<GenreDTO>(vm);
+
             dto = _genreAccessor.Save(dto);
             vm = Mapper.Map<GenreViewModel>(dto);
+
             return vm;
         }
 
@@ -42,6 +54,7 @@ namespace CoreTemplate.Managers.Managers
         {
             var dto = _genreAccessor.Delete(id);
             var vm = Mapper.Map<GenreViewModel>(dto);
+
             return vm;
         }
     }

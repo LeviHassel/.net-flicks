@@ -88,7 +88,7 @@ namespace CoreTemplate.Managers.Managers
                 vm.Genres = vm.Genres.OrderBy(x => x.Name).ToList();
             }
 
-            return new MoviesViewModel { Movies = vms };
+            return new MoviesViewModel { Movies = vms.OrderBy(x => x.Name).ToList() };
         }
 
         public CastMemberViewModel GetNewCastMember(int index)

@@ -37,7 +37,7 @@ namespace CoreTemplate.Managers.Managers
                 vm.People = vm.People.OrderBy(x => x.PersonName).ToList();
             }
 
-            return new DepartmentsViewModel { Departments = vms };
+            return new DepartmentsViewModel { Departments = vms.OrderBy(x => x.Name).ToList() };
         }
 
         public DepartmentViewModel Save(DepartmentViewModel vm)

@@ -2,6 +2,7 @@
 using CoreTemplate.ViewModels.Movie;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace CoreTemplate.Web.Controllers
 {
@@ -25,6 +26,7 @@ namespace CoreTemplate.Web.Controllers
         public ActionResult ViewAll()
         {
             var vm = _movieManager.GetAll();
+            vm.Movies = vm.Movies.OrderByDescending(x => x.ReleaseDate).ToList();
 
             return View(vm);
         }

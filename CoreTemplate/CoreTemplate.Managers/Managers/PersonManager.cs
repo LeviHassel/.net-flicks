@@ -37,7 +37,7 @@ namespace CoreTemplate.Managers.Managers
                 vm.Roles = vm.Roles.OrderBy(x => x.MovieName).ToList();
             }
 
-            return new PeopleViewModel { People = vms };
+            return new PeopleViewModel { People = vms.OrderBy(x => x.FirstName).ToList() };
         }
 
         public PersonViewModel Save(PersonViewModel vm)

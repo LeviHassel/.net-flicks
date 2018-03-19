@@ -22,7 +22,7 @@ namespace CoreTemplate.Managers.Managers
             var dto = id.HasValue ? _genreAccessor.Get(id.Value) : new GenreDTO();
             var vm = Mapper.Map<GenreViewModel>(dto);
 
-            vm.Movies = vm.Movies.OrderBy(x => x.Name).ToList();
+            vm.Movies = vm.Movies.OrderByDescending(x => x.ReleaseDate).ToList();
 
             return vm;
         }
@@ -37,7 +37,7 @@ namespace CoreTemplate.Managers.Managers
                 vm.Movies = vm.Movies.OrderBy(x => x.Name).ToList();
             }
 
-            return new GenresViewModel { Genres = vms };
+            return new GenresViewModel { Genres = vms.OrderBy(x => x.Name).ToList() };
         }
 
         public GenreViewModel Save(GenreViewModel vm)

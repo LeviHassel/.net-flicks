@@ -2,7 +2,7 @@
 
 @model CoreTemplate.ViewModels.Movie.MovieViewModel
 
-<div class="col mb-4">
+<div class="col mb-4 movie-column" data-name="@Model.Name" data-date="@Model.ReleaseDate.ToString("yyyy/MM/dd")" data-price="@Model.RentCost">
     <div class="card movie-card" style="width: 15rem;">
         <a asp-controller="Movie" asp-action="View" asp-route-id="@Model.Id" style="all: unset">
             <img class="card-img-top" src="@Model.ImageUrl">

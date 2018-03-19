@@ -2,6 +2,26 @@
     //Set up Bootstrap tooltips
     $('[data-toggle="tooltip"]').tooltip();
 
+    //Sort movie cards
+    $(document).on('click', '.sort-movies', function () {
+        var elementId = this.id;
+        var sortData = elementId.split("-");
+        var attr = sortData[1];
+        var order = sortData[2];
+
+        tinysort('div.movie-column', { attr: 'data-' + attr, order: order });
+
+        $(".sort-movies").each(function (index) {
+            if ($(this).attr('id') === elementId) {
+                $(this).addClass('active text-white');
+            } else {
+                $(this).removeClass('active text-white');
+            }
+        });
+
+        $('#sort-movies-dropdown').text(attr[0].toUpperCase() + attr.slice(1) + ' (' + order[0].toUpperCase() + order.slice(1) + '.)');
+    });
+
     //Toggled open/closed icon on collapsible cards
     $('.collapse-card').on('click', function () {
         $(this)

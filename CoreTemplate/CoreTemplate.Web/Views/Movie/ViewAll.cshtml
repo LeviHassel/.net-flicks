@@ -5,24 +5,8 @@
 }
 
 <div class="d-flex justify-content-end mb-5">
-    <h1 class="mr-auto">@ViewBag.Title</h1>
-    <h5 class="my-auto mr-2">Sort By</h5>
-    <div class="dropdown my-auto">
-        <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-            Date
-        </button>
-        <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
-            <h6 class="dropdown-header">Ascending <i class="fas fa-arrow-down"></i></h6>
-            <a class="dropdown-item">Name</a>
-            <a class="dropdown-item active text-white">Date</a>
-            <a class="dropdown-item">Price</a>
-            <div class="dropdown-divider"></div>
-            <h6 class="dropdown-header">Descending <i class="fas fa-arrow-up"></i></h6>
-            <a class="dropdown-item">Name</a>
-            <a class="dropdown-item">Date</a>
-            <a class="dropdown-item">Price</a>
-        </div>
-    </div>
+    <h1 class="mr-auto">@ViewBag.Title <small>(@Model.Movies.Count)</small></h1>
+    @Html.Partial("_MovieSorter")
 </div>
 
 <div class="container-fluid">

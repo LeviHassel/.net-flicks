@@ -42,9 +42,10 @@
 
     <div class="card role-card">
         <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-@(categoryName)">
-            <h5 class="card-title mb-0">
-                @categoryName <small>(@category.Count())</small><i class="btn-toolbar float-right fas @(isFirstCategory ? "fa-chevron-up" : "fa-chevron-down")" style="margin-top: 2px;"></i>
-            </h5>
+            <div class="d-flex">
+                <h5 class="card-title mb-0">@categoryName <small>(@category.Count())</small></h5>
+                <i class="ml-auto my-auto fas @(isFirstCategory ? "fa-chevron-up" : "fa-chevron-down")"></i>
+            </div>
         </div>
         <div class="card-body py-0 collapse @(isFirstCategory ? "show" : "")" id="collapse-@(categoryName)">
             <table class="table mb-0">

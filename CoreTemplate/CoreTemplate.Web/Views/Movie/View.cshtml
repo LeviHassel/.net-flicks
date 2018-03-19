@@ -43,9 +43,10 @@
 
             <div class="card role-card">
                 <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-cast">
-                    <h5 class="card-title mb-0">
-                        Cast <small>(@Model.Cast.Count())</small><i class="btn-toolbar float-right fas fa-chevron-up" style="margin-top: 2px;"></i>
-                    </h5>
+                    <div class="d-flex">
+                        <h5 class="card-title mb-0">Cast <small>(@Model.Cast.Count())</small></h5>
+                        <i class="ml-auto my-auto fas fa-chevron-up"></i>
+                    </div>
                 </div>
                 <div class="card-body py-0 collapse show" id="collapse-cast">
                     <table class="table mb-0">
@@ -75,9 +76,10 @@
 
                 <div class="card role-card">
                     <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-@(departmentName)">
-                        <h5 class="card-title mb-0">
-                            @departmentName <small>(@department.Count())</small><i class="btn-toolbar float-right fas fa-chevron-up" style="margin-top: 2px;"></i>
-                        </h5>
+                        <div class="d-flex">
+                            <h5 class="card-title mb-0">@departmentName <small>(@department.Count())</small></h5>
+                            <i class="ml-auto my-auto fas fa-chevron-up"></i>
+                        </div>
                     </div>
                     <div class="card-body py-0 collapse show" id="collapse-@(departmentName)">
                         <table class="table mb-0">

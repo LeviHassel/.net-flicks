@@ -83,7 +83,7 @@ namespace CoreTemplate.Web.Config
                     template: "{controller=Home}/{action=Index}/{id?}");
             });
 
-            //Capture errors and add an endpoint to see the error log via "ELM" (Error Logging Middleware)
+            //Capture errors and add an endpoint to see the error log via ELM (Error Logging Middleware)
             app.UseElmPage();
             app.UseElmCapture();
         }

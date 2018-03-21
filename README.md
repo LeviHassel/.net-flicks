@@ -1,28 +1,40 @@
-# ASP .NET Core 2.0 Multi-Layer Starter Template
+# DotNetFlicks (.NET Core 2.0 Sample App)
+
+## Note: This is a work in progress and is not ready to be used in its current state
 
 ## Overview
-This is a good template. It uses [IDesign](http://www.idesign.net/ "IDesign") methodology.
+What started as a simple template for .NET Core 2.0 evolved into a decent-sized application showcasing what I believe to be the best .NET practices. This solution uses multitier system architecture, based off [IDesign](http://www.idesign.net/ "IDesign") methodology, well-thought-out database schema, an intuitive user interface and more.
 
 ## Design
-This solution is divided into four layers. 
+This solution is divided into six layers. 
+
+### Common
+Dependencies: None
+
+[Complete this]
 
 ### Clients
-Dependencies: Managers
+Dependencies: Common, Managers
 
 The Clients layer is the user interface. This is where all of the controllers, views, front-end styling and JavaScript lives. If the need arises to build a Web API, you simply need to build a new project in this layer and hook it up to the other layers of your project.
 
 ### Managers
-Dependencies: Accessors
+Dependencies: Common, Engines, Accessors
 
 The Managers layer (usually called the Services layer in the world of C#), handles all of the business logic of the application.
 
+### Engines
+Dependencies: Common, Accessors
+
+[Complete this]
+
 ### Accessors
-Dependencies: None
+Dependencies: Common
 
 The Accessors layer (usually called the Repository layer in world of C#), is in charge of storing and retrieving your application's data.
 
 ### Tests
-Dependencies: Web, Managers and Accessors
+Dependencies: Common, Web, Managers, Accessors
 
 The Tests layer uses [xUnit](https://xunit.github.io/ "xUnit") along with [Moq](https://github.com/moq/moq4 "Moq") to handle integration and unit tests.
 

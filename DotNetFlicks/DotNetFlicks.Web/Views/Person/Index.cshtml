@@ -1,0 +1,77 @@
+﻿@model DotNetFlicks.ViewModels.Person.PeopleViewModel
+
+@{
+    ViewBag.Title = "People";
+}
+
+<div class="d-flex mb-5">
+    <h1>@ViewBag.Title <small>(@Model.People.Count)</small></h1>
+    <a class="btn btn-primary ml-auto my-auto" asp-controller="Person" asp-action="Edit">New</a>
+</div>
+
+<div>
+    <table class="table sortable">
+        <thead>
+            <tr>
+                <th class="d-none d-sm-table-cell" data-defaultsort="asc"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().FirstName)</h5></th>
+                <th class="d-none d-sm-table-cell"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().LastName)</h5></th>
+                <th class="d-table-cell d-sm-none"><h5>Name</h5></th>
+                <th class="d-none d-md-table-cell"><h5>Image</h5></th>
+                <th class="d-none d-md-table-cell"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().Roles)</h5></th>
+                <th width="168" data-defaultsort="disabled"></th>
+            </tr>
+        </thead>
+        <tbody>
+            @foreach (var i in Model.People)
+            {
+                <tr>
+                    <td class="d-none d-sm-table-cell align-middle">@Html.DisplayFor(x => i.FirstName)</td>
+                    <td class="d-none d-sm-table-cell align-middle">@Html.DisplayFor(x => i.LastName)</td>
+                    <td class="d-table-cell d-sm-none align-middle">@Html.DisplayFor(x => i.FirstName) @Html.DisplayFor(x => i.LastName)</td>
+                    <td class="d-none d-md-table-cell align-middle" data-value=@(!string.IsNullOrEmpty(i.ImageUrl))>
+                        @if (!string.IsNullOrEmpty(i.ImageUrl))
+                        {
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".image-modal" data-title="@i.FirstName @i.LastName" data-img-src="@i.ImageUrl">
+                                <i class="fas fa-image"></i>
+                            </button>
+                        }
+                    </td>
+                    <td class="d-none d-md-table-cell">
+                        <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.RolesTooltip">
+                            @i.Roles.Count
+                        </button>
+                    </td>
+                    <td>
+                        <div class="d-flex">
+                            <a class="btn btn-primary" asp-controller="Person" asp-action="View" asp-route-id="@i.Id">
+                                <i class="fas fa-eye"></i>
+                            </a>
+                            <a class="btn btn-primary ml-2" asp-controller="Person" asp-action="Edit" asp-route-id="@i.Id">
+                                <i class="fas fa-edit"></i>
+                            </a>
+                            <a class="btn btn-primary ml-2" asp-controller="Person" asp-action="Delete" asp-route-id="@i.Id">
+                                <i class="fas fa-trash"></i>
+                            </a>
+                        </div>
+                    </td>
+                </tr>
+            }
+        </tbody>
+    </table>
+
+    <div class="modal fade image-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title"></h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body text-center">
+                    <img alt="Image" class="img-fluid" />
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

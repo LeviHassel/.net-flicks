@@ -1,0 +1,81 @@
+﻿@using DotNetFlicks.Common.Helpers
+
+@model DotNetFlicks.ViewModels.Person.PersonViewModel
+
+@{
+    ViewBag.Title = Model.FirstName + " " + Model.LastName;
+    var categories = Model.Roles.GroupBy(x => x.Category).OrderByDescending(x => x.Count());
+}
+
+<div class="jumbotron" style="padding: 32px">
+    <div class="row">
+        @if (!string.IsNullOrEmpty(Model.ImageUrl))
+        {
+            <div class="col-xl-4 col-md-6 offset-md-3 offset-lg-0 text-center">
+                <img src=@Model.ImageUrl class="img-fluid jumbo-image" data-toggle="modal" data-target=".image-modal" />
+                <br class="d-lg-none" /><br class="d-lg-none" />
+            </div>
+        }
+        <div class="col">
+            <h1 class="display-4">@ViewBag.Title</h1>
+            <hr class="my-4">
+            <p>@Model.Biography</p>
+            <p><strong>Age@(Model.DeathDate.HasValue ? " at Death" : ""): </strong>@Html.DisplayFor(x => x.Age)</p>
+            <p><strong>Born: </strong>@Model.BirthDate.ToCustomDateString()</p>
+            @if (Model.DeathDate.HasValue)
+            {
+                <p><strong>Died: </strong>@Model.DeathDate.Value.ToCustomDateString()</p>
+            }
+            @if (!string.IsNullOrEmpty(Model.KnownFor))
+            {
+                <p><strong>Known For: </strong>@Html.DisplayFor(x => x.KnownFor)</p>
+            }
+            <p><strong>Credits: </strong>@Html.DisplayFor(x => x.Roles.Count)</p>
+        </div>
+    </div>
+</div>
+
+@foreach (var category in categories)
+{
+    var categoryName = category.First().Category;
+
+    <div class="card role-card">
+        <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-@(categoryName)">
+            <div class="d-flex">
+                <h5 class="card-title mb-0">@categoryName <small>(@category.Count())</small></h5>
+                <i class="ml-auto my-auto fas fa-chevron-up")"></i>
+            </div>
+        </div>
+        <div class="card-body py-0 collapse show" id="collapse-@(categoryName)">
+            <table class="table mb-0">
+                @foreach (var role in category)
+                {
+                    <tr class="row">
+                        <td width="70">@role.MovieYear</td>
+                        <td width="50"><i class="far fa-circle fa-xs"></i></td>
+                        <td class="col">
+                            <strong><a asp-controller="Movie" asp-action="View" asp-route-id="@role.MovieId" style="color: black">@role.MovieName</a></strong> (@role.Role)
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+    </div>
+    <br />
+}
+
+<div class="modal fade image-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="max-width: 550px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">@ViewBag.Title</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src=@Model.ImageUrl alt="Image" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</div>

@@ -1,0 +1,116 @@
+﻿<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DotNetFlicks</title>
+
+    <environment include="Development">
+        <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.css" />
+        <link rel="stylesheet" href="~/lib/bootstrap-sortable/Contents/bootstrap-sortable.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.0-beta/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="~/css/site.css" />
+    </environment>
+    <environment exclude="Development">
+        <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css"
+              asp-fallback-href="~/lib/bootstrap/dist/css/bootstrap.min.css"
+              asp-fallback-test-class="sr-only" asp-fallback-test-property="position" asp-fallback-test-value="absolute" />
+        integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm"
+        crossorigin="anonymous" />
+        <link rel="stylesheet" href="~/lib/bootstrap-sortable/Contents/bootstrap-sortable.css" />
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.0-beta/css/bootstrap-select.min.css">
+        <link rel="stylesheet" href="~/css/site.min.css" asp-append-version="true" />
+    </environment>
+</head>
+<body>
+    <nav class="navbar navbar-expand-xl navbar-dark bg-dark fixed-top">
+        <a asp-controller="Home" asp-action="Index" class="navbar-brand mb-0 h1">DotNetFlicks</a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbar-content">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+
+        <div class="collapse navbar-collapse" id="navbar-content" role="tablist">
+            @if (User.Identity.IsAuthenticated)
+            {
+                <div class="container navbar-nav mx-auto">
+                    <ul class="navbar-nav m-auto">
+                        <li class="navbar-text">
+                            <b>User</b> |
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Movie" asp-action="ViewAll" class="nav-link">Browse Movies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Home" asp-action="Index" class="nav-link">My Movies</a>
+                        </li>
+                    </ul>
+                    <ul class="navbar-nav m-auto">
+                        <li class="navbar-text">
+                            <b>Admin</b> |
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Movie" asp-action="Index" class="nav-link">Movies</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Genre" asp-action="Index" class="nav-link">Genres</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Person" asp-action="Index" class="nav-link">People</a>
+                        </li>
+                        <li class="nav-item">
+                            <a asp-controller="Department" asp-action="Index" class="nav-link">Departments</a>
+                        </li>
+                    </ul>
+                </div>
+            }
+            @await Html.PartialAsync("_LoginPartial")
+        </div>
+    </nav>
+
+    <div class="container body-content">
+        <br /><br />
+        @RenderBody()
+    </div>
+
+    <br />
+
+    <footer class="footer">
+        <div class="container">
+            <span class="text-muted">&copy; @DateTime.Now.Year - DotNetFlicks</span>
+        </div>
+    </footer>
+
+    <environment include="Development">
+        <script src="~/lib/jquery/dist/jquery.js"></script>
+        <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.js"></script>
+        <script src="~/lib/moment/moment.js"></script>
+        <script src="~/lib/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.0-beta/js/bootstrap-select.min.js"></script>
+        <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tinysort/2.3.6/tinysort.js"></script>
+        <script src="~/js/site.js" asp-append-version="true"></script>
+    </environment>
+    <environment exclude="Development">
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+                asp-fallback-src="~/lib/jquery/dist/jquery.min.js"
+                asp-fallback-test="window.jQuery"
+                integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+                crossorigin="anonymous">
+        </script>
+        <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"
+                asp-fallback-src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"
+                asp-fallback-test="window.jQuery && window.jQuery.fn && window.jQuery.fn.modal"
+                integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFWpi1MquVdAyjUar5+76PVCmYl"
+                crossorigin="anonymous">
+        </script>
+        <script src="~/lib/moment/moment.js"></script>
+        <script src="~/lib/bootstrap-sortable/Scripts/bootstrap-sortable.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap-select/1.13.0-beta/js/bootstrap-select.min.js"></script>
+        <script src="https://use.fontawesome.com/releases/v5.0.6/js/all.js"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/tinysort/2.3.6/tinysort.js"></script>
+        <script src="~/js/site.min.js" asp-append-version="true"></script>
+    </environment>
+
+    @RenderSection("Scripts", required: false)
+</body>
+</html>

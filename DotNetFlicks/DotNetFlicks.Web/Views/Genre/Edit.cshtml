@@ -1,0 +1,26 @@
+﻿@model DotNetFlicks.ViewModels.Genre.GenreViewModel
+
+@{
+    ViewBag.Title = Model.Id > 0 ? string.Format("Edit {0}", Model.Name) : "New Genre";
+}
+
+<h1>@ViewBag.Title</h1>
+<br /><br />
+
+<form asp-controller="Genre" asp-action="Edit" method="post" class="form-horizontal" role="form">
+    <div class="container">
+        <div class="form-group">
+            <label asp-for="Name" class="control-label"></label>
+            <input asp-for="Name" class="form-control" />
+            <span asp-validation-for="Name" class="text-danger"></span>
+        </div>
+
+        <br /><br />
+
+        <div class="form-group">
+            <button class="btn btn-primary" type="submit">Save</button>
+            <br /><br />
+            <a asp-action="Index">Back to List</a>
+        </div>
+    </div>
+</form>

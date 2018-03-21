@@ -1,0 +1,23 @@
+﻿@model DotNetFlicks.ViewModels.Movie.CastMemberViewModel
+
+<tr class="row">
+    <td class="col align-middle">
+        <select asp-for="PersonId" asp-items="@Model.People" class="form-control selectpicker" data-live-search="true">
+            <option disabled selected>Select</option>
+        </select>
+    </td>
+    <td class="col align-middle">
+        <input asp-for="Role" class="form-control" />
+    </td>
+    <td class="col align-middle">
+        <input asp-for="ScreenTime" class="form-control" />
+    </td>
+    <td width="64">
+        <input asp-for="IsDeleted" type="hidden" />
+        <div class="d-flex">
+            <a class="btn btn-danger delete-person">
+                <i class="fas fa-trash" style="color: white"></i>
+            </a>
+        </div>
+    </td>
+</tr>

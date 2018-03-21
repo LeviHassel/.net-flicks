@@ -1,0 +1,120 @@
+﻿@using DotNetFlicks.Common.Helpers
+
+@model DotNetFlicks.ViewModels.Movie.MovieViewModel
+
+@{
+    ViewBag.Title = Model.Name;
+}
+
+<div class="jumbotron" style="padding: 32px">
+    <div class="row">
+        <div class="col-xl-4 col-md-6 offset-md-3 offset-lg-0 text-center">
+            <img src=@Model.ImageUrl class="img-fluid jumbo-image" data-toggle="modal" data-target=".image-modal" />
+            <br class="d-lg-none" /><br class="d-lg-none" />
+        </div>
+        <div class="col">
+            <h1 class="display-4">@ViewBag.Title</h1>
+            <hr class="my-4">
+            <p>@Model.Description</p>
+            <br />
+            <p>
+                <strong>Genres: </strong>
+                @foreach (var genre in Model.Genres)
+                {
+                    <a class="badge badge-secondary" asp-controller="Genre" asp-action="View" asp-route-id="@genre.Id">@genre.Name</a>
+                }
+            </p>
+            <p><strong>Release Date: </strong>@Model.ReleaseDate.ToCustomDateString()</p>
+            <p><strong>Runtime: </strong>@Html.DisplayFor(x => x.Runtime)</p>
+            <span>
+                <a class="btn btn-primary btn-lg m-1" href="#" role="button">Rent ($@Model.RentCost)</a>
+                <a class="btn btn-primary btn-lg m-1" href="#" role="button">Buy ($@Model.PurchaseCost)</a>
+                <a class="btn btn-primary btn-lg m-1" href="#" role="button">Watch</a>
+            </span>
+        </div>
+    </div>
+</div>
+
+<div class="container">
+    <div class="row">
+        <div class="col-md-6">
+            <h2>Cast <small>(@Html.DisplayFor(x => x.Cast.Count))</small></h2>
+            <br />
+
+            <div class="card role-card">
+                <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-cast">
+                    <div class="d-flex">
+                        <h5 class="card-title mb-0">Cast <small>(@Model.Cast.Count())</small></h5>
+                        <i class="ml-auto my-auto fas fa-chevron-up"></i>
+                    </div>
+                </div>
+                <div class="card-body py-0 collapse show" id="collapse-cast">
+                    <table class="table mb-0">
+                        @foreach (var castMember in Model.Cast)
+                        {
+                            <tr class="row">
+                                <td class="col-6 align-middle">
+                                    <strong><a asp-controller="Person" asp-action="View" asp-route-id="@castMember.PersonId" style="color: black;">@castMember.PersonName</a></strong>
+                                </td>
+                                <td class="col-6 align-middle">
+                                    @castMember.Role
+                                </td>
+                            </tr>
+                        }
+                    </table>
+                </div>
+            </div>
+            <br />
+        </div>
+        <div class="col-md-6">
+            <h2>Crew <small>(@Html.DisplayFor(x => x.Crew.Count))</small></h2>
+            <br />
+
+            @foreach (var department in Model.Crew.GroupBy(x => x.Category))
+            {
+                var departmentName = department.First().Category;
+
+                <div class="card role-card">
+                    <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-@(departmentName)">
+                        <div class="d-flex">
+                            <h5 class="card-title mb-0">@departmentName <small>(@department.Count())</small></h5>
+                            <i class="ml-auto my-auto fas fa-chevron-up"></i>
+                        </div>
+                    </div>
+                    <div class="card-body py-0 collapse show" id="collapse-@(departmentName)">
+                        <table class="table mb-0">
+                            @foreach (var crewMember in department)
+                            {
+                                <tr class="row">
+                                    <td class="col-6 align-middle">
+                                        <strong><a asp-controller="Person" asp-action="View" asp-route-id="@crewMember.PersonId" style="color: black;">@crewMember.PersonName</a></strong>
+                                    </td>
+                                    <td class="col-6 align-middle">
+                                        @crewMember.Role
+                                    </td>
+                                </tr>
+                            }
+                        </table>
+                    </div>
+                </div>
+                <br />
+            }
+        </div>
+    </div>
+</div>
+
+<div class="modal fade image-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog" style="max-width: 550px">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">@ViewBag.Title</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body text-center">
+                <img src=@Model.ImageUrl alt="Image" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</div>

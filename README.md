@@ -1,4 +1,4 @@
-# DotNetFlicks (.NET Core 2.0 Sample App)
+# .NetFlicks (.NET Core 2.0 Sample App)
 
 ## Note: This is a work in progress and is not ready to be used in its current state
 

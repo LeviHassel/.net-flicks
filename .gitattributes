@@ -17,4 +17,4 @@
 *.RTF	 diff=astextplain
 
 # Override language definitions for repo
-*/wwwroot/lib/* linguist-vendored=true
+wwwroot/lib/* linguist-vendored

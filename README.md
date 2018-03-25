@@ -3,7 +3,7 @@
 ## Note: This is a work in progress and is not ready to be used in its current state
 
 ## Overview
-What started as a simple template for .NET Core 2.0 evolved into a decent-sized application showcasing what I believe to be the best .NET practices. This solution uses multitier system architecture, based off [IDesign](http://www.idesign.net/ "IDesign") methodology, well-thought-out database schema, an intuitive user interface and more.
+What started as a simple template project for .NET Core 2.0 evolved into a decent-sized sample application showcasing what I believe to be the best .NET practices. This solution uses multitier system architecture, based off [IDesign](http://www.idesign.net/ "IDesign") methodology, well-thought-out database schema, an intuitive user interface and more.
 
 ## Design
 This solution is divided into six layers. 

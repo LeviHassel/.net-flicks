@@ -2,6 +2,7 @@
 using DotNetFlicks.Accessors.Models.EF;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -18,6 +19,7 @@ namespace DotNetFlicks.Accessors.Database
             SeedAdmin(context, userManager);
             SeedGenres(context);
             SeedDepartments(context);
+            SeedMovies(context);
         }
 
         #region Private Methods
@@ -87,6 +89,41 @@ namespace DotNetFlicks.Accessors.Database
                 };
 
                 context.Departments.AddRange(departments);
+                context.SaveChanges();
+            }
+        }
+
+        private static void SeedMovies(DotNetFlicksContext context)
+        {
+            if (!context.Movies.Any())
+            {
+                var movies = new List<Movie>
+                {
+                    new Movie
+                    {
+                        Name = "The Dark Knight Rises",
+                        Description = "Following the death of District Attorney Harvey Dent, Batman assumes responsibility for Dent's crimes to protect the late attorney's reputation and is subsequently hunted by the Gotham City Police Department. Eight years later, Batman encounters the mysterious Selina Kyle and the villainous Bane, a new terrorist leader who overwhelms Gotham's finest. The Dark Knight resurfaces to protect a city that has branded him an enemy.",
+                        ReleaseDate = new DateTime(2012, 7, 20),
+                        Runtime = new TimeSpan(0, 2, 45, 0, 0),
+                        ImageUrl = "https://image.tmdb.org/t/p/w600_and_h900_bestv2/dEYnvnUfXrqvqeRSqvIEtmzhoA8.jpg",
+                        TrailerUrl = "https://www.youtube.com/embed/g8evyE9TuYk",
+                        RentCost = 3.99m,
+                        PurchaseCost = 11.99m
+                    },
+                    new Movie
+                    {
+                        Name = "The Dark Knight Rises",
+                        Description = "Following the death of District Attorney Harvey Dent, Batman assumes responsibility for Dent's crimes to protect the late attorney's reputation and is subsequently hunted by the Gotham City Police Department. Eight years later, Batman encounters the mysterious Selina Kyle and the villainous Bane, a new terrorist leader who overwhelms Gotham's finest. The Dark Knight resurfaces to protect a city that has branded him an enemy.",
+                        ReleaseDate = new DateTime(2012, 7, 20),
+                        Runtime = new TimeSpan(0, 2, 45, 0, 0),
+                        ImageUrl = "https://image.tmdb.org/t/p/w600_and_h900_bestv2/dEYnvnUfXrqvqeRSqvIEtmzhoA8.jpg",
+                        TrailerUrl = "https://www.youtube.com/embed/g8evyE9TuYk",
+                        RentCost = 3.99m,
+                        PurchaseCost = 11.99m
+                    }
+                };
+
+                context.Movies.AddRange(movies);
                 context.SaveChanges();
             }
         }

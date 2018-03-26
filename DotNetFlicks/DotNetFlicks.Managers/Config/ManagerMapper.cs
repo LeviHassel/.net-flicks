@@ -33,7 +33,8 @@ namespace DotNetFlicks.Managers.Config
                 .ForMember(dest => dest.MovieName, opt => opt.MapFrom(src => src.Movie.Name))
                 .ForMember(dest => dest.MovieYear, opt => opt.MapFrom(src => src.Movie.ReleaseDate.Year))
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.Position))
-                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Department.Name));
+                .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Department.Name))
+                .ForMember(dest => dest.IsDirector, opt => opt.MapFrom(src => src.Department.IsDirecting));
 
             CreateMap<DepartmentDTO, DepartmentViewModel>()
                 .ForMember(dest => dest.People, opt => opt.MapFrom(src => src.Roles));

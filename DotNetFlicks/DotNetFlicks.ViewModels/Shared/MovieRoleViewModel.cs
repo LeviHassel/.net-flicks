@@ -1,5 +1,4 @@
-﻿using DotNetFlicks.ViewModels.Base;
-using System;
+﻿using System;
 
 namespace DotNetFlicks.ViewModels.Shared
 {
@@ -20,5 +19,7 @@ namespace DotNetFlicks.ViewModels.Shared
         public string Category { get; set; }
 
         public TimeSpan ScreenTime { get; set; }
+
+        public bool IsDirector { get; set; }
     }
 }

@@ -4,6 +4,7 @@
 
 @{
     ViewBag.Title = Model.Name;
+    var directors = Model.Crew.Where(x => x.IsDirector).ToList();
 }
 
 <div class="jumbotron" style="padding: 32px">
@@ -17,6 +18,14 @@
             <hr class="my-4">
             <p>@Model.Description</p>
             <br />
+            @if (directors.Count == 1)
+            {
+                <p><strong>Director: </strong>@directors.Single().PersonName</p>
+            }
+            else if (directors.Count > 1)
+            {
+                <p><strong>Directors: </strong>@string.Join(", ", directors.Select(x => x.PersonName))</p>
+            }
             <p>
                 <strong>Genres: </strong>
                 @foreach (var genre in Model.Genres)

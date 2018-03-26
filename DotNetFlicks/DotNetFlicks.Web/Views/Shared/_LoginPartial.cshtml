@@ -1,4 +1,4 @@
-@using DotNetFlicks.Managers.Identity
+@using DotNetFlicks.Accessors.Identity
 
 @inject ApplicationSignInManager SignInManager
 @inject ApplicationUserManager UserManager
@@ -11,7 +11,7 @@
                 <a asp-controller="Manage" asp-action="Index" class="nav-link" title="Manage">Hello @UserManager.GetUserName(User)!</a>
             </li>
             <li class="nav-item">
-                <button type="submit" class="btn btn-link navbar-btn nav-link">Log out</button>
+                <button type="submit" class="btn btn-link navbar-btn nav-link border-0">Log out</button>
             </li>
         </ul>
     </form>

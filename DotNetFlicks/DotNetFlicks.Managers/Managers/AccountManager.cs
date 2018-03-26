@@ -1,5 +1,4 @@
 ﻿using DotNetFlicks.Accessors.Identity;
-using DotNetFlicks.Managers.Identity;
 using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Account;
 using DotNetFlicks.ViewModels.Manage;

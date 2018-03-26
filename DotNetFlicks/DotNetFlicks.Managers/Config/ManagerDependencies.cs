@@ -1,4 +1,4 @@
-﻿using DotNetFlicks.Managers.Identity;
+﻿using DotNetFlicks.Accessors.Identity;
 using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.Managers.Managers;
 using Microsoft.Extensions.DependencyInjection;

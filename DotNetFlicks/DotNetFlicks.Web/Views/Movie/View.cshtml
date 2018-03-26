@@ -20,11 +20,17 @@
             <br />
             @if (directors.Count == 1)
             {
-                <p><strong>Director: </strong>@directors.Single().PersonName</p>
+                <p><strong>Director: </strong><a asp-controller="Person" asp-action="View" asp-route-id="@directors.Single().PersonId" style="color: black;">@directors.Single().PersonName</a></p>
             }
             else if (directors.Count > 1)
             {
-                <p><strong>Directors: </strong>@string.Join(", ", directors.Select(x => x.PersonName))</p>
+                <p>
+                    <strong>Directors: </strong>
+                    @foreach (var director in directors)
+                    {
+                        <span><a asp-controller="Person" asp-action="View" asp-route-id="@director.PersonId" style="color: black;">@director.PersonName</a>@(director != directors.Last() ? "," : "")</span>
+                    }
+                </p>
             }
             <p>
                 <strong>Genres: </strong>

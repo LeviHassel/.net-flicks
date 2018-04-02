@@ -11,9 +11,10 @@ using System;
 namespace DotNetFlicks.Accessors.Migrations
 {
     [DbContext(typeof(DotNetFlicksContext))]
-    partial class DotNetFlicksContextModelSnapshot : ModelSnapshot
+    [Migration("20180402220939_Make_Birth_Date_Nullable")]
+    partial class Make_Birth_Date_Nullable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

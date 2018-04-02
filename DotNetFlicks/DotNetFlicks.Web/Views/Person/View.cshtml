@@ -20,12 +20,18 @@
             <h1 class="display-4">@ViewBag.Title</h1>
             <hr class="my-4">
             <p>@Model.Biography</p>
-            <p><strong>Age@(Model.DeathDate.HasValue ? " at Death" : ""): </strong>@Html.DisplayFor(x => x.Age)</p>
-            <p><strong>Born: </strong>@Model.BirthDate.ToCustomDateString()</p>
+
+            @if (Model.BirthDate.HasValue)
+            {
+                <p><strong>Age@(Model.DeathDate.HasValue ? " at Death" : ""): </strong>@Html.DisplayFor(x => x.Age)</p>
+                <p><strong>Born: </strong>@Model.BirthDate.Value.ToCustomDateString()</p>
+            }
+
             @if (Model.DeathDate.HasValue)
             {
                 <p><strong>Died: </strong>@Model.DeathDate.Value.ToCustomDateString()</p>
             }
+
             @if (!string.IsNullOrEmpty(Model.KnownFor))
             {
                 <p><strong>Known For: </strong>@Html.DisplayFor(x => x.KnownFor)</p>
@@ -43,7 +49,7 @@
         <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-@(categoryName)">
             <div class="d-flex">
                 <h5 class="card-title mb-0">@categoryName <small>(@category.Count())</small></h5>
-                <i class="ml-auto my-auto fas fa-chevron-up")"></i>
+                <i class="ml-auto my-auto fas fa-chevron-up" )"></i>
             </div>
         </div>
         <div class="card-body py-0 collapse show" id="collapse-@(categoryName)">

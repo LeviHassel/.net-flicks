@@ -20,15 +20,20 @@ namespace DotNetFlicks.Common.Helpers
         /// <param name="birthDate"></param>
         /// <param name="deathDate"></param>
         /// <returns></returns>
-        public static int GetAge(DateTime birthDate, DateTime? deathDate)
+        public static int GetAge(DateTime? birthDate, DateTime? deathDate)
         {
-            var lastDateAlive = deathDate.HasValue ? deathDate.Value : DateTime.Today;
+            var age = 0;
 
-            var age = lastDateAlive.Year - birthDate.Year;
-
-            if (birthDate > lastDateAlive.AddYears(-age))
+            if (birthDate.HasValue)
             {
-                age--;
+                var lastDateAlive = deathDate.HasValue ? deathDate.Value : DateTime.Today;
+
+                age = lastDateAlive.Year - birthDate.Value.Year;
+
+                if (birthDate.Value > lastDateAlive.AddYears(-age))
+                {
+                    age--;
+                }
             }
 
             return age;

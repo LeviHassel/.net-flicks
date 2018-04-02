@@ -14,7 +14,7 @@ namespace DotNetFlicks.ViewModels.Movie
 
         public string Role { get; set; }
 
-        public TimeSpan ScreenTime { get; set; }
+        public int Order { get; set; }
 
         public SelectList People { get; set; }
     }

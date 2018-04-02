@@ -45,7 +45,7 @@ namespace DotNetFlicks.Managers.Managers
             var dto = _movieAccessor.Get(id);
             var vm = Mapper.Map<MovieViewModel>(dto);
 
-            vm.Cast = vm.Cast.OrderByDescending(x => x.ScreenTime).ToList();
+            vm.Cast = vm.Cast.OrderBy(x => x.Order).ToList();
             vm.Crew = vm.Crew.OrderBy(x => x.Category).ThenBy(x => x.PersonName).ToList();
             vm.Genres = vm.Genres.OrderBy(x => x.Name).ToList();
 

@@ -18,7 +18,7 @@ namespace DotNetFlicks.ViewModels.Shared
 
         public string Category { get; set; }
 
-        public TimeSpan ScreenTime { get; set; }
+        public int Order { get; set; }
 
         public bool IsDirector { get; set; }
     }

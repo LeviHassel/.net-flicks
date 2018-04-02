@@ -15,6 +15,6 @@ namespace DotNetFlicks.Accessors.Models.EF
 
         public string Role { get; set; }
 
-        public TimeSpan ScreenTime { get; set; }
+        public int Order { get; set; }
     }
 }

@@ -33,20 +33,21 @@ namespace DotNetFlicks.Accessors.Config
                 .ForMember(dest => dest.Crew, opt => opt.MapFrom(src => src.credits.crew));
 
             CreateMap<JsonGenre, MovieGenre>()
-                .ForMember(dest => dest.MovieId, opt => opt.MapFrom(src => src.id)) //leave blank, populate later?
+                //.ForMember(dest => dest.MovieId, opt => opt.MapFrom(src => src.id)) //leave blank, populate later?
                 .ForMember(dest => dest.GenreId, opt => opt.MapFrom(src => src.id));
 
             CreateMap<JsonCast, CastMember>()
                 .ForMember(dest => dest.PersonId, opt => opt.MapFrom(src => src.id))
-                .ForMember(dest => dest.MovieId, opt => opt.MapFrom(src => src.name)) //leave blank, populate later?
+                //.ForMember(dest => dest.MovieId, opt => opt.MapFrom(src => src.name)) //leave blank, populate later?
                 .ForMember(dest => dest.Role, opt => opt.MapFrom(src => src.character))
-                .ForMember(dest => dest.ScreenTime, opt => opt.MapFrom(src => src.order)); //need DB change to get this working
+                .ForMember(dest => dest.Order, opt => opt.MapFrom(src => src.order)); //see if this works
 
             CreateMap<JsonCrew, CrewMember>()
                 .ForMember(dest => dest.PersonId, opt => opt.MapFrom(src => src.id))
-                .ForMember(dest => dest.MovieId, opt => opt.MapFrom(src => src.name)) //leave blank, populate later?
+                //.ForMember(dest => dest.MovieId, opt => opt.MapFrom(src => src.name)) //leave blank, populate later?
                 .ForMember(dest => dest.Position, opt => opt.MapFrom(src => src.job))
-                .ForMember(dest => dest.DepartmentId, opt => opt.MapFrom(src => src.department)); //find a way to get Id from name
+                //.ForMember(dest => dest.DepartmentId, opt => opt.MapFrom(src => src.department)) //find a way to get Id from name
+                ;
         }
 
         public override string ProfileName

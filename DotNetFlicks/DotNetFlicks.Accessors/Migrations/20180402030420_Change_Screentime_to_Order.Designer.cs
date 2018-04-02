@@ -11,9 +11,10 @@ using System;
 namespace DotNetFlicks.Accessors.Migrations
 {
     [DbContext(typeof(DotNetFlicksContext))]
-    partial class DotNetFlicksContextModelSnapshot : ModelSnapshot
+    [Migration("20180402030420_Change_Screentime_to_Order")]
+    partial class Change_Screentime_to_Order
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

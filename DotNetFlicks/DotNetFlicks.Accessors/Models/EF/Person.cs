@@ -6,9 +6,7 @@ namespace DotNetFlicks.Accessors.Models.EF
 {
     public class Person : Entity
     {
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
+        public string Name { get; set; }
 
         public string Biography { get; set; }
 

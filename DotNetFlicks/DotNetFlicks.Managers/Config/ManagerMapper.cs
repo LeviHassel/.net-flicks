@@ -18,7 +18,7 @@ namespace DotNetFlicks.Managers.Config
 
             CreateMap<CastMemberDTO, MovieRoleViewModel>()
                 .ForMember(dest => dest.PersonId, opt => opt.MapFrom(src => src.PersonId))
-                .ForMember(dest => dest.PersonName, opt => opt.MapFrom(src => src.Person.FullName))
+                .ForMember(dest => dest.PersonName, opt => opt.MapFrom(src => src.Person.Name))
                 .ForMember(dest => dest.MovieId, opt => opt.MapFrom(src => src.MovieId))
                 .ForMember(dest => dest.MovieName, opt => opt.MapFrom(src => src.Movie.Name))
                 .ForMember(dest => dest.MovieYear, opt => opt.MapFrom(src => src.Movie.ReleaseDate.Year))
@@ -28,7 +28,7 @@ namespace DotNetFlicks.Managers.Config
 
             CreateMap<CrewMemberDTO, MovieRoleViewModel>()
                 .ForMember(dest => dest.PersonId, opt => opt.MapFrom(src => src.PersonId))
-                .ForMember(dest => dest.PersonName, opt => opt.MapFrom(src => src.Person.FullName))
+                .ForMember(dest => dest.PersonName, opt => opt.MapFrom(src => src.Person.Name))
                 .ForMember(dest => dest.MovieId, opt => opt.MapFrom(src => src.MovieId))
                 .ForMember(dest => dest.MovieName, opt => opt.MapFrom(src => src.Movie.Name))
                 .ForMember(dest => dest.MovieYear, opt => opt.MapFrom(src => src.Movie.ReleaseDate.Year))

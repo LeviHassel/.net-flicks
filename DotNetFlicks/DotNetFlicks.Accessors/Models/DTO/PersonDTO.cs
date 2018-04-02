@@ -6,9 +6,7 @@ namespace DotNetFlicks.Accessors.Models.DTO
 {
     public class PersonDTO : EntityDTO
     {
-        public string FirstName { get; set; }
-
-        public string LastName { get; set; }
+        public string Name { get; set; }
 
         public string Biography { get; set; }
 
@@ -21,7 +19,5 @@ namespace DotNetFlicks.Accessors.Models.DTO
         public ICollection<CastMemberDTO> CastRoles { get; set; }
 
         public ICollection<CrewMemberDTO> CrewRoles { get; set; }
-
-        public string FullName { get { return string.Format("{0} {1}", FirstName, LastName); } }
     }
 }

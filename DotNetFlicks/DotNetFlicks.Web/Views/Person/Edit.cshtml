@@ -1,7 +1,7 @@
 ﻿@model DotNetFlicks.ViewModels.Person.PersonViewModel
 
 @{
-    ViewBag.Title = Model.Id > 0 ? string.Format("Edit {0} {1}", Model.FirstName, Model.LastName) : "New Person";
+    ViewBag.Title = Model.Id > 0 ? "Edit " + Model.Name : "New Person";
 }
 
 <h1>@ViewBag.Title</h1>
@@ -11,14 +11,14 @@
     <div class="container">
         <div class="row">
             <div class="col-md-6 mb-4">
-                <label asp-for="FirstName" class="control-label"></label>
-                <input asp-for="FirstName" class="form-control" />
-                <span asp-validation-for="FirstName" class="text-danger"></span>
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
             </div>
             <div class="col-md-6 mb-4">
-                <label asp-for="LastName" class="control-label"></label>
-                <input asp-for="LastName" class="form-control" />
-                <span asp-validation-for="LastName" class="text-danger"></span>
+                <label asp-for="ImageUrl" class="control-label"></label>
+                <input asp-for="ImageUrl" class="form-control" />
+                <span asp-validation-for="ImageUrl" class="text-danger"></span>
             </div>
         </div>
         <div class="form-group">
@@ -38,11 +38,6 @@
                 <input asp-for="DeathDate" class="form-control" />
                 <span asp-validation-for="DeathDate" class="text-danger"></span>
             </div>
-        </div>
-        <div class="form-group">
-            <label asp-for="ImageUrl" class="control-label"></label>
-            <input asp-for="ImageUrl" class="form-control" />
-            <span asp-validation-for="ImageUrl" class="text-danger"></span>
         </div>
 
         <br /><br />

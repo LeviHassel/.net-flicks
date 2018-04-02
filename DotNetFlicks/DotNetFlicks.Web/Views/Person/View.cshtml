@@ -3,7 +3,7 @@
 @model DotNetFlicks.ViewModels.Person.PersonViewModel
 
 @{
-    ViewBag.Title = Model.FirstName + " " + Model.LastName;
+    ViewBag.Title = Model.Name;
     var categories = Model.Roles.GroupBy(x => x.Category).OrderByDescending(x => x.Count());
 }
 

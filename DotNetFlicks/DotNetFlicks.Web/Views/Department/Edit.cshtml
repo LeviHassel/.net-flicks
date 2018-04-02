@@ -1,7 +1,7 @@
 ﻿@model DotNetFlicks.ViewModels.Department.DepartmentViewModel
 
 @{
-    ViewBag.Title = Model.Id > 0 ? string.Format("Edit {0}", Model.Name) : "New Department";
+    ViewBag.Title = Model.Id > 0 ? "Edit " + Model.Name : "New Department";
 }
 
 <h1>@ViewBag.Title</h1>

@@ -7,10 +7,11 @@ using DotNetFlicks.Accessors.Models.EF;
 using DotNetFlicks.Accessors.Models.EF.Base;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
+using System.Threading;
+using TMDbLib.Client;
 
 namespace DotNetFlicks.Accessors.Accessors
 {
@@ -29,18 +30,28 @@ namespace DotNetFlicks.Accessors.Accessors
             peopleIds = peopleIds.Distinct().OrderBy(x => x).ToList();
 
             var people = new List<Person>();
+            TMDbClient client = new TMDbClient("5955178fb6a488b7ec2f4bd861ed3e33");
+            
 
             foreach (var personId in peopleIds)
             {
                 //Only 40 requests per 10 seconds, so make it slow somehow
                 //Get all 4890 people details using TMDBlib
+                var personData = client.GetPersonAsync(personId).Result;
 
                 people.Add(
                     new Person
                     {
-                        FirstName = ""
+                        Id = personData.Id,
+                        Name = personData.Name,
+                        Biography = personData.Biography,
+                        //BirthDate = personData.Birthday.HasValue ? personData.Birthday.Value : null,
+                        //DeathDate = personData.Deathday.HasValue ? personData.Deathday.Value : null,
+                        ImageUrl = "https://image.tmdb.org/t/p/w600_and_h900_bestv2/" + personData.ProfilePath
                     }
                 );
+
+                Thread.Sleep(500);
             }
 
             var peopleJson = JsonConvert.SerializeObject(people);

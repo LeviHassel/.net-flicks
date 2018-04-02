@@ -13,9 +13,7 @@
     <table class="table sortable">
         <thead>
             <tr>
-                <th class="d-none d-sm-table-cell" data-defaultsort="asc"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().FirstName)</h5></th>
-                <th class="d-none d-sm-table-cell"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().LastName)</h5></th>
-                <th class="d-table-cell d-sm-none"><h5>Name</h5></th>
+                <th class="d-table-cell" data-defaultsort="asc"><h5>Name</h5></th>
                 <th class="d-none d-md-table-cell"><h5>Image</h5></th>
                 <th class="d-none d-md-table-cell"><h5>@Html.DisplayNameFor(x => Model.People.FirstOrDefault().Roles)</h5></th>
                 <th width="168" data-defaultsort="disabled"></th>
@@ -25,13 +23,11 @@
             @foreach (var i in Model.People)
             {
                 <tr>
-                    <td class="d-none d-sm-table-cell align-middle">@Html.DisplayFor(x => i.FirstName)</td>
-                    <td class="d-none d-sm-table-cell align-middle">@Html.DisplayFor(x => i.LastName)</td>
-                    <td class="d-table-cell d-sm-none align-middle">@Html.DisplayFor(x => i.FirstName) @Html.DisplayFor(x => i.LastName)</td>
+                    <td class="d-table-cell align-middle">@Html.DisplayFor(x => i.Name)</td>
                     <td class="d-none d-md-table-cell align-middle" data-value=@(!string.IsNullOrEmpty(i.ImageUrl))>
                         @if (!string.IsNullOrEmpty(i.ImageUrl))
                         {
-                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".image-modal" data-title="@i.FirstName @i.LastName" data-img-src="@i.ImageUrl">
+                            <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".image-modal" data-title="@i.Name" data-img-src="@i.ImageUrl">
                                 <i class="fas fa-image"></i>
                             </button>
                         }

@@ -1,7 +1,7 @@
 ﻿@model DotNetFlicks.ViewModels.Movie.EditMovieViewModel
 
 @{
-    ViewBag.Title = Model.Id > 0 ? string.Format("Edit {0}", Model.Name) : "New Movie";
+    ViewBag.Title = Model.Id > 0 ? "Edit " + Model.Name : "New Movie";
 }
 
 <h1>@ViewBag.Title</h1>

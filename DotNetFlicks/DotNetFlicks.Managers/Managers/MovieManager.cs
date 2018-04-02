@@ -57,21 +57,21 @@ namespace DotNetFlicks.Managers.Managers
             var movieDto = id.HasValue ? _movieAccessor.Get(id.Value) : new MovieDTO();
             var departmentDtos = _departmentAccessor.GetAll().OrderBy(x => x.Name);
             var genreDtos = _genreAccessor.GetAll().OrderBy(x => x.Name);
-            var personDtos = _personAccessor.GetAll().OrderBy(x => x.FirstName);
+            var personDtos = _personAccessor.GetAll().OrderBy(x => x.Name);
 
             var vm = Mapper.Map<EditMovieViewModel>(movieDto);
             vm.GenresSelectList = new MultiSelectList(genreDtos, "Id", "Name", movieDto.Genres != null ? movieDto.Genres.Select(x => x.GenreId).ToList() : null);
-            vm.Cast = vm.Cast.OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName).ToList();
-            vm.Crew = vm.Crew.OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).FirstName).ToList();
+            vm.Cast = vm.Cast.OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).Name).ToList();
+            vm.Crew = vm.Crew.OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).Name).ToList();
 
             foreach (var castMemberVm in vm.Cast)
             {
-                castMemberVm.People = new SelectList(personDtos, "Id", "FullName", castMemberVm.PersonId);
+                castMemberVm.People = new SelectList(personDtos, "Id", "Name", castMemberVm.PersonId);
             }
 
             foreach (var crewMemberVm in vm.Crew)
             {
-                crewMemberVm.People = new SelectList(personDtos, "Id", "FullName", crewMemberVm.PersonId);
+                crewMemberVm.People = new SelectList(personDtos, "Id", "Name", crewMemberVm.PersonId);
                 crewMemberVm.Departments = new SelectList(departmentDtos, "Id", "Name", crewMemberVm.DepartmentId);
             }
 
@@ -93,12 +93,12 @@ namespace DotNetFlicks.Managers.Managers
 
         public CastMemberViewModel GetNewCastMember(int index)
         {
-            var personDtos = _personAccessor.GetAll().OrderBy(x => x.FirstName);
+            var personDtos = _personAccessor.GetAll().OrderBy(x => x.Name);
 
             var vm = new CastMemberViewModel
             {
                 Index = index,
-                People = new SelectList(personDtos, "Id", "FullName")
+                People = new SelectList(personDtos, "Id", "Name")
             };
 
             return vm;
@@ -106,13 +106,13 @@ namespace DotNetFlicks.Managers.Managers
 
         public CrewMemberViewModel GetNewCrewMember(int index)
         {
-            var personDtos = _personAccessor.GetAll().OrderBy(x => x.FirstName);
+            var personDtos = _personAccessor.GetAll().OrderBy(x => x.Name);
             var departmentDtos = _departmentAccessor.GetAll().OrderBy(x => x.Name);
 
             var vm = new CrewMemberViewModel
             {
                 Index = index,
-                People = new SelectList(personDtos, "Id", "FullName"),
+                People = new SelectList(personDtos, "Id", "Name"),
                 Departments = new SelectList(departmentDtos, "Id", "Name")
             };
 

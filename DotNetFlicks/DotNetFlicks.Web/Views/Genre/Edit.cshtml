@@ -1,7 +1,7 @@
 ﻿@model DotNetFlicks.ViewModels.Genre.GenreViewModel
 
 @{
-    ViewBag.Title = Model.Id > 0 ? string.Format("Edit {0}", Model.Name) : "New Genre";
+    ViewBag.Title = Model.Id > 0 ? "Edit " + Model.Name : "New Genre";
 }
 
 <h1>@ViewBag.Title</h1>

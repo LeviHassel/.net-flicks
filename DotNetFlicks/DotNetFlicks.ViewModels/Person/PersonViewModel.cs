@@ -11,12 +11,7 @@ namespace DotNetFlicks.ViewModels.Person
     public class PersonViewModel : EntityViewModel
     {
         [Required(AllowEmptyStrings = false)]
-        [Display(Name = "First Name")]
-        public string FirstName { get; set; }
-
-        [Required(AllowEmptyStrings = false)]
-        [Display(Name = "Last Name")]
-        public string LastName { get; set; }
+        public string Name { get; set; }
 
         [MaxLength(750)]
         public string Biography { get; set; }

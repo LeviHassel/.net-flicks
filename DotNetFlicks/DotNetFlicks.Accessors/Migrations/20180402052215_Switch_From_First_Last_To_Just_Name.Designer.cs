@@ -11,9 +11,10 @@ using System;
 namespace DotNetFlicks.Accessors.Migrations
 {
     [DbContext(typeof(DotNetFlicksContext))]
-    partial class DotNetFlicksContextModelSnapshot : ModelSnapshot
+    [Migration("20180402052215_Switch_From_First_Last_To_Just_Name")]
+    partial class Switch_From_First_Last_To_Just_Name
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

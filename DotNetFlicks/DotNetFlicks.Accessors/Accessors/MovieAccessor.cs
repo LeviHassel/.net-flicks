@@ -7,6 +7,7 @@ using DotNetFlicks.Accessors.Models.EF;
 using DotNetFlicks.Accessors.Models.EF.Base;
 using Microsoft.EntityFrameworkCore;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.IO;
 using System.Linq;
@@ -137,6 +138,47 @@ namespace DotNetFlicks.Accessors.Accessors
 
             var jsonMovies = JsonConvert.DeserializeObject<List<RootObject>>(File.ReadAllText(@"Database" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "movies.json"));
             var movies = Mapper.Map<List<Movie>>(jsonMovies);
+
+            foreach (var movie in movies)
+            {
+                foreach (var moviegenre in movie.Genres)
+                {
+                    moviegenre.MovieId = movie.Id;
+                }
+
+                foreach (var castmember in movie.Cast)
+                {
+                    castmember.MovieId = movie.Id;
+                }
+
+                foreach (var crewmember in movie.Crew)
+                {
+                    crewmember.MovieId = movie.Id;
+                }
+            }
+
+            //Add purchase cost and Rent cost to objects
+
+            //Find a way to populate Department ID for Crew
+
+            var peopleIds = movies.SelectMany(x => x.Cast.Select(y => y.PersonId)).ToList();
+            peopleIds.AddRange(movies.SelectMany(x => x.Crew.Select(y => y.PersonId)).ToList());
+            peopleIds = peopleIds.Distinct().OrderBy(x => x).ToList();
+
+            var people = new List<Person>();
+
+            foreach (var personId in peopleIds)
+            {
+                //Only 40 requests per 10 seconds, so make it slow somehow
+                //Get all 4890 people details using TMDBlib
+
+                people.Add(
+                    new Person
+                    {
+                        FirstName = ""
+                    }
+                );
+            }
 
             var entity = _db.Movies
                 .Include(x => x.Cast).ThenInclude(x => x.Person)

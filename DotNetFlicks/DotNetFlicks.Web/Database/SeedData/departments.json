@@ -1,0 +1,47 @@
+[
+	{
+		"id": 1,
+		"name": "Art"
+	},
+	{
+		"id": 2,
+		"name": "Camera"
+	},
+	{
+		"id": 3,
+		"name": "Costume & Make-Up"
+	},
+	{
+		"id": 4,
+		"name": "Crew"
+	},
+	{
+		"id": 5,
+		"name": "Directing",
+		"isDirecting": true,
+	},
+	{
+		"id": 6,
+		"name": "Editing"
+	},
+	{
+		"id": 7,
+		"name": "Lighting"
+	},
+	{
+		"id": 8,
+		"name": "Production"
+	},
+	{
+		"id": 9,
+		"name": "Sound"
+	},
+	{
+		"id": 10,
+		"name": "Visual Effects"
+	},
+	{
+		"id": 11,
+		"name": "Writing"
+	}
+]

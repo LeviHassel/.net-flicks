@@ -22,7 +22,7 @@ namespace DotNetFlicks.ViewModels.Person
         public DateTime? BirthDate { get; set; }
 
         [DataType(DataType.Date)]
-        [Display(Name = "Death Date (Optional)")]
+        [Display(Name = "Death Date")]
         public DateTime? DeathDate { get; set; }
 
         [Url]

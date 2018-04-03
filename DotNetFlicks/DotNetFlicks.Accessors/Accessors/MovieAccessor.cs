@@ -6,12 +6,8 @@ using DotNetFlicks.Accessors.Models.DTO;
 using DotNetFlicks.Accessors.Models.EF;
 using DotNetFlicks.Accessors.Models.EF.Base;
 using Microsoft.EntityFrameworkCore;
-using Newtonsoft.Json;
 using System.Collections.Generic;
-using System.IO;
 using System.Linq;
-using System.Threading;
-using TMDbLib.Client;
 
 namespace DotNetFlicks.Accessors.Accessors
 {

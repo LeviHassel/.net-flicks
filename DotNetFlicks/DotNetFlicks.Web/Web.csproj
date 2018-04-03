@@ -22,6 +22,10 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Content Remove="Config\SeedData\departments.json" />
+    <Content Remove="Config\SeedData\genres.json" />
+    <Content Remove="Config\SeedData\movies.json" />
+    <Content Remove="Config\SeedData\people.json" />
     <Content Remove="wwwroot\.gitignore" />
   </ItemGroup>
   <ItemGroup>
@@ -35,6 +39,12 @@
     <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
     <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Config\SeedData\departments.json" />
+    <None Include="Config\SeedData\genres.json" />
+    <None Include="Config\SeedData\movies.json" />
+    <None Include="Config\SeedData\people.json" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\DotNetFlicks.Common\Common.csproj" />

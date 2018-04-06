@@ -44,7 +44,7 @@ namespace DotNetFlicks.Accessors.Database
         {
             if (!context.Genres.Any())
             {
-                var genres = JsonConvert.DeserializeObject<List<Genre>>(File.ReadAllText(@"Database" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "genres.json"));
+                var genres = JsonConvert.DeserializeObject<List<Genre>>(File.ReadAllText(@"Config" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "genres.json"));
 
                 context.Genres.AddRange(genres);
                 context.SaveChanges();
@@ -55,7 +55,7 @@ namespace DotNetFlicks.Accessors.Database
         {
             if (!context.Departments.Any())
             {
-                var departments = JsonConvert.DeserializeObject<List<Department>>(File.ReadAllText(@"Database" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "departments.json"));
+                var departments = JsonConvert.DeserializeObject<List<Department>>(File.ReadAllText(@"Config" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "departments.json"));
 
                 context.Departments.AddRange(departments);
                 context.SaveChanges();
@@ -66,7 +66,7 @@ namespace DotNetFlicks.Accessors.Database
         {
             if (!context.People.Any())
             {
-                var people = JsonConvert.DeserializeObject<List<Person>>(File.ReadAllText(@"Database" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "people.json"));
+                var people = JsonConvert.DeserializeObject<List<Person>>(File.ReadAllText(@"Config" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "people.json"));
 
                 context.People.AddRange(people);
                 context.SaveChanges();
@@ -77,7 +77,26 @@ namespace DotNetFlicks.Accessors.Database
         {
             if (!context.Movies.Any())
             {
-                var movies = JsonConvert.DeserializeObject<List<Movie>>(File.ReadAllText(@"Database" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "movies.json"));
+                var movies = JsonConvert.DeserializeObject<List<Movie>>(File.ReadAllText(@"Config" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "movies.json"));
+                /*
+                var g = movies.SelectMany(x => x.Genres).ToList();
+
+                context.MovieGenres.AddRange(g);
+                context.SaveChanges();
+
+                context.CastMembers.AddRange(movies.SelectMany(x => x.Cast).ToList());
+                context.SaveChanges();
+
+                context.CrewMembers.AddRange(movies.SelectMany(x => x.Crew).ToList());
+                context.SaveChanges();
+
+                foreach (var movie in movies)
+                {
+                    movie.Genres = null;
+                    movie.Cast = null;
+                    movie.Crew = null;
+                }
+                */
 
                 context.Movies.AddRange(movies);
                 context.SaveChanges();

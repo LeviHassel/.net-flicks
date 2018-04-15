@@ -31,11 +31,6 @@ namespace DotNetFlicks.Accessors.Database
             }
         }
 
-        protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-        {
-            optionsBuilder.UseEF6CompatibleValueGeneration();
-        }
-
         public virtual void SetState(object entity, EntityState state)
         {
             this.Entry(entity).State = state;

@@ -78,25 +78,6 @@ namespace DotNetFlicks.Accessors.Database
             if (!context.Movies.Any())
             {
                 var movies = JsonConvert.DeserializeObject<List<Movie>>(File.ReadAllText(@"Config" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "movies.json"));
-                /*
-                var g = movies.SelectMany(x => x.Genres).ToList();
-
-                context.MovieGenres.AddRange(g);
-                context.SaveChanges();
-
-                context.CastMembers.AddRange(movies.SelectMany(x => x.Cast).ToList());
-                context.SaveChanges();
-
-                context.CrewMembers.AddRange(movies.SelectMany(x => x.Crew).ToList());
-                context.SaveChanges();
-
-                foreach (var movie in movies)
-                {
-                    movie.Genres = null;
-                    movie.Cast = null;
-                    movie.Crew = null;
-                }
-                */
 
                 context.Movies.AddRange(movies);
                 context.SaveChanges();

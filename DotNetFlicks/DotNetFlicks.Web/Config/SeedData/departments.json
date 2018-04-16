@@ -1,47 +1,47 @@
 [
 	{
-		"id": 1,
-		"name": "Art"
+		"TmdbId": 1,
+		"Name": "Art"
 	},
 	{
-		"id": 2,
-		"name": "Camera"
+		"TmdbId": 2,
+		"Name": "Camera"
 	},
 	{
-		"id": 3,
-		"name": "Costume & Make-Up"
+		"TmdbId": 3,
+		"Name": "Costume & Make-Up"
 	},
 	{
-		"id": 4,
-		"name": "Crew"
+		"TmdbId": 4,
+		"Name": "Crew"
 	},
 	{
-		"id": 5,
-		"name": "Directing",
+		"TmdbId": 5,
+		"Name": "Directing",
 		"isDirecting": true,
 	},
 	{
-		"id": 6,
-		"name": "Editing"
+		"TmdbId": 6,
+		"Name": "Editing"
 	},
 	{
-		"id": 7,
-		"name": "Lighting"
+		"TmdbId": 7,
+		"Name": "Lighting"
 	},
 	{
-		"id": 8,
-		"name": "Production"
+		"TmdbId": 8,
+		"Name": "Production"
 	},
 	{
-		"id": 9,
-		"name": "Sound"
+		"TmdbId": 9,
+		"Name": "Sound"
 	},
 	{
-		"id": 10,
-		"name": "Visual Effects"
+		"TmdbId": 10,
+		"Name": "Visual Effects"
 	},
 	{
-		"id": 11,
-		"name": "Writing"
+		"TmdbId": 11,
+		"Name": "Writing"
 	}
 ]

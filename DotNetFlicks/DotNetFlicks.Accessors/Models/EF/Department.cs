@@ -9,6 +9,8 @@ namespace DotNetFlicks.Accessors.Models.EF
 
         public bool IsDirecting { get; set; }
 
+        public int TmdbId { get; set; }
+
         public virtual ICollection<CrewMember> Roles { get; set; }
     }
 }

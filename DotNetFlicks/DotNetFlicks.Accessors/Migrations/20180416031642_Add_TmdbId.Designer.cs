@@ -10,9 +10,10 @@ using Microsoft.EntityFrameworkCore.Migrations;
 namespace DotNetFlicks.Accessors.Migrations
 {
     [DbContext(typeof(DotNetFlicksContext))]
-    partial class DotNetFlicksContextModelSnapshot : ModelSnapshot
+    [Migration("20180416031642_Add_TmdbId")]
+    partial class Add_TmdbId
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

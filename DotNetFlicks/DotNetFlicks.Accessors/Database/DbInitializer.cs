@@ -22,6 +22,9 @@ namespace DotNetFlicks.Accessors.Database
             SeedDepartments(context);
             SeedPeople(context);
             SeedMovies(context);
+            SeedMovieGenres(context);
+            SeedCastMembers(context);
+            SeedCrewMembers(context);
         }
 
         #region Private Methods
@@ -80,6 +83,61 @@ namespace DotNetFlicks.Accessors.Database
                 var movies = JsonConvert.DeserializeObject<List<Movie>>(File.ReadAllText(@"Config" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "movies.json"));
 
                 context.Movies.AddRange(movies);
+                context.SaveChanges();
+            }
+        }
+
+        private static void SeedMovieGenres(DotNetFlicksContext context)
+        {
+            if (!context.MovieGenres.Any())
+            {
+                var movieGenres = JsonConvert.DeserializeObject<List<MovieGenre>>(File.ReadAllText(@"Config" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "movieGenres.json"));
+
+                //Because EF Core doesn't support seeding preset IDs, I've used the TmdbId column to connect the related seeding data
+                foreach (var movieGenre in movieGenres)
+                {
+                    movieGenre.GenreId = context.Genres.Single(x => x.TmdbId == movieGenre.GenreId).Id;
+                    movieGenre.MovieId = context.Movies.Single(x => x.TmdbId == movieGenre.MovieId).Id;
+                }
+
+                context.MovieGenres.AddRange(movieGenres);
+                context.SaveChanges();
+            }
+        }
+
+        private static void SeedCastMembers(DotNetFlicksContext context)
+        {
+            if (!context.CastMembers.Any())
+            {
+                var castMembers = JsonConvert.DeserializeObject<List<CastMember>>(File.ReadAllText(@"Config" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "castMembers.json"));
+
+                //Because EF Core doesn't support seeding preset IDs, I've used the TmdbId column to connect the related seeding data
+                foreach (var castMember in castMembers)
+                {
+                    castMember.MovieId = context.Movies.Single(x => x.TmdbId == castMember.MovieId).Id;
+                    castMember.PersonId = context.People.Single(x => x.TmdbId == castMember.PersonId).Id;
+                }
+
+                context.CastMembers.AddRange(castMembers);
+                context.SaveChanges();
+            }
+        }
+
+        private static void SeedCrewMembers(DotNetFlicksContext context)
+        {
+            if (!context.CrewMembers.Any())
+            {
+                var crewMembers = JsonConvert.DeserializeObject<List<CrewMember>>(File.ReadAllText(@"Config" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "crewMembers.json"));
+
+                //Because EF Core doesn't support seeding preset IDs, I've used the TmdbId column to connect the related seeding data
+                foreach (var crewMember in crewMembers)
+                {
+                    crewMember.MovieId = context.Movies.Single(x => x.TmdbId == crewMember.MovieId).Id;
+                    crewMember.PersonId = context.People.Single(x => x.TmdbId == crewMember.PersonId).Id;
+                    crewMember.DepartmentId = context.Departments.Single(x => x.TmdbId == crewMember.DepartmentId).Id;
+                }
+
+                context.CrewMembers.AddRange(crewMembers);
                 context.SaveChanges();
             }
         }

@@ -5,7 +5,8 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
+    <TypeScriptToolsVersion>2.8</TypeScriptToolsVersion>
   </PropertyGroup>
 
   <PropertyGroup>
@@ -16,7 +17,7 @@
     <UserSecretsId>aspnet-DotNetFlicks-e91132e6-85a2-421c-a63d-b0ed9cc0c64f</UserSecretsId>
     <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
     <OutputTypeEx>library</OutputTypeEx>
-    <StartupObject>DotNetFlicks.Web.Config.Program</StartupObject>
+    <StartupObject></StartupObject>
     <AssemblyName>DotNetFlicks.Web</AssemblyName>
     <RootNamespace>DotNetFlicks.Web</RootNamespace>
   </PropertyGroup>
@@ -27,18 +28,14 @@
     <Content Remove="Config\SeedData\movies.json" />
     <Content Remove="Config\SeedData\people.json" />
     <Content Remove="wwwroot\.gitignore" />
+    <Content Remove="wwwroot\lib\moment\moment.d.ts" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.6" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0-preview2-final" />
 	<PackageReference Include="AutoMapper" Version="6.2.2" />
-    <PackageReference Include="BuildBundlerMinifier" Version="2.6.362" />
-    <PackageReference Include="BundlerMinifier.Core" Version="2.6.362" />
+    <PackageReference Include="BuildBundlerMinifier" Version="2.6.375" />
+    <PackageReference Include="BundlerMinifier.Core" Version="2.6.375" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.Elm" Version="0.2.2" />
-  </ItemGroup>
-  <ItemGroup>
-    <DotNetCliToolReference Include="Microsoft.EntityFrameworkCore.Tools.DotNet" Version="2.0.0" />
-    <DotNetCliToolReference Include="Microsoft.Extensions.SecretManager.Tools" Version="2.0.0" />
-    <DotNetCliToolReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Tools" Version="2.0.0" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\SeedData\departments.json" />
@@ -50,6 +47,9 @@
     <ProjectReference Include="..\DotNetFlicks.Common\Common.csproj" />
     <ProjectReference Include="..\DotNetFlicks.Managers\Managers.csproj" />
     <ProjectReference Include="..\DotNetFlicks.ViewModels\ViewModels.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <TypeScriptCompile Include="wwwroot\lib\moment\moment.d.ts" />
   </ItemGroup>
 
 </Project>

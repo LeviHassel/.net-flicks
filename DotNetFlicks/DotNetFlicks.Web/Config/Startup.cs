@@ -8,6 +8,7 @@ using DotNetFlicks.Managers.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
@@ -44,7 +45,7 @@ namespace DotNetFlicks.Web.Config
             services.AddElm();
 
             //Set up MVC
-            services.AddMvc();
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             //Set up dependency injection
             services.AddManagerDependencies();
@@ -71,6 +72,10 @@ namespace DotNetFlicks.Web.Config
             {
                 app.UseExceptionHandler("/Home/Error");
             }
+
+            app.UseHsts();
+
+            app.UseHttpsRedirection();
 
             app.UseStaticFiles();
 

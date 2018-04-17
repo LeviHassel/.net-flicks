@@ -2,24 +2,19 @@
     //Set up Bootstrap tooltips
     $('[data-toggle="tooltip"]').tooltip();
 
-    //Sort movie cards
+    //Sort movie cards by type
     $(document).on('click', '.sort-movies', function () {
-        var elementId = this.id;
-        var sortData = elementId.split("-");
-        var attr = sortData[1];
-        var order = sortData[2];
+        $('.dropdown-item.sort-movies.active').removeClass('active text-white');
+        $(this).addClass('active text-white');
+        $('#sort-movies-dropdown').text(this.text);
+        sortMovies();
+    });
 
-        tinysort('div.movie-column', { attr: 'data-' + attr, order: order });
-
-        $(".sort-movies").each(function (index) {
-            if ($(this).attr('id') === elementId) {
-                $(this).addClass('active text-white');
-            } else {
-                $(this).removeClass('active text-white');
-            }
-        });
-
-        $('#sort-movies-dropdown').text(attr[0].toUpperCase() + attr.slice(1) + ' (' + order[0].toUpperCase() + order.slice(1) + '.)');
+    //Toggle ascending/descending sort for movie cards
+    $('#sort-direction').on('click', function () {
+        $(this).attr('data-sort', $(this).attr('data-sort') == 'desc' ? 'asc' : 'desc');
+        $(this).find('[data-fa-i2svg]').toggleClass('fa-arrow-up').toggleClass('fa-arrow-down');
+        sortMovies();
     });
 
     //Toggled open/closed icon on collapsible cards
@@ -80,3 +75,10 @@
         $(this).closest('tr').hide();
     });
 });
+
+//Sort movie cards by attribute and direction
+function sortMovies() {
+    var attr = $('.dropdown-item.sort-movies.active').attr('id');
+    var order = $('#sort-direction').attr('data-sort');
+    tinysort('div.movie-column', { attr: attr, order: order });
+}

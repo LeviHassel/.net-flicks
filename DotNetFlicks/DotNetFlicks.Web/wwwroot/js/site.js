@@ -2,6 +2,10 @@
 
     //Initialize DataTables
     $('.data-table').DataTable({
+        columnDefs: [
+            { targets: 'no-sort', orderable: false },
+            { targets: 'no-search', searchable: false }
+        ]
     });
 
     //Initialize People DataTable (this one uses AJAX to increase page loading speed)
@@ -37,7 +41,8 @@
             },
             {
                 className: "d-none d-md-table-cell",
-                orderable: false,
+                orderable: true,
+                data: "Roles.length",
                 render: function (data, type, full, meta) {
                     return '<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="' + full.RolesTooltip + '">' + full.Roles.length + '</button >';
                 }

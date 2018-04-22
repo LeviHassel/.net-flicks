@@ -14,8 +14,8 @@
         <thead>
             <tr>
                 <th><h5>@Html.DisplayNameFor(x => Model.Genres.FirstOrDefault().Name)</h5></th>
-                <th class="d-none d-sm-table-cell"><h5>@Html.DisplayNameFor(x => Model.Genres.FirstOrDefault().Movies)</h5></th>
-                <th width="116"></th>
+                <th class="d-none d-sm-table-cell no-search"><h5>@Html.DisplayNameFor(x => Model.Genres.FirstOrDefault().Movies)</h5></th>
+                <th width="116" class="no-sort"></th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +27,7 @@
                             @Html.DisplayFor(x => i.Name)
                         </a>
                     </td>
-                    <td class="d-none d-sm-table-cell">
+                    <td class="d-none d-sm-table-cell" data-sort="@i.Movies.Count">
                         <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.MoviesTooltip">
                             @i.Movies.Count
                         </button>

@@ -14,8 +14,8 @@
         <thead>
             <tr>
                 <th><h5>@Html.DisplayNameFor(x => Model.Departments.FirstOrDefault().Name)</h5></th>
-                <th class="d-none d-sm-table-cell"><h5>@Html.DisplayNameFor(x => Model.Departments.FirstOrDefault().People)</h5></th>
-                <th width="116"></th>
+                <th class="d-none d-sm-table-cell no-search"><h5>@Html.DisplayNameFor(x => Model.Departments.FirstOrDefault().People)</h5></th>
+                <th width="116" class="no-sort"></th>
             </tr>
         </thead>
         <tbody>
@@ -23,7 +23,7 @@
             {
                 <tr>
                     <td class="align-middle">@Html.DisplayFor(x => i.Name)</td>
-                    <td class="d-none d-sm-table-cell">
+                    <td class="d-none d-sm-table-cell" data-sort="@i.People.Count">
                         <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.PeopleTooltip">
                             @i.People.Count
                         </button>

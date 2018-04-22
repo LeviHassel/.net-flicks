@@ -14,10 +14,10 @@
         <thead>
             <tr>
                 <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Name)</h5></th>
-                <th class="d-none d-md-table-cell"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().ReleaseDate)</h5></th>
-                <th class="d-none d-xl-table-cell"><h5>Image</h5></th>
-                <th class="d-none d-lg-table-cell"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Genres)</h5></th>
-                <th width="116"></th>
+                <th class="d-none d-md-table-cell no-search"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().ReleaseDate)</h5></th>
+                <th class="d-none d-xl-table-cell no-sort"><h5>Image</h5></th>
+                <th class="d-none d-lg-table-cell no-search"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Genres)</h5></th>
+                <th width="116" class="no-sort"></th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +29,7 @@
                             @Html.DisplayFor(x => i.Name)
                         </a>
                     </td>
-                    <td class="d-none d-md-table-cell align-middle">@Html.DisplayFor(x => i.ReleaseDate)</td>
+                    <td class="d-none d-md-table-cell align-middle" data-sort="@i.ReleaseDate.ToString("yyyy-MM-dd")">@Html.DisplayFor(x => i.ReleaseDate)</td>
                     <td class="d-none d-xl-table-cell align-middle">
                         @if (!string.IsNullOrEmpty(i.ImageUrl))
                         {
@@ -38,7 +38,7 @@
                             </button>
                         }
                     </td>
-                    <td class="d-none d-lg-table-cell">
+                    <td class="d-none d-lg-table-cell" data-sort="@i.Genres.Count">
                         <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.GenresTooltip">
                             @i.Genres.Count
                         </button>

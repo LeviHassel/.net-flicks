@@ -19,6 +19,8 @@ namespace DotNetFlicks.Web.Controllers
 
         public ActionResult Index()
         {
+            ViewBag.PeopleCount = _personManager.GetCount();
+
             return View();
         }
 

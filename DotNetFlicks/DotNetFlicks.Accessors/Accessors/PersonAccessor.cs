@@ -43,6 +43,11 @@ namespace DotNetFlicks.Accessors.Accessors
             return dtos;
         }
 
+        public int GetCount()
+        {
+            return _db.People.Count();
+        }
+
         public PersonDTO Save(PersonDTO dto)
         {
             var entity = Mapper.Map<Person>(dto);

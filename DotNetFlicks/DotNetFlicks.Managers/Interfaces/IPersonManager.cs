@@ -8,6 +8,8 @@ namespace DotNetFlicks.Managers.Interfaces
 
         PeopleViewModel GetAll();
 
+        int GetCount();
+
         PersonViewModel Save(PersonViewModel vm);
 
         PersonViewModel Delete(int id);

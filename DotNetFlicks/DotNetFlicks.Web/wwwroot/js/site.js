@@ -2,11 +2,12 @@
 
     //Initialize DataTables
     $('.data-table').DataTable({
-        "deferRender": true
     });
 
+    //Initialize People DataTable (this one uses AJAX to increase page loading speed)
     $(".people-data-table").DataTable({
         serverSide: true,
+        autoWidth: false,
 
         ajax: {
             url: "/Person/LoadData",
@@ -18,7 +19,6 @@
         columns: [
             {
                 className: "d-table-cell align-middle",
-                autoWidth: true,
                 data: "Name",
                 render: function (data, type, full, meta) {
                     return '<a href="Person/View/' + full.Id + '" style="color: black">' + full.Name + '</a >';
@@ -26,18 +26,20 @@
             },
             {
                 className: "d-none d-md-table-cell align-middle",
-                autoWidth: true,
                 orderable: false,
                 render: function (data, type, full, meta) {
-                    return '<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".image-modal" data-title="' + full.Name + '" data-img-src="' + full.ImageUrl + '"><i class="fas fa-image"></i></button>';
+                    if (full.ImageUrl) {
+                        return '<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".image-modal" data-title="' + full.Name + '" data-img-src="' + full.ImageUrl + '"><i class="fas fa-image"></i></button>';
+                    } else {
+                        return '';
+                    }
                 }
             },
             {
                 className: "d-none d-md-table-cell",
-                autoWidth: true,
                 orderable: false,
                 render: function (data, type, full, meta) {
-                    return '<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".image-modal" data-title="' + full.Name + '" data-img-src="' + full.ImageUrl + '"><i class="fas fa-image"></i></button>';
+                    return '<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="' + full.RolesTooltip + '">' + full.Roles.length + '</button >';
                 },
             },
             {

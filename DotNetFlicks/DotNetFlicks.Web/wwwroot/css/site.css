@@ -71,3 +71,22 @@ body {
 .dataTable thead th {
     border-bottom: none !important;
 }
+
+.dataTables_paginate {
+    margin-top: 8px !important;
+}
+
+/* Use simple pagination for small screens */
+@media screen and (max-width: 767px) {
+    li.paginate_button.previous {
+        display: inline;
+    }
+
+    li.paginate_button.next {
+        display: inline;
+    }
+
+    li.paginate_button {
+        display: none;
+    }
+}

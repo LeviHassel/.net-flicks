@@ -10,14 +10,14 @@
 </div>
 
 <div>
-    <table class="table sortable">
+    <table class="table data-table">
         <thead>
             <tr>
-                <th data-defaultsort="asc"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Name)</h5></th>
+                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Name)</h5></th>
                 <th class="d-none d-md-table-cell"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().ReleaseDate)</h5></th>
                 <th class="d-none d-xl-table-cell"><h5>Image</h5></th>
                 <th class="d-none d-lg-table-cell"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Genres)</h5></th>
-                <th width="168" data-defaultsort="disabled"></th>
+                <th width="168"></th>
             </tr>
         </thead>
         <tbody>
@@ -25,8 +25,8 @@
             {
                 <tr>
                     <td class="align-middle">@Html.DisplayFor(x => i.Name)</td>
-                    <td class="d-none d-md-table-cell align-middle" data-dateformat="MM-DD-YYYY">@Html.DisplayFor(x => i.ReleaseDate)</td>
-                    <td class="d-none d-xl-table-cell align-middle" data-value=@(!string.IsNullOrEmpty(i.ImageUrl))>
+                    <td class="d-none d-md-table-cell align-middle">@Html.DisplayFor(x => i.ReleaseDate)</td>
+                    <td class="d-none d-xl-table-cell align-middle">
                         @if (!string.IsNullOrEmpty(i.ImageUrl))
                         {
                             <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".image-modal" data-title="@i.Name" data-img-src="@i.ImageUrl">

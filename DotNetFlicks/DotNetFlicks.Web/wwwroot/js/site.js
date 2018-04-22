@@ -1,4 +1,54 @@
 ﻿$(function () {
+
+    //Initialize DataTables
+    $('.data-table').DataTable({
+        "deferRender": true
+    });
+
+    $(".people-data-table").DataTable({
+        serverSide: true,
+
+        ajax: {
+            url: "/Person/LoadData",
+            type: "POST"
+        },
+
+        rowId: 'Id',
+
+        columns: [
+            {
+                className: "d-table-cell align-middle",
+                autoWidth: true,
+                data: "Name",
+                render: function (data, type, full, meta) {
+                    return '<a href="Person/View/' + full.Id + '" style="color: black">' + full.Name + '</a >';
+                }
+            },
+            {
+                className: "d-none d-md-table-cell align-middle",
+                autoWidth: true,
+                orderable: false,
+                render: function (data, type, full, meta) {
+                    return '<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".image-modal" data-title="' + full.Name + '" data-img-src="' + full.ImageUrl + '"><i class="fas fa-image"></i></button>';
+                }
+            },
+            {
+                className: "d-none d-md-table-cell",
+                autoWidth: true,
+                orderable: false,
+                render: function (data, type, full, meta) {
+                    return '<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".image-modal" data-title="' + full.Name + '" data-img-src="' + full.ImageUrl + '"><i class="fas fa-image"></i></button>';
+                },
+            },
+            {
+                orderable: false,
+                render: function (data, type, full, meta) {
+                    return '<div class="d-flex"><a class="btn btn-primary ml-2" href="Person/Edit/' + full.Id + '"><i class="fas fa-edit"></i></a><a class="btn btn-primary ml-2" href="Person/Delete/' + full.Id + '"><i class="fas fa-trash"></i></a></div >';
+                }
+            }
+        ]
+    });
+
     //Set up Bootstrap tooltips
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -12,7 +62,7 @@
 
     //Toggle ascending/descending sort for movie cards
     $('#sort-direction').on('click', function () {
-        $(this).attr('data-sort', $(this).attr('data-sort') == 'desc' ? 'asc' : 'desc');
+        $(this).attr('data-sort', $(this).attr('data-sort') === 'desc' ? 'asc' : 'desc');
         $(this).find('[data-fa-i2svg]').toggleClass('fa-arrow-up').toggleClass('fa-arrow-down');
         sortMovies();
     });

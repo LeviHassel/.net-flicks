@@ -11,6 +11,11 @@ body {
     padding-right: 15px;
 }
 
+.custom-link {
+    color: black;
+    font-weight: 500;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {

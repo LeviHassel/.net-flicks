@@ -21,7 +21,7 @@
                 className: "d-table-cell align-middle",
                 data: "Name",
                 render: function (data, type, full, meta) {
-                    return '<a href="Person/View/' + full.Id + '" style="color: black">' + full.Name + '</a >';
+                    return '<a href="Person/View/' + full.Id + '" class="custom-link">' + full.Name + '</a >';
                 }
             },
             {
@@ -40,7 +40,7 @@
                 orderable: false,
                 render: function (data, type, full, meta) {
                     return '<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="' + full.RolesTooltip + '">' + full.Roles.length + '</button >';
-                },
+                }
             },
             {
                 orderable: false,

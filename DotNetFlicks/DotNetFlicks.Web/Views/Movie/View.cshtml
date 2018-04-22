@@ -20,7 +20,7 @@
             <br />
             @if (directors.Count == 1)
             {
-                <p><strong>Director: </strong><a asp-controller="Person" asp-action="View" asp-route-id="@directors.Single().PersonId" style="color: black;">@directors.Single().PersonName</a></p>
+                <p><strong>Director: </strong><a asp-controller="Person" asp-action="View" asp-route-id="@directors.Single().PersonId" class="custom-link">@directors.Single().PersonName</a></p>
             }
             else if (directors.Count > 1)
             {
@@ -28,7 +28,7 @@
                     <strong>Directors: </strong>
                     @foreach (var director in directors)
                     {
-                        <span><a asp-controller="Person" asp-action="View" asp-route-id="@director.PersonId" style="color: black;">@director.PersonName</a>@(director != directors.Last() ? "," : "")</span>
+                        <span><a asp-controller="Person" asp-action="View" asp-route-id="@director.PersonId" class="custom-link">@director.PersonName</a>@(director != directors.Last() ? "," : "")</span>
                     }
                 </p>
             }
@@ -69,7 +69,7 @@
                         {
                             <tr class="row">
                                 <td class="col-6 align-middle">
-                                    <strong><a asp-controller="Person" asp-action="View" asp-route-id="@castMember.PersonId" style="color: black;">@castMember.PersonName</a></strong>
+                                    <strong><a asp-controller="Person" asp-action="View" asp-route-id="@castMember.PersonId" class="custom-link">@castMember.PersonName</a></strong>
                                 </td>
                                 <td class="col-6 align-middle">
                                     @castMember.Role
@@ -102,7 +102,7 @@
                             {
                                 <tr class="row">
                                     <td class="col-6 align-middle">
-                                        <strong><a asp-controller="Person" asp-action="View" asp-route-id="@crewMember.PersonId" style="color: black;">@crewMember.PersonName</a></strong>
+                                        <strong><a asp-controller="Person" asp-action="View" asp-route-id="@crewMember.PersonId" class="custom-link">@crewMember.PersonName</a></strong>
                                     </td>
                                     <td class="col-6 align-middle">
                                         @crewMember.Role

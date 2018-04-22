@@ -11,6 +11,11 @@ body {
     padding-right: 15px;
 }
 
+.custom-link {
+    color: black;
+    font-weight: 500;
+}
+
 /* Sticky footer styles
 -------------------------------------------------- */
 html {
@@ -56,4 +61,37 @@ body {
 .jumbo-image {
     cursor: pointer;
     box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+/* Customize DataTables 
+-------------------------------------------------- */
+.btn-primary {
+    color: #fff !important;
+}
+
+.container table.dataTable {
+    margin: 30px 0 30px 0 !important;
+}
+
+.dataTable thead th {
+    border-bottom: none !important;
+}
+
+.dataTables_paginate {
+    margin-top: 8px !important;
+}
+
+/* Use simple pagination for small screens */
+@media screen and (max-width: 767px) {
+    li.paginate_button.previous {
+        display: inline;
+    }
+
+    li.paginate_button.next {
+        display: inline;
+    }
+
+    li.paginate_button {
+        display: none;
+    }
 }

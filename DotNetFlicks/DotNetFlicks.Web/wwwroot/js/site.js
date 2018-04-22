@@ -1,6 +1,68 @@
 ﻿$(function () {
-    //Set up Bootstrap tooltips
+
+    //Initialize DataTables
+    $('.data-table').DataTable({
+        columnDefs: [
+            { targets: 'no-sort', orderable: false },
+            { targets: 'no-search', searchable: false }
+        ]
+    });
+
+    //Initialize People DataTable (this one uses AJAX to increase page loading speed)
+    $(".people-data-table").DataTable({
+        serverSide: true,
+        autoWidth: false,
+
+        ajax: {
+            url: "/Person/LoadData",
+            type: "POST"
+        },
+
+        rowId: 'Id',
+
+        columns: [
+            {
+                className: "d-table-cell align-middle",
+                data: "Name",
+                render: function (data, type, full, meta) {
+                    return '<a href="Person/View/' + full.Id + '" class="custom-link">' + full.Name + '</a >';
+                }
+            },
+            {
+                className: "d-none d-md-table-cell align-middle",
+                orderable: false,
+                render: function (data, type, full, meta) {
+                    if (full.ImageUrl) {
+                        return '<button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".image-modal" data-title="' + full.Name + '" data-img-src="' + full.ImageUrl + '"><i class="fas fa-image"></i></button>';
+                    } else {
+                        return '';
+                    }
+                }
+            },
+            {
+                className: "d-none d-md-table-cell",
+                orderable: true,
+                data: "Roles.length",
+                render: function (data, type, full, meta) {
+                    return '<button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="' + full.RolesTooltip + '">' + full.Roles.length + '</button >';
+                }
+            },
+            {
+                orderable: false,
+                render: function (data, type, full, meta) {
+                    return '<div class="d-flex"><a class="btn btn-primary ml-2" href="Person/Edit/' + full.Id + '"><i class="fas fa-edit"></i></a><a class="btn btn-primary ml-2" href="Person/Delete/' + full.Id + '"><i class="fas fa-trash"></i></a></div >';
+                }
+            }
+        ]
+    });
+
+    //Initialize Bootstrap tooltips on page load
     $('[data-toggle="tooltip"]').tooltip();
+
+    //Initialize Bootstrap tooltips on DataTable draw
+    $('.dataTable').on('draw.dt', function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 
     //Sort movie cards by type
     $(document).on('click', '.sort-movies', function () {
@@ -12,7 +74,7 @@
 
     //Toggle ascending/descending sort for movie cards
     $('#sort-direction').on('click', function () {
-        $(this).attr('data-sort', $(this).attr('data-sort') == 'desc' ? 'asc' : 'desc');
+        $(this).attr('data-sort', $(this).attr('data-sort') === 'desc' ? 'asc' : 'desc');
         $(this).find('[data-fa-i2svg]').toggleClass('fa-arrow-up').toggleClass('fa-arrow-down');
         sortMovies();
     });

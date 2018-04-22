@@ -40,6 +40,11 @@ namespace DotNetFlicks.Managers.Managers
             return new PeopleViewModel { People = vms.OrderBy(x => x.Name).ToList() };
         }
 
+        public int GetCount()
+        {
+            return _personAccessor.GetCount();
+        }
+
         public PersonViewModel Save(PersonViewModel vm)
         {
             var dto = Mapper.Map<PersonDTO>(vm);

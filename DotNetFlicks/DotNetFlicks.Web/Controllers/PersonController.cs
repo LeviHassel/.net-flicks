@@ -1,7 +1,9 @@
-﻿using DotNetFlicks.Managers.Interfaces;
+﻿using DataTablesParser;
+using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Person;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
+using System.Linq;
 
 namespace DotNetFlicks.Web.Controllers
 {
@@ -17,9 +19,16 @@ namespace DotNetFlicks.Web.Controllers
 
         public ActionResult Index()
         {
-            var vm = _personManager.GetAll();
+            ViewBag.PeopleCount = _personManager.GetCount();
 
-            return View(vm);
+            return View();
+        }
+
+        public ActionResult LoadData()
+        {
+            var parser = new Parser<PersonViewModel>(Request.Form, _personManager.GetAll().People.AsQueryable());
+
+            return Json(parser.Parse());
         }
 
         public ActionResult View(int id)

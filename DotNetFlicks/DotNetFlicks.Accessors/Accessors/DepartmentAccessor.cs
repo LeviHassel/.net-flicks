@@ -32,8 +32,8 @@ namespace DotNetFlicks.Accessors.Accessors
         public List<DepartmentDTO> GetAll()
         {
             var entities = _db.Departments
-                .Include(x => x.Roles).ThenInclude(x => x.Person)
-                .Include(x => x.Roles).ThenInclude(x => x.Movie)
+                //.Include(x => x.Roles).ThenInclude(x => x.Person)
+                //.Include(x => x.Roles).ThenInclude(x => x.Movie)
                 .ToList();
 
             var dtos = Mapper.Map<List<DepartmentDTO>>(entities);

@@ -9,6 +9,8 @@ namespace DotNetFlicks.Accessors.Interfaces
 
         List<PersonDTO> GetAll();
 
+        int GetCount();
+
         PersonDTO Save(PersonDTO dto);
 
         PersonDTO Delete(int id);

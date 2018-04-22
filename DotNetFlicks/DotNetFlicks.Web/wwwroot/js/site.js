@@ -1,6 +1,5 @@
 ﻿$(function () {
-
-    //Initialize DataTables
+    //Initialize DataTable for Movies, Genres and Departments
     $('.data-table').DataTable({
         columnDefs: [
             { targets: 'no-sort', orderable: false },

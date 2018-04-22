@@ -9,6 +9,7 @@
 
 <form asp-controller="Genre" asp-action="Edit" method="post" class="form-horizontal" role="form">
     <div class="container">
+        <input asp-for="TmdbId" type="hidden" />
         <div class="form-group">
             <label asp-for="Name" class="control-label"></label>
             <input asp-for="Name" class="form-control" />

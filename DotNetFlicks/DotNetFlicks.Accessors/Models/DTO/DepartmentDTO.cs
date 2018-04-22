@@ -9,6 +9,8 @@ namespace DotNetFlicks.Accessors.Models.DTO
 
         public bool IsDirecting { get; set; }
 
+        public int TmdbId { get; set; }
+
         public ICollection<CrewMemberDTO> Roles { get; set; }
     }
 }

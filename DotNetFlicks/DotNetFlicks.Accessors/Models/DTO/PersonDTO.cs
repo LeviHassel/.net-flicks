@@ -16,6 +16,8 @@ namespace DotNetFlicks.Accessors.Models.DTO
 
         public string ImageUrl { get; set; }
 
+        public int TmdbId { get; set; }
+
         public ICollection<CastMemberDTO> CastRoles { get; set; }
 
         public ICollection<CrewMemberDTO> CrewRoles { get; set; }

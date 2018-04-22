@@ -15,6 +15,10 @@
             <h4 class="text-danger">@Model.Name cannot be deleted because @Model.People.Count people use it: </h4>
             <p>@Html.Raw(Model.PeopleBulletedList)</p>
         }
+        else if (Model.IsDirecting)
+        {
+            <h4 class="text-danger">@Model.Name cannot be deleted.</h4>
+        }
         else
         {
             <input type="submit" value="Delete" class="btn btn-danger" />

@@ -7,6 +7,8 @@ namespace DotNetFlicks.Accessors.Models.DTO
     {
         public string Name { get; set; }
 
+        public int TmdbId { get; set; }
+
         public ICollection<MovieGenreDTO> Movies { get; set; }
     }
 }

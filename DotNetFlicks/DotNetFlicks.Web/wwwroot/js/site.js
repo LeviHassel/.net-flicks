@@ -51,8 +51,13 @@
         ]
     });
 
-    //Set up Bootstrap tooltips
+    //Initialize Bootstrap tooltips on page load
     $('[data-toggle="tooltip"]').tooltip();
+
+    //Initialize Bootstrap tooltips on DataTable draw
+    $('.dataTable').on('draw.dt', function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
 
     //Sort movie cards by type
     $(document).on('click', '.sort-movies', function () {

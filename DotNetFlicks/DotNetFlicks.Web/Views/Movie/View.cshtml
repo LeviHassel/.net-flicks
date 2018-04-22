@@ -4,7 +4,7 @@
 
 @{
     ViewBag.Title = Model.Name;
-    var directors = Model.Crew.Where(x => x.IsDirector).ToList();
+    var directors = Model.Crew.Where(x => x.IsDirector && (x.Role == "Director" || x.Role == "Co-Director")).OrderBy(x => x.Role != "Director").ToList();
 }
 
 <div class="jumbotron" style="padding: 32px">
@@ -16,8 +16,10 @@
         <div class="col">
             <h1 class="display-4">@ViewBag.Title</h1>
             <hr class="my-4">
+
             <p>@Model.Description</p>
             <br />
+
             @if (directors.Count == 1)
             {
                 <p><strong>Director: </strong><a asp-controller="Person" asp-action="View" asp-route-id="@directors.Single().PersonId" class="custom-link">@directors.Single().PersonName</a></p>
@@ -28,10 +30,13 @@
                     <strong>Directors: </strong>
                     @foreach (var director in directors)
                     {
-                        <span><a asp-controller="Person" asp-action="View" asp-route-id="@director.PersonId" class="custom-link">@director.PersonName</a>@(director != directors.Last() ? "," : "")</span>
+                        <span>
+                            <a asp-controller="Person" asp-action="View" asp-route-id="@director.PersonId" class="custom-link">@director.PersonName</a>@(director.Role != "Director" ? " (" + director.Role + ")" : "")@(director != directors.Last() ? "," : "")
+                        </span>
                     }
                 </p>
             }
+
             <p>
                 <strong>Genres: </strong>
                 @foreach (var genre in Model.Genres)
@@ -39,8 +44,11 @@
                     <a class="badge badge-secondary" asp-controller="Genre" asp-action="View" asp-route-id="@genre.Id">@genre.Name</a>
                 }
             </p>
+
             <p><strong>Release Date: </strong>@Model.ReleaseDate.ToCustomDateString()</p>
+
             <p><strong>Runtime: </strong>@Html.DisplayFor(x => x.Runtime)</p>
+
             <span>
                 <a class="btn btn-primary btn-lg m-1" href="#" role="button">Rent ($@Model.RentCost)</a>
                 <a class="btn btn-primary btn-lg m-1" href="#" role="button">Buy ($@Model.PurchaseCost)</a>
@@ -56,29 +64,32 @@
             <h2>Cast <small>(@Html.DisplayFor(x => x.Cast.Count))</small></h2>
             <br />
 
-            <div class="card role-card">
-                <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-cast">
-                    <div class="d-flex">
-                        <h5 class="card-title mb-0">Cast <small>(@Model.Cast.Count())</small></h5>
-                        <i class="ml-auto my-auto fas fa-chevron-up"></i>
+            @if (Model.Cast.Any())
+            {
+                <div class="card role-card">
+                    <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-cast">
+                        <div class="d-flex">
+                            <h5 class="card-title mb-0">Cast <small>(@Model.Cast.Count())</small></h5>
+                            <i class="ml-auto my-auto fas fa-chevron-up"></i>
+                        </div>
+                    </div>
+                    <div class="card-body py-0 collapse show" id="collapse-cast">
+                        <table class="table mb-0">
+                            @foreach (var castMember in Model.Cast)
+                            {
+                                <tr class="row">
+                                    <td class="col-6 align-middle">
+                                        <strong><a asp-controller="Person" asp-action="View" asp-route-id="@castMember.PersonId" class="custom-link">@castMember.PersonName</a></strong>
+                                    </td>
+                                    <td class="col-6 align-middle">
+                                        @castMember.Role
+                                    </td>
+                                </tr>
+                            }
+                        </table>
                     </div>
                 </div>
-                <div class="card-body py-0 collapse show" id="collapse-cast">
-                    <table class="table mb-0">
-                        @foreach (var castMember in Model.Cast)
-                        {
-                            <tr class="row">
-                                <td class="col-6 align-middle">
-                                    <strong><a asp-controller="Person" asp-action="View" asp-route-id="@castMember.PersonId" class="custom-link">@castMember.PersonName</a></strong>
-                                </td>
-                                <td class="col-6 align-middle">
-                                    @castMember.Role
-                                </td>
-                            </tr>
-                        }
-                    </table>
-                </div>
-            </div>
+            }
             <br />
         </div>
         <div class="col-md-6">

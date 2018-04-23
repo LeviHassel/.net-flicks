@@ -17,7 +17,7 @@
             <h1 class="display-4">@ViewBag.Title</h1>
             <hr class="my-4">
 
-            <p>@Model.Description</p>
+            <p>@Html.Raw(Model.Description)</p>
             <br />
 
             @if (directors.Count == 1)

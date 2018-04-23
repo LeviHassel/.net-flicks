@@ -19,7 +19,7 @@
         <div class="col">
             <h1 class="display-4">@ViewBag.Title</h1>
             <hr class="my-4">
-            <p>@Model.Biography</p>
+            <p>@Html.Raw(Model.Biography)</p>
 
             @if (Model.BirthDate.HasValue)
             {

@@ -34,8 +34,8 @@
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0-preview2-final" />
 	<PackageReference Include="AutoMapper" Version="6.2.2" />
     <PackageReference Include="BuildBundlerMinifier" Version="2.6.375" />
-    <PackageReference Include="BundlerMinifier.Core" Version="2.6.375" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.Elm" Version="0.2.2" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="1.0.20" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\SeedData\departments.json" />
@@ -47,6 +47,14 @@
     <ProjectReference Include="..\DotNetFlicks.Common\Common.csproj" />
     <ProjectReference Include="..\DotNetFlicks.Managers\Managers.csproj" />
     <ProjectReference Include="..\DotNetFlicks.ViewModels\ViewModels.csproj" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="wwwroot\lib\" />
+    <Folder Include="wwwroot\lib\bootstrap-select\css\" />
+    <Folder Include="wwwroot\lib\bootstrap\css\" />
+    <Folder Include="wwwroot\lib\bootstrap\js\" />
+    <Folder Include="wwwroot\lib\jquery\" />
+    <Folder Include="wwwroot\lib\tinysort\" />
   </ItemGroup>
 
 </Project>

@@ -14,10 +14,10 @@
         <thead>
             <tr>
                 <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Name)</h5></th>
-                <th class="d-none d-md-table-cell no-search"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().ReleaseDate)</h5></th>
-                <th class="d-none d-xl-table-cell no-sort"><h5>Image</h5></th>
-                <th class="d-none d-lg-table-cell no-search"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Genres)</h5></th>
-                <th width="116" class="no-sort"></th>
+                <th class="d-none d-md-table-cell" data-searchable="false"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().ReleaseDate)</h5></th>
+                <th class="d-none d-xl-table-cell" data-sortable="false"><h5>Image</h5></th>
+                <th class="d-none d-lg-table-cell" data-searchable="false"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Genres)</h5></th>
+                <th width="116" data-sortable="false"></th>
             </tr>
         </thead>
         <tbody>

@@ -73,8 +73,8 @@ body {
     margin: 30px 0 30px 0 !important;
 }
 
-.dataTable thead th {
-    border-bottom: none !important;
+table.dataTable tbody tr:first-of-type td{
+    border-top: none !important;
 }
 
 .dataTables_paginate {

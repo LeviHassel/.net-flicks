@@ -1,14 +1,18 @@
 ﻿$(function () {
     //Initialize DataTable for Movies, Genres and Departments
     $('.data-table').DataTable({
-        columnDefs: [
-            { targets: 'no-sort', orderable: false },
-            { targets: 'no-search', searchable: false }
-        ]
+        stateSave: true,
+        fixedHeader: {
+            headerOffset: $(".navbar").outerHeight()
+        }
     });
 
     //Initialize People DataTable (this one uses AJAX to increase page loading speed)
     $(".people-data-table").DataTable({
+        stateSave: true,
+        fixedHeader: {
+            headerOffset: $(".navbar").outerHeight()
+        },
         serverSide: true,
         autoWidth: false,
 

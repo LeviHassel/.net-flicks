@@ -49,7 +49,6 @@
     <ProjectReference Include="..\DotNetFlicks.ViewModels\ViewModels.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="wwwroot\lib\" />
     <Folder Include="wwwroot\lib\bootstrap-select\css\" />
     <Folder Include="wwwroot\lib\bootstrap\css\" />
     <Folder Include="wwwroot\lib\bootstrap\js\" />

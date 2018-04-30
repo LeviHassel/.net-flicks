@@ -3,6 +3,7 @@ using DotNetFlicks.Managers.Interfaces;
 using Microsoft.Extensions.Options;
 using System.Net;
 using System.Net.Mail;
+using System.Text.Encodings.Web;
 using System.Threading.Tasks;
 
 namespace DotNetFlicks.Managers.Managers
@@ -37,12 +38,16 @@ namespace DotNetFlicks.Managers.Managers
             };
 
             mail.To.Add(email);
-
             client.Send(mail);
-
             client.Dispose();
 
             return Task.CompletedTask;
+        }
+
+        public Task SendEmailConfirmationAsync(string email, string link)
+        {
+            return SendEmailAsync(email, "Confirm your email",
+                $"Please confirm your account by clicking <a href='{HtmlEncoder.Default.Encode(link)}'>here</a>.");
         }
     }
 }

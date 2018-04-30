@@ -1,6 +1,6 @@
 {
-  "version": "1.0",
-  "defaultProvider": "cdnjs",
+    "version": "1.0",
+    "defaultProvider": "cdnjs",
     "libraries": [
         {
             "library": "twitter-bootstrap@4.1.0",
@@ -25,6 +25,10 @@
         {
             "library": "tinysort@2.3.6",
             "destination": "wwwroot/lib/tinysort"
+        },
+        {
+            "library": "ajax-bootstrap-select@1.4.3",
+            "destination": "wwwroot/lib/ajax-bootstrap-select"
         }
     ]
 }

@@ -19,7 +19,16 @@
         <div class="col">
             <h1 class="display-4">@ViewBag.Title</h1>
             <hr class="my-4">
-            <p>@Html.Raw(Model.Biography)</p>
+
+            <span>
+                @Html.Raw(Model.Biography.ToSubString(500).PreserveNewLines())
+                @if (Model.Biography.Count() > 500)
+                {
+                    <a class="btn btn-primary btn-sm m-1" role="button" data-toggle="modal" data-target=".biography-modal">Read more</a>
+                }
+            </span>
+
+            <br /><br />
 
             @if (Model.BirthDate.HasValue)
             {
@@ -81,6 +90,22 @@
             </div>
             <div class="modal-body text-center">
                 <img src=@Model.ImageUrl alt="Image" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade biography-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">@ViewBag.Title</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.Raw(Model.Biography.PreserveNewLines())
             </div>
         </div>
     </div>

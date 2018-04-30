@@ -17,8 +17,14 @@
             <h1 class="display-4">@ViewBag.Title</h1>
             <hr class="my-4">
 
-            <p>@Html.Raw(Model.Description)</p>
-            <br />
+            <span>
+                @Html.Raw(Model.Description.ToSubString(500).PreserveNewLines())
+                @if (Model.Description.Count() > 500)
+                {
+                    <a class="btn btn-primary btn-sm m-1" role="button" data-toggle="modal" data-target=".description-modal">Read more</a>
+                }
+            </span>
+            <br /><br />
 
             @if (directors.Count == 1)
             {
@@ -140,6 +146,22 @@
             </div>
             <div class="modal-body text-center">
                 <img src=@Model.ImageUrl alt="Image" class="img-fluid" />
+            </div>
+        </div>
+    </div>
+</div>
+
+<div class="modal fade description-modal" tabindex="-1" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">@ViewBag.Title</h2>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                @Html.Raw(Model.Description.PreserveNewLines())
             </div>
         </div>
     </div>

@@ -13,7 +13,6 @@ namespace DotNetFlicks.ViewModels.Person
         [Required(AllowEmptyStrings = false)]
         public string Name { get; set; }
 
-        [MaxLength(750)]
         public string Biography { get; set; }
 
         [Required]

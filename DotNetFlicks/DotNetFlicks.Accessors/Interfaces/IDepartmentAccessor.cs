@@ -9,6 +9,8 @@ namespace DotNetFlicks.Accessors.Interfaces
 
         List<DepartmentDTO> GetAll();
 
+        List<DepartmentDTO> GetByName(string query);
+
         DepartmentDTO Save(DepartmentDTO dto);
 
         DepartmentDTO Delete(int id);

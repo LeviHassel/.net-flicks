@@ -41,6 +41,17 @@ namespace DotNetFlicks.Accessors.Accessors
             return dtos;
         }
 
+        public List<DepartmentDTO> GetByName(string query)
+        {
+            var entities = _db.Departments
+                .Where(x => x.Name.ToLower().Contains(query.ToLower()))
+                .ToList();
+
+            var dtos = Mapper.Map<List<DepartmentDTO>>(entities);
+
+            return dtos;
+        }
+
         public DepartmentDTO Save(DepartmentDTO dto)
         {
             var entity = Mapper.Map<Department>(dto);

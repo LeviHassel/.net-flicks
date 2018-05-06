@@ -43,6 +43,17 @@ namespace DotNetFlicks.Accessors.Accessors
             return dtos;
         }
 
+        public List<PersonDTO> GetByName(string query)
+        {
+            var entities = _db.People
+                .Where(x => x.Name.ToLower().Contains(query.ToLower()))
+                .ToList();
+
+            var dtos = Mapper.Map<List<PersonDTO>>(entities);
+
+            return dtos;
+        }
+
         public int GetCount()
         {
             return _db.People.Count();

@@ -9,6 +9,8 @@ namespace DotNetFlicks.Accessors.Interfaces
 
         List<PersonDTO> GetAll();
 
+        List<PersonDTO> GetByName(string query);
+
         int GetCount();
 
         PersonDTO Save(PersonDTO dto);

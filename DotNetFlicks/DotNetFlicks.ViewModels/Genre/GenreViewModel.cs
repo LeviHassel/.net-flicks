@@ -1,4 +1,4 @@
-﻿using DotNetFlicks.Common.Helpers;
+﻿using DotNetFlicks.Common.Extensions;
 using DotNetFlicks.ViewModels.Base;
 using DotNetFlicks.ViewModels.Movie;
 using System.Collections.Generic;
@@ -16,8 +16,8 @@ namespace DotNetFlicks.ViewModels.Genre
 
         public List<MovieViewModel> Movies { get; set; }
 
-        public string MoviesTooltip { get { return Movies != null ? ListHelper.GetTooltipList(Movies.Select(x => x.Name).ToList()) : ""; } }
+        public string MoviesTooltip { get { return Movies != null ? Movies.Select(x => x.Name).ToList().ToTooltipList() : ""; } }
 
-        public string MoviesBulletedList { get { return Movies != null ? ListHelper.GetBulletedList(Movies.Select(x => x.Name).ToList()) : ""; } }
+        public string MoviesBulletedList { get { return Movies != null ? Movies.Select(x => x.Name).ToList().ToTooltipList() : ""; } }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System;
 
-namespace DotNetFlicks.Common.Helpers
+namespace DotNetFlicks.Common.Extensions
 {
-    public static class DateHelper
+    public static class DateExtensions
     {
         /// <summary>
         /// Returns a long date string without the day of the week (example: January 1st, 2000)
@@ -20,7 +20,7 @@ namespace DotNetFlicks.Common.Helpers
         /// <param name="birthDate"></param>
         /// <param name="deathDate"></param>
         /// <returns></returns>
-        public static int GetAge(DateTime? birthDate, DateTime? deathDate)
+        public static int ToAge(this DateTime? birthDate, DateTime? deathDate)
         {
             var age = 0;
 

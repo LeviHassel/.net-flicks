@@ -1,16 +1,16 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace DotNetFlicks.Common.Helpers
+namespace DotNetFlicks.Common.Extensions
 {
-    public static class ListHelper
+    public static class ListExtensions
     {
         /// <summary>
         /// Builds an HTML-formatted tooltip list from a list of lines
         /// </summary>
         /// <param name="lines"></param>
         /// <returns></returns>
-        public static string GetTooltipList(List<string> lines)
+        public static string ToTooltipList(this List<string> lines)
         {
             var sb = new StringBuilder();
 
@@ -35,7 +35,7 @@ namespace DotNetFlicks.Common.Helpers
         /// </summary>
         /// <param name="lines"></param>
         /// <returns></returns>
-        public static string GetBulletedList(List<string> lines)
+        public static string ToBulletedList(this List<string> lines)
         {
             var sb = new StringBuilder();
 

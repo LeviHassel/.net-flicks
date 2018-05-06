@@ -1,4 +1,4 @@
-﻿using DotNetFlicks.Common.Helpers;
+﻿using DotNetFlicks.Common.Extensions;
 using DotNetFlicks.ViewModels.Base;
 using DotNetFlicks.ViewModels.Shared;
 using System;
@@ -32,12 +32,12 @@ namespace DotNetFlicks.ViewModels.Person
 
         public List<MovieRoleViewModel> Roles { get; set; }
 
-        public string RolesTooltip { get { return Roles != null ? ListHelper.GetTooltipList(Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList()) : ""; } }
+        public string RolesTooltip { get { return Roles != null ? Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList().ToTooltipList() : ""; } }
 
-        public string RolesBulletedList { get { return Roles != null ? ListHelper.GetBulletedList(Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList()) : ""; } }
+        public string RolesBulletedList { get { return Roles != null ? Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList().ToTooltipList() : ""; } }
 
         public string KnownFor { get { return Roles != null && Roles.Any() ? Roles.GroupBy(x => x.Category).OrderByDescending(x => x.Count()).First().Key : ""; } }
 
-        public int Age { get { return DateHelper.GetAge(BirthDate, DeathDate); } }
+        public int Age { get { return BirthDate.ToAge(DeathDate); } }
     }
 }

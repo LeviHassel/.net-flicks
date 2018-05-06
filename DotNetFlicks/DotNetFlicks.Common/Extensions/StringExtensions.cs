@@ -1,8 +1,8 @@
 ﻿using System.Web;
 
-namespace DotNetFlicks.Common.Helpers
+namespace DotNetFlicks.Common.Extensions
 {
-    public static class StringHelper
+    public static class StringExtensions
     {
         /// <summary>
         /// Get a specified number of characters from a string, starting at 0

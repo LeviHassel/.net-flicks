@@ -7,7 +7,7 @@
     var categories = Model.Roles.GroupBy(x => x.Category).OrderByDescending(x => x.Count());
 }
 
-<div class="jumbotron" style="padding: 32px">
+<div class="jumbotron">
     <div class="row">
         @if (!string.IsNullOrEmpty(Model.ImageUrl))
         {

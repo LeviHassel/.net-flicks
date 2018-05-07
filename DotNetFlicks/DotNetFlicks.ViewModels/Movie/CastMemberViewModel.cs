@@ -12,10 +12,10 @@ namespace DotNetFlicks.ViewModels.Movie
 
         public int PersonId { get; set; }
 
+        public string PersonName { get; set; }
+
         public string Role { get; set; }
 
         public int Order { get; set; }
-
-        public SelectList People { get; set; }
     }
 }

@@ -10,9 +10,9 @@ namespace DotNetFlicks.Managers.Interfaces
 
         MoviesViewModel GetAll();
 
-        CastMemberViewModel GetNewCastMember(int index);
+        string GetDepartmentSelectData(string query);
 
-        CrewMemberViewModel GetNewCrewMember(int index);
+        string GetPersonSelectData(string query);
 
         EditMovieViewModel Save(EditMovieViewModel vm);
 

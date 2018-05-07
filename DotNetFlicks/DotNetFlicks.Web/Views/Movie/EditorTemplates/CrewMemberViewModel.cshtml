@@ -2,13 +2,27 @@
 
 <tr class="row">
     <td class="col align-middle">
-        <select asp-for="PersonId" asp-items="@Model.People" class="form-control selectpicker" data-live-search="true" data-size="10">
-            <option disabled selected>Select</option>
+        <select asp-for="PersonId" class="form-control person-picker" data-live-search="true" data-size="10">
+            @if (Model.PersonId != 0)
+            {
+                <option value="@Model.PersonId" selected>@Model.PersonName</option>
+            }
+            else
+            {
+                <option disabled selected>Select</option>
+            }
         </select>
     </td>
     <td class="col align-middle">
-        <select asp-for="DepartmentId" asp-items="@Model.Departments" class="form-control selectpicker" data-live-search="true" data-size="10">
-            <option disabled selected>Select</option>
+        <select asp-for="DepartmentId" class="form-control department-picker" data-live-search="true" data-size="10">
+            @if (Model.DepartmentId != 0)
+            {
+                <option value="@Model.DepartmentId" selected>@Model.DepartmentName</option>
+            }
+            else
+            {
+                <option disabled selected>Select</option>
+            }
         </select>
     </td>
     <td class="col align-middle">

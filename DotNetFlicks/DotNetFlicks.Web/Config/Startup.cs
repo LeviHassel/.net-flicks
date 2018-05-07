@@ -7,6 +7,7 @@ using DotNetFlicks.Engines.Config;
 using DotNetFlicks.Managers.Config;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
+using Microsoft.AspNetCore.Http.Features;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
@@ -44,6 +45,9 @@ namespace DotNetFlicks.Web.Config
 
             //Set up "ELM" (Error Logging Middleware)
             services.AddElm();
+
+            //Allow submission of forms with up to 10,000 data points (default is 1024)
+            services.Configure<FormOptions>(x => x.ValueCountLimit = 10000);
 
             //Set up MVC
             services.AddMvc()

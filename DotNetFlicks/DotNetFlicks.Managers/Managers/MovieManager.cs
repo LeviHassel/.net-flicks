@@ -5,6 +5,7 @@ using DotNetFlicks.Engines.Interfaces;
 using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Movie;
 using Microsoft.AspNetCore.Mvc.Rendering;
+using Newtonsoft.Json;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -55,25 +56,13 @@ namespace DotNetFlicks.Managers.Managers
         public EditMovieViewModel GetForEditing(int? id)
         {
             var movieDto = id.HasValue ? _movieAccessor.Get(id.Value) : new MovieDTO();
-            var departmentDtos = _departmentAccessor.GetAll().OrderBy(x => x.Name);
             var genreDtos = _genreAccessor.GetAll().OrderBy(x => x.Name);
-            var personDtos = _personAccessor.GetAll().OrderBy(x => x.Name);
 
             var vm = Mapper.Map<EditMovieViewModel>(movieDto);
+
+            vm.Cast = vm.Cast.OrderBy(x => x.PersonName).ToList();
+            vm.Crew = vm.Crew.OrderBy(x => x.PersonName).ToList();
             vm.GenresSelectList = new MultiSelectList(genreDtos, "Id", "Name", movieDto.Genres != null ? movieDto.Genres.Select(x => x.GenreId).ToList() : null);
-            vm.Cast = vm.Cast.OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).Name).ToList();
-            vm.Crew = vm.Crew.OrderBy(x => personDtos.Single(y => y.Id == x.PersonId).Name).ToList();
-
-            foreach (var castMemberVm in vm.Cast)
-            {
-                castMemberVm.People = new SelectList(personDtos, "Id", "Name", castMemberVm.PersonId);
-            }
-
-            foreach (var crewMemberVm in vm.Crew)
-            {
-                crewMemberVm.People = new SelectList(personDtos, "Id", "Name", crewMemberVm.PersonId);
-                crewMemberVm.Departments = new SelectList(departmentDtos, "Id", "Name", crewMemberVm.DepartmentId);
-            }
 
             return vm;
         }
@@ -91,32 +80,18 @@ namespace DotNetFlicks.Managers.Managers
             return new MoviesViewModel { Movies = vms.OrderBy(x => x.Name).ToList() };
         }
 
-        public CastMemberViewModel GetNewCastMember(int index)
+        public string GetDepartmentSelectData(string query)
         {
-            var personDtos = _personAccessor.GetAll().OrderBy(x => x.Name);
+            var departmentDtos = _departmentAccessor.GetByName(query).OrderBy(x => x.Name);
 
-            var vm = new CastMemberViewModel
-            {
-                Index = index,
-                People = new SelectList(personDtos, "Id", "Name")
-            };
-
-            return vm;
+            return JsonConvert.SerializeObject(departmentDtos.Select(x => new { value = x.Id, text = x.Name }));
         }
 
-        public CrewMemberViewModel GetNewCrewMember(int index)
+        public string GetPersonSelectData(string query)
         {
-            var personDtos = _personAccessor.GetAll().OrderBy(x => x.Name);
-            var departmentDtos = _departmentAccessor.GetAll().OrderBy(x => x.Name);
+            var personDtos = _personAccessor.GetByName(query).OrderBy(x => x.Name);
 
-            var vm = new CrewMemberViewModel
-            {
-                Index = index,
-                People = new SelectList(personDtos, "Id", "Name"),
-                Departments = new SelectList(departmentDtos, "Id", "Name")
-            };
-
-            return vm;
+            return JsonConvert.SerializeObject(personDtos.Select(x => new { value = x.Id, text = x.Name }));
         }
 
         public EditMovieViewModel Save(EditMovieViewModel vm)

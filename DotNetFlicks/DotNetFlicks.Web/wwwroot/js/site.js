@@ -1,4 +1,8 @@
 ﻿$(function () {
+    //Initialize AJAX Bootstrap Select lists for faster load times
+    initializePersonPicker();
+    initializeDepartmentPicker();
+
     //Initialize DataTable for Movies, Genres and Departments
     $('.data-table').DataTable({
         stateSave: true,
@@ -114,7 +118,7 @@
             $('#cast-table tbody').append(response);
 
             //Refresh bootstrap-select so that it sets up the JS for new dropdowns
-            $('.selectpicker').selectpicker();
+            initializePersonPicker();
         });
     });
 
@@ -130,7 +134,8 @@
             $('#crew-table tbody').append(response);
 
             //Refresh bootstrap-select so that it sets up the JS for new dropdowns
-            $('.selectpicker').selectpicker();
+            initializePersonPicker();
+            initializeDepartmentPicker();
         });
     });
 
@@ -146,4 +151,30 @@ function sortMovies() {
     var attr = $('.dropdown-item.sort-movies.active').attr('id');
     var order = $('#sort-direction').attr('data-sort');
     tinysort('div.movie-column', { attr: attr, order: order });
+}
+
+function initializeDepartmentPicker() {
+    $('.department-picker')
+        .selectpicker()
+        .ajaxSelectPicker({
+            ajax: {
+                url: '../../Movie/GetDepartmentSelectData',
+                data: {
+                    query: '{{{q}}}'
+                }
+            }
+        });
+}
+
+function initializePersonPicker() {
+    $('.person-picker')
+        .selectpicker()
+        .ajaxSelectPicker({
+            ajax: {
+                url: '../../Movie/GetPersonSelectData',
+                data: {
+                    query: '{{{q}}}'
+                }
+            }
+        });
 }

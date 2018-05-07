@@ -76,7 +76,7 @@ namespace DotNetFlicks.Web.Controllers
 
         public ActionResult AddCastMember(int index)
         {
-            var vm = _movieManager.GetNewCastMember(index);
+            var vm = new CastMemberViewModel { Index = index };
 
             ViewData.TemplateInfo.HtmlFieldPrefix = string.Format("Cast[{0}]", index);
 
@@ -85,11 +85,21 @@ namespace DotNetFlicks.Web.Controllers
 
         public ActionResult AddCrewMember(int index)
         {
-            var vm = _movieManager.GetNewCrewMember(index);
+            var vm = new CrewMemberViewModel { Index = index };
 
             ViewData.TemplateInfo.HtmlFieldPrefix = string.Format("Crew[{0}]", index);
 
             return PartialView("../Movie/EditorTemplates/CrewMemberViewModel", vm);
+        }
+
+        public string GetPersonSelectData(string query)
+        {
+            return _movieManager.GetPersonSelectData(query);
+        }
+
+        public string GetDepartmentSelectData(string query)
+        {
+            return _movieManager.GetDepartmentSelectData(query);
         }
     }
 }

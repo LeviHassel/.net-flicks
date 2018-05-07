@@ -37,6 +37,7 @@ namespace DotNetFlicks.Engines.Engines
             foreach (var castMemberDto in castMemberDtos)
             {
                 castMemberDto.MovieId = movieId;
+                castMemberDto.Person = null;
             }
 
             _castMemberAccessor.SaveAll(movieId, castMemberDtos);
@@ -59,6 +60,7 @@ namespace DotNetFlicks.Engines.Engines
             foreach (var crewMemberDto in crewMemberDtos)
             {
                 crewMemberDto.MovieId = movieId;
+                crewMemberDto.Person = null;
             }
 
             _crewMemberAccessor.SaveAll(movieId, crewMemberDtos);

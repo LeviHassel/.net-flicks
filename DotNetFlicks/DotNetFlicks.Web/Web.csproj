@@ -33,7 +33,7 @@
     <PackageReference Include="DatatablesParser-core" Version="1.2.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0-preview2-final" />
 	<PackageReference Include="AutoMapper" Version="6.2.2" />
-    <PackageReference Include="BuildBundlerMinifier" Version="2.6.375" />
+    <PackageReference Include="BuildBundlerMinifier" Version="2.7.385" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.Elm" Version="0.2.2" />
     <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="1.0.20" />
   </ItemGroup>

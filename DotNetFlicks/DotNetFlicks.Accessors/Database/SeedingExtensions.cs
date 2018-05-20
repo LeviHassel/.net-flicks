@@ -51,11 +51,9 @@ namespace DotNetFlicks.Accessors.Database
         public static void SeedMovieGenres(this ModelBuilder builder)
         {
             var movieGenres = JsonConvert.DeserializeObject<List<MovieGenre>>(File.ReadAllText(@"Config" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "movieGenres.json"));
-            var id = 1;
 
             foreach (var movieGenre in movieGenres)
             {
-                movieGenre.Id = id++;
                 builder.Entity<MovieGenre>().HasData(movieGenre);
             }
         }
@@ -63,11 +61,9 @@ namespace DotNetFlicks.Accessors.Database
         public static void SeedCastMembers(this ModelBuilder builder)
         {
             var castMembers = JsonConvert.DeserializeObject<List<CastMember>>(File.ReadAllText(@"Config" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "castMembers.json"));
-            var id = 1;
 
             foreach (var castMember in castMembers)
             {
-                castMember.Id = id++;
                 builder.Entity<CastMember>().HasData(castMember);
             }
         }
@@ -75,11 +71,9 @@ namespace DotNetFlicks.Accessors.Database
         public static void SeedCrewMembers(this ModelBuilder builder)
         {
             var crewMembers = JsonConvert.DeserializeObject<List<CrewMember>>(File.ReadAllText(@"Config" + Path.DirectorySeparatorChar + "SeedData" + Path.DirectorySeparatorChar + "crewMembers.json"));
-            var id = 1;
 
             foreach (var crewMember in crewMembers)
             {
-                crewMember.Id = id++;
                 builder.Entity<CrewMember>().HasData(crewMember);
             }
         }

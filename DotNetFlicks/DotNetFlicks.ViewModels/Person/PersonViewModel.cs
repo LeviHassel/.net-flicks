@@ -15,7 +15,6 @@ namespace DotNetFlicks.ViewModels.Person
 
         public string Biography { get; set; }
 
-        [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Birth Date")]
         public DateTime? BirthDate { get; set; }

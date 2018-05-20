@@ -6,7 +6,7 @@ using System.IO;
 
 namespace DotNetFlicks.Accessors.Database
 {
-    public static class SeedingExtensions
+    public static class SeedData
     {
         public static void SeedGenres(this ModelBuilder builder)
         {

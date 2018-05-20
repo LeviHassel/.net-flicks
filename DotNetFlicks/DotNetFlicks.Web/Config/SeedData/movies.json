@@ -8,11 +8,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/xIxMMv_LD5Q",
 		"PurchaseCost": 11.99,
 		"RentCost": 3.99,
-		"TmdbId": 194662,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 194662
 	},
 	{
 		"Name": "Coco",
@@ -23,11 +19,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/zNCz4mQzfEI",
 		"PurchaseCost": 14.99,
 		"RentCost": 4.99,
-		"TmdbId": 354912,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 354912
 	},
 	{
 		"Name": "The Dark Knight Rises",
@@ -38,11 +30,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/z5Humz3ONgk",
 		"PurchaseCost": 9.99,
 		"RentCost": 2.99,
-		"TmdbId": 49026,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 49026
 	},
 	{
 		"Name": "Django Unchained",
@@ -53,11 +41,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/_iH0UBYDI4g",
 		"PurchaseCost": 9.99,
 		"RentCost": 2.99,
-		"TmdbId": 68718,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 68718
 	},
 	{
 		"Name": "Ferris Bueller's Day Off",
@@ -68,11 +52,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/D6gABQFR94U",
 		"PurchaseCost": 7.99,
 		"RentCost": 1.99,
-		"TmdbId": 9377,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 9377
 	},
 	{
 		"Name": "Get Out",
@@ -83,11 +63,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/sRfnevzM9kQ",
 		"PurchaseCost": 12.99,
 		"RentCost": 4.99,
-		"TmdbId": 419430,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 419430
 	},
 	{
 		"Name": "Inception",
@@ -98,11 +74,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/xitHF0IPJSQ",
 		"PurchaseCost": 10.99,
 		"RentCost": 2.99,
-		"TmdbId": 27205,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 27205
 	},
 	{
 		"Name": "Interstellar",
@@ -113,11 +85,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/ePbKGoIGAXY",
 		"PurchaseCost": 11.99,
 		"RentCost": 3.99,
-		"TmdbId": 157336,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 157336
 	},
 	{
 		"Name": "The Lion King",
@@ -128,11 +96,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/4sj1MT05lAA",
 		"PurchaseCost": 9.99,
 		"RentCost": 2.99,
-		"TmdbId": 8587,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 8587
 	},
 	{
 		"Name": "The Lord of the Rings: The Return of the King",
@@ -143,11 +107,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/co9SNfJNDN8",
 		"PurchaseCost": 7.99,
 		"RentCost": 1.99,
-		"TmdbId": 122,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 122
 	},
 	{
 		"Name": "Pulp Fiction",
@@ -158,11 +118,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/s7EdQ4FqbhY",
 		"PurchaseCost": 9.99,
 		"RentCost": 2.99,
-		"TmdbId": 680,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 680
 	},
 	{
 		"Name": "The Revenant",
@@ -173,11 +129,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/QRfj1VCg16Y",
 		"PurchaseCost": 11.99,
 		"RentCost": 3.99,
-		"TmdbId": 281957,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 281957
 	},
 	{
 		"Name": "The Ritual",
@@ -188,11 +140,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/aBFyixPE7zA",
 		"PurchaseCost": 13.99,
 		"RentCost": 3.99,
-		"TmdbId": 433808,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 433808
 	},
 	{
 		"Name": "Saving Private Ryan",
@@ -203,11 +151,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/RYExstiQlLc",
 		"PurchaseCost": 7.99,
 		"RentCost": 1.99,
-		"TmdbId": 857,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 857
 	},
 	{
 		"Name": "Schindler's List",
@@ -218,11 +162,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/bJcLRFWxRno",
 		"PurchaseCost": 9.99,
 		"RentCost": 2.99,
-		"TmdbId": 424,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 424
 	},
 	{
 		"Name": "The Shape of Water",
@@ -233,11 +173,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/XFYWazblaUA",
 		"PurchaseCost": 12.99,
 		"RentCost": 4.99,
-		"TmdbId": 399055,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 399055
 	},
 	{
 		"Name": "The Empire Strikes Back",
@@ -248,11 +184,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/KwYa7UpoWtM",
 		"PurchaseCost": 7.99,
 		"RentCost": 2.99,
-		"TmdbId": 1891,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 1891
 	},
 	{
 		"Name": "Straight Outta Compton",
@@ -263,11 +195,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/rsbWEF1Sju0",
 		"PurchaseCost": 8.99,
 		"RentCost": 2.99,
-		"TmdbId": 277216,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 277216
 	},
 	{
 		"Name": "Toy Story 3",
@@ -278,11 +206,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/TNMpa5yBf5o",
 		"PurchaseCost": 11.99,
 		"RentCost": 3.99,
-		"TmdbId": 10193,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 10193
 	},
 	{
 		"Name": "Tropic Thunder",
@@ -293,11 +217,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/VsEdmjAudSI",
 		"PurchaseCost": 8.99,
 		"RentCost": 2.99,
-		"TmdbId": 7446,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 7446
 	},
 	{
 		"Name": "Airplane!",
@@ -308,11 +228,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/HMnVs287AJ4",
 		"PurchaseCost": 5.99,
 		"RentCost": 1.99,
-		"TmdbId": 813,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 813
 	},
 	{
 		"Name": "Jurassic Park",
@@ -323,11 +239,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/QWBKEmWWL38",
 		"PurchaseCost": 8.99,
 		"RentCost": 2.99,
-		"TmdbId": 329,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 329
 	},
 	{
 		"Name": "Pan's Labyrinth",
@@ -338,11 +250,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/gPkMx_pfJ5w",
 		"PurchaseCost": 11.99,
 		"RentCost": 3.99,
-		"TmdbId": 1417,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 1417
 	},
 	{
 		"Name": "The Godfather: Part II",
@@ -353,11 +261,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/9O1Iy9od7-A",
 		"PurchaseCost": 9.99,
 		"RentCost": 2.99,
-		"TmdbId": 240,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 240
 	},
 	{
 		"Name": "Alien",
@@ -368,11 +272,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/097uj1HjkbM",
 		"PurchaseCost": 7.99,
 		"RentCost": 1.99,
-		"TmdbId": 348,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 348
 	},
 	{
 		"Name": "Spirited Away",
@@ -383,11 +283,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/ByXuk9QqQkk",
 		"PurchaseCost": 9.99,
 		"RentCost": 2.99,
-		"TmdbId": 129,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 129
 	},
 	{
 		"Name": "The Good, the Bad and the Ugly",
@@ -398,11 +294,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/OLNktcDs05Y",
 		"PurchaseCost": 6.99,
 		"RentCost": 1.99,
-		"TmdbId": 429,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 429
 	},
 	{
 		"Name": "The Shining",
@@ -413,11 +305,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/ANKdpe4J2h0",
 		"PurchaseCost": 7.99,
 		"RentCost": 1.99,
-		"TmdbId": 694,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 694
 	},
 	{
 		"Name": "John Wick",
@@ -428,11 +316,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/2AUmvWm5ZDQ",
 		"PurchaseCost": 12.99,
 		"RentCost": 3.99,
-		"TmdbId": 245891,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 245891
 	},
 	{
 		"Name": "No Country for Old Men",
@@ -443,11 +327,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/qnwNuG1ayno",
 		"PurchaseCost": 9.99,
 		"RentCost": 2.99,
-		"TmdbId": 6977,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 6977
 	},
 	{
 		"Name": "Guardians of the Galaxy",
@@ -458,11 +338,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/b7yOuhI1dzU",
 		"PurchaseCost": 11.99,
 		"RentCost": 3.99,
-		"TmdbId": 118340,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 118340
 	},
 	{
 		"Name": "Harry Potter and the Deathly Hallows: Part 2",
@@ -473,11 +349,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/mObK5XD8udk",
 		"PurchaseCost": 9.99,
 		"RentCost": 2.99,
-		"TmdbId": 12445,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 12445
 	},
 	{
 		"Name": "The Grand Budapest Hotel",
@@ -488,11 +360,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/qmLEsdDnyLg",
 		"PurchaseCost": 9.99,
 		"RentCost": 3.99,
-		"TmdbId": 120467,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 120467
 	},
 	{
 		"Name": "WALL·E",
@@ -503,11 +371,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/8-_9n5DtKOc",
 		"PurchaseCost": 11.99,
 		"RentCost": 3.99,
-		"TmdbId": 10681,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 10681
 	},
 	{
 		"Name": "Logan",
@@ -518,11 +382,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/RH3OxVFvTeg",
 		"PurchaseCost": 14.99,
 		"RentCost": 4.99,
-		"TmdbId": 263115,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 263115
 	},
 	{
 		"Name": "The Thing",
@@ -533,11 +393,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/p35JDJLa9ec",
 		"PurchaseCost": 5.99,
 		"RentCost": 1.99,
-		"TmdbId": 1091,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 1091
 	},
 	{
 		"Name": "The Wolf of Wall Street",
@@ -548,11 +404,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/iszwuX1AK6A",
 		"PurchaseCost": 9.99,
 		"RentCost": 2.99,
-		"TmdbId": 106646,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 106646
 	},
 	{
 		"Name": "Hacksaw Ridge",
@@ -563,11 +415,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/s2-1hz1juBI",
 		"PurchaseCost": 11.99,
 		"RentCost": 3.99,
-		"TmdbId": 324786,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 324786
 	},
 	{
 		"Name": "Back to the Future",
@@ -578,11 +426,7 @@
 		"TrailerUrl": "https://www.youtube.com/embed/qvsgGtivCgs",
 		"PurchaseCost": 7.99,
 		"RentCost": 1.99,
-		"TmdbId": 105,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 105
 	},
 	{
 		"Name": "A Clockwork Orange",
@@ -593,10 +437,6 @@
 		"TrailerUrl": "https://www.youtube.com/embed/2gtPhs84Jdg",
 		"PurchaseCost": 6.99,
 		"RentCost": 1.99,
-		"TmdbId": 185,
-		"Genres": null,
-		"Cast": null,
-		"Crew": null,
-		"Id": 0
+		"Id": 185
 	}
 ]

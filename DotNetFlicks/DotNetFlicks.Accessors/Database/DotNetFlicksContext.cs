@@ -17,16 +17,34 @@ namespace DotNetFlicks.Accessors.Database
         {
         }
 
+        public DbSet<CastMember> CastMembers { get; set; }
+        public DbSet<CrewMember> CrewMembers { get; set; }
+        public DbSet<Department> Departments { get; set; }
+        public DbSet<Genre> Genres { get; set; }
+        public DbSet<Movie> Movies { get; set; }
+        public DbSet<MovieGenre> MovieGenres { get; set; }
+        public DbSet<Person> People { get; set; }
+        public DbSet<UserMovie> UserMovies { get; set; }
+
         protected override void OnModelCreating(ModelBuilder builder)
         {
             // Customize the ASP.NET Identity model and override the defaults if needed. Add your customizations after calling base.OnModelCreating(builder);
             base.OnModelCreating(builder);
-            
+
             //Disable cascade deletions
             foreach (var relationship in builder.Model.GetEntityTypes().SelectMany(e => e.GetForeignKeys()))
             {
                 relationship.DeleteBehavior = DeleteBehavior.Restrict;
             }
+
+            //Seed data
+            builder.SeedGenres();
+            builder.SeedDepartments();
+            builder.SeedPeople();
+            builder.SeedMovies();
+            builder.SeedMovieGenres();
+            builder.SeedCastMembers();
+            builder.SeedCrewMembers();
         }
 
         public virtual void SetState(object entity, EntityState state)
@@ -45,14 +63,5 @@ namespace DotNetFlicks.Accessors.Database
                 entry.State = EntityState.Detached;
             }
         }
-
-        public DbSet<CastMember> CastMembers { get; set; }
-        public DbSet<CrewMember> CrewMembers { get; set; }
-        public DbSet<Department> Departments { get; set; }
-        public DbSet<Genre> Genres { get; set; }
-        public DbSet<Movie> Movies { get; set; }
-        public DbSet<MovieGenre> MovieGenres { get; set; }
-        public DbSet<Person> People { get; set; }
-        public DbSet<UserMovie> UserMovies { get; set; }
     }
 }

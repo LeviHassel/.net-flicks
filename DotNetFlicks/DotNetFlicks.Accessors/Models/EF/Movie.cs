@@ -22,8 +22,6 @@ namespace DotNetFlicks.Accessors.Models.EF
 
         public decimal RentCost { get; set; }
 
-        public int TmdbId { get; set; }
-
         public virtual ICollection<MovieGenre> Genres { get; set; }
 
         public virtual ICollection<CastMember> Cast { get; set; }

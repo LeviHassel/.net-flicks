@@ -1,78 +1,78 @@
 [
 	{
-		"TmdbId": 28,
+		"Id": 28,
 		"Name": "Action"
 	},
 	{
-		"TmdbId": 12,
+		"Id": 12,
 		"Name": "Adventure"
 	},
 	{
-		"TmdbId": 16,
+		"Id": 16,
 		"Name": "Animation"
 	},
 	{
-		"TmdbId": 35,
+		"Id": 35,
 		"Name": "Comedy"
 	},
 	{
-		"TmdbId": 80,
+		"Id": 80,
 		"Name": "Crime"
 	},
 	{
-		"TmdbId": 99,
+		"Id": 99,
 		"Name": "Documentary"
 	},
 	{
-		"TmdbId": 18,
+		"Id": 18,
 		"Name": "Drama"
 	},
 	{
-		"TmdbId": 10751,
+		"Id": 10751,
 		"Name": "Family"
 	},
 	{
-		"TmdbId": 14,
+		"Id": 14,
 		"Name": "Fantasy"
 	},
 	{
-		"TmdbId": 36,
+		"Id": 36,
 		"Name": "History"
 	},
 	{
-		"TmdbId": 27,
+		"Id": 27,
 		"Name": "Horror"
 	},
 	{
-		"TmdbId": 10402,
+		"Id": 10402,
 		"Name": "Music"
 	},
 	{
-		"TmdbId": 9648,
+		"Id": 9648,
 		"Name": "Mystery"
 	},
 	{
-		"TmdbId": 10749,
+		"Id": 10749,
 		"Name": "Romance"
 	},
 	{
-		"TmdbId": 878,
+		"Id": 878,
 		"Name": "Science Fiction"
 	},
 	{
-		"TmdbId": 10770,
+		"Id": 10770,
 		"Name": "TV Movie"
 	},
 	{
-		"TmdbId": 53,
+		"Id": 53,
 		"Name": "Thriller"
 	},
 	{
-		"TmdbId": 10752,
+		"Id": 10752,
 		"Name": "War"
 	},
 	{
-		"TmdbId": 37,
+		"Id": 37,
 		"Name": "Western"
 	}
 ]

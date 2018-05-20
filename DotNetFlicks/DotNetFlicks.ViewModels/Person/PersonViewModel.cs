@@ -28,8 +28,6 @@ namespace DotNetFlicks.ViewModels.Person
         [Display(Name = "Image URL")]
         public string ImageUrl { get; set; }
 
-        public int TmdbId { get; set; }
-
         public List<MovieRoleViewModel> Roles { get; set; }
 
         public string RolesTooltip { get { return Roles != null ? Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList().ToTooltipList() : ""; } }

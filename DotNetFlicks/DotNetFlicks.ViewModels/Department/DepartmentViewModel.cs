@@ -14,8 +14,6 @@ namespace DotNetFlicks.ViewModels.Department
 
         public bool IsDirecting { get; set; }
 
-        public int TmdbId { get; set; }
-
         public List<MovieRoleViewModel> People { get; set; }
 
         public string PeopleTooltip { get { return People != null ? People.Select(x => string.Format("{0} - {1}", x.PersonName, x.MovieName)).ToList().ToTooltipList() : ""; } }

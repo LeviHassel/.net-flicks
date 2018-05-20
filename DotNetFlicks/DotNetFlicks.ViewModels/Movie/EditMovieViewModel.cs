@@ -44,8 +44,6 @@ namespace DotNetFlicks.ViewModels.Movie
         [Display(Name = "Rent")]
         public decimal RentCost { get; set; }
 
-        public int TmdbId { get; set; }
-
         [Display(Name = "Genres")]
         public List<int> GenreIds { get; set; }
 

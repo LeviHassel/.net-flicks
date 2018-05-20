@@ -7,8 +7,6 @@ namespace DotNetFlicks.Accessors.Models.EF
     {
         public string Name { get; set; }
 
-        public int TmdbId { get; set; }
-
         public virtual ICollection<MovieGenre> Movies { get; set; }
     }
 }

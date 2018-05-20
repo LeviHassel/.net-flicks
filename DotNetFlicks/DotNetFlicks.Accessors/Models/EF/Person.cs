@@ -16,8 +16,6 @@ namespace DotNetFlicks.Accessors.Models.EF
 
         public string ImageUrl { get; set; }
 
-        public int TmdbId { get; set; }
-
         public virtual ICollection<CastMember> CastRoles { get; set; }
 
         public virtual ICollection<CrewMember> CrewRoles { get; set; }

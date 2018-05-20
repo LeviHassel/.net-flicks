@@ -22,8 +22,6 @@ namespace DotNetFlicks.Accessors.Models.DTO
 
         public decimal RentCost { get; set; }
 
-        public int TmdbId { get; set; }
-
         public ICollection<MovieGenreDTO> Genres { get; set; }
 
         public ICollection<CastMemberDTO> Cast { get; set; }

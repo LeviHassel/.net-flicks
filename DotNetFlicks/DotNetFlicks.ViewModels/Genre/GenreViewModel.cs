@@ -12,8 +12,6 @@ namespace DotNetFlicks.ViewModels.Genre
         [Required(AllowEmptyStrings = false)]
         public string Name { get; set; }
 
-        public int TmdbId { get; set; }
-
         public List<MovieViewModel> Movies { get; set; }
 
         public string MoviesTooltip { get { return Movies != null ? Movies.Select(x => x.Name).ToList().ToTooltipList() : ""; } }

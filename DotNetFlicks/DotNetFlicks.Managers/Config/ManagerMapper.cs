@@ -47,20 +47,25 @@ namespace DotNetFlicks.Managers.Config
             CreateMap<GenreViewModel, GenreDTO>();
 
             CreateMap<MovieDTO, MovieViewModel>()
-                .ForMember(dest => dest.Genres, opt => opt.MapFrom(src => src.Genres.Select(x => x.Genre)));
+                .ForMember(dest => dest.Genres, opt => opt.MapFrom(src => src.Genres.Select(x => x.Genre)))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description.Replace("\\n", System.Environment.NewLine)));
 
             CreateMap<MovieViewModel, MovieDTO>();
 
-            CreateMap<MovieDTO, EditMovieViewModel>();
+            CreateMap<MovieDTO, EditMovieViewModel>()
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description.Replace("\\n", System.Environment.NewLine)));
 
             CreateMap<EditMovieViewModel, MovieDTO>()
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Description.Replace(System.Environment.NewLine, "\\n")))
                 .ForMember(dest => dest.Cast, opt => opt.Ignore())
                 .ForMember(dest => dest.Crew, opt => opt.Ignore());
 
             CreateMap<PersonDTO, PersonViewModel>()
-                .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => Mapper.Map<List<MovieRoleViewModel>>(src.CastRoles).Concat(Mapper.Map<List<MovieRoleViewModel>>(src.CrewRoles)).ToList()));
+                .ForMember(dest => dest.Roles, opt => opt.MapFrom(src => Mapper.Map<List<MovieRoleViewModel>>(src.CastRoles).Concat(Mapper.Map<List<MovieRoleViewModel>>(src.CrewRoles)).ToList()))
+                .ForMember(dest => dest.Biography, opt => opt.MapFrom(src => src.Biography.Replace("\\n", System.Environment.NewLine)));
 
-            CreateMap<PersonViewModel, PersonDTO>();
+            CreateMap<PersonViewModel, PersonDTO>()
+                .ForMember(dest => dest.Biography, opt => opt.MapFrom(src => src.Biography.Replace(System.Environment.NewLine, "\\n")));
         }
 
         public override string ProfileName

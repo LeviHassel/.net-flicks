@@ -16,11 +16,11 @@ namespace DotNetFlicks.Common.Extensions
         }
 
         /// <summary>
-        /// Preserve line breaks when displaying raw HTML
+        /// HTML encodes a string, ensuring that text is displayed correctly and not interpreted as HTML by the browser
         /// </summary>
         /// <param name="message"></param>
         /// <returns></returns>
-        public static string PreserveNewLines(this string message)
+        public static string HtmlEncode(this string message)
         {
             return HttpUtility.HtmlEncode(message).Replace("\n", "<br/>");
         }

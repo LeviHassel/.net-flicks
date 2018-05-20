@@ -18,7 +18,7 @@
             <hr class="my-4">
 
             <span>
-                @Html.Raw(Model.Description.ToSubString(500).PreserveNewLines())
+                @Html.Raw(Model.Description.ToSubString(500).HtmlEncode())
                 @if (Model.Description.Count() > 500)
                 {
                     <a class="btn btn-primary btn-sm m-1" role="button" data-toggle="modal" data-target=".description-modal">Read more</a>
@@ -161,7 +161,7 @@
                 </button>
             </div>
             <div class="modal-body">
-                @Html.Raw(Model.Description.PreserveNewLines())
+                @Html.Raw(Model.Description.HtmlEncode())
             </div>
         </div>
     </div>

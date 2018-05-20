@@ -2,6 +2,7 @@
 
 <tr class="row">
     <td class="col align-middle">
+        <input asp-for="Id" type="hidden" />
         <select asp-for="PersonId" class="form-control person-picker" data-live-search="true" data-size="10">
             @if (Model.PersonId != 0)
             {

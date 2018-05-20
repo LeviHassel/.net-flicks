@@ -61,6 +61,7 @@ namespace DotNetFlicks.Engines.Engines
             {
                 crewMemberDto.MovieId = movieId;
                 crewMemberDto.Person = null;
+                crewMemberDto.Department = null;
             }
 
             _crewMemberAccessor.SaveAll(movieId, crewMemberDtos);

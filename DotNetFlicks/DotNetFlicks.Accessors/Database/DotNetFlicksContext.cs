@@ -49,7 +49,7 @@ namespace DotNetFlicks.Accessors.Database
 
         public virtual void SetState(object entity, EntityState state)
         {
-            this.Entry(entity).State = state;
+            Entry(entity).State = state;
         }
 
         /// <summary>

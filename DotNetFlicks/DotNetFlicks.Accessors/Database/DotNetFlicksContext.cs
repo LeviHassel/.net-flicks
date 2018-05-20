@@ -8,15 +8,6 @@ namespace DotNetFlicks.Accessors.Database
 {
     public class DotNetFlicksContext : IdentityDbContext<ApplicationUser>
     {
-        /// <summary>
-        /// Default context
-        /// </summary>
-        /// <param name="options"></param>
-        public DotNetFlicksContext(DbContextOptions<DotNetFlicksContext> options)
-            : base(options)
-        {
-        }
-
         public DbSet<CastMember> CastMembers { get; set; }
         public DbSet<CrewMember> CrewMembers { get; set; }
         public DbSet<Department> Departments { get; set; }
@@ -25,6 +16,15 @@ namespace DotNetFlicks.Accessors.Database
         public DbSet<MovieGenre> MovieGenres { get; set; }
         public DbSet<Person> People { get; set; }
         public DbSet<UserMovie> UserMovies { get; set; }
+
+        /// <summary>
+        /// Default context
+        /// </summary>
+        /// <param name="options"></param>
+        public DotNetFlicksContext(DbContextOptions<DotNetFlicksContext> options)
+            : base(options)
+        {
+        }
 
         protected override void OnModelCreating(ModelBuilder builder)
         {

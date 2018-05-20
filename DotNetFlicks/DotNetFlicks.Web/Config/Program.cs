@@ -3,9 +3,11 @@ using DotNetFlicks.Accessors.Identity;
 using Microsoft.AspNetCore;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.AspNetCore.Identity;
+using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.DependencyInjection;
 using Microsoft.Extensions.Logging;
 using System;
+using System.Linq;
 
 namespace DotNetFlicks.Web.Config
 {
@@ -22,8 +24,26 @@ namespace DotNetFlicks.Web.Config
                 try
                 {
                     var context = services.GetRequiredService<DotNetFlicksContext>();
-                    var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
-                    DbInitializer.Initialize(context, userManager);
+
+                    //Create database if it doesn't exist and apply any pending migrations
+                    context.Database.Migrate();
+
+                    //Seed admin user
+                    if (!context.Users.Any())
+                    {
+                        var userManager = services.GetRequiredService<UserManager<ApplicationUser>>();
+
+                        var admin = new ApplicationUser
+                        {
+                            UserName = "admin@dotnetflicks.com",
+                            Email = "admin@dotnetflicks.com",
+                            EmailConfirmed = true
+                        };
+
+                        userManager.CreateAsync(admin, "p@ssWORD471");
+
+                        throw new Exception("");
+                    }
                 }
                 catch (Exception ex)
                 {

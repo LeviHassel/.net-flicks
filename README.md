@@ -1,9 +1,9 @@
-# .NetFlicks (.NET Core 2.0 Sample App)
+# .NetFlicks (.NET Core 2.1 Sample App)
 
 ## Note: This is a work in progress and is not ready to be used in its current state
 
 ## Overview
-What started as a simple template project for .NET Core 2.0 evolved into a decent-sized sample application showcasing what I believe to be the best .NET practices. This solution uses multitier system architecture, based off [IDesign](http://www.idesign.net/ "IDesign") methodology, well-thought-out database schema, an intuitive user interface and more.
+What started as a simple template project for .NET Core 2.1 evolved into a decent-sized sample application showcasing what I believe to be the best .NET practices. This solution uses multitier system architecture, based off [IDesign](http://www.idesign.net/ "IDesign") methodology, well-thought-out database schema, an intuitive user interface and more.
 
 ## Design
 This solution is divided into six layers. 
@@ -50,7 +50,7 @@ The Tests layer uses [xUnit](https://xunit.github.io/ "xUnit") along with [Moq](
 ## Getting Started
 1. Download and install all of the requirements listed above.
 2. Download this repository.
-3. Open the solution in Visual Studio and run the Web project. This will create and seed the application's database, called CoreTemplateDb.
+3. Open the solution in Visual Studio and run the Web project. This will create and seed the application's database, called CoreTemplateDb. 
 
 ## Tips
 

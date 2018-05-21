@@ -27,7 +27,7 @@ namespace DotNetFlicks.Tests.ManagerTests
         private Mock<IMovieAccessor> _movieAccessorMock;
         private Mock<IMovieGenreAccessor> _movieGenreAccessorMock;
         private Mock<IPersonAccessor> _personAccessorMock;
-        private Mock<IPersonEngine> _personEngineMock;
+        private Mock<IMovieRoleUpdateEngine> _movieRoleUpdateEngineMock;
 
         //This is method is called before the start of every test in this class
         public MovieManagerTest()
@@ -41,7 +41,7 @@ namespace DotNetFlicks.Tests.ManagerTests
                 _movieAccessorMock.Object,
                 _movieGenreAccessorMock.Object,
                 _personAccessorMock.Object,
-                _personEngineMock.Object);
+                _movieRoleUpdateEngineMock.Object);
 
             //Set up a Fixture to populate random data: https://github.com/AutoFixture/AutoFixture
             _fixture = new Fixture();

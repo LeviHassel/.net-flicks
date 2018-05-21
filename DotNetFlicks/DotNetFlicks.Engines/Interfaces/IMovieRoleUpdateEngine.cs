@@ -3,7 +3,7 @@ using System.Collections.Generic;
 
 namespace DotNetFlicks.Engines.Interfaces
 {
-    public interface IPersonEngine
+    public interface IMovieRoleUpdateEngine
     {
         void UpdateCast(List<CastMemberViewModel> castMemberVms, int movieId);
 

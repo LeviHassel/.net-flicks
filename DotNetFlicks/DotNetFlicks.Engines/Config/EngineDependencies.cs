@@ -14,7 +14,7 @@ namespace DotNetFlicks.Engines.Config
                 throw new ArgumentNullException(nameof(services));
             }
 
-            services.AddTransient<IPersonEngine, PersonEngine>();
+            services.AddTransient<IMovieRoleUpdateEngine, MovieRoleUpdateEngine>();
 
             return services;
         }

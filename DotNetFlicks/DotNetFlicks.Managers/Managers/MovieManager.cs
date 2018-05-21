@@ -20,7 +20,7 @@ namespace DotNetFlicks.Managers.Managers
         private IMovieAccessor _movieAccessor;
         private IMovieGenreAccessor _movieGenreAccessor;
         private IPersonAccessor _personAccessor;
-        private IPersonEngine _personEngine;
+        private IMovieRoleUpdateEngine _movieRoleUpdateEngine;
 
         public MovieManager(ICastMemberAccessor castMemberAccessor,
             ICrewMemberAccessor crewMemberAccessor,
@@ -29,7 +29,7 @@ namespace DotNetFlicks.Managers.Managers
             IMovieAccessor movieAccessor,
             IMovieGenreAccessor movieGenreAccessor,
             IPersonAccessor personAccessor,
-            IPersonEngine personEngine)
+            IMovieRoleUpdateEngine movieRoleUpdateEngine)
         {
             _castMemberAccessor = castMemberAccessor;
             _crewMemberAccessor = crewMemberAccessor;
@@ -38,7 +38,7 @@ namespace DotNetFlicks.Managers.Managers
             _movieAccessor = movieAccessor;
             _movieGenreAccessor = movieGenreAccessor;
             _personAccessor = personAccessor;
-            _personEngine = personEngine;
+            _movieRoleUpdateEngine = movieRoleUpdateEngine;
         }
 
         public MovieViewModel Get(int id)
@@ -101,8 +101,8 @@ namespace DotNetFlicks.Managers.Managers
             dto = _movieAccessor.Save(dto);
 
             _movieGenreAccessor.SaveAll(dto.Id, vm.GenreIds);
-            _personEngine.UpdateCast(vm.Cast, dto.Id);
-            _personEngine.UpdateCrew(vm.Crew, dto.Id);
+            _movieRoleUpdateEngine.UpdateCast(vm.Cast, dto.Id);
+            _movieRoleUpdateEngine.UpdateCrew(vm.Crew, dto.Id);
 
             vm = Mapper.Map<EditMovieViewModel>(dto);
 

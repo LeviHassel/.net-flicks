@@ -8,12 +8,12 @@ using System.Linq;
 
 namespace DotNetFlicks.Engines.Engines
 {
-    public class PersonEngine : IPersonEngine
+    public class MovieRoleUpdateEngine : IMovieRoleUpdateEngine
     {
         private ICastMemberAccessor _castMemberAccessor;
         private ICrewMemberAccessor _crewMemberAccessor;
 
-        public PersonEngine(ICastMemberAccessor castMemberAccessor,
+        public MovieRoleUpdateEngine(ICastMemberAccessor castMemberAccessor,
             ICrewMemberAccessor crewMemberAccessor)
         {
             _castMemberAccessor = castMemberAccessor;

@@ -70,7 +70,7 @@ namespace DotNetFlicks.Managers.Managers
         {
             var user = await _userManager.FindByEmailAsync(email);
 
-            if (user == null || !(await _userManager.IsEmailConfirmedAsync(user)))
+            if (user == null)
             {
                 return null;
             }

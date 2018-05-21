@@ -1,5 +1,5 @@
 # .NetFlicks (.NET Core 2.1 Sample App)
----
+
 ## Note: This is a work in progress and is not ready to be used in its current state
 
 ## Overview
@@ -25,6 +25,7 @@ A very important concept is to design around volatility. Try to give every servi
 
 ## Database Design
 [Talk briefly about the database]
+[Mention that I use Identity, but not roles for demo purposes]
 ![.NetFlicks Database](https://user-images.githubusercontent.com/9669653/40290536-25721b6e-5c84-11e8-927e-0656b7452ff2.png)
 
 ## Stack
@@ -51,9 +52,9 @@ A very important concept is to design around volatility. Try to give every servi
 1. Install the following:
    * [Visual Studio Community](https://www.visualstudio.com/downloads/ "Visual Studio Community") (15.3+ is required for Core 2.0)
    * [.NET Core 2.0 SDK](https://www.microsoft.com/net/download/core ".NET Core 2.0 SDK")
-   * [SQL Server 2016 Express LocalDB](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express "SQL Server 2016 Express LocalDB") (Find the LocalDB download option link on the page- it's not the main one; during the installation process, select "New SQL Server stand-alone installation or add features to an existing installation" and use the default setup)
-2. Download this repository.
-3. Open the solution in Visual Studio and run the Web project. This will create and seed the application's database, called DotNetFlicksDb.
+   * [SQL Server 2017 Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express "SQL Server 2017 Express") (during the installation process, make sure to install LocalDb feature)
+2. Download this repository
+3. Open the solution in Visual Studio and run the Web project; this will create and seed the application's database, called DotNetFlicksDb
 
 ### Tips
 * **Connect to database using SQL Server Management Studio**

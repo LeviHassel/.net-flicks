@@ -36,10 +36,7 @@ namespace DotNetFlicks.Managers.Config
                 .ForMember(dest => dest.Category, opt => opt.MapFrom(src => src.Department.Name))
                 .ForMember(dest => dest.IsDirector, opt => opt.MapFrom(src => src.Department.IsDirecting));
 
-            CreateMap<DepartmentDTO, DepartmentViewModel>()
-                .ForMember(dest => dest.People, opt => opt.MapFrom(src => src.Roles));
-
-            CreateMap<DepartmentViewModel, DepartmentDTO>();
+            CreateMap<DepartmentDTO, DepartmentViewModel>().ReverseMap();
 
             CreateMap<GenreDTO, GenreViewModel>()
                 .ForMember(dest => dest.Movies, opt => opt.MapFrom(src => src.Movies.Select(x => x.Movie)));

@@ -21,8 +21,7 @@ namespace DotNetFlicks.Managers.Managers
         {
             var dto = id.HasValue ? _departmentAccessor.Get(id.Value) : new DepartmentDTO();
             var vm = Mapper.Map<DepartmentViewModel>(dto);
-
-            vm.People = vm.People.OrderBy(x => x.PersonName).ToList();
+            vm.PeopleCount = id.HasValue ? _departmentAccessor.GetRoleCount(id.Value) : 0;
 
             return vm;
         }
@@ -34,7 +33,7 @@ namespace DotNetFlicks.Managers.Managers
 
             foreach (var vm in vms)
             {
-                vm.People = vm.People.OrderBy(x => x.PersonName).ToList();
+                vm.PeopleCount = _departmentAccessor.GetRoleCount(vm.Id);
             }
 
             return new DepartmentsViewModel { Departments = vms.OrderBy(x => x.Name).ToList() };

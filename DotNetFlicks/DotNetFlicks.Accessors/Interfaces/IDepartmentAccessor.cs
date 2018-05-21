@@ -11,6 +11,8 @@ namespace DotNetFlicks.Accessors.Interfaces
 
         List<DepartmentDTO> GetByName(string query);
 
+        int GetRoleCount(int id);
+
         DepartmentDTO Save(DepartmentDTO dto);
 
         DepartmentDTO Delete(int id);

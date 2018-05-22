@@ -25,17 +25,19 @@ What started as a simple template project for .NET Core evolved into a decent-si
    * [Fluent Assertions](https://fluentassertions.com/ "Fluent Assertions")
 
 ## System Architecture
-This solution is divided into four layers based on [IDesign](http://www.idesign.net/ "IDesign") methodology. IDesign is a closed architecture system where each layer can only call down.
-
-[Explain briefly How to use iDesign correctly so they don't just create a Controller/Manager/Accessor for every class]
-A very important concept is to design around volatility. Try to give every service only one reason to change.
+This solution is divided into four layers based on [IDesign](http://www.idesign.net/ "IDesign") methodology:
 
 | Layer | Description | Dependencies | Model
 | - | - | - | - |
 | Clients | Home of the UI, including controllers, views, styling and scripts | Managers | ViewModel
 | Managers | Manages a sequence of actions, handles business logic | Engines, Accessors | DTO
-| Engines | Applies an algorithm/business rule, useful for encapsulating things | Accessors | DTO
+| Engines | Encapsulates commonly used algorithms and business logic | Accessors | DTO
 | Accessors | Stores and retrieves data from resources like databases and APIs | None | Entity
+
+IDesign is a closed architecture system where each layer can only call down.
+
+[Explain briefly How to use iDesign correctly so they don't just create a Controller/Manager/Accessor for every class]
+A very important concept is to design around volatility. Try to give every service only one reason to change.
 
 ![.NetFlicks Architecture](https://user-images.githubusercontent.com/9669653/40292370-8e94ff6a-5c90-11e8-8751-08ce14575cea.png)
 

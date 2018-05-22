@@ -27,15 +27,15 @@ What started as a simple template project for .NET Core evolved into a decent-si
 ## System Architecture
 This solution is divided into four layers based on [IDesign](http://www.idesign.net/ "IDesign") methodology. IDesign is a closed architecture system where each layer can only call down.
 
-[Explain breifly How to use iDesign correctly so they don't just create a Controller/Manager/Accessor for every class]
+[Explain briefly How to use iDesign correctly so they don't just create a Controller/Manager/Accessor for every class]
 A very important concept is to design around volatility. Try to give every service only one reason to change.
 
-| Layer | Description | Dependencies |
-| - | - | - |
-| Clients | The user interface, where all of the controllers, views, styling and scripts live | Managers |
-| Managers | Manages a sequence of actions, handles business logic (often called the Services layer in the world of C#) | Engines, Accessors |
-| Engines | Applies an algorithm/business rule, useful for encapsulating things | Accessors |
-| Accessors | Stores and retrieves data from resources like databases and APIs (often called the Repository layer in world of C#) | None |
+| Layer | Description | Dependencies | Model
+| - | - | - | - |
+| Clients | The user interface, where all of the controllers, views, styling and scripts live | Managers | ViewModel
+| Managers | Manages a sequence of actions, handles business logic | Engines, Accessors | DTO
+| Engines | Applies an algorithm/business rule, useful for encapsulating things | Accessors | DTO
+| Accessors | Stores and retrieves data from resources like databases and APIs | None | Entity
 
 ![.NetFlicks Architecture](https://user-images.githubusercontent.com/9669653/40292370-8e94ff6a-5c90-11e8-8751-08ce14575cea.png)
 
@@ -59,7 +59,7 @@ A very important concept is to design around volatility. Try to give every servi
   * When you open it, it should show the "Connect to Server" window; if not, click Connect->Database Engine in the sidebar
   * Select `Database Engine` for Server type, enter `(localdb)\MSSQLLocalDB` for Server name, select `Windows authentication` for Authentication and click Connect
   * You should now see `DotNetFlicksDb` in the Databases folder of your localdb
-* **Catch emails in develpoment**
+* **Catch emails in development**
   * Install [Papercut](https://github.com/ChangemakerStudios/Papercut "Papercut"), a fake SMTP server that you can use to catch outgoing emails in development
 * **View logs and exceptions**
   * In order to view a list of all logs and exceptions from your current IIS session, add `/elm` to the base URL

@@ -32,7 +32,7 @@ A very important concept is to design around volatility. Try to give every servi
 
 | Layer | Description | Dependencies | Model
 | - | - | - | - |
-| Clients | The user interface, where all of the controllers, views, styling and scripts live | Managers | ViewModel
+| Clients | Home of the UI, including controllers, views, styling and scripts | Managers | ViewModel
 | Managers | Manages a sequence of actions, handles business logic | Engines, Accessors | DTO
 | Engines | Applies an algorithm/business rule, useful for encapsulating things | Accessors | DTO
 | Accessors | Stores and retrieves data from resources like databases and APIs | None | Entity

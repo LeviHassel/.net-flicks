@@ -27,12 +27,12 @@ What started as a simple template project for .NET Core evolved into a decent-si
 ## System Architecture
 This solution is divided into four layers based on [IDesign](http://www.idesign.net/ "IDesign") methodology:
 
-| Layer | Description | Dependencies | Model
-| - | - | - | - |
-| Clients | Home of the UI, including controllers, views, styling and scripts | Managers | ViewModel
-| Managers | Manages a sequence of actions, handles business logic | Engines, Accessors | DTO
-| Engines | Encapsulates commonly used algorithms and business logic | Accessors | DTO
-| Accessors | Stores and retrieves data from resources like databases and APIs | None | Entity
+| Layer | Description | Dependencies | Model |
+| --- | --- | --- | --- |
+| Clients | Home of the UI, including controllers, views, styling and scripts | Managers | ViewModel |
+| Managers | Manages a sequence of actions, handles business logic | Engines, Accessors | DTO |
+| Engines | Encapsulates commonly used algorithms and business logic | Accessors | DTO |
+| Accessors | Stores and retrieves data from resources like databases and APIs | None | Entity |
 
 IDesign is a closed architecture system where each layer can only call down.
 

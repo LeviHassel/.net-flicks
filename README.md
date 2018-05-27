@@ -33,7 +33,7 @@ This solution is divided into four layers based on [IDesign](http://www.idesign.
 
 | Layer | Description | Able to Call | Model |
 | --- | --- | --- | --- |
-| Clients | An entry-point, such as an MVC website or an HTTP REST API endpoint | Managers | ViewModel |
+| Clients | An entry-point to the system, such as an MVC website with controllers and views, an HTTP REST API endpoint or a mobile application | Managers | ViewModel |
 | Managers | Manages the workflow of a call chain, handles business logic | Engines, Accessors | DTO |
 | Engines (Optional) | Encapsulates commonly used algorithms and business logic | Accessors | DTO |
 | Accessors | Accesses data from resources like databases and APIs | None | Entity |

@@ -1,4 +1,4 @@
-﻿using DotNetFlicks.Common.Extensions;
+﻿using DotNetFlicks.Common.Utilities;
 using DotNetFlicks.ViewModels.Base;
 using DotNetFlicks.ViewModels.Shared;
 using System;
@@ -35,6 +35,6 @@ namespace DotNetFlicks.ViewModels.Person
 
         public string KnownFor { get { return Roles != null && Roles.Any() ? Roles.GroupBy(x => x.Category).OrderByDescending(x => x.Count()).First().Key : ""; } }
 
-        public int Age { get { return BirthDate.ToAge(DeathDate); } }
+        public int Age { get { return DateUtility.GetAge(BirthDate, DeathDate); } }
     }
 }

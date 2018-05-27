@@ -1,9 +1,9 @@
 ﻿using System.Collections.Generic;
 using System.Text;
 
-namespace DotNetFlicks.Common.Extensions
+namespace DotNetFlicks.Common.Utilities
 {
-    public static class ListExtensions
+    public static class ListUtility
     {
         /// <summary>
         /// Builds an HTML-formatted tooltip list from a list of lines

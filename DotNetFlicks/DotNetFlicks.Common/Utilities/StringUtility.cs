@@ -1,11 +1,11 @@
 ﻿using System.Web;
 
-namespace DotNetFlicks.Common.Extensions
+namespace DotNetFlicks.Common.Utilities
 {
-    public static class StringExtensions
+    public static class StringUtility
     {
         /// <summary>
-        /// Get a specified number of characters from a string, starting at 0
+        /// Gets a specified number of characters from a string, starting at 0
         /// </summary>
         /// <param name="message"></param>
         /// <param name="count"></param>

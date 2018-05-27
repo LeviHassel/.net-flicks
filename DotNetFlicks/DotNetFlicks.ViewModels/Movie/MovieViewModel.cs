@@ -1,4 +1,4 @@
-﻿using DotNetFlicks.Common.Extensions;
+﻿using DotNetFlicks.Common.Utilities;
 using DotNetFlicks.ViewModels.Base;
 using DotNetFlicks.ViewModels.Genre;
 using DotNetFlicks.ViewModels.Shared;

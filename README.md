@@ -24,27 +24,24 @@ What started as a simple template project for .NET Core evolved into a decent-si
    * [AutoFixture](https://github.com/AutoFixture/AutoFixture "AutoFixture")
    * [Fluent Assertions](https://fluentassertions.com/ "Fluent Assertions")
 
+## Database Design
+The database for this solution uses Entity Framework and ASP.NET Identity. I opted not to use Identity Roles for simplicity when demoing.
+![.NetFlicks Database](https://user-images.githubusercontent.com/9669653/40290536-25721b6e-5c84-11e8-927e-0656b7452ff2.png)
+
 ## System Architecture
 This solution is divided into four layers based on [IDesign](http://www.idesign.net/ "IDesign") methodology:
 
-| Layer | Description | Dependencies | Model |
+| Layer | Description | Able to Call | Model |
 | --- | --- | --- | --- |
-| Clients | Home of the UI, including controllers, views, styling and scripts | Managers | ViewModel |
-| Managers | Manages a sequence of actions, handles business logic | Engines, Accessors | DTO |
-| Engines | Encapsulates commonly used algorithms and business logic | Accessors | DTO |
-| Accessors | Stores and retrieves data from resources like databases and APIs | None | Entity |
+| Clients | An entry-point to the system, such as an MVC website with controllers and views, an HTTP REST API endpoint or a mobile application | Managers | ViewModel |
+| Managers | Manages the workflow of a call chain, handles business logic | Engines, Accessors | DTO |
+| Engines (Optional) | Encapsulates commonly used algorithms and business logic | Accessors | DTO |
+| Accessors | Accesses data from resources like databases and APIs | None | Entity |
 
-IDesign is a closed architecture system where each layer can only call down.
+IDesign is a closed architecture that focuses on encapsulating volatility, minimizing coupling and separation of concerns. The official IDesign documentation is sparse, so I'd recommend reading [Software architecture and project design, a mechanized approach](http://codewithspoon.com/2017/07/software-architecture/ "Software architecture and project design, a mechanized approach") for a quick intro to the method.
 
-[Explain briefly How to use iDesign correctly so they don't just create a Controller/Manager/Accessor for every class]
-A very important concept is to design around volatility. Try to give every service only one reason to change.
-
+Here's my implementation of IDesign for this solution:
 ![.NetFlicks Architecture](https://user-images.githubusercontent.com/9669653/40292370-8e94ff6a-5c90-11e8-8751-08ce14575cea.png)
-
-## Database Design
-[Talk briefly about the database]
-[Mention that I use Identity, but not roles for demo purposes]
-![.NetFlicks Database](https://user-images.githubusercontent.com/9669653/40290536-25721b6e-5c84-11e8-927e-0656b7452ff2.png)
 
 ## Setup
 ### Getting Started

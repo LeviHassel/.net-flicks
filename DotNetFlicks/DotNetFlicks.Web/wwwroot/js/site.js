@@ -110,7 +110,7 @@
         initializePersonPicker('#' + $(this).attr('id'));
 
         if ($(this).is('#crew-modal')) {
-            initializeDepartmentPicker();
+            initializeDepartmentPicker('');
         }
     });
 

@@ -139,26 +139,28 @@
         });
     });
 
-    $(".order-up, .order-down").click(function () {
-        var row = $(this).parents("tr:first");
-        var orderInput = row.find("input.order");
-        var order = parseInt(orderInput.val());
-        var lastOrder = $('#crew-table tbody tr').length - 1;
-
-        if ($(this).is(".order-up") && order !== 0) {
-            row.insertBefore(row.prev());
-            orderInput.val(order - 1);
-        }
-        else if (order !== lastOrder) {
-            row.insertAfter(row.next());
-            orderInput.val(order + 1);
-        }
-    });
-
     //Delete Person in Edit Cast and Edit Crew modals
     $('.people-table').on('click', '.delete-person', function () {
         $(this).closest('td').find('.is-deleted').val('true');
         $(this).closest('tr').hide();
+    });
+
+    //Move Cast Members up and down in Edit Cast modal
+    $(".order-up, .order-down").click(function () {
+        var row = $(this).closest("tr");
+        var order = parseInt(row.find("input.order").val());
+        var lastOrder = $('#crew-table tbody tr').length - 1;
+
+        if ($(this).is(".order-up") && order !== 0) {
+            changeRowOrder(row, -1);
+            changeRowOrder(row.prev(), 1);
+            row.insertBefore(row.prev());
+        }
+        else if (order !== lastOrder) {
+            changeRowOrder(row, 1);
+            changeRowOrder(row.next(), -1);
+            row.insertAfter(row.next());
+        }
     });
 });
 
@@ -193,4 +195,10 @@ function initializePersonPicker() {
                 }
             }
         });
+}
+
+function changeRowOrder(row, change) {
+    var orderInput = row.find("input.order");
+    var order = parseInt(orderInput.val());
+    orderInput.val(order + change);
 }

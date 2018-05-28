@@ -1,4 +1,5 @@
-﻿using DotNetFlicks.ViewModels.Account;
+﻿using DotNetFlicks.Accessors.Identity;
+using DotNetFlicks.ViewModels.Account;
 using DotNetFlicks.ViewModels.Manage;
 using Microsoft.AspNetCore.Authentication;
 using Microsoft.AspNetCore.Identity;
@@ -66,6 +67,8 @@ namespace DotNetFlicks.Managers.Interfaces
         Task<IdentityResult> CreateUserExternal(ExternalLoginViewModel vm);
 
         Task<AuthenticationProperties> ConfigureExternalAuthenticationProperties(string provider, string redirectUrl, ClaimsPrincipal identityUser = null);
+
+        Task<ApplicationUser> GetApplicationUser(ClaimsPrincipal identityUser);
 
         Task<string> GetUserId(string email);
 

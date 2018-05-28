@@ -418,6 +418,18 @@ namespace DotNetFlicks.Managers.Managers
         #endregion
 
         #region Account Utilities
+        public async Task<ApplicationUser> GetApplicationUser(ClaimsPrincipal identityUser)
+        {
+            var user = await _userManager.GetUserAsync(identityUser);
+
+            if (user == null)
+            {
+                throw new ApplicationException($"Unable to load user with ID '{user.Id}'.");
+            }
+
+            return user;
+        }
+
         public async Task<string> GetUserId(string email)
         {
             var user = await _userManager.FindByEmailAsync(email);
@@ -439,18 +451,6 @@ namespace DotNetFlicks.Managers.Managers
         #endregion
 
         #region Helpers
-        private async Task<ApplicationUser> GetApplicationUser(ClaimsPrincipal identityUser)
-        {
-            var user = await _userManager.GetUserAsync(identityUser);
-
-            if (user == null)
-            {
-                throw new ApplicationException($"Unable to load user with ID '{user.Id}'.");
-            }
-
-            return user;
-        }
-
         private string FormatKey(string unformattedKey)
         {
             var result = new StringBuilder();

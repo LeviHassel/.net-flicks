@@ -140,14 +140,22 @@
         var lastOrder = $('#crew-table tbody tr').length - 1;
 
         if ($(this).is(".order-up") && order !== 0) {
-            changeRowOrder(row, -1);
-            changeRowOrder(row.prev(), 1);
-            row.insertBefore(row.prev());
+            var prevRow = $(row).prevAll("tr:visible:first");
+
+            if (prevRow.length) {
+                row.insertBefore(prevRow);
+                changeRowOrder(row, -1);
+                changeRowOrder(prevRow, 1);
+            }
         }
         else if (order !== lastOrder) {
-            changeRowOrder(row, 1);
-            changeRowOrder(row.next(), -1);
-            row.insertAfter(row.next());
+            var nextRow = $(row).nextAll("tr:visible:first");
+
+            if (nextRow.length) {
+                row.insertAfter(nextRow);
+                changeRowOrder(row, 1);
+                changeRowOrder(nextRow, -1);
+            }
         }
     });
 

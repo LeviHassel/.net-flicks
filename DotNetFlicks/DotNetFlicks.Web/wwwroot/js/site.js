@@ -80,7 +80,7 @@
     });
 
     //jQuery breaks validation for the Runtime TimeSpan, but server-side works: https://stackoverflow.com/a/18625285
-    $'"#Runtime').rules('remove', 'range');
+    $('#Runtime').rules('remove', 'range');
 
     //Sort movie cards by type
     $(document).on('click', '.sort-movies', function () {

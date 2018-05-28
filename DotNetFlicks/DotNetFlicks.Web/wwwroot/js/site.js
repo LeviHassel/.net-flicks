@@ -139,9 +139,25 @@
         });
     });
 
+    $(".order-up, .order-down").click(function () {
+        var row = $(this).parents("tr:first");
+        var orderInput = row.find("input.order");
+        var order = parseInt(orderInput.val());
+        var lastOrder = $('#crew-table tbody tr').length - 1;
+
+        if ($(this).is(".order-up") && order !== 0) {
+            row.insertBefore(row.prev());
+            orderInput.val(order - 1);
+        }
+        else if (order !== lastOrder) {
+            row.insertAfter(row.next());
+            orderInput.val(order + 1);
+        }
+    });
+
     //Delete Person in Edit Cast and Edit Crew modals
     $('.people-table').on('click', '.delete-person', function () {
-        $(this).closest('td').find('input').val('true');
+        $(this).closest('td').find('.is-deleted').val('true');
         $(this).closest('tr').hide();
     });
 });

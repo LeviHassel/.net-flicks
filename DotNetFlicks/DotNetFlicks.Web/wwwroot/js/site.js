@@ -1,7 +1,27 @@
 ﻿$(function () {
+    //Initialize Bootstrap tooltips on page load
+    $('[data-toggle="tooltip"]').tooltip();
+
+    //Initialize Bootstrap tooltips on DataTable draw
+    $('.dataTable').on('draw.dt', function () {
+        $('[data-toggle="tooltip"]').tooltip();
+    });
+
     //Initialize AJAX Bootstrap Select lists for faster load times
     initializePersonPicker();
     initializeDepartmentPicker();
+
+    //Update image modals
+    $('.image-modal').on('show.bs.modal', function (event) {
+        var button = $(event.relatedTarget);
+
+        var title = button.data('title');
+        var imageSource = button.data('img-src');
+
+        var modal = $(this);
+        modal.find('.modal-title').text(title);
+        modal.find('img').attr('src', imageSource);
+    });
 
     //Initialize DataTable for Movies, Genres and Departments
     $('.data-table').DataTable({
@@ -63,14 +83,6 @@
         ]
     });
 
-    //Initialize Bootstrap tooltips on page load
-    $('[data-toggle="tooltip"]').tooltip();
-
-    //Initialize Bootstrap tooltips on DataTable draw
-    $('.dataTable').on('draw.dt', function () {
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-
     //Sort movie cards by type
     $(document).on('click', '.sort-movies', function () {
         $('.dropdown-item.sort-movies.active').removeClass('active text-white');
@@ -94,19 +106,7 @@
             .toggleClass('fa-chevron-down');
     });
 
-    //Update image modals
-    $('.image-modal').on('show.bs.modal', function (event) {
-        var button = $(event.relatedTarget);
-
-        var title = button.data('title');
-        var imageSource = button.data('img-src');
-
-        var modal = $(this);
-        modal.find('.modal-title').text(title);
-        modal.find('img').attr('src', imageSource);
-    });
-
-    //Add New Cast Member in Edit Crew modal
+    //Add New Cast Member
     $(document).on('click', '.add-cast-member', function () {
         var nextIndex = $('#cast-table tbody tr').length;
 
@@ -122,7 +122,36 @@
         });
     });
 
-    //Add New Crew Member in Edit Crew modal
+    //Delete Cast Member
+    $('.people-table').on('click', '.delete-cast-member', function () {
+        $(this).closest('td').find('.is-deleted').val('true');
+        var row = $(this).closest('tr');
+        row.hide();
+
+        row.nextAll().each(function (index, row) {
+            changeRowOrder($(row), -1);
+        });
+    });
+
+    //Reorder Cast Member
+    $(".order-up, .order-down").click(function () {
+        var row = $(this).closest("tr");
+        var order = parseInt(row.find("input.order").val());
+        var lastOrder = $('#crew-table tbody tr').length - 1;
+
+        if ($(this).is(".order-up") && order !== 0) {
+            changeRowOrder(row, -1);
+            changeRowOrder(row.prev(), 1);
+            row.insertBefore(row.prev());
+        }
+        else if (order !== lastOrder) {
+            changeRowOrder(row, 1);
+            changeRowOrder(row.next(), -1);
+            row.insertAfter(row.next());
+        }
+    });
+
+    //Add New Crew Member
     $(document).on('click', '.add-crew-member', function () {
         var nextIndex = $('#crew-table tbody tr').length;
 
@@ -139,28 +168,10 @@
         });
     });
 
-    //Delete Person in Edit Cast and Edit Crew modals
-    $('.people-table').on('click', '.delete-person', function () {
+    //Delete Crew Member
+    $('.people-table').on('click', '.delete-crew-member', function () {
         $(this).closest('td').find('.is-deleted').val('true');
         $(this).closest('tr').hide();
-    });
-
-    //Move Cast Members up and down in Edit Cast modal
-    $(".order-up, .order-down").click(function () {
-        var row = $(this).closest("tr");
-        var order = parseInt(row.find("input.order").val());
-        var lastOrder = $('#crew-table tbody tr').length - 1;
-
-        if ($(this).is(".order-up") && order !== 0) {
-            changeRowOrder(row, -1);
-            changeRowOrder(row.prev(), 1);
-            row.insertBefore(row.prev());
-        }
-        else if (order !== lastOrder) {
-            changeRowOrder(row, 1);
-            changeRowOrder(row.next(), -1);
-            row.insertAfter(row.next());
-        }
     });
 });
 

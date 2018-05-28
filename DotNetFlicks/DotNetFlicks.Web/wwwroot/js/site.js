@@ -123,7 +123,7 @@
     });
 
     //Delete Cast Member
-    $('.people-table').on('click', '.delete-cast-member', function () {
+    $('#cast-table').on('click', '.delete-person', function () {
         $(this).closest('td').find('.is-deleted').val('true');
         var row = $(this).closest('tr');
         row.hide();
@@ -177,7 +177,7 @@
     });
 
     //Delete Crew Member
-    $('.people-table').on('click', '.delete-crew-member', function () {
+    $('#crew-table').on('click', '.delete-person', function () {
         $(this).closest('td').find('.is-deleted').val('true');
         $(this).closest('tr').hide();
     });

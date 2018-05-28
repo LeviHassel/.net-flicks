@@ -20,6 +20,7 @@ namespace DotNetFlicks.ViewModels.Movie
         public DateTime ReleaseDate { get; set; }
 
         [Required]
+        [Range(typeof(TimeSpan), "00:00", "23:59")]
         [DisplayFormat(DataFormatString = "{0:%h}h {0:%m}m")]
         public TimeSpan Runtime { get; set; }
 

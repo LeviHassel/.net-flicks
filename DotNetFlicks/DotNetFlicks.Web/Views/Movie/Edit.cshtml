@@ -74,11 +74,11 @@
             </div>
         </div>
 
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".cast-modal">Edit Cast</button>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#cast-modal">Edit Cast</button>
 
-        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target=".crew-modal">Edit Crew</button>
+        <button type="button" class="btn btn-secondary" data-toggle="modal" data-target="#crew-modal">Edit Crew</button>
 
-        <div class="modal fade cast-modal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="cast-modal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -110,14 +110,14 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary add-cast-member mr-auto" data-toggle="modal">Add Person</button>
+                        <button type="button" class="btn btn-secondary add-person mr-auto" data-toggle="modal">Add Person</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Update Cast</button>
                     </div>
                 </div>
             </div>
         </div>
 
-        <div class="modal fade crew-modal" tabindex="-1" role="dialog">
+        <div class="modal fade" id="crew-modal" tabindex="-1" role="dialog">
             <div class="modal-dialog modal-lg">
                 <div class="modal-content">
                     <div class="modal-header">
@@ -150,7 +150,7 @@
                         </div>
                     </div>
                     <div class="modal-footer">
-                        <button type="button" class="btn btn-secondary add-crew-member mr-auto" data-toggle="modal">Add Person</button>
+                        <button type="button" class="btn btn-secondary add-person mr-auto" data-toggle="modal">Add Person</button>
                         <button type="button" class="btn btn-primary" data-dismiss="modal">Update Crew</button>
                     </div>
                 </div>

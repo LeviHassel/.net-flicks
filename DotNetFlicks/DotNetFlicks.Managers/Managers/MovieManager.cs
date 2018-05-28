@@ -60,7 +60,7 @@ namespace DotNetFlicks.Managers.Managers
 
             var vm = Mapper.Map<EditMovieViewModel>(movieDto);
 
-            vm.Cast = vm.Cast.OrderBy(x => x.PersonName).ToList();
+            vm.Cast = vm.Cast.OrderBy(x => x.Order).ToList();
             vm.Crew = vm.Crew.OrderBy(x => x.PersonName).ToList();
             vm.GenresSelectList = new MultiSelectList(genreDtos, "Id", "Name", movieDto.Genres != null ? movieDto.Genres.Select(x => x.GenreId).ToList() : null);
 

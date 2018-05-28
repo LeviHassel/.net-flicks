@@ -76,7 +76,7 @@ namespace DotNetFlicks.Web.Controllers
 
         public ActionResult AddCastMember(int index)
         {
-            var vm = new CastMemberViewModel { Index = index };
+            var vm = new CastMemberViewModel { Index = index, Order = index };
 
             ViewData.TemplateInfo.HtmlFieldPrefix = string.Format("Cast[{0}]", index);
 

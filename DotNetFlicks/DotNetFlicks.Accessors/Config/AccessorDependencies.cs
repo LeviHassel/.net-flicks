@@ -25,6 +25,7 @@ namespace DotNetFlicks.Accessors.Config
             services.AddTransient<IMovieAccessor, MovieAccessor>();
             services.AddTransient<IMovieGenreAccessor, MovieGenreAccessor>();
             services.AddTransient<IPersonAccessor, PersonAccessor>();
+            services.AddTransient<IUserMovieAccessor, UserMovieAccessor>();
 
             return services;
         }

@@ -9,7 +9,7 @@ namespace DotNetFlicks.Accessors.Interfaces
 
         List<DepartmentDTO> GetAll();
 
-        List<DepartmentDTO> GetByName(string query);
+        List<DepartmentDTO> GetAllByName(string query);
 
         int GetRoleCount(int id);
 

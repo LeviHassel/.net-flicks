@@ -6,6 +6,7 @@ using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Movie;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -21,6 +22,7 @@ namespace DotNetFlicks.Managers.Managers
         private IMovieGenreAccessor _movieGenreAccessor;
         private IPersonAccessor _personAccessor;
         private IMovieRoleUpdateEngine _movieRoleUpdateEngine;
+        private IUserMovieAccessor _userMovieAccessor;
 
         public MovieManager(ICastMemberAccessor castMemberAccessor,
             ICrewMemberAccessor crewMemberAccessor,
@@ -29,7 +31,8 @@ namespace DotNetFlicks.Managers.Managers
             IMovieAccessor movieAccessor,
             IMovieGenreAccessor movieGenreAccessor,
             IPersonAccessor personAccessor,
-            IMovieRoleUpdateEngine movieRoleUpdateEngine)
+            IMovieRoleUpdateEngine movieRoleUpdateEngine,
+            IUserMovieAccessor userMovieAccessor)
         {
             _castMemberAccessor = castMemberAccessor;
             _crewMemberAccessor = crewMemberAccessor;
@@ -39,6 +42,7 @@ namespace DotNetFlicks.Managers.Managers
             _movieGenreAccessor = movieGenreAccessor;
             _personAccessor = personAccessor;
             _movieRoleUpdateEngine = movieRoleUpdateEngine;
+            _userMovieAccessor = userMovieAccessor;
         }
 
         public MovieViewModel Get(int id)
@@ -82,14 +86,14 @@ namespace DotNetFlicks.Managers.Managers
 
         public string GetDepartmentSelectData(string query)
         {
-            var departmentDtos = _departmentAccessor.GetByName(query).OrderBy(x => x.Name);
+            var departmentDtos = _departmentAccessor.GetAllByName(query).OrderBy(x => x.Name);
 
             return JsonConvert.SerializeObject(departmentDtos.Select(x => new { value = x.Id, text = x.Name }));
         }
 
         public string GetPersonSelectData(string query)
         {
-            var personDtos = _personAccessor.GetByName(query).OrderBy(x => x.Name);
+            var personDtos = _personAccessor.GetAllByName(query).OrderBy(x => x.Name);
 
             return JsonConvert.SerializeObject(personDtos.Select(x => new { value = x.Id, text = x.Name }));
         }

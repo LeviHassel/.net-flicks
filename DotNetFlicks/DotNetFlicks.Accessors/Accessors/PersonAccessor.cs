@@ -43,7 +43,7 @@ namespace DotNetFlicks.Accessors.Accessors
             return dtos;
         }
 
-        public List<PersonDTO> GetByName(string query)
+        public List<PersonDTO> GetAllByName(string query)
         {
             var entities = _db.People
                 .Where(x => x.Name.ToLower().Contains(query.ToLower()))

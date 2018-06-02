@@ -5,6 +5,8 @@
 @{
     ViewBag.Title = Model.Name;
     var directors = Model.Crew.Where(x => x.IsDirector && (x.Role == "Director" || x.Role == "Co-Director")).OrderBy(x => x.Role != "Director").ToList();
+    var purchased = Model.PurchaseDate.HasValue;
+    var currentlyRented = Model.RentEndDate.HasValue && Model.RentEndDate.Value >= DateTime.UtcNow;
 }
 
 <div class="jumbotron">
@@ -56,9 +58,17 @@
             <p><strong>Runtime: </strong>@Html.DisplayFor(x => x.Runtime)</p>
 
             <span>
-                <a class="btn btn-primary btn-lg m-1" href="#" role="button">Rent ($@Model.RentCost)</a>
-                <a class="btn btn-primary btn-lg m-1" href="#" role="button">Buy ($@Model.PurchaseCost)</a>
-                <a class="btn btn-primary btn-lg m-1" href="#" role="button">Watch</a>
+                @if (purchased || currentlyRented)
+                {
+                    <a class="btn btn-primary btn-lg m-1" href="#" role="button" data-toggle="modal" data-target="#watch-modal">Watch</a>
+                    <p>Purchased on @Model.PurchaseDate.Value</p>
+                    <p>Renting hours remaining</p>
+                }
+                else
+                {
+                    <a class="btn btn-primary btn-lg m-1" href="#" role="button" data-toggle="modal" data-target="#rent-modal">Rent ($@Model.RentCost)</a>
+                    <a class="btn btn-primary btn-lg m-1" href="#" role="button" data-toggle="modal" data-target="#buy-modal">Buy ($@Model.PurchaseCost)</a>
+                }
             </span>
         </div>
     </div>
@@ -151,18 +161,101 @@
     </div>
 </div>
 
-<div class="modal fade" id="description-modal" tabindex="-1" role="dialog">
-    <div class="modal-dialog modal-lg modal-dialog-centered">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h2 class="modal-title">@ViewBag.Title</h2>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                @Html.Raw(Model.Description.HtmlEncode())
+@if (Model.Description.Count() > 500)
+{
+    <div class="modal fade" id="description-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">@ViewBag.Title</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    @Html.Raw(Model.Description.HtmlEncode())
+                </div>
             </div>
         </div>
     </div>
-</div>
+}
+
+@if (purchased || currentlyRented)
+{
+    <div class="modal fade" id="watch-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">@ViewBag.Title</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        Unfortunately, due to the surprisingly low number of people that actually pay for our movies, we've had to make some budget cuts. The most disappointing one is that now we can only show you a trailer rather than the actual movie. Hope this is okay.
+                    </p>
+                    <div class="embed-responsive embed-responsive-16by9">
+                        <iframe class="embed-responsive-item" src="@Model.TrailerUrl" allowfullscreen></iframe>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+}
+else
+{
+    <div class="modal fade" id="rent-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">@ViewBag.Title</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        To cut down on royalties taken by credit card companies, Paypal and Stripe, we do things differently here. Here's our corporate address:
+
+
+                        We trust you to send us cash in the mail.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger mr-auto" data-toggle="modal">Close</button>
+                    <a class="btn btn-primary" asp-controller="Movie" asp-action="Rent" asp-route-id="@Model.Id">
+                        I promise to pay
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="modal fade" id="buy-modal" tabindex="-1" role="dialog">
+        <div class="modal-dialog modal-lg modal-dialog-centered">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h2 class="modal-title">@ViewBag.Title</h2>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <p>
+                        To cut down on royalties taken by credit card companies, Paypal and Stripe, we do things differently here. Here's our corporate address:
+
+
+                        We trust you to send us cash in the mail.
+                    </p>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-danger mr-auto" data-toggle="modal">Close</button>
+                    <a class="btn btn-primary" asp-controller="Movie" asp-action="Purchase" asp-route-id="@Model.Id">
+                        I promise to pay
+                    </a>
+                </div>
+            </div>
+        </div>
+    </div>
+}

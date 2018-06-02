@@ -38,6 +38,10 @@ namespace DotNetFlicks.ViewModels.Movie
         [Display(Name = "Rent")]
         public decimal RentCost { get; set; }
 
+        public DateTime? RentEndDate { get; set; }
+
+        public DateTime? PurchaseDate { get; set; }
+
         public List<GenreViewModel> Genres { get; set; }
 
         public List<MovieRoleViewModel> Cast { get; set; }

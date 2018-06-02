@@ -45,7 +45,7 @@ namespace DotNetFlicks.Managers.Managers
             _userMovieAccessor = userMovieAccessor;
         }
 
-        public MovieViewModel Get(int id)
+        public MovieViewModel Get(int id, string userId)
         {
             var dto = _movieAccessor.Get(id);
             var vm = Mapper.Map<MovieViewModel>(dto);
@@ -82,6 +82,24 @@ namespace DotNetFlicks.Managers.Managers
             }
 
             return new MoviesViewModel { Movies = vms.OrderBy(x => x.Name).ToList() };
+        }
+
+        public void Purchase(int id, string userId, bool rent)
+        {
+            var currentDate = DateTime.UtcNow;
+
+            //TODO: need to handle case where it was rented once and now being purchased
+            //check if it exists, if so, update, don't duplicate
+
+            var dto = new UserMovieDTO
+            {
+                MovieId = id,
+                UserId = userId,
+                PurchaseDate = rent ? (DateTime?)null : currentDate,
+                RentEndDate = rent ? currentDate.AddDays(2) : (DateTime?)null
+            };
+
+            _userMovieAccessor.Save(dto);
         }
 
         public string GetDepartmentSelectData(string query)

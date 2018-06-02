@@ -4,11 +4,13 @@ namespace DotNetFlicks.Managers.Interfaces
 {
     public interface IMovieManager
     {
-        MovieViewModel Get(int id);
+        MovieViewModel Get(int id, string userId);
 
         EditMovieViewModel GetForEditing(int? id);
 
         MoviesViewModel GetAll();
+
+        void Purchase(int id, string userId, bool rent);
 
         string GetDepartmentSelectData(string query);
 

@@ -9,10 +9,13 @@ namespace DotNetFlicks.Web.Controllers
     [Authorize]
     public class MovieController : Controller
     {
+        private IAccountManager _accountManager;
         private IMovieManager _movieManager;
 
-        public MovieController(IMovieManager movieManager)
+        public MovieController(IAccountManager accountManager,
+            IMovieManager movieManager)
         {
+            _accountManager = accountManager;
             _movieManager = movieManager;
         }
 
@@ -33,9 +36,20 @@ namespace DotNetFlicks.Web.Controllers
 
         public ActionResult View(int id)
         {
-            var vm = _movieManager.Get(id);
+            var user = _accountManager.GetApplicationUser(HttpContext.User).Result;
+
+            var vm = _movieManager.Get(id, user.Id);
 
             return View(vm);
+        }
+
+        public ActionResult Purchase(int id, bool rent)
+        {
+            var user = _accountManager.GetApplicationUser(HttpContext.User).Result;
+
+            _movieManager.Purchase(id, user.Id, rent);
+
+            return RedirectToAction("View", new { id });
         }
 
         public ActionResult Edit(int? id)

@@ -25,7 +25,7 @@ namespace DotNetFlicks.Web.Config
                 {
                     var context = services.GetRequiredService<DotNetFlicksContext>();
 
-                    //Create database if it doesn't exist and apply any pending migrations
+                    //Create database if it doesn't exist and apply any pending migrations (this will also seed data)
                     context.Database.Migrate();
 
                     //Seed admin user
@@ -41,8 +41,6 @@ namespace DotNetFlicks.Web.Config
                         };
 
                         userManager.CreateAsync(admin, "p@ssWORD471");
-
-                        throw new Exception("");
                     }
                 }
                 catch (Exception ex)

@@ -75,20 +75,16 @@ namespace DotNetFlicks.Web.Config
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
-            app.UseHsts();
-
             app.UseHttpsRedirection();
-
             app.UseStaticFiles();
-
             app.UseAuthentication();
 
             app.UseMvc(routes =>

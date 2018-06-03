@@ -1,6 +1,7 @@
 ﻿using DotNetFlicks.Accessors.Models.EF.Base;
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations.Schema;
 
 namespace DotNetFlicks.Accessors.Models.EF
 {
@@ -18,8 +19,10 @@ namespace DotNetFlicks.Accessors.Models.EF
 
         public string TrailerUrl { get; set; }
 
+        [Column(TypeName = "decimal(10, 2)")]
         public decimal PurchaseCost { get; set; }
 
+        [Column(TypeName = "decimal(10, 2)")]
         public decimal RentCost { get; set; }
 
         public virtual ICollection<MovieGenre> Genres { get; set; }

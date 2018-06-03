@@ -86,8 +86,8 @@ namespace DotNetFlicks.Accessors.Migrations
                     Runtime = table.Column<TimeSpan>(nullable: false),
                     ImageUrl = table.Column<string>(nullable: true),
                     TrailerUrl = table.Column<string>(nullable: true),
-                    PurchaseCost = table.Column<decimal>(nullable: false),
-                    RentCost = table.Column<decimal>(nullable: false)
+                    PurchaseCost = table.Column<decimal>(type: "decimal(10, 2)", nullable: false),
+                    RentCost = table.Column<decimal>(type: "decimal(10, 2)", nullable: false)
                 },
                 constraints: table =>
                 {

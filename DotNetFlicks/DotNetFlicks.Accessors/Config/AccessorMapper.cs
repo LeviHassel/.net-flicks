@@ -14,7 +14,7 @@ namespace DotNetFlicks.Accessors.Config
             CreateMap<Genre, GenreDTO>().ReverseMap();
             CreateMap<Movie, MovieDTO>().ReverseMap();
             CreateMap<MovieGenre, MovieGenreDTO>().ReverseMap();
-            CreateMap<Person, PersonDTO>().ReverseMap();
+            CreateMap<Person, PersonDTO>().MaxDepth(1).ReverseMap();
             CreateMap<UserMovie, UserMovieDTO>().ReverseMap();
         }
 

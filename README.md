@@ -33,9 +33,9 @@ This solution is divided into four layers based on [IDesign](http://www.idesign.
 
 | Layer | Description | Able to Call | Model |
 | --- | --- | --- | --- |
-| Clients | An entry-point to the system, such as an MVC site or REST API endpoint | Managers | ViewModel |
+| Clients | An entry-point to the system, such as an MVC site or REST API | Managers | ViewModel |
 | Managers | Manages the workflow of a call chain, handles business logic | Engines, Accessors | DTO |
-| Engines (Optional) | Encapsulates commonly used algorithms and business logic | Accessors | DTO |
+| Engines | Encapsulates algorithms and business logic (optional) | Accessors | DTO |
 | Accessors | Accesses data from resources like databases and APIs | None | Entity |
 
 IDesign is a closed architecture that focuses on encapsulating volatility, minimizing coupling and separation of concerns. The official IDesign documentation is sparse, so I'd recommend reading [Software architecture and project design, a mechanized approach](http://codewithspoon.com/2017/07/software-architecture/ "Software architecture and project design, a mechanized approach") for a quick intro to the method.

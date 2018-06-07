@@ -54,6 +54,7 @@ namespace DotNetFlicks.Web.Config
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options =>
                 {
+                    //This option is required for https://github.com/garvincasimir/csharp-datatables-parser
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 });
 

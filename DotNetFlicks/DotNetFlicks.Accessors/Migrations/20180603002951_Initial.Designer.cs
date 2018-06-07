@@ -10,14 +10,14 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace DotNetFlicks.Accessors.Migrations
 {
     [DbContext(typeof(DotNetFlicksContext))]
-    [Migration("20180520205725_Initial")]
+    [Migration("20180603002951_Initial")]
     partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
-                .HasAnnotation("ProductVersion", "2.1.0-rc1-32029")
+                .HasAnnotation("ProductVersion", "2.1.0-rtm-30799")
                 .HasAnnotation("Relational:MaxIdentifierLength", 128)
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
@@ -5685,11 +5685,13 @@ namespace DotNetFlicks.Accessors.Migrations
 
                     b.Property<string>("Name");
 
-                    b.Property<decimal>("PurchaseCost");
+                    b.Property<decimal>("PurchaseCost")
+                        .HasColumnType("decimal(10, 2)");
 
                     b.Property<DateTime>("ReleaseDate");
 
-                    b.Property<decimal>("RentCost");
+                    b.Property<decimal>("RentCost")
+                        .HasColumnType("decimal(10, 2)");
 
                     b.Property<TimeSpan>("Runtime");
 

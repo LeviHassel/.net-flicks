@@ -46,8 +46,8 @@ Here's my implementation of IDesign for this solution:
 ## Setup
 ### Getting Started
 1. Install the following:
-   * [Visual Studio Community](https://www.visualstudio.com/downloads/ "Visual Studio Community") (15.3+ is required for Core 2.0)
-   * [.NET Core 2.0 SDK](https://www.microsoft.com/net/download/core ".NET Core 2.0 SDK")
+   * [Visual Studio Community 2017](https://www.visualstudio.com/downloads/ "Visual Studio Community 2017") (15.7+ is required for Core 2.1)
+   * [.NET Core 2.1 SDK](https://www.microsoft.com/net/download/windows ".NET Core 2.1 SDK")
    * [SQL Server 2017 Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express "SQL Server 2017 Express") (during the installation process, make sure to install LocalDb feature)
 2. Download this repository
 3. Open the solution in Visual Studio and run the Web project; this will create and seed the application's database, called DotNetFlicksDb (special thanks to [TMDB](https://www.themoviedb.org "TMDB") for providing the seed data)

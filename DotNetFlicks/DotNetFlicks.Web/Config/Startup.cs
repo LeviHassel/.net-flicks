@@ -54,6 +54,7 @@ namespace DotNetFlicks.Web.Config
                 .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
                 .AddJsonOptions(options =>
                 {
+                    //This option is required for https://github.com/garvincasimir/csharp-datatables-parser
                     options.SerializerSettings.ContractResolver = new DefaultContractResolver();
                 });
 
@@ -75,20 +76,16 @@ namespace DotNetFlicks.Web.Config
             if (env.IsDevelopment())
             {
                 app.UseDeveloperExceptionPage();
-                app.UseBrowserLink();
                 app.UseDatabaseErrorPage();
             }
             else
             {
                 app.UseExceptionHandler("/Home/Error");
+                app.UseHsts();
             }
 
-            app.UseHsts();
-
             app.UseHttpsRedirection();
-
             app.UseStaticFiles();
-
             app.UseAuthentication();
 
             app.UseMvc(routes =>

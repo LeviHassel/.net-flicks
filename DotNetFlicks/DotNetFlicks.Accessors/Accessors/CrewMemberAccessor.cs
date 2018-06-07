@@ -16,12 +16,6 @@ namespace DotNetFlicks.Accessors.Accessors
         {
         }
 
-        /// <summary>
-        /// For the given Movie, create/update all CrewMembers in list and delete all CrewMembers not in list
-        /// </summary>
-        /// <param name="movieId"></param>
-        /// <param name="dtos"></param>
-        /// <returns></returns>
         public List<CrewMemberDTO> SaveAll(int movieId, List<CrewMemberDTO> dtos)
         {
             //Create/update entries from crew list

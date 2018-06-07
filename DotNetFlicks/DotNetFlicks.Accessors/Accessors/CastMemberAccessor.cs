@@ -16,12 +16,6 @@ namespace DotNetFlicks.Accessors.Accessors
         {
         }
 
-        /// <summary>
-        /// For the given Movie, create/update all CastMembers in list and delete all CastMembers not in list
-        /// </summary>
-        /// <param name="movieId"></param>
-        /// <param name="dtos"></param>
-        /// <returns></returns>
         public List<CastMemberDTO> SaveAll(int movieId, List<CastMemberDTO> dtos)
         {
             //Create/update entries from cast list

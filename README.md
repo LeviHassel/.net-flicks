@@ -25,7 +25,7 @@ What started as a simple template project for .NET Core evolved into a decent-si
    * [Fluent Assertions](https://fluentassertions.com/ "Fluent Assertions")
 
 ## Database Design
-The database for this solution uses Entity Framework and ASP.NET Identity. I opted not to use Identity Roles for simplicity when demoing.
+The database for this solution uses Entity Framework and ASP.NET Identity. I chose not to use Identity Roles, instead allowing all users to see both the Client and Administrator UI at once for simplicity.
 ![.NetFlicks Database](https://user-images.githubusercontent.com/9669653/40290536-25721b6e-5c84-11e8-927e-0656b7452ff2.png)
 
 ## System Architecture

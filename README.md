@@ -25,7 +25,7 @@ What started as a simple template project for .NET Core evolved into a decent-si
    * [Fluent Assertions](https://fluentassertions.com/ "Fluent Assertions")
 
 ## Database Design
-The database for this solution uses Entity Framework and ASP.NET Identity. I opted not to use Identity Roles for simplicity when demoing.
+The database for this solution uses Entity Framework and ASP.NET Identity. I chose not to use Identity Roles, instead allowing all users to see both the Client and Administrator UI at once for simplicity.
 ![.NetFlicks Database](https://user-images.githubusercontent.com/9669653/40290536-25721b6e-5c84-11e8-927e-0656b7452ff2.png)
 
 ## System Architecture
@@ -33,9 +33,9 @@ This solution is divided into four layers based on [IDesign](http://www.idesign.
 
 | Layer | Description | Able to Call | Model |
 | --- | --- | --- | --- |
-| Clients | An entry-point to the system, such as an MVC site or REST API endpoint | Managers | ViewModel |
+| Clients | An entry-point to the system, such as an MVC site or REST API | Managers | ViewModel |
 | Managers | Manages the workflow of a call chain, handles business logic | Engines, Accessors | DTO |
-| Engines (Optional) | Encapsulates commonly used algorithms and business logic | Accessors | DTO |
+| Engines | Encapsulates algorithms and business logic (optional layer) | Accessors | DTO |
 | Accessors | Accesses data from resources like databases and APIs | None | Entity |
 
 IDesign is a closed architecture that focuses on encapsulating volatility, minimizing coupling and separation of concerns. The official IDesign documentation is sparse, so I'd recommend reading [Software architecture and project design, a mechanized approach](http://codewithspoon.com/2017/07/software-architecture/ "Software architecture and project design, a mechanized approach") for a quick intro to the method.

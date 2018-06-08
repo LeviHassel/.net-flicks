@@ -57,19 +57,28 @@
 
             <p><strong>Runtime: </strong>@Html.DisplayFor(x => x.Runtime)</p>
 
-            <span>
+            <div class="d-flex align-items-center mt-4">
                 @if (purchased || currentlyRented)
                 {
-                    <a class="btn btn-primary btn-lg m-1" href="#" role="button" data-toggle="modal" data-target="#watch-modal">Watch</a>
-                    <p>Purchased on @Model.PurchaseDate.Value</p>
-                    <p>Renting hours remaining</p>
+                    <a class="btn btn-primary btn-lg mr-3" href="#" role="button" data-toggle="modal" data-target="#watch-modal">Watch</a>
                 }
                 else
                 {
-                    <a class="btn btn-primary btn-lg m-1" href="#" role="button" data-toggle="modal" data-target="#rent-modal">Rent ($@Model.RentCost)</a>
-                    <a class="btn btn-primary btn-lg m-1" href="#" role="button" data-toggle="modal" data-target="#buy-modal">Buy ($@Model.PurchaseCost)</a>
+                    <a class="btn btn-primary btn-lg mr-3" href="#" role="button" data-toggle="modal" data-target="#rent-modal">Rent ($@Model.RentCost)</a>
+                    <a class="btn btn-primary btn-lg mr-3" href="#" role="button" data-toggle="modal" data-target="#buy-modal">Buy ($@Model.PurchaseCost)</a>
                 }
-            </span>
+
+                @if (purchased)
+                {
+                    <p class="mb-0">Purchased on @Model.PurchaseDate.Value.Date.ToLongDateString()</p>
+                }
+
+                @if (currentlyRented)
+                {
+                    var rentHoursRemaining = Model.RentEndDate.Value - DateTime.UtcNow;
+                    <p class="mb-0">@rentHoursRemaining.ToString(@"d\d\ hh\h\ mm\m") remaining for rental</p>
+                }
+            </div>
         </div>
     </div>
 </div>
@@ -192,12 +201,13 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>
-                        Unfortunately, due to the surprisingly low number of people that actually pay for our movies, we've had to make some budget cuts. The most disappointing one is that now we can only show you a trailer rather than the actual movie. Hope this is okay.
-                    </p>
                     <div class="embed-responsive embed-responsive-16by9">
                         <iframe class="embed-responsive-item" src="@Model.TrailerUrl" allowfullscreen></iframe>
                     </div>
+                    <br />
+                    <p>
+                        <strong>Disclaimer: </strong>Unfortunately, due to the surprisingly low number of people that actually pay for our movies, we've had to make some budget cuts. The most disappointing one is that now we can only show you a trailer rather than the actual movie. Hope this is okay.
+                    </p>
                 </div>
             </div>
         </div>
@@ -209,7 +219,7 @@ else
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title">@ViewBag.Title</h2>
+                    <h2 class="modal-title">Rent @ViewBag.Title</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>
@@ -236,7 +246,7 @@ else
         <div class="modal-dialog modal-lg modal-dialog-centered">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h2 class="modal-title">@ViewBag.Title</h2>
+                    <h2 class="modal-title">Buy @ViewBag.Title</h2>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                         <span aria-hidden="true">&times;</span>
                     </button>

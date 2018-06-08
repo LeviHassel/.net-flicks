@@ -12,5 +12,7 @@ namespace DotNetFlicks.Accessors.Interfaces
         List<UserMovieDTO> GetAllByUser(string userId);
 
         UserMovieDTO Save(UserMovieDTO dto);
+
+        List<UserMovieDTO> DeleteAllByMovie(int movieId);
     }
 }

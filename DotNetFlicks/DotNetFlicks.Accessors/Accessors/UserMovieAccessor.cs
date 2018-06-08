@@ -62,5 +62,17 @@ namespace DotNetFlicks.Accessors.Accessors
 
             return dto;
         }
+
+        public List<UserMovieDTO> DeleteAllByMovie(int movieId)
+        {
+            var entities = _db.UserMovies.Where(x => x.MovieId == movieId).ToList();
+
+            _db.UserMovies.RemoveRange(entities);
+            _db.SaveChanges();
+
+            var dtos = Mapper.Map<List<UserMovieDTO>>(entities);
+
+            return dtos;
+        }
     }
 }

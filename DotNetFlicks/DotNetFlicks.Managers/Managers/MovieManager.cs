@@ -22,6 +22,7 @@ namespace DotNetFlicks.Managers.Managers
         private IMoviePurchaseEngine _moviePurchaseEngine;
         private IMovieRoleUpdateEngine _movieRoleUpdateEngine;
         private IPersonAccessor _personAccessor;
+        private IUserMovieAccessor _userMovieAccessor;
 
         public MovieManager(ICastMemberAccessor castMemberAccessor,
             ICrewMemberAccessor crewMemberAccessor,
@@ -31,7 +32,8 @@ namespace DotNetFlicks.Managers.Managers
             IMovieGenreAccessor movieGenreAccessor,
             IMoviePurchaseEngine moviePurchaseEngine,
             IMovieRoleUpdateEngine movieRoleUpdateEngine,
-            IPersonAccessor personAccessor)
+            IPersonAccessor personAccessor,
+            IUserMovieAccessor userMovieAccessor)
         {
             _castMemberAccessor = castMemberAccessor;
             _crewMemberAccessor = crewMemberAccessor;
@@ -42,16 +44,26 @@ namespace DotNetFlicks.Managers.Managers
             _moviePurchaseEngine = moviePurchaseEngine;
             _movieRoleUpdateEngine = movieRoleUpdateEngine;
             _personAccessor = personAccessor;
+            _userMovieAccessor = userMovieAccessor;
         }
 
         public MovieViewModel Get(int id, string userId)
         {
             var dto = _movieAccessor.Get(id);
+
             var vm = Mapper.Map<MovieViewModel>(dto);
 
             vm.Cast = vm.Cast.OrderBy(x => x.Order).ToList();
             vm.Crew = vm.Crew.OrderBy(x => x.Category).ThenBy(x => x.PersonName).ToList();
             vm.Genres = vm.Genres.OrderBy(x => x.Name).ToList();
+
+            var userMovieDto = _userMovieAccessor.GetByMovieAndUser(id, userId);
+
+            if (userMovieDto != null)
+            {
+                vm.PurchaseDate = userMovieDto.PurchaseDate;
+                vm.RentEndDate = userMovieDto.RentEndDate;
+            }
 
             return vm;
         }
@@ -131,6 +143,7 @@ namespace DotNetFlicks.Managers.Managers
             _castMemberAccessor.DeleteAllByMovie(id);
             _crewMemberAccessor.DeleteAllByMovie(id);
             _movieGenreAccessor.DeleteAllByMovie(id);
+            _userMovieAccessor.DeleteAllByMovie(id);
 
             var dto = _movieAccessor.Delete(id);
             var vm = Mapper.Map<MovieViewModel>(dto);

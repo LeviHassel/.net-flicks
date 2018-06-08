@@ -20,8 +20,8 @@ namespace DotNetFlicks.Managers.Managers
         private IGenreAccessor _genreAccessor;
         private IMovieAccessor _movieAccessor;
         private IMovieGenreAccessor _movieGenreAccessor;
-        private IPersonAccessor _personAccessor;
         private IMovieRoleUpdateEngine _movieRoleUpdateEngine;
+        private IPersonAccessor _personAccessor;
         private IUserMovieAccessor _userMovieAccessor;
 
         public MovieManager(ICastMemberAccessor castMemberAccessor,
@@ -30,8 +30,8 @@ namespace DotNetFlicks.Managers.Managers
             IGenreAccessor genreAccessor,
             IMovieAccessor movieAccessor,
             IMovieGenreAccessor movieGenreAccessor,
-            IPersonAccessor personAccessor,
             IMovieRoleUpdateEngine movieRoleUpdateEngine,
+            IPersonAccessor personAccessor,
             IUserMovieAccessor userMovieAccessor)
         {
             _castMemberAccessor = castMemberAccessor;
@@ -40,8 +40,8 @@ namespace DotNetFlicks.Managers.Managers
             _genreAccessor = genreAccessor;
             _movieAccessor = movieAccessor;
             _movieGenreAccessor = movieGenreAccessor;
-            _personAccessor = personAccessor;
             _movieRoleUpdateEngine = movieRoleUpdateEngine;
+            _personAccessor = personAccessor;
             _userMovieAccessor = userMovieAccessor;
         }
 

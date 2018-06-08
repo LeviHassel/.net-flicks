@@ -26,8 +26,9 @@ namespace DotNetFlicks.Tests.ManagerTests
         private Mock<IDepartmentAccessor> _departmentAccessorMock;
         private Mock<IMovieAccessor> _movieAccessorMock;
         private Mock<IMovieGenreAccessor> _movieGenreAccessorMock;
-        private Mock<IPersonAccessor> _personAccessorMock;
         private Mock<IMovieRoleUpdateEngine> _movieRoleUpdateEngineMock;
+        private Mock<IPersonAccessor> _personAccessorMock;
+        private Mock<IUserMovieAccessor> _userMovieAccessorMock;
 
         //This is method is called before the start of every test in this class
         public MovieManagerTest()
@@ -40,8 +41,9 @@ namespace DotNetFlicks.Tests.ManagerTests
                 _genreAccessorMock.Object,
                 _movieAccessorMock.Object,
                 _movieGenreAccessorMock.Object,
+                _movieRoleUpdateEngineMock.Object,
                 _personAccessorMock.Object,
-                _movieRoleUpdateEngineMock.Object);
+                _userMovieAccessorMock.Object);
 
             //Set up a Fixture to populate random data: https://github.com/AutoFixture/AutoFixture
             _fixture = new Fixture();
@@ -53,13 +55,14 @@ namespace DotNetFlicks.Tests.ManagerTests
             //Arrange
             var expectedMovieDto = _fixture.Create<MovieDTO>();
             var expectedMovieVm = Mapper.Map<MovieViewModel>(expectedMovieDto);
+            var userId = _fixture.Create<string>();
 
             _movieAccessorMock
                 .Setup(x => x.Get(expectedMovieDto.Id))
                 .Returns(expectedMovieDto);
 
             //Act
-            var actualMovieVm = _movieManager.Get(expectedMovieDto.Id);
+            var actualMovieVm = _movieManager.Get(expectedMovieDto.Id, userId);
 
             //Assert
             actualMovieVm.Should().BeEquivalentTo(expectedMovieVm);

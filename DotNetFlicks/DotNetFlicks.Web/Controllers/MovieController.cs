@@ -74,7 +74,9 @@ namespace DotNetFlicks.Web.Controllers
 
         public ActionResult Delete(int id)
         {
-            var vm = _movieManager.Get(id);
+            var user = _accountManager.GetApplicationUser(HttpContext.User).Result;
+
+            var vm = _movieManager.Get(id, user.Id);
 
             return View(vm);
         }

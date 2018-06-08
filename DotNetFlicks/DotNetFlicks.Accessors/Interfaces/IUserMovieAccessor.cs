@@ -7,6 +7,8 @@ namespace DotNetFlicks.Accessors.Interfaces
     {
         UserMovieDTO Get(int id);
 
+        UserMovieDTO GetByMovieAndUser(int movieId, string userId);
+
         List<UserMovieDTO> GetAllByUser(string userId);
 
         UserMovieDTO Save(UserMovieDTO dto);

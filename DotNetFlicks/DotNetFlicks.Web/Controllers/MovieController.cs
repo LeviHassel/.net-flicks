@@ -43,11 +43,20 @@ namespace DotNetFlicks.Web.Controllers
             return View(vm);
         }
 
-        public ActionResult Purchase(int id, bool rent)
+        public ActionResult Purchase(int id)
         {
             var user = _accountManager.GetApplicationUser(HttpContext.User).Result;
 
-            _movieManager.Purchase(id, user.Id, rent);
+            _movieManager.Purchase(id, user.Id);
+
+            return RedirectToAction("View", new { id });
+        }
+
+        public ActionResult Rent(int id)
+        {
+            var user = _accountManager.GetApplicationUser(HttpContext.User).Result;
+
+            _movieManager.Rent(id, user.Id);
 
             return RedirectToAction("View", new { id });
         }

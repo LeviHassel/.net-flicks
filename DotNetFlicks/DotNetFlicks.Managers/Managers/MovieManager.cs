@@ -6,7 +6,6 @@ using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Movie;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
-using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -20,9 +19,9 @@ namespace DotNetFlicks.Managers.Managers
         private IGenreAccessor _genreAccessor;
         private IMovieAccessor _movieAccessor;
         private IMovieGenreAccessor _movieGenreAccessor;
+        private IMoviePurchaseEngine _moviePurchaseEngine;
         private IMovieRoleUpdateEngine _movieRoleUpdateEngine;
         private IPersonAccessor _personAccessor;
-        private IUserMovieAccessor _userMovieAccessor;
 
         public MovieManager(ICastMemberAccessor castMemberAccessor,
             ICrewMemberAccessor crewMemberAccessor,
@@ -30,9 +29,9 @@ namespace DotNetFlicks.Managers.Managers
             IGenreAccessor genreAccessor,
             IMovieAccessor movieAccessor,
             IMovieGenreAccessor movieGenreAccessor,
+            IMoviePurchaseEngine moviePurchaseEngine,
             IMovieRoleUpdateEngine movieRoleUpdateEngine,
-            IPersonAccessor personAccessor,
-            IUserMovieAccessor userMovieAccessor)
+            IPersonAccessor personAccessor)
         {
             _castMemberAccessor = castMemberAccessor;
             _crewMemberAccessor = crewMemberAccessor;
@@ -40,9 +39,9 @@ namespace DotNetFlicks.Managers.Managers
             _genreAccessor = genreAccessor;
             _movieAccessor = movieAccessor;
             _movieGenreAccessor = movieGenreAccessor;
+            _moviePurchaseEngine = moviePurchaseEngine;
             _movieRoleUpdateEngine = movieRoleUpdateEngine;
             _personAccessor = personAccessor;
-            _userMovieAccessor = userMovieAccessor;
         }
 
         public MovieViewModel Get(int id, string userId)
@@ -84,22 +83,18 @@ namespace DotNetFlicks.Managers.Managers
             return new MoviesViewModel { Movies = vms.OrderBy(x => x.Name).ToList() };
         }
 
-        public void Purchase(int id, string userId, bool rent)
+        public void Purchase(int id, string userId)
         {
-            var currentDate = DateTime.UtcNow;
+            var userMovieDto = _moviePurchaseEngine.GetUserMovie(id, userId);
 
-            //TODO: need to handle case where it was rented once and now being purchased
-            //check if it exists, if so, update, don't duplicate
+            _moviePurchaseEngine.Purchase(userMovieDto);
+        }
 
-            var dto = new UserMovieDTO
-            {
-                MovieId = id,
-                UserId = userId,
-                PurchaseDate = rent ? (DateTime?)null : currentDate,
-                RentEndDate = rent ? currentDate.AddDays(2) : (DateTime?)null
-            };
+        public void Rent(int id, string userId)
+        {
+            var userMovieDto = _moviePurchaseEngine.GetUserMovie(id, userId);
 
-            _userMovieAccessor.Save(dto);
+            _moviePurchaseEngine.Rent(userMovieDto);
         }
 
         public string GetDepartmentSelectData(string query)

@@ -28,6 +28,17 @@ namespace DotNetFlicks.Accessors.Accessors
             return dto;
         }
 
+        public UserMovieDTO GetByMovieAndUser(int movieId, string userId)
+        {
+            var entity = _db.UserMovies
+                .Include(x => x.Movie)
+                .SingleOrDefault(x => x.MovieId == movieId && x.UserId == userId);
+
+            var dto = Mapper.Map<UserMovieDTO>(entity);
+
+            return dto;
+        }
+
         public List<UserMovieDTO> GetAllByUser(string userId)
         {
             var entities = _db.UserMovies

@@ -15,6 +15,7 @@ namespace DotNetFlicks.Engines.Config
             }
 
             services.AddTransient<IMovieRoleUpdateEngine, MovieRoleUpdateEngine>();
+            services.AddTransient<IMoviePurchaseEngine, MoviePurchaseEngine>();
 
             return services;
         }

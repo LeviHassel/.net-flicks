@@ -17,21 +17,13 @@ namespace DotNetFlicks.Accessors.Accessors
         {
         }
 
-        public UserMovieDTO Get(int id)
-        {
-            var entity = _db.UserMovies
-                .Include(x => x.Movie)
-                .Single(x => x.Id == id);
-
-            var dto = Mapper.Map<UserMovieDTO>(entity);
-
-            return dto;
-        }
-
         public UserMovieDTO GetByMovieAndUser(int movieId, string userId)
         {
             var entity = _db.UserMovies
-                .Include(x => x.Movie)
+                .Include(x => x.Movie).ThenInclude(x => x.Cast).ThenInclude(x => x.Person)
+                .Include(x => x.Movie).ThenInclude(x => x.Crew).ThenInclude(x => x.Person)
+                .Include(x => x.Movie).ThenInclude(x => x.Crew).ThenInclude(x => x.Department)
+                .Include(x => x.Movie).ThenInclude(x => x.Genres).ThenInclude(x => x.Genre)
                 .SingleOrDefault(x => x.MovieId == movieId && x.UserId == userId);
 
             var dto = Mapper.Map<UserMovieDTO>(entity);
@@ -45,6 +37,8 @@ namespace DotNetFlicks.Accessors.Accessors
                 .Include(x => x.Movie)
                 .Where(x => x.UserId == userId)
                 .ToList();
+
+            //TODO: Filter out expired rentals
 
             var dtos = Mapper.Map<List<UserMovieDTO>>(entities);
 

@@ -55,5 +55,10 @@
     <Folder Include="wwwroot\lib\jquery\" />
     <Folder Include="wwwroot\lib\tinysort\" />
   </ItemGroup>
+  <ItemGroup>
+    <Content Update="Views\Movie\ViewAllForUser.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
+  </ItemGroup>
 
 </Project>

@@ -5,8 +5,6 @@ namespace DotNetFlicks.Accessors.Interfaces
 {
     public interface IUserMovieAccessor
     {
-        UserMovieDTO Get(int id);
-
         UserMovieDTO GetByMovieAndUser(int movieId, string userId);
 
         List<UserMovieDTO> GetAllByUser(string userId);

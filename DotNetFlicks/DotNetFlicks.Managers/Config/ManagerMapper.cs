@@ -63,6 +63,26 @@ namespace DotNetFlicks.Managers.Config
 
             CreateMap<PersonViewModel, PersonDTO>()
                 .ForMember(dest => dest.Biography, opt => opt.MapFrom(src => src.Biography.Replace(System.Environment.NewLine, "\\n")));
+
+            //TODO: Decide if this is neccessary or what parts I can remove
+
+            CreateMap<UserMovieDTO, MovieViewModel>()
+                .ForMember(dest => dest.Id, opt => opt.MapFrom(src => src.Movie.Id))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Movie.Name))
+                .ForMember(dest => dest.Description, opt => opt.MapFrom(src => src.Movie.Description.Replace("\\n", System.Environment.NewLine)))
+                .ForMember(dest => dest.ReleaseDate, opt => opt.MapFrom(src => src.Movie.ReleaseDate))
+                .ForMember(dest => dest.Runtime, opt => opt.MapFrom(src => src.Movie.Runtime))
+                .ForMember(dest => dest.ImageUrl, opt => opt.MapFrom(src => src.Movie.ImageUrl))
+                .ForMember(dest => dest.TrailerUrl, opt => opt.MapFrom(src => src.Movie.TrailerUrl))
+                .ForMember(dest => dest.PurchaseCost, opt => opt.MapFrom(src => src.Movie.PurchaseCost))
+                .ForMember(dest => dest.RentCost, opt => opt.MapFrom(src => src.Movie.RentCost))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Movie.Name))
+                .ForMember(dest => dest.Name, opt => opt.MapFrom(src => src.Movie.Name))
+                .ForMember(dest => dest.Genres, opt => opt.MapFrom(src => src.Movie.Genres.Select(x => x.Genre)))
+                .ForMember(dest => dest.Cast, opt => opt.MapFrom(src => src.Movie.Cast))
+                .ForMember(dest => dest.Crew, opt => opt.MapFrom(src => src.Movie.Crew));
+
+            CreateMap<MovieViewModel, MovieDTO>();
         }
 
         public override string ProfileName

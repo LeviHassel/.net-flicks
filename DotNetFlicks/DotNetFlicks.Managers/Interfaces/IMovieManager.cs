@@ -10,6 +10,8 @@ namespace DotNetFlicks.Managers.Interfaces
 
         MoviesViewModel GetAll();
 
+        MoviesViewModel GetAllForUser(string userId);
+
         void Purchase(int id, string userId);
 
         void Rent(int id, string userId);

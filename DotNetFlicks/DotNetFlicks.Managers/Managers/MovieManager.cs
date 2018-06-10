@@ -59,6 +59,8 @@ namespace DotNetFlicks.Managers.Managers
 
             var userMovieDto = _userMovieAccessor.GetByMovieAndUser(id, userId);
 
+            //TODO: Consider refactoring with mapper
+
             if (userMovieDto != null)
             {
                 vm.PurchaseDate = userMovieDto.PurchaseDate;
@@ -87,12 +89,22 @@ namespace DotNetFlicks.Managers.Managers
             var dtos = _movieAccessor.GetAll();
             var vms = Mapper.Map<List<MovieViewModel>>(dtos);
 
+            //TODO: Only needed for back-end index?
             foreach (var vm in vms)
             {
                 vm.Genres = vm.Genres.OrderBy(x => x.Name).ToList();
             }
 
             return new MoviesViewModel { Movies = vms.OrderBy(x => x.Name).ToList() };
+        }
+
+        public MoviesViewModel GetAllForUser(string userId)
+        {
+            var userMovieDtos = _userMovieAccessor.GetAllByUser(userId);
+
+            var vms = Mapper.Map<List<MovieViewModel>>(userMovieDtos);
+
+            return new MoviesViewModel { Movies = vms };
         }
 
         public void Purchase(int id, string userId)

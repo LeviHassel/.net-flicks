@@ -34,6 +34,16 @@ namespace DotNetFlicks.Web.Controllers
             return View(vm);
         }
 
+        public ActionResult ViewAllForUser()
+        {
+            var user = _accountManager.GetApplicationUser(HttpContext.User).Result;
+
+            var vm = _movieManager.GetAllForUser(user.Id);
+            vm.Movies = vm.Movies.OrderByDescending(x => x.ReleaseDate).ToList();
+
+            return View(vm);
+        }
+
         public ActionResult View(int id)
         {
             var user = _accountManager.GetApplicationUser(HttpContext.User).Result;

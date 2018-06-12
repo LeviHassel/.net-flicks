@@ -48,16 +48,15 @@ Here's my implementation of IDesign for this solution:
 1. Install the following:
    * [Visual Studio Community 2017](https://www.visualstudio.com/downloads/ "Visual Studio Community 2017") (15.7+ is required for Core 2.1)
    * [.NET Core 2.1 SDK](https://www.microsoft.com/net/download/windows ".NET Core 2.1 SDK")
-   * [SQL Server 2017 Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express "SQL Server 2017 Express") (during the installation process, make sure to install LocalDb feature)
+   * [SQL Server 2017 Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express "SQL Server 2017 Express")
 2. Download this repository
-3. Open the solution in Visual Studio and run the Web project; this will create and seed the application's database, called DotNetFlicksDb (special thanks to [TMDB](https://www.themoviedb.org "TMDB") for providing the seed data)
+3. Open the solution in Visual Studio and run the Web project; this may take some time, as it will create and seed DotNetFlicksDb, the application's database (special thanks to [TMDB](https://www.themoviedb.org "TMDB") for providing the seed data)
+4. Log into the default administrator account (email: admin@dotnetflicks.com, password: p@ssWORD471) or create your own account to start using the site
 
 ### Tips
-* **Connect to database using SQL Server Management Studio**
-  * Install [SQL Server Management Studio](https://docs.microsoft.com/en-us/sql/ssms/download-sql-server-management-studio-ssms "SQL Server Management Studio"), a significantly more powerful and user-friendly alternative to Visual Studio's built-in SQL Server Object Explorer
-  * When you open it, it should show the "Connect to Server" window; if not, click Connect->Database Engine in the sidebar
-  * Select `Database Engine` for Server type, enter `(localdb)\MSSQLLocalDB` for Server name, select `Windows authentication` for Authentication and click Connect
-  * You should now see `DotNetFlicksDb` in the Databases folder of your localdb
+* **Acess/manage database**
+  * Inside Visual Studio, open the SQL Server Object Explorer window by going to View->SQL Server Object Explorer
+  * Expand `(localdb)\MSSQLLocalDB` and the `Databases` folder to find `DotNetFlicksDb`
 * **Catch emails in development**
   * Install [Papercut](https://github.com/ChangemakerStudios/Papercut "Papercut"), a fake SMTP server that you can use to catch outgoing emails in development
 * **View logs and exceptions**

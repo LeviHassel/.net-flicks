@@ -54,7 +54,7 @@ Here's my implementation of IDesign for this solution:
 4. Log into the default administrator account (email: admin@dotnetflicks.com, password: p@ssWORD471) or create your own account to start using the site
 
 ### Tips
-* **Acess/manage database
+* **Acess/manage database**
   * Inside Visual Studio, open the SQL Server Object Explorer window by going to View->SQL Server Object Explorer
   * Expand `(localdb)\MSSQLLocalDB` and the `Databases` folder to find `DotNetFlicksDb`
 * **Catch emails in development**

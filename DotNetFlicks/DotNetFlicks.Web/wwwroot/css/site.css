@@ -38,7 +38,7 @@ body {
     background-color: #f5f5f5;
 }
 
-/* Card styles
+/* Movie Card styles
 -------------------------------------------------- */
 .movie-card {
     cursor: pointer;
@@ -54,6 +54,14 @@ body {
 
 .collapse-card {
     cursor: pointer;
+}
+
+.sort-movies {
+    cursor: pointer;
+}
+
+.sort-movies:active {
+    color: white !important;
 }
 
 /* Jumbotron styles

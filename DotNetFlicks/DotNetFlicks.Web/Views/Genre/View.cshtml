@@ -2,18 +2,21 @@
 
 @{
     ViewBag.Title = Model.Name;
+    ViewData["OnlyPurchasedMovies"] = false;
 }
 
-<div class="d-flex justify-content-end mb-5">
-    <h1 class="mr-auto">@ViewBag.Title <small>(@Model.Movies.Count)</small></h1>
-    <partial name="_MovieSorter" />
-</div>
+<div class="movie-card-container">
+    <div class="d-flex justify-content-end mb-5">
+        <h1 class="mr-auto">@ViewBag.Title <small>(@Model.Movies.Count)</small></h1>
+        <partial name="_MovieSorter" view-data="@ViewData" />
+    </div>
 
-<div class="container-fluid">
-    <div class="row">
-        @foreach (var movie in Model.Movies)
-        {
-            @Html.DisplayFor(x => movie, "MovieCard")
-        }
+    <div class="container-fluid">
+        <div class="row">
+            @foreach (var movie in Model.Movies)
+            {
+                @Html.DisplayFor(x => movie, "MovieCard")
+            }
+        </div>
     </div>
 </div>

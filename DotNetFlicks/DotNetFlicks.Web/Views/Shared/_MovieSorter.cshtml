@@ -1,11 +1,19 @@
 ﻿<h5 class="my-auto mr-2">Sort By</h5>
-<div class="dropdown my-auto">
-    <button class="btn btn-primary dropdown-toggle" type="button" id="sort-movies-dropdown" data-toggle="dropdown">Date</button>
+<div class="dropdown my-auto movie-sorter">
+    <button class="btn btn-primary dropdown-toggle" type="button" id="sort-movies-dropdown" data-toggle="dropdown">Release Date</button>
+
     <div class="dropdown-menu">
+        <a class="dropdown-item sort-movies active text-white" id="data-date">Release Date</a>
+        @if ((bool)ViewData["OnlyPurchasedMovies"])
+        {
+            <a class="dropdown-item sort-movies" id="data-purchase-date">Purchase Date</a>
+        }
+        else
+        {
+            <a class="dropdown-item sort-movies" id="data-price">Price</a>
+        }
         <a class="dropdown-item sort-movies" id="data-name">Name</a>
-        <a class="dropdown-item sort-movies active text-white" id="data-date">Date</a>
-        <a class="dropdown-item sort-movies" id="data-purchase-date">Purchase Date</a>
-        <a class="dropdown-item sort-movies" id="data-price">Price</a>
     </div>
+
     <button class="btn btn-primary" id="sort-direction" data-sort="desc" type="button"><i class="fas fa-arrow-down"></i></button>
 </div>

@@ -1,7 +1,7 @@
 ﻿@model DotNetFlicks.ViewModels.Movie.MoviesViewModel
 
-@{
-    ViewBag.Title = "My Movies";
+@{ 
+    ViewData["OnlyPurchasedMovies"] = true;
 }
 
 <ul class="nav nav-pills nav-fill mb-3" id="pills-tab" role="tablist">
@@ -16,10 +16,10 @@
     </li>
 </ul>
 <div class="tab-content" id="pills-tabContent">
-    <div class="tab-pane fade show active" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
+    <div class="tab-pane fade show active movie-card-container" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
         <div class="d-flex justify-content-end mb-5">
-            <h1 class="mr-auto">@ViewBag.Title <small>(@Model.Movies.Count)</small></h1>
-            <partial name="_MovieSorter" />
+            <h1 class="mr-auto">My Library and Rentals <small>(@Model.Movies.Count)</small></h1>
+            <partial name="_MovieSorter" view-data="@ViewData" />
         </div>
 
         <div class="container-fluid">
@@ -32,15 +32,18 @@
         </div>
     </div>
 
-    <div class="tab-pane fade" id="pills-library" role="tabpanel" aria-labelledby="pills-library-tab">
+    <div class="tab-pane fade movie-card-container" id="pills-library" role="tabpanel" aria-labelledby="pills-library-tab">
+        @{
+            var library = Model.Movies.Where(x => x.PurchaseDate.HasValue).ToList();
+        }
         <div class="d-flex justify-content-end mb-5">
-            <h1 class="mr-auto">@ViewBag.Title <small>(@Model.Movies.Count)</small></h1>
-            <partial name="_MovieSorter" />
+            <h1 class="mr-auto">My Library <small>(@library.Count)</small></h1>
+            <partial name="_MovieSorter" view-data="@ViewData" />
         </div>
 
         <div class="container-fluid">
             <div class="row">
-                @foreach (var movie in Model.Movies.Where(x => x.PurchaseDate.HasValue))
+                @foreach (var movie in library)
                 {
                     @Html.DisplayFor(x => movie, "MovieCard")
                 }
@@ -48,15 +51,19 @@
         </div>
     </div>
 
-    <div class="tab-pane fade" id="pills-rentals" role="tabpanel" aria-labelledby="pills-rentals-tab">
+    <div class="tab-pane fade movie-card-container" id="pills-rentals" role="tabpanel" aria-labelledby="pills-rentals-tab">
+        @{ 
+            var rentals = Model.Movies.Where(x => x.RentEndDate.HasValue).ToList();
+        }
+
         <div class="d-flex justify-content-end mb-5">
-            <h1 class="mr-auto">@ViewBag.Title <small>(@Model.Movies.Count)</small></h1>
-            <partial name="_MovieSorter" />
+            <h1 class="mr-auto">My Rentals <small>(@rentals.Count)</small></h1>
+            <partial name="_MovieSorter" view-data="@ViewData" />
         </div>
 
         <div class="container-fluid">
             <div class="row">
-                @foreach (var movie in Model.Movies.Where(x => x.RentEndDate.HasValue))
+                @foreach (var movie in rentals)
                 {
                     @Html.DisplayFor(x => movie, "MovieCard")
                 }

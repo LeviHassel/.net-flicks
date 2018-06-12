@@ -82,17 +82,24 @@
 
     //Sort movie cards by type
     $(document).on('click', '.sort-movies', function () {
-        $('.dropdown-item.sort-movies.active').removeClass('active text-white');
-        $(this).addClass('active text-white');
-        $('#sort-movies-dropdown').text(this.text);
-        sortMovies();
+        var activeSortItem = $(this);
+        var movieSorter = activeSortItem.closest('.movie-sorter');
+
+        movieSorter.find('.dropdown-item.sort-movies.active').removeClass('active text-white');
+        activeSortItem.addClass('active text-white');
+        movieSorter.find('#sort-movies-dropdown').text(this.text);
+
+        sortMovies(movieSorter);
     });
 
     //Toggle ascending/descending sort for movie cards
-    $('#sort-direction').on('click', function () {
-        $(this).attr('data-sort', $(this).attr('data-sort') === 'desc' ? 'asc' : 'desc');
-        $(this).find('[data-fa-i2svg]').toggleClass('fa-arrow-up').toggleClass('fa-arrow-down');
-        sortMovies();
+    $(document).on('click', '#sort-direction', function () {
+        var activeSortItem = $(this);
+        activeSortItem.attr('data-sort', activeSortItem.attr('data-sort') === 'desc' ? 'asc' : 'desc');
+        activeSortItem.find('[data-fa-i2svg]').toggleClass('fa-arrow-up').toggleClass('fa-arrow-down');
+
+        var movieSorter = activeSortItem.closest('.movie-sorter');
+        sortMovies(movieSorter);
     });
 
     //Toggled open/closed icon on collapsible cards
@@ -176,10 +183,13 @@
 });
 
 //Sort movie cards by attribute and direction
-function sortMovies() {
-    var attr = $('.dropdown-item.sort-movies.active').attr('id');
-    var order = $('#sort-direction').attr('data-sort');
-    tinysort('div.movie-column', { attr: attr, order: order });
+function sortMovies(movieSorter) {
+    var attr = movieSorter.find('.dropdown-item.sort-movies.active').attr('id');
+    var order = movieSorter.find('#sort-direction').attr('data-sort');
+
+    var container = movieSorter.closest('div.movie-card-container');
+    var columns = container.get(0).querySelectorAll('div.movie-column');
+    tinysort(columns, { attr: attr, order: order });
 }
 
 function initializePersonPicker(container) {

@@ -51,10 +51,12 @@ Here's my implementation of IDesign for this solution:
    * [SQL Server 2017 Express](https://www.microsoft.com/en-us/sql-server/sql-server-editions-express "SQL Server 2017 Express")
 2. Download this repository
 3. Open the solution in Visual Studio and run the Web project; this may take some time, as it will create and seed DotNetFlicksDb, the application's database (special thanks to [TMDB](https://www.themoviedb.org "TMDB") for providing the seed data)
-4. Log into the default administrator account (Email: admin@dotnetflicks.com, Password: p@ssWORD471) or create your own account
-5. To access the database inside Visual Studio, go to View->SQL Server Object Explorer, expand `(localdb)\MSSQLLocalDB` and you should find `DotNetFlicksDb` in the `Databases` folder
+4. Log into the default administrator account (email: admin@dotnetflicks.com, password: p@ssWORD471) or create your own account to start using the site
 
 ### Tips
+* **Acess/manage database
+  * Inside Visual Studio, open the SQL Server Object Explorer window by going to View->SQL Server Object Explorer
+  * Expand `(localdb)\MSSQLLocalDB` and the `Databases` folder to find `DotNetFlicksDb`
 * **Catch emails in development**
   * Install [Papercut](https://github.com/ChangemakerStudios/Papercut "Papercut"), a fake SMTP server that you can use to catch outgoing emails in development
 * **View logs and exceptions**

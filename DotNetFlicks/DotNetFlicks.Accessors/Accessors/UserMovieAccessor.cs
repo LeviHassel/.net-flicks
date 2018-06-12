@@ -6,6 +6,7 @@ using DotNetFlicks.Accessors.Models.DTO;
 using DotNetFlicks.Accessors.Models.EF;
 using DotNetFlicks.Accessors.Models.EF.Base;
 using Microsoft.EntityFrameworkCore;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -35,10 +36,9 @@ namespace DotNetFlicks.Accessors.Accessors
         {
             var entities = _db.UserMovies
                 .Include(x => x.Movie)
-                .Where(x => x.UserId == userId)
+                .Where(x => x.UserId == userId &&
+                (x.RentEndDate.HasValue ? x.RentEndDate.Value >= DateTime.UtcNow : true))
                 .ToList();
-
-            //TODO: Filter out expired rentals
 
             var dtos = Mapper.Map<List<UserMovieDTO>>(entities);
 

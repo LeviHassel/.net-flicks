@@ -60,8 +60,6 @@ namespace DotNetFlicks.Managers.Managers
 
             var userMovieDto = _userMovieAccessor.GetByMovieAndUser(id, userId);
 
-            //TODO: Consider refactoring with mapper
-
             if (userMovieDto != null)
             {
                 vm.PurchaseDate = userMovieDto.PurchaseDate;
@@ -84,7 +82,17 @@ namespace DotNetFlicks.Managers.Managers
         {
             var userMovieDtos = _userMovieAccessor.GetAllByUser(userId);
 
-            var vms = Mapper.Map<List<MovieViewModel>>(userMovieDtos);
+            var vms = new List<MovieViewModel>();
+
+            foreach (var userMovieDto in userMovieDtos)
+            {
+                var vm = Mapper.Map<MovieViewModel>(userMovieDto.Movie);
+
+                vm.PurchaseDate = userMovieDto.PurchaseDate;
+                vm.RentEndDate = userMovieDto.RentEndDate;
+
+                vms.Add(vm);
+            }
 
             return new MoviesViewModel { Movies = vms.OrderByDescending(x => x.ReleaseDate).ToList() };
         }

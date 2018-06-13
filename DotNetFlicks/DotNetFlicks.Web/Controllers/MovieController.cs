@@ -2,7 +2,6 @@
 using DotNetFlicks.ViewModels.Movie;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 namespace DotNetFlicks.Web.Controllers
 {
@@ -19,18 +18,11 @@ namespace DotNetFlicks.Web.Controllers
             _movieManager = movieManager;
         }
 
-        public ActionResult Index()
-        {
-            var vm = _movieManager.GetAll();
-
-            return View(vm);
-        }
-
+        #region Client
         public ActionResult ViewAll()
         {
             var vm = _movieManager.GetAll();
-            vm.Movies = vm.Movies.OrderByDescending(x => x.ReleaseDate).ToList();
-
+            
             return View(vm);
         }
 
@@ -39,7 +31,6 @@ namespace DotNetFlicks.Web.Controllers
             var user = _accountManager.GetApplicationUser(HttpContext.User).Result;
 
             var vm = _movieManager.GetAllForUser(user.Id);
-            vm.Movies = vm.Movies.OrderByDescending(x => x.ReleaseDate).ToList();
 
             return View(vm);
         }
@@ -69,6 +60,15 @@ namespace DotNetFlicks.Web.Controllers
             _movieManager.Rent(id, user.Id);
 
             return RedirectToAction("View", new { id });
+        }
+        #endregion
+
+        #region Administrator
+        public ActionResult Index()
+        {
+            var vm = _movieManager.GetAllForEditing();
+
+            return View(vm);
         }
 
         public ActionResult Edit(int? id)
@@ -136,5 +136,6 @@ namespace DotNetFlicks.Web.Controllers
         {
             return _movieManager.GetDepartmentSelectData(query);
         }
+        #endregion
     }
 }

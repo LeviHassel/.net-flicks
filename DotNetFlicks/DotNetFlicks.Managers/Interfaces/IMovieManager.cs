@@ -6,8 +6,6 @@ namespace DotNetFlicks.Managers.Interfaces
     {
         MovieViewModel Get(int id, string userId);
 
-        EditMovieViewModel GetForEditing(int? id);
-
         MoviesViewModel GetAll();
 
         MoviesViewModel GetAllForUser(string userId);
@@ -16,12 +14,16 @@ namespace DotNetFlicks.Managers.Interfaces
 
         void Rent(int id, string userId);
 
-        string GetDepartmentSelectData(string query);
+        EditMovieViewModel GetForEditing(int? id);
 
-        string GetPersonSelectData(string query);
+        MoviesViewModel GetAllForEditing();
 
         EditMovieViewModel Save(EditMovieViewModel vm);
 
         MovieViewModel Delete(int id);
+
+        string GetDepartmentSelectData(string query);
+
+        string GetPersonSelectData(string query);
     }
 }

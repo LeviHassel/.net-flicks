@@ -47,6 +47,7 @@ namespace DotNetFlicks.Managers.Managers
             _userMovieAccessor = userMovieAccessor;
         }
 
+        #region Client
         public MovieViewModel Get(int id, string userId)
         {
             var dto = _movieAccessor.Get(id);
@@ -70,32 +71,13 @@ namespace DotNetFlicks.Managers.Managers
             return vm;
         }
 
-        public EditMovieViewModel GetForEditing(int? id)
-        {
-            var movieDto = id.HasValue ? _movieAccessor.Get(id.Value) : new MovieDTO();
-            var genreDtos = _genreAccessor.GetAll().OrderBy(x => x.Name);
-
-            var vm = Mapper.Map<EditMovieViewModel>(movieDto);
-
-            vm.Cast = vm.Cast.OrderBy(x => x.Order).ToList();
-            vm.Crew = vm.Crew.OrderBy(x => x.PersonName).ToList();
-            vm.GenresSelectList = new MultiSelectList(genreDtos, "Id", "Name", movieDto.Genres != null ? movieDto.Genres.Select(x => x.GenreId).ToList() : null);
-
-            return vm;
-        }
-
         public MoviesViewModel GetAll()
         {
             var dtos = _movieAccessor.GetAll();
+
             var vms = Mapper.Map<List<MovieViewModel>>(dtos);
 
-            //TODO: Only needed for back-end index?
-            foreach (var vm in vms)
-            {
-                vm.Genres = vm.Genres.OrderBy(x => x.Name).ToList();
-            }
-
-            return new MoviesViewModel { Movies = vms.OrderBy(x => x.Name).ToList() };
+            return new MoviesViewModel { Movies = vms.OrderByDescending(x => x.ReleaseDate).ToList() };
         }
 
         public MoviesViewModel GetAllForUser(string userId)
@@ -104,7 +86,7 @@ namespace DotNetFlicks.Managers.Managers
 
             var vms = Mapper.Map<List<MovieViewModel>>(userMovieDtos);
 
-            return new MoviesViewModel { Movies = vms };
+            return new MoviesViewModel { Movies = vms.OrderByDescending(x => x.ReleaseDate).ToList() };
         }
 
         public void Purchase(int id, string userId)
@@ -120,20 +102,36 @@ namespace DotNetFlicks.Managers.Managers
 
             _moviePurchaseEngine.Rent(userMovieDto);
         }
+        #endregion
 
-        public string GetDepartmentSelectData(string query)
+        #region Administrator
+        public EditMovieViewModel GetForEditing(int? id)
         {
-            var departmentDtos = _departmentAccessor.GetAllByName(query).OrderBy(x => x.Name);
+            var movieDto = id.HasValue ? _movieAccessor.Get(id.Value) : new MovieDTO();
+            var genreDtos = _genreAccessor.GetAll().OrderBy(x => x.Name);
 
-            return JsonConvert.SerializeObject(departmentDtos.Select(x => new { value = x.Id, text = x.Name }));
+            var vm = Mapper.Map<EditMovieViewModel>(movieDto);
+
+            vm.Cast = vm.Cast.OrderBy(x => x.Order).ToList();
+            vm.Crew = vm.Crew.OrderBy(x => x.PersonName).ToList();
+            vm.GenresSelectList = new MultiSelectList(genreDtos, "Id", "Name", movieDto.Genres != null ? movieDto.Genres.Select(x => x.GenreId).ToList() : null);
+
+            return vm;
         }
 
-        public string GetPersonSelectData(string query)
+        public MoviesViewModel GetAllForEditing()
         {
-            var personDtos = _personAccessor.GetAllByName(query).OrderBy(x => x.Name);
+            var dtos = _movieAccessor.GetAll();
+            var vms = Mapper.Map<List<MovieViewModel>>(dtos);
 
-            return JsonConvert.SerializeObject(personDtos.Select(x => new { value = x.Id, text = x.Name }));
+            foreach (var vm in vms)
+            {
+                vm.Genres = vm.Genres.OrderBy(x => x.Name).ToList();
+            }
+
+            return new MoviesViewModel { Movies = vms.OrderBy(x => x.Name).ToList() };
         }
+
 
         public EditMovieViewModel Save(EditMovieViewModel vm)
         {
@@ -162,5 +160,20 @@ namespace DotNetFlicks.Managers.Managers
 
             return vm;
         }
+
+        public string GetDepartmentSelectData(string query)
+        {
+            var departmentDtos = _departmentAccessor.GetAllByName(query).OrderBy(x => x.Name);
+
+            return JsonConvert.SerializeObject(departmentDtos.Select(x => new { value = x.Id, text = x.Name }));
+        }
+
+        public string GetPersonSelectData(string query)
+        {
+            var personDtos = _personAccessor.GetAllByName(query).OrderBy(x => x.Name);
+
+            return JsonConvert.SerializeObject(personDtos.Select(x => new { value = x.Id, text = x.Name }));
+        }
+        #endregion
     }
 }

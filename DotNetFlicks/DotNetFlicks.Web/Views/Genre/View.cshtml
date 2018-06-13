@@ -11,12 +11,10 @@
         <partial name="_MovieSorter" view-data="@ViewData" />
     </div>
 
-    <div class="container-fluid">
-        <div class="row">
-            @foreach (var movie in Model.Movies)
-            {
-                @Html.DisplayFor(x => movie, "MovieCard")
-            }
-        </div>
+    <div class="mx-auto d-flex flex-wrap justify-content-center justify-content-lg-start" style="max-width: 1088px;">
+        @foreach (var movie in Model.Movies)
+        {
+            @Html.DisplayFor(x => movie, "MovieCard")
+        }
     </div>
 </div>

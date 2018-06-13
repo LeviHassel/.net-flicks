@@ -15,26 +15,24 @@
     }
 }
 
-<div class="col mb-4 movie-column" data-name="@Model.Name" data-date="@(((DateTimeOffset)Model.ReleaseDate).ToUnixTimeSeconds().ToString())" data-price="@Model.RentCost" data-purchase-date="@purchaseDate">
-    <div class="card movie-card" style="width: 15rem;">
-        <a asp-controller="Movie" asp-action="View" asp-route-id="@Model.Id" style="all: unset">
-            <img class="card-img-top" src="@Model.ImageUrl">
-            <div class="card-body" style="padding-bottom: 0; height: 44px;">
-                @if (Model.Name.Count() > 20)
-                {
-                    <h6 class="card-title mb-0">@Model.Name</h6>
-                }
-                else
-                {
-                    <h5 class="card-title mb-0">@Model.Name</h5>
-                }
+<div class="card movie-card m-3" style="width: 15rem;" data-name="@Model.Name" data-date="@(((DateTimeOffset)Model.ReleaseDate).ToUnixTimeSeconds().ToString())" data-price="@Model.RentCost" data-purchase-date="@purchaseDate">
+    <a asp-controller="Movie" asp-action="View" asp-route-id="@Model.Id" style="all: unset">
+        <img class="card-img-top" src="@Model.ImageUrl">
+        <div class="card-body" style="padding-bottom: 0; height: 44px;">
+            @if (Model.Name.Count() > 20)
+            {
+                <h6 class="card-title mb-0">@Model.Name</h6>
+            }
+            else
+            {
+                <h5 class="card-title mb-0">@Model.Name</h5>
+            }
+        </div>
+        <div class="card-footer text-muted" style="background: none; border-top: none;">
+            <div class="d-flex">
+                <p class="card-text mb-0"><small>@Model.ReleaseDate.ToCustomDateString()</small></p>
+                <p class="card-text ml-auto mb-0">$@Model.RentCost</p>
             </div>
-            <div class="card-footer text-muted" style="background: none; border-top: none;">
-                <div class="d-flex">
-                    <p class="card-text mb-0"><small>@Model.ReleaseDate.ToCustomDateString()</small></p>
-                    <p class="card-text ml-auto mb-0">$@Model.RentCost</p>
-                </div>
-            </div>
-        </a>
-    </div>
+        </div>
+    </a>
 </div>

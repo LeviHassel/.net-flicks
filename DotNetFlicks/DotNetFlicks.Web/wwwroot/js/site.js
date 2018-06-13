@@ -1,6 +1,11 @@
 ﻿$(function () {
     initializeBootstrapTooltips();
 
+    //Initialize Bootstrap tooltips on DataTable draw
+    $('.table').on('draw.dt', function () {
+        initializeBootstrapTooltips();
+    });
+
     //Update image modals
     $('.image-modal').on('show.bs.modal', function (event) {
         var button = $(event.relatedTarget);
@@ -18,8 +23,7 @@
         stateSave: true,
         fixedHeader: {
             headerOffset: $('.navbar').outerHeight()
-        },
-        drawCallback: initializeBootstrapTooltips()
+        }
     });
 
     //Initialize People DataTable (this one uses AJAX to increase page loading speed)
@@ -35,9 +39,6 @@
             url: '/Person/LoadData',
             type: 'POST'
         },
-
-        //TODO: Get this working
-        drawCallback: initializeBootstrapTooltips(),
 
         rowId: 'Id',
 
@@ -224,6 +225,6 @@ function changeRowOrder(row, change) {
     orderInput.val(order + change);
 }
 
-function initializeBootstrapTooltips () {
+function initializeBootstrapTooltips() {
     $('[data-toggle="tooltip"]').tooltip();
 }

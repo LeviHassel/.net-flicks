@@ -206,7 +206,7 @@
                     </div>
                     <br />
                     <p>
-                        <strong>Disclaimer: </strong>Unfortunately, due to the surprisingly low number of people that actually pay for our movies, we've had to make some budget cuts. The most disappointing one is that now we can only show you a trailer rather than the actual movie. Hope this is okay.
+                        <strong>Disclaimer: </strong>Due to the surprisingly low number of people that follow through with their payments to us, we've had to make some budget cuts. Unfortunately, replacing all of our full-length movies with trailers was one of them. Hope this is okay.
                     </p>
                 </div>
             </div>
@@ -225,16 +225,11 @@ else
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>
-                        To cut down on royalties taken by credit card companies, Paypal and Stripe, we do things differently here. Here's our corporate address:
-
-                        We trust you to send us cash in the mail.
-
-                        Rentals last for 48 hours.
-                    </p>
+                    <p><strong>How to pay: </strong>In an effort to eliminate fees from credit card companies, the only payment method we accept is cash mailed directly to our corporate office. If you don't have the money right now, don't worry; we simply trust our customers to pay us eventually.</p>
+                    <p><i>Rentals last for 48 hours.</i></p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger mr-auto" data-toggle="modal">Close</button>
+                    <h5 class="mr-auto">Total: $@Model.RentCost</h5>
                     <a class="btn btn-primary" asp-controller="Movie" asp-action="Rent" asp-route-id="@Model.Id">
                         I promise to pay
                     </a>
@@ -253,14 +248,10 @@ else
                     </button>
                 </div>
                 <div class="modal-body">
-                    <p>
-                        To cut down on royalties taken by credit card companies, Paypal and Stripe, we do things differently here. Here's our corporate address:
-
-                        We trust you to send us cash in the mail.
-                    </p>
+                    <p><strong>How to pay: </strong>In an effort to eliminate fees from credit card companies, the only payment method we accept is cash mailed directly to our corporate office. If you don't have the money right now, don't worry; we simply trust our customers to pay us eventually.</p>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-danger mr-auto" data-toggle="modal">Close</button>
+                    <h5 class="mr-auto">Total: $@Model.PurchaseCost</h5>
                     <a class="btn btn-primary" asp-controller="Movie" asp-action="Purchase" asp-route-id="@Model.Id">
                         I promise to pay
                     </a>

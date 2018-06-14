@@ -16,20 +16,21 @@ namespace DotNetFlicks.Web.Controllers
             _personManager = personManager;
         }
 
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int? pageSize)
         {
             var request = new IndexRequest
             {
                 SortOrder = sortOrder,
                 Search = searchString == null ? currentFilter : searchString,
                 PageIndex = searchString == null && page.HasValue ? page.Value : 1, 
-                PageSize = 10
+                PageSize = pageSize.HasValue ? pageSize.Value : 10
             };
 
             ViewData["CurrentSort"] = request.SortOrder;
             ViewData["NameSortParm"] = string.IsNullOrEmpty(request.SortOrder) ? "name_desc" : "";
-            ViewData["RolesSortParm"] = request.SortOrder == "Roles" ? "roles_desc" : "Date";
+            ViewData["RolesSortParm"] = request.SortOrder == "Roles" ? "roles_desc" : "Roles";
             ViewData["CurrentFilter"] = request.Search;
+            ViewData["PageSize"] = request.PageSize;
 
             var vms = _personManager.GetRequest(request);
 

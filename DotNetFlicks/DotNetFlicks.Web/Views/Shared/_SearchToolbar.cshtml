@@ -1,9 +1,18 @@
-﻿<div class="d-flex justify-content-end mb-5">
-    <p class="my-auto mr-auto">Show 10 entries</p>
-    <p class="my-auto mr-3">Search: </p>
-    <form asp-action="Index" method="get" class="my-auto">
-        <div class="form-actions no-color">
-            <input class="form-control" type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-        </div>
-    </form>
-</div>
+﻿<form asp-action="Index" method="get" class="my-auto mr-auto">
+    <div class="d-flex justify-content-end mb-5">
+        <p class="my-auto mr-auto">Show </p>
+
+        <input type="hidden" name="SortOrder" value="@ViewData["CurrentSort"]" />
+
+        <input type="hidden" name="Page" value="@ViewData["TotalPages"]" />
+
+        <select class="form-control" asp-items="Model.PageSizes" name="PageSize" onchange="this.form.submit();"></select>
+
+        <p class="my-auto mr-auto"> entries</p>
+
+        <p class="my-auto mr-3">Search: </p>
+
+        <input class="form-control" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" onchange="this.form.submit();" />
+
+    </div>
+</form>

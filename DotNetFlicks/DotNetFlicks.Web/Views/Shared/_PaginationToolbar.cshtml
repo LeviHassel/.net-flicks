@@ -1,0 +1,60 @@
+﻿@{
+    var firstDisabled = Model.PageIndex == 1 ? "disabled" : "";
+    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
+    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
+    var lastDisabled = Model.PageIndex == Model.TotalPages || Model.TotalPages < 0 ? "disabled" : "";
+}
+
+<div class="d-flex justify-content-end mb-5">
+    <p class="my-auto mr-auto">Showing @Model.FirstItemIndex to @Model.LastItemIndex of @Model.TotalCount entries</p>
+
+    <div class="btn-group btn-group-toggle my-auto">
+        @if (Model.TotalPages > 3)
+        {
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-page="1"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-outline-primary @firstDisabled">
+                First
+            </a>
+        }
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-page="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-outline-primary @prevDisabled">
+            Previous
+        </a>
+        @for (var i = 1; i <= Model.TotalPages; i++)
+        {
+            if (Math.Abs(Model.PageIndex - i) < 3)
+            {
+                <a asp-action="Index"
+                   asp-route-sortOrder="@ViewData["CurrentSort"]"
+                   asp-route-page="@i"
+                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
+                   class="btn btn-outline-primary @(i == Model.PageIndex ? "active" : "")">
+                    @i
+                </a>
+            }
+        }
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-page="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-outline-primary @nextDisabled">
+            Next
+        </a>
+        @if (Model.TotalPages > 3)
+        {
+            <a asp-action="Index"
+               asp-route-sortOrder="@ViewData["CurrentSort"]"
+               asp-route-page="@Model.TotalPages"
+               asp-route-currentFilter="@ViewData["CurrentFilter"]"
+               class="btn btn-outline-primary @lastDisabled">
+                Last
+            </a>
+        }
+    </div>
+</div>

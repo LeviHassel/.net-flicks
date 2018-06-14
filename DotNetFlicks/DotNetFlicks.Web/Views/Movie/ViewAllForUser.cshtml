@@ -1,6 +1,6 @@
 ﻿@model DotNetFlicks.ViewModels.Movie.MoviesViewModel
 
-@{ 
+@{
     ViewData["OnlyPurchasedMovies"] = true;
 }
 
@@ -22,12 +22,7 @@
             <partial name="_MovieSorter" view-data="@ViewData" />
         </div>
 
-        <div class="mx-auto d-flex flex-wrap justify-content-center justify-content-lg-start" style="max-width: 1088px;">
-            @foreach (var movie in Model.Movies)
-            {
-                @Html.DisplayFor(x => movie, "MovieCard")
-            }
-        </div>
+        <partial name="_MovieCardList" model="Model.Movies" />
     </div>
 
     <div class="tab-pane fade movie-card-container" id="pills-library" role="tabpanel" aria-labelledby="pills-library-tab">
@@ -39,16 +34,11 @@
             <partial name="_MovieSorter" view-data="@ViewData" />
         </div>
 
-        <div class="mx-auto d-flex flex-wrap justify-content-center justify-content-lg-start" style="max-width: 1088px;">
-            @foreach (var movie in library)
-            {
-                @Html.DisplayFor(x => movie, "MovieCard")
-            }
-        </div>
+        <partial name="_MovieCardList" model="library" />
     </div>
 
     <div class="tab-pane fade movie-card-container" id="pills-rentals" role="tabpanel" aria-labelledby="pills-rentals-tab">
-        @{ 
+        @{
             var rentals = Model.Movies.Where(x => x.RentEndDate.HasValue).ToList();
         }
 
@@ -57,11 +47,6 @@
             <partial name="_MovieSorter" view-data="@ViewData" />
         </div>
 
-        <div class="mx-auto d-flex flex-wrap justify-content-center justify-content-lg-start" style="max-width: 1088px;">
-            @foreach (var movie in rentals)
-            {
-                @Html.DisplayFor(x => movie, "MovieCard")
-            }
-        </div>
+        <partial name="_MovieCardList" model="rentals" />
     </div>
 </div>

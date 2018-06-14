@@ -1,0 +1,9 @@
+﻿<div class="d-flex justify-content-end mb-5">
+    <p class="my-auto mr-auto">Show 10 entries</p>
+    <p class="my-auto mr-3">Search: </p>
+    <form asp-action="Index" method="get" class="my-auto">
+        <div class="form-actions no-color">
+            <input class="form-control" type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+        </div>
+    </form>
+</div>

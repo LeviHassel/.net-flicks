@@ -4,8 +4,6 @@
 
 @{
     ViewData["Title"] = "People";
-    var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
-    var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }
 
 <div class="d-flex mb-5">
@@ -14,16 +12,7 @@
 </div>
 
 <div>
-    <div class="d-flex justify-content-end mb-5">
-        <p class="my-auto mr-auto">Show 10 entries</p>
-        <p class="my-auto mr-3">Search: </p>
-        <form asp-action="Index" method="get" class="my-auto">
-            <div class="form-actions no-color">
-                <input class="form-control" type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-            </div>
-        </form>
-    </div>
-
+    <partial name="_SearchToolbar" />
 
     <table class="table">
         <thead>
@@ -94,57 +83,5 @@
         </div>
     </div>
 
-    <div class="d-flex justify-content-end mb-5">
-        <p class="my-auto mr-auto">Showing @Model.FirstItemIndex to @Model.LastItemIndex of @Model.TotalCount entries</p>
-
-        <div class="btn-group btn-group-toggle my-auto">
-            @if (Model.PageIndex != 1)
-            {
-                <a asp-action="Index"
-                   asp-route-sortOrder="@ViewData["CurrentSort"]"
-                   asp-route-page="1"
-                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                   class="btn btn-outline-primary">
-                    First
-                </a>
-            }
-            <a asp-action="Index"
-               asp-route-sortOrder="@ViewData["CurrentSort"]"
-               asp-route-page="@(Model.PageIndex - 1)"
-               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-               class="btn btn-outline-primary @prevDisabled">
-                Previous
-            </a>
-            @for (var i = 1; i <= Model.TotalPages; i++)
-            {
-                if (Math.Abs(Model.PageIndex - i) < 3)
-                {
-                    <a asp-action="Index"
-                       asp-route-sortOrder="@ViewData["CurrentSort"]"
-                       asp-route-page="@i"
-                       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                       class="btn btn-outline-primary @(i == Model.PageIndex ? "active" : "")">
-                        @i
-                    </a>
-                }
-            }
-            <a asp-action="Index"
-               asp-route-sortOrder="@ViewData["CurrentSort"]"
-               asp-route-page="@(Model.PageIndex + 1)"
-               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-               class="btn btn-outline-primary @nextDisabled">
-                Next
-            </a>
-            @if (Model.PageIndex != Model.TotalPages)
-            {
-                <a asp-action="Index"
-                   asp-route-sortOrder="@ViewData["CurrentSort"]"
-                   asp-route-page="@Model.TotalPages"
-                   asp-route-currentFilter="@ViewData["CurrentFilter"]"
-                   class="btn btn-outline-primary">
-                    Last
-                </a>
-            }
-        </div>
-    </div>
+    <partial name="_PaginationToolbar" />
 </div>

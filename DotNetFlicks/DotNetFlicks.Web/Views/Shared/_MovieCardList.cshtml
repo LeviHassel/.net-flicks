@@ -1,0 +1,46 @@
+﻿@using DotNetFlicks.Common.Utilities
+
+@model List<DotNetFlicks.ViewModels.Movie.MovieViewModel>
+
+<div class="mx-auto d-flex flex-wrap justify-content-center justify-content-lg-start" style="max-width: 1088px;">
+    @foreach (var movie in Model)
+    {
+        var purchaseDate = "";
+
+        if (movie.RentEndDate.HasValue)
+        {
+            purchaseDate = ((DateTimeOffset)movie.RentEndDate.Value.AddDays(-2)).ToUnixTimeSeconds().ToString();
+        }
+        else if (movie.PurchaseDate.HasValue)
+        {
+            purchaseDate = ((DateTimeOffset)movie.PurchaseDate.Value).ToUnixTimeSeconds().ToString();
+        }
+
+        <div class="card movie-card m-3"
+             style="width: 15rem;"
+             data-name="@movie.Name"
+             data-date="@(((DateTimeOffset)movie.ReleaseDate).ToUnixTimeSeconds().ToString())"
+             data-price="@movie.RentCost"
+             data-purchase-date="@purchaseDate">
+            <a asp-controller="Movie" asp-action="View" asp-route-id="@movie.Id" style="all: unset">
+                <img class="card-img-top" src="@movie.ImageUrl">
+                <div class="card-body" style="padding-bottom: 0; height: 44px;">
+                    @if (movie.Name.Count() > 20)
+                    {
+                        <h6 class="card-title mb-0">@movie.Name</h6>
+                    }
+                    else
+                    {
+                        <h5 class="card-title mb-0">@movie.Name</h5>
+                    }
+                </div>
+                <div class="card-footer text-muted" style="background: none; border-top: none;">
+                    <div class="d-flex">
+                        <p class="card-text mb-0"><small>@movie.ReleaseDate.ToCustomDateString()</small></p>
+                        <p class="card-text ml-auto mb-0">$@movie.RentCost</p>
+                    </div>
+                </div>
+            </a>
+        </div>
+    }
+</div>

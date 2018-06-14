@@ -19,7 +19,6 @@ namespace DotNetFlicks.ViewModels.Movie
         [Display(Name = "Release Date")]
         public DateTime ReleaseDate { get; set; }
 
-        [DisplayFormat(DataFormatString = "{0:%h}h {0:%m}m")]
         public TimeSpan Runtime { get; set; }
 
         [Url]

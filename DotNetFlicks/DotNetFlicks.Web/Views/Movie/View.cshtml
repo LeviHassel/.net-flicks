@@ -55,7 +55,7 @@
 
             <p><strong>Release Date: </strong>@Model.ReleaseDate.ToCustomDateString()</p>
 
-            <p><strong>Runtime: </strong>@Html.DisplayFor(x => x.Runtime)</p>
+            <p><strong>Runtime: </strong>@Model.Runtime.ToFormattedString()</p>
 
             <div class="d-flex align-items-center mt-4">
                 @if (purchased || currentlyRented)
@@ -76,7 +76,7 @@
                 @if (currentlyRented)
                 {
                     var rentHoursRemaining = Model.RentEndDate.Value - DateTime.UtcNow;
-                    <p class="mb-0">@rentHoursRemaining.ToString(@"d\d\ hh\h\ mm\m") remaining for rental</p>
+                    <p class="mb-0">@rentHoursRemaining.ToFormattedString() remaining for rental</p>
                 }
             </div>
         </div>

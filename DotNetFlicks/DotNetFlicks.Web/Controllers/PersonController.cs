@@ -18,7 +18,7 @@ namespace DotNetFlicks.Web.Controllers
 
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            var query = new IndexQuery
+            var request = new IndexRequest
             {
                 SortOrder = sortOrder,
                 Search = searchString == null ? currentFilter : searchString,
@@ -26,12 +26,12 @@ namespace DotNetFlicks.Web.Controllers
                 PageSize = 10
             };
 
-            ViewData["CurrentSort"] = query.SortOrder;
-            ViewData["NameSortParm"] = string.IsNullOrEmpty(query.SortOrder) ? "name_desc" : "";
-            ViewData["RolesSortParm"] = query.SortOrder == "Roles" ? "roles_desc" : "Date";
-            ViewData["CurrentFilter"] = query.Search;
+            ViewData["CurrentSort"] = request.SortOrder;
+            ViewData["NameSortParm"] = string.IsNullOrEmpty(request.SortOrder) ? "name_desc" : "";
+            ViewData["RolesSortParm"] = request.SortOrder == "Roles" ? "roles_desc" : "Date";
+            ViewData["CurrentFilter"] = request.Search;
 
-            var vms = _personManager.GetQuery(query);
+            var vms = _personManager.GetRequest(request);
 
             return View(vms);
         }

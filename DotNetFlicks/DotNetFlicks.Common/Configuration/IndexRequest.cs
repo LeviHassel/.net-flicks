@@ -1,6 +1,6 @@
 ﻿namespace DotNetFlicks.Common.Configuration
 {
-    public class IndexQuery
+    public class IndexRequest
     {
         public string SortOrder { get; set; }
 

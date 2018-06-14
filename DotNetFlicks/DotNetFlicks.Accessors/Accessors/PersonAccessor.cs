@@ -32,43 +32,42 @@ namespace DotNetFlicks.Accessors.Accessors
             return dto;
         }
 
-        public List<PersonDTO> GetQuery(IndexQuery query)
+        public List<PersonDTO> GetRequest(IndexRequest request)
         {
-            var entities = _db.People
+            var query = _db.People
                 .AsNoTracking()
                 .Include(x => x.CastRoles).ThenInclude(x => x.Movie)
                 .Include(x => x.CrewRoles).ThenInclude(x => x.Movie)
                 .Include(x => x.CrewRoles).ThenInclude(x => x.Department)
                 .AsQueryable();
 
-            if (!string.IsNullOrEmpty(query.Search))
+            if (!string.IsNullOrEmpty(request.Search))
             {
-                entities = entities.Where(x => x.Name.ToLower().Contains(query.Search.ToLower()));
+                query = query.Where(x => x.Name.ToLower().Contains(request.Search.ToLower()));
             }
 
-            switch (query.SortOrder)
+            switch (request.SortOrder)
             {
                 case "name_desc":
-                    entities = entities.OrderByDescending(x => x.Name);
+                    query = query.OrderByDescending(x => x.Name);
                     break;
                 case "Roles":
-                    entities = entities.OrderBy(x => x.CrewRoles.Count() + x.CastRoles.Count());
+                    query = query.OrderBy(x => x.CrewRoles.Count() + x.CastRoles.Count());
                     break;
                 case "roles_desc":
-                    entities = entities.OrderByDescending(x => x.CrewRoles.Count() + x.CastRoles.Count());
+                    query = query.OrderByDescending(x => x.CrewRoles.Count() + x.CastRoles.Count());
                     break;
                 default:
-                    entities = entities.OrderBy(x => x.Name);
+                    query = query.OrderBy(x => x.Name);
                     break;
             }
 
-            //TODO: Improve names
-            var items = entities
-                .Skip((query.PageIndex - 1) * query.PageSize)
-                .Take(query.PageSize)
+            var entities = query
+                .Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
                 .ToList();
 
-            var dtos = Mapper.Map<List<PersonDTO>>(items);
+            var dtos = Mapper.Map<List<PersonDTO>>(entities);
 
             return dtos;
         }

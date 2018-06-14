@@ -8,7 +8,7 @@ namespace DotNetFlicks.Accessors.Interfaces
     {
         PersonDTO Get(int id);
 
-        List<PersonDTO> GetQuery(IndexQuery query);
+        List<PersonDTO> GetRequest(IndexRequest query);
 
         List<PersonDTO> GetAllByName(string query);
 

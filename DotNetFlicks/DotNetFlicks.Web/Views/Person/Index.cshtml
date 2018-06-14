@@ -14,15 +14,16 @@
 </div>
 
 <div>
-    <form asp-action="Index" method="get">
-        <div class="form-actions no-color">
-            <p>
-                Find by name: <input type="text" name="SearchString" value="@ViewData["currentFilter"]" />
-                <input type="submit" value="Search" class="btn btn-default" /> |
-                <a asp-action="Index">Back to Full List</a>
-            </p>
-        </div>
-    </form>
+    <div class="d-flex justify-content-end mb-5">
+        <p class="my-auto mr-auto">Show 10 entries</p>
+        <p class="my-auto mr-3">Search: </p>
+        <form asp-action="Index" method="get" class="my-auto">
+            <div class="form-actions no-color">
+                <input class="form-control" type="text" name="SearchString" value="@ViewData["currentFilter"]" />
+            </div>
+        </form>
+    </div>
+
 
     <table class="table">
         <thead>
@@ -93,18 +94,21 @@
         </div>
     </div>
 
-    <a asp-action="Index"
-       asp-route-sortOrder="@ViewData["CurrentSort"]"
-       asp-route-page="@(Model.PageIndex - 1)"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-       class="btn btn-default @prevDisabled">
-        Previous
-    </a>
-    <a asp-action="Index"
-       asp-route-sortOrder="@ViewData["CurrentSort"]"
-       asp-route-page="@(Model.PageIndex + 1)"
-       asp-route-currentFilter="@ViewData["CurrentFilter"]"
-       class="btn btn-default @nextDisabled">
-        Next
-    </a>
+    <div class="d-flex justify-content-end mb-5">
+        <p class="my-auto mr-auto">Showing 1 to 10 of @Model.TotalCount entries</p>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-page="@(Model.PageIndex - 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default my-auto @prevDisabled">
+            Previous
+        </a>
+        <a asp-action="Index"
+           asp-route-sortOrder="@ViewData["CurrentSort"]"
+           asp-route-page="@(Model.PageIndex + 1)"
+           asp-route-currentFilter="@ViewData["CurrentFilter"]"
+           class="btn btn-default my-auto @nextDisabled">
+            Next
+        </a>
+    </div>
 </div>

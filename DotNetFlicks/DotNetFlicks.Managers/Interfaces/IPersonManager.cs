@@ -7,7 +7,7 @@ namespace DotNetFlicks.Managers.Interfaces
     {
         PersonViewModel Get(int? id);
 
-        PaginatedList<PersonViewModel> GetQuery(IndexQuery query);
+        PaginatedList<PersonViewModel> GetRequest(IndexRequest query);
 
         PersonViewModel Save(PersonViewModel vm);
 

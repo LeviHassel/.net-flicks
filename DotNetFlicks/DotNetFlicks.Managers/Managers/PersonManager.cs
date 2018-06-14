@@ -28,9 +28,9 @@ namespace DotNetFlicks.Managers.Managers
             return vm;
         }
 
-        public PaginatedList<PersonViewModel> GetQuery(IndexQuery query)
+        public PaginatedList<PersonViewModel> GetRequest(IndexRequest request)
         {
-            var dtos = _personAccessor.GetQuery(query);
+            var dtos = _personAccessor.GetRequest(request);
 
             var vms = Mapper.Map<List<PersonViewModel>>(dtos);
 
@@ -39,9 +39,9 @@ namespace DotNetFlicks.Managers.Managers
                 vm.Roles = vm.Roles.OrderBy(x => x.MovieName).ToList();
             }
 
-            var count = _personAccessor.GetCount(query.Search);
+            var count = _personAccessor.GetCount(request.Search);
 
-            var paginatedList = new PaginatedList<PersonViewModel>(vms, count, query.PageIndex, query.PageSize);
+            var paginatedList = new PaginatedList<PersonViewModel>(vms, count, request.PageIndex, request.PageSize);
 
             return paginatedList;
         }

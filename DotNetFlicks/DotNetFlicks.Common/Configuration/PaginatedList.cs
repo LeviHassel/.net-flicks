@@ -11,12 +11,16 @@ namespace DotNetFlicks.Common.Configuration
         public int PageIndex { get; private set; }
         public int TotalPages { get; private set; }
         public int TotalCount { get; private set; }
+        public int FirstItemIndex { get; private set; }
+        public int LastItemIndex { get; private set; }
 
         public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
         {
             PageIndex = pageIndex;
             TotalPages = (int)Math.Ceiling(count / (double)pageSize);
             TotalCount = count;
+            FirstItemIndex = count > 0 ? (pageIndex - 1) * pageSize + 1 : 0;
+            LastItemIndex = pageSize * pageIndex < count ? pageSize * pageIndex : count;
 
             this.AddRange(items);
         }

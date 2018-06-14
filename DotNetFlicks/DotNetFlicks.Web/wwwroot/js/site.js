@@ -189,8 +189,8 @@ function sortMovies(movieSorter) {
     var order = movieSorter.find('#sort-direction').attr('data-sort');
 
     var container = movieSorter.closest('div.movie-card-container');
-    var columns = container.get(0).querySelectorAll('div.movie-column');
-    tinysort(columns, { attr: attr, order: order });
+    var cards = container.get(0).querySelectorAll('div.movie-card');
+    tinysort(cards, { attr: attr, order: order });
 }
 
 function initializePersonPicker(container) {

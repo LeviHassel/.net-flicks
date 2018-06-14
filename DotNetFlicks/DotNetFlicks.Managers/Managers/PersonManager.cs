@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using DotNetFlicks.Accessors.Interfaces;
 using DotNetFlicks.Accessors.Models.DTO;
+using DotNetFlicks.Common.Configuration;
 using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Person;
 using System.Collections.Generic;
@@ -27,9 +28,12 @@ namespace DotNetFlicks.Managers.Managers
             return vm;
         }
 
-        public PeopleViewModel GetAll()
+        public PaginatedList<PersonViewModel> GetQuery(IndexQuery query)
         {
-            var dtos = _personAccessor.GetAll();
+            var dtos = _personAccessor.GetQuery(query);
+
+            var count = _personAccessor.GetCount();
+
             var vms = Mapper.Map<List<PersonViewModel>>(dtos);
 
             foreach (var vm in vms)
@@ -37,7 +41,9 @@ namespace DotNetFlicks.Managers.Managers
                 vm.Roles = vm.Roles.OrderBy(x => x.MovieName).ToList();
             }
 
-            return new PeopleViewModel { People = vms.OrderBy(x => x.Name).ToList() };
+            var paginatedList = new PaginatedList<PersonViewModel>(vms, count, query.PageIndex, query.PageSize);
+
+            return paginatedList;
         }
 
         public int GetCount()

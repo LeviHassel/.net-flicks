@@ -1,4 +1,5 @@
-﻿using DotNetFlicks.ViewModels.Person;
+﻿using DotNetFlicks.Common.Configuration;
+using DotNetFlicks.ViewModels.Person;
 
 namespace DotNetFlicks.Managers.Interfaces
 {
@@ -6,7 +7,7 @@ namespace DotNetFlicks.Managers.Interfaces
     {
         PersonViewModel Get(int? id);
 
-        PeopleViewModel GetAll();
+        PaginatedList<PersonViewModel> GetQuery(IndexQuery query);
 
         int GetCount();
 

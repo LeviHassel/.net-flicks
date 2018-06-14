@@ -1,9 +1,8 @@
-﻿using DataTablesParser;
+﻿using DotNetFlicks.Common.Configuration;
 using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Person;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
-using System.Linq;
 
 namespace DotNetFlicks.Web.Controllers
 {
@@ -17,18 +16,24 @@ namespace DotNetFlicks.Web.Controllers
             _personManager = personManager;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page)
         {
-            ViewBag.PeopleCount = _personManager.GetCount();
+            var query = new IndexQuery
+            {
+                SortOrder = sortOrder,
+                Search = searchString == null ? currentFilter : searchString,
+                PageIndex = searchString == null && page.HasValue ? page.Value : 1, 
+                PageSize = 10
+            };
 
-            return View();
-        }
+            ViewData["CurrentSort"] = query.SortOrder;
+            ViewData["NameSortParm"] = string.IsNullOrEmpty(query.SortOrder) ? "name_desc" : "";
+            ViewData["RolesSortParm"] = query.SortOrder == "Roles" ? "roles_desc" : "Date";
+            ViewData["CurrentFilter"] = query.Search;
 
-        public ActionResult LoadData()
-        {
-            var parser = new Parser<PersonViewModel>(Request.Form, _personManager.GetAll().People.AsQueryable());
+            var vms = _personManager.GetQuery(query);
 
-            return Json(parser.Parse());
+            return View(vms);
         }
 
         public ActionResult View(int id)

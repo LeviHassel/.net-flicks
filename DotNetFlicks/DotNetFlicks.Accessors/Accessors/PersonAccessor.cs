@@ -5,9 +5,11 @@ using DotNetFlicks.Accessors.Interfaces;
 using DotNetFlicks.Accessors.Models.DTO;
 using DotNetFlicks.Accessors.Models.EF;
 using DotNetFlicks.Accessors.Models.EF.Base;
+using DotNetFlicks.Common.Configuration;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
+using System.Threading.Tasks;
 
 namespace DotNetFlicks.Accessors.Accessors
 {
@@ -39,6 +41,44 @@ namespace DotNetFlicks.Accessors.Accessors
                 .ToList();
 
             var dtos = Mapper.Map<List<PersonDTO>>(entities);
+
+            return dtos;
+        }
+
+        public List<PersonDTO> GetQuery(IndexQuery query)
+        {
+            var entities = _db.People
+                .Include(x => x.CastRoles).ThenInclude(x => x.Movie)
+                .Include(x => x.CrewRoles).ThenInclude(x => x.Movie)
+                .Include(x => x.CrewRoles).ThenInclude(x => x.Department)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(query.Search))
+            {
+                entities = entities.Where(x => x.Name.ToLower().Contains(query.Search.ToLower()));
+            }
+
+            switch (query.SortOrder)
+            {
+                case "name_desc":
+                    entities = entities.OrderByDescending(x => x.Name);
+                    break;
+                case "Roles":
+                    entities = entities.OrderBy(x => x.CrewRoles.Count() + x.CastRoles.Count());
+                    break;
+                case "roles_desc":
+                    entities = entities.OrderByDescending(x => x.CrewRoles.Count() + x.CastRoles.Count());
+                    break;
+                default:
+                    entities = entities.OrderBy(x => x.Name);
+                    break;
+            }
+
+            var items = entities.Skip((query.PageIndex - 1) * query.PageSize).Take(query.PageSize).AsQueryable();
+
+            var hello = items.ToList();
+
+            var dtos = Mapper.Map<List<PersonDTO>>(hello);
 
             return dtos;
         }

@@ -26,7 +26,7 @@ What started as a simple template project for .NET Core evolved into a decent-si
 
 ## Database Design
 The database for this solution uses Entity Framework and ASP.NET Identity. I chose not to use Identity Roles, instead allowing all users to see both the Client and Administrator UI at once for simplicity.
-![.NetFlicks Database](https://user-images.githubusercontent.com/9669653/40290536-25721b6e-5c84-11e8-927e-0656b7452ff2.png)
+![.NetFlicks Database](https://user-images.githubusercontent.com/9669653/41392853-b398faba-6f68-11e8-996e-21f882e9df8c.png)
 
 ## System Architecture
 This solution is divided into four layers based on [IDesign](http://www.idesign.net/ "IDesign") methodology:
@@ -41,7 +41,7 @@ This solution is divided into four layers based on [IDesign](http://www.idesign.
 IDesign is a closed architecture that focuses on encapsulating volatility, minimizing coupling and separation of concerns. The official IDesign documentation is sparse, so I'd recommend reading [Software architecture and project design, a mechanized approach](http://codewithspoon.com/2017/07/software-architecture/ "Software architecture and project design, a mechanized approach") for a quick intro to the method.
 
 Here's my implementation of IDesign for this solution:
-![.NetFlicks Architecture](https://user-images.githubusercontent.com/9669653/40292370-8e94ff6a-5c90-11e8-8751-08ce14575cea.png)
+![.NetFlicks Architecture](https://user-images.githubusercontent.com/9669653/41392851-b37d69a8-6f68-11e8-8e45-6f5b8ab7fcba.png)
 
 ## Setup
 ### Getting Started

@@ -9,8 +9,6 @@ namespace DotNetFlicks.Managers.Interfaces
 
         PaginatedList<PersonViewModel> GetQuery(IndexQuery query);
 
-        int GetCount();
-
         PersonViewModel Save(PersonViewModel vm);
 
         PersonViewModel Delete(int id);

@@ -32,8 +32,6 @@ namespace DotNetFlicks.Managers.Managers
         {
             var dtos = _personAccessor.GetQuery(query);
 
-            var count = _personAccessor.GetCount();
-
             var vms = Mapper.Map<List<PersonViewModel>>(dtos);
 
             foreach (var vm in vms)
@@ -41,14 +39,11 @@ namespace DotNetFlicks.Managers.Managers
                 vm.Roles = vm.Roles.OrderBy(x => x.MovieName).ToList();
             }
 
+            var count = _personAccessor.GetCount(query.Search);
+
             var paginatedList = new PaginatedList<PersonViewModel>(vms, count, query.PageIndex, query.PageSize);
 
             return paginatedList;
-        }
-
-        public int GetCount()
-        {
-            return _personAccessor.GetCount();
         }
 
         public PersonViewModel Save(PersonViewModel vm)

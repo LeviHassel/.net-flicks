@@ -8,13 +8,11 @@ namespace DotNetFlicks.Accessors.Interfaces
     {
         PersonDTO Get(int id);
 
-        List<PersonDTO> GetAll();
-
         List<PersonDTO> GetQuery(IndexQuery query);
 
         List<PersonDTO> GetAllByName(string query);
 
-        int GetCount();
+        int GetCount(string search);
 
         PersonDTO Save(PersonDTO dto);
 

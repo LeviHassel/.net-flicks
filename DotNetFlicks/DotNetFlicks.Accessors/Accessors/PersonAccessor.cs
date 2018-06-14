@@ -32,22 +32,10 @@ namespace DotNetFlicks.Accessors.Accessors
             return dto;
         }
 
-        public List<PersonDTO> GetAll()
-        {
-            var entities = _db.People
-                .Include(x => x.CastRoles).ThenInclude(x => x.Movie)
-                .Include(x => x.CrewRoles).ThenInclude(x => x.Movie)
-                .Include(x => x.CrewRoles).ThenInclude(x => x.Department)
-                .ToList();
-
-            var dtos = Mapper.Map<List<PersonDTO>>(entities);
-
-            return dtos;
-        }
-
         public List<PersonDTO> GetQuery(IndexQuery query)
         {
             var entities = _db.People
+                .AsNoTracking()
                 .Include(x => x.CastRoles).ThenInclude(x => x.Movie)
                 .Include(x => x.CrewRoles).ThenInclude(x => x.Movie)
                 .Include(x => x.CrewRoles).ThenInclude(x => x.Department)
@@ -74,15 +62,18 @@ namespace DotNetFlicks.Accessors.Accessors
                     break;
             }
 
-            var items = entities.Skip((query.PageIndex - 1) * query.PageSize).Take(query.PageSize).AsQueryable();
+            //TODO: Improve names
+            var items = entities
+                .Skip((query.PageIndex - 1) * query.PageSize)
+                .Take(query.PageSize)
+                .ToList();
 
-            var hello = items.ToList();
-
-            var dtos = Mapper.Map<List<PersonDTO>>(hello);
+            var dtos = Mapper.Map<List<PersonDTO>>(items);
 
             return dtos;
         }
 
+        //TODO: Move this into GetQuery?
         public List<PersonDTO> GetAllByName(string query)
         {
             var entities = _db.People
@@ -94,9 +85,16 @@ namespace DotNetFlicks.Accessors.Accessors
             return dtos;
         }
 
-        public int GetCount()
+        public int GetCount(string search)
         {
-            return _db.People.Count();
+            if (!string.IsNullOrEmpty(search))
+            {
+                return _db.People.Where(x => x.Name.ToLower().Contains(search.ToLower())).Count();
+            }
+            else
+            {
+                return _db.People.Count();
+            }
         }
 
         public PersonDTO Save(PersonDTO dto)

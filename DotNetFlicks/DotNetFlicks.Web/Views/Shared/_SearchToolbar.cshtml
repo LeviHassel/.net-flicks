@@ -1,18 +1,16 @@
-﻿<form asp-action="Index" method="get" class="my-auto mr-auto">
-    <div class="d-flex justify-content-end mb-5">
-        <p class="my-auto mr-auto">Show </p>
+﻿<form asp-action="Index" method="get">
+    <input type="hidden" name="SortOrder" value="@ViewData["CurrentSort"]" />
+    <input type="hidden" name="Page" value="@ViewData["TotalPages"]" />
 
-        <input type="hidden" name="SortOrder" value="@ViewData["CurrentSort"]" />
-
-        <input type="hidden" name="Page" value="@ViewData["TotalPages"]" />
-
-        <select class="form-control" asp-items="Model.PageSizes" name="PageSize" onchange="this.form.submit();"></select>
-
-        <p class="my-auto mr-auto"> entries</p>
-
-        <p class="my-auto mr-3">Search: </p>
-
-        <input class="form-control" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" onchange="this.form.submit();" />
-
+    <div class="d-flex justify-content-start mb-4">
+        <div class="my-auto">
+            <p class="d-inline-block mr-2">Show </p>
+            <select class="d-inline-block form-control w-auto" asp-items="Model.PageSizes" name="PageSize" onchange="this.form.submit();"></select>
+            <p class="d-inline-block ml-2"> entries</p>
+        </div>
+        <div class="my-auto ml-auto">
+            <p class="d-inline-block mr-2">Search: </p>
+            <input class="d-inline-block form-control w-auto" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" onchange="this.form.submit();" />
+        </div>
     </div>
 </form>

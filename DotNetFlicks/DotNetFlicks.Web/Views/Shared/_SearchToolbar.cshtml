@@ -17,7 +17,7 @@
             </div>
 
         </div>
-        @if (!string.IsNullOrEmpty((string)ViewData["CurrentFilter"]))
+        @if (!string.IsNullOrEmpty(Model.CurrentFilter))
         {
             <div class="ml-3 mt-2">
                 <a asp-action="Index" asp-route-sortOrder="@Model.CurrentSort" asp-route-pageSize="@Model.PageSize">Clear search</a>

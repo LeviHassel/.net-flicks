@@ -2,15 +2,29 @@
     <input type="hidden" name="SortOrder" value="@ViewData["CurrentSort"]" />
     <input type="hidden" name="Page" value="@ViewData["TotalPages"]" />
 
-    <div class="d-flex justify-content-start mb-4">
-        <div class="my-auto">
+    <div class="d-flex mb-4">
+        <div>
             <p class="d-inline-block mr-2">Show </p>
             <select class="d-inline-block form-control w-auto" asp-items="Model.PageSizes" name="PageSize" onchange="this.form.submit();"></select>
             <p class="d-inline-block ml-2"> entries</p>
         </div>
-        <div class="my-auto ml-auto">
-            <p class="d-inline-block mr-2">Search: </p>
-            <input class="d-inline-block form-control w-auto" type="text" name="SearchString" value="@ViewData["CurrentFilter"]" onchange="this.form.submit();" />
+        <div class="ml-auto">
+            <div class="input-group mb-3">
+                <input type="text" class="form-control" name="SearchString" value="@ViewData["CurrentFilter"]" placeholder="Search" />
+                <div class="input-group-append">
+                    <button type="submit" class="btn btn-primary">
+                        <i class="fas fa-search"></i>
+                    </button>
+                </div>
+            </div>
+
         </div>
+        @if (!string.IsNullOrEmpty((string)ViewData["CurrentFilter"]))
+        {
+            <div class="ml-3 mt-2">
+                <a asp-action="Index" asp-route-sortOrder="@ViewData["CurrentSort"]" asp-route-pageSize="@ViewData["PageSize"]">Clear search</a>
+            </div>
+        }
+
     </div>
 </form>

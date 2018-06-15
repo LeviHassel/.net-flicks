@@ -9,13 +9,21 @@ namespace DotNetFlicks.ViewModels.Shared
     public class PaginatedList<T> : List<T>
     {
         public string CurrentSort { get; private set; }
+
         public string CurrentFilter { get; private set; }
+
         public int FirstItemIndex { get; private set; }
+
         public int LastItemIndex { get; private set; }
+
         public int PageIndex { get; private set; }
+
         public int PageSize { get; private set; }
+
         public int TotalCount { get; private set; }
+
         public int TotalPages { get; private set; }
+
         public List<SelectListItem> PageSizeOptions { get; private set; }
 
         public PaginatedList(List<T> items, int count, IndexRequest request)

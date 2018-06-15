@@ -18,13 +18,7 @@ namespace DotNetFlicks.Web.Controllers
 
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int? pageSize)
         {
-            var request = new IndexRequest
-            {
-                SortOrder = sortOrder,
-                Search = searchString == null ? currentFilter : searchString,
-                PageIndex = searchString == null && page.HasValue ? page.Value : 1, 
-                PageSize = pageSize.HasValue ? pageSize.Value : 10
-            };
+            var request = new IndexRequest(sortOrder, currentFilter, searchString, page, pageSize);
 
             //TODO: consider moving these or refactoring how they work (maybe an enum or helper?)
             ViewData["NameSortParm"] = string.IsNullOrEmpty(request.SortOrder) ? "name_desc" : "";

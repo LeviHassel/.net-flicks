@@ -1,6 +1,4 @@
 ﻿using DotNetFlicks.ViewModels.Base;
-using Microsoft.AspNetCore.Mvc.Rendering;
-using System;
 
 namespace DotNetFlicks.ViewModels.Movie
 {

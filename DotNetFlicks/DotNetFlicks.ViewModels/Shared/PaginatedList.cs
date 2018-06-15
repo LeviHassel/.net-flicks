@@ -65,7 +65,5 @@ namespace DotNetFlicks.ViewModels.Shared
                 return (PageIndex < TotalPages);
             }
         }
-
-        //TODO: Add more helper functions
     }
 }

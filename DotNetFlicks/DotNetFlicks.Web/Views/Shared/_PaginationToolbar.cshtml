@@ -1,8 +1,6 @@
 ﻿@{
-    var firstDisabled = Model.PageIndex == 1 ? "disabled" : "";
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
-    var lastDisabled = Model.PageIndex == Model.TotalPages || Model.TotalPages < 0 ? "disabled" : "";
 }
 
 <div class="d-flex justify-content-end mt-4 pagination-toolbar">
@@ -19,6 +17,7 @@
         </a>
         @for (var i = 1; i <= Model.TotalPages; i++)
         {
+            //Display page links for the current page, the pages on both sides of the current page, the first page and last page
             if (Math.Abs(Model.PageIndex - i) < 2 || i == 1 || i == Model.TotalPages)
             {
                 <a asp-action="Index"
@@ -30,6 +29,7 @@
                     @i
                 </a>
             }
+            //Display "..." spacers to represent page number skips between the middle 3 pages and the first and last pages
             else if (Math.Abs(Model.PageIndex - i) < 3)
             {
                 <a class="btn btn-outline-primary d-none d-md-inline disabled">...</a>

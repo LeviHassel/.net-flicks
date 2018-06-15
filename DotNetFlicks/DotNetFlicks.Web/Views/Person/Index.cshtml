@@ -26,7 +26,18 @@
                        asp-route-pageSize="@Model.PageSize">
                         <div class="d-flex">
                             <h5 class="mb-1">Name</h5>
-                            <i class="fas fa-sort my-auto ml-auto"></i>
+                            @if (string.IsNullOrEmpty(Model.CurrentSort))
+                            {
+                                <i class="fas fa-sort-up my-auto ml-auto"></i>
+                            }
+                            else if (Model.CurrentSort == "name_desc")
+                            {
+                                <i class="fas fa-sort-down my-auto ml-auto"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-sort my-auto ml-auto" style="color: lightgray;"></i>
+                            }
                         </div>
                     </a>
 
@@ -43,7 +54,18 @@
                        asp-route-pageSize="@Model.PageSize">
                         <div class="d-flex">
                             <h5 class="mb-1">Roles</h5>
-                            <i class="fas fa-sort my-auto ml-auto"></i>
+                            @if (Model.CurrentSort == "Roles")
+                            {
+                                <i class="fas fa-sort-up my-auto ml-auto"></i>
+                            }
+                            else if (Model.CurrentSort == "roles_desc")
+                            {
+                                <i class="fas fa-sort-down my-auto ml-auto"></i>
+                            }
+                            else
+                            {
+                                <i class="fas fa-sort my-auto ml-auto" style="color: lightgray;"></i>
+                            }
                         </div>
                     </a>
                 </th>

@@ -5,41 +5,34 @@
     var lastDisabled = Model.PageIndex == Model.TotalPages || Model.TotalPages < 0 ? "disabled" : "";
 }
 
-<div class="d-flex justify-content-end mt-4">
-    <p class="my-auto mr-auto">Showing @Model.FirstItemIndex to @Model.LastItemIndex of @Model.TotalCount entries</p>
+<div class="d-flex justify-content-end mt-4 pagination-toolbar">
+    <p class="my-auto mr-auto">@Model.FirstItemIndex - @Model.LastItemIndex of @Model.TotalCount items</p>
 
     <div class="btn-group btn-group-toggle my-auto">
-        @if (Model.TotalPages > 3)
-        {
-            <a asp-action="Index"
-               asp-route-sortOrder="@ViewData["CurrentSort"]"
-               asp-route-page="1"
-               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-               asp-route-pageSize="@ViewData["PageSize"]"
-               class="btn btn-outline-primary @firstDisabled">
-                First
-            </a>
-        }
         <a asp-action="Index"
            asp-route-sortOrder="@ViewData["CurrentSort"]"
            asp-route-page="@(Model.PageIndex - 1)"
            asp-route-currentFilter="@ViewData["CurrentFilter"]"
            asp-route-pageSize="@ViewData["PageSize"]"
            class="btn btn-outline-primary @prevDisabled">
-            Previous
+            <i class="fas fa-chevron-left my-auto ml-auto"></i>
         </a>
         @for (var i = 1; i <= Model.TotalPages; i++)
         {
-            if (Math.Abs(Model.PageIndex - i) < 3)
+            if (Math.Abs(Model.PageIndex - i) < 2 || i == 1 || i == Model.TotalPages)
             {
                 <a asp-action="Index"
                    asp-route-sortOrder="@ViewData["CurrentSort"]"
                    asp-route-page="@i"
                    asp-route-currentFilter="@ViewData["CurrentFilter"]"
                    asp-route-pageSize="@ViewData["PageSize"]"
-                   class="btn btn-outline-primary @(i == Model.PageIndex ? "active" : "")">
+                   class="btn btn-outline-primary d-none d-md-inline @(i == Model.PageIndex ? "active" : "")">
                     @i
                 </a>
+            }
+            else if (Math.Abs(Model.PageIndex - i) < 3)
+            {
+                <a class="btn btn-outline-primary d-none d-md-inline disabled">...</a>
             }
         }
         <a asp-action="Index"
@@ -48,18 +41,7 @@
            asp-route-currentFilter="@ViewData["CurrentFilter"]"
            asp-route-pageSize="@ViewData["PageSize"]"
            class="btn btn-outline-primary @nextDisabled">
-            Next
+            <i class="fas fa-chevron-right my-auto ml-auto"></i>
         </a>
-        @if (Model.TotalPages > 3)
-        {
-            <a asp-action="Index"
-               asp-route-sortOrder="@ViewData["CurrentSort"]"
-               asp-route-page="@Model.TotalPages"
-               asp-route-currentFilter="@ViewData["CurrentFilter"]"
-               asp-route-pageSize="@ViewData["PageSize"]"
-               class="btn btn-outline-primary @lastDisabled">
-                Last
-            </a>
-        }
     </div>
 </div>

@@ -1,12 +1,10 @@
 ﻿<form asp-action="Index" method="get">
     <input type="hidden" name="SortOrder" value="@ViewData["CurrentSort"]" />
-    <input type="hidden" name="Page" value="@ViewData["TotalPages"]" />
 
     <div class="d-flex mb-4">
         <div>
-            <p class="d-inline-block mr-2">Show </p>
+            <p class="d-inline-block mr-2">Items per page: </p>
             <select class="d-inline-block form-control w-auto" asp-items="Model.PageSizes" name="PageSize" onchange="this.form.submit();"></select>
-            <p class="d-inline-block ml-2"> entries</p>
         </div>
         <div class="ml-auto">
             <div class="input-group mb-3">

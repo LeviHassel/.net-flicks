@@ -79,6 +79,12 @@ body {
     max-width: 600px;
 }
 
+/* Customize Index Tables 
+-------------------------------------------------- */
+.pagination-toolbar a {
+    border-color: lightgray;
+}
+
 /* Customize DataTables 
 -------------------------------------------------- */
 .btn-primary {

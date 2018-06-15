@@ -4,6 +4,7 @@ using DotNetFlicks.Accessors.Models.DTO;
 using DotNetFlicks.Common.Configuration;
 using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Person;
+using DotNetFlicks.ViewModels.Shared;
 using System.Collections.Generic;
 using System.Linq;
 

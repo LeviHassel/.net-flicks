@@ -1,6 +1,4 @@
-﻿using System;
-
-namespace DotNetFlicks.ViewModels.Shared
+﻿namespace DotNetFlicks.ViewModels.Shared
 {
     public class MovieRoleViewModel
     {

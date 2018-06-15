@@ -1,9 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc.Rendering;
+﻿using DotNetFlicks.Common.Configuration;
+using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 
-namespace DotNetFlicks.Common.Configuration
+namespace DotNetFlicks.ViewModels.Shared
 {
     public class PaginatedList<T> : List<T>
     {
@@ -56,5 +57,7 @@ namespace DotNetFlicks.Common.Configuration
                 return (PageIndex < TotalPages);
             }
         }
+
+        //TODO: Add more helper functions
     }
 }

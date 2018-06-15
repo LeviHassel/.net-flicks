@@ -1,5 +1,6 @@
 ﻿using DotNetFlicks.Common.Configuration;
 using DotNetFlicks.ViewModels.Person;
+using DotNetFlicks.ViewModels.Shared;
 
 namespace DotNetFlicks.Managers.Interfaces
 {

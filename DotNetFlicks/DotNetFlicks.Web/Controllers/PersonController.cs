@@ -18,7 +18,7 @@ namespace DotNetFlicks.Web.Controllers
 
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int? pageSize)
         {
-            var request = new IndexRequest(sortOrder, currentFilter, searchString, page, pageSize);
+            var request = new DataTableRequest(sortOrder, currentFilter, searchString, page, pageSize);
 
             //TODO: consider moving these or refactoring how they work (maybe an enum or helper?)
             ViewData["NameSortParm"] = string.IsNullOrEmpty(request.SortOrder) ? "name_desc" : "";

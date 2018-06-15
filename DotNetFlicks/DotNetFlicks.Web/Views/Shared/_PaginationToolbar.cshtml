@@ -1,4 +1,6 @@
-﻿@{
+﻿@model DotNetFlicks.ViewModels.Shared.DataTableViewModel
+
+@{
     var prevDisabled = !Model.HasPreviousPage ? "disabled" : "";
     var nextDisabled = !Model.HasNextPage ? "disabled" : "";
 }

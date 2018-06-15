@@ -6,7 +6,7 @@ using System.Linq;
 
 namespace DotNetFlicks.ViewModels.Shared
 {
-    public class PaginatedList<T> : List<T>
+    public class DataTableViewModel
     {
         public string CurrentSort { get; private set; }
 
@@ -26,7 +26,7 @@ namespace DotNetFlicks.ViewModels.Shared
 
         public List<SelectListItem> PageSizeOptions { get; private set; }
 
-        public PaginatedList(List<T> items, int count, IndexRequest request)
+        public DataTableViewModel(DataTableRequest request, int count)
         {
             CurrentSort = request.SortOrder;
             CurrentFilter = request.Search;
@@ -46,8 +46,6 @@ namespace DotNetFlicks.ViewModels.Shared
             };
 
             PageSizeOptions.Single(x => x.Value == request.PageSize.ToString()).Selected = true;
-
-            this.AddRange(items);
         }
 
         public bool HasPreviousPage

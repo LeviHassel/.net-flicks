@@ -1,6 +1,5 @@
 ﻿using DotNetFlicks.Common.Models;
 using DotNetFlicks.ViewModels.Person;
-using DotNetFlicks.ViewModels.Shared;
 
 namespace DotNetFlicks.Managers.Interfaces
 {
@@ -8,7 +7,7 @@ namespace DotNetFlicks.Managers.Interfaces
     {
         PersonViewModel Get(int? id);
 
-        PaginatedList<PersonViewModel> GetRequest(IndexRequest query);
+        PeopleViewModel GetRequest(DataTableRequest query);
 
         PersonViewModel Save(PersonViewModel vm);
 

@@ -31,7 +31,7 @@ namespace DotNetFlicks.Accessors.Accessors
             return dto;
         }
 
-        public List<PersonDTO> GetRequest(IndexRequest request)
+        public List<PersonDTO> GetRequest(DataTableRequest request)
         {
             var query = _db.People
                 .AsNoTracking()

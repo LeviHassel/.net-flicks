@@ -1,6 +1,6 @@
 ﻿namespace DotNetFlicks.Common.Models
 {
-    public class IndexRequest
+    public class DataTableRequest
     {
         public string SortOrder { get; set; }
 
@@ -10,7 +10,7 @@
 
         public int PageSize { get; set; }
 
-        public IndexRequest(string sortOrder, string currentFilter, string searchString, int? page, int? pageSize)
+        public DataTableRequest(string sortOrder, string currentFilter, string searchString, int? page, int? pageSize)
         {
             SortOrder = sortOrder;
             Search = searchString == null ? currentFilter : searchString;

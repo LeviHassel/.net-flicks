@@ -1,18 +1,16 @@
-﻿@using DotNetFlicks.ViewModels.Shared;
-
-@model PaginatedList<DotNetFlicks.ViewModels.Person.PersonViewModel>
+﻿@model DotNetFlicks.ViewModels.Person.PeopleViewModel
 
 @{
     ViewData["Title"] = "People";
 }
 
 <div class="d-flex mb-5">
-    <h1>@ViewData["Title"] <small>(@Model.TotalCount)</small></h1>
+    <h1>@ViewData["Title"] <small>(@Model.DataTable.TotalCount)</small></h1>
     <a class="btn btn-primary ml-auto my-auto" asp-controller="Person" asp-action="Edit">New</a>
 </div>
 
 <div>
-    <partial name="_SearchToolbar" />
+    <partial name="_SearchToolbar" for="@Model.DataTable" />
 
     <table class="table">
         <thead>
@@ -21,16 +19,16 @@
                     <a class="d-block p-3"
                        asp-action="Index"
                        asp-route-sortOrder="@ViewData["NameSortParm"]"
-                       asp-route-currentFilter="@Model.CurrentFilter"
-                       asp-route-page="@Model.PageIndex"
-                       asp-route-pageSize="@Model.PageSize">
+                       asp-route-currentFilter="@Model.DataTable.CurrentFilter"
+                       asp-route-page="@Model.DataTable.PageIndex"
+                       asp-route-pageSize="@Model.DataTable.PageSize">
                         <div class="d-flex">
                             <h5 class="mb-1">Name</h5>
-                            @if (string.IsNullOrEmpty(Model.CurrentSort))
+                            @if (string.IsNullOrEmpty(Model.DataTable.CurrentSort))
                             {
                                 <i class="fas fa-sort-up my-auto ml-auto"></i>
                             }
-                            else if (Model.CurrentSort == "name_desc")
+                            else if (Model.DataTable.CurrentSort == "name_desc")
                             {
                                 <i class="fas fa-sort-down my-auto ml-auto"></i>
                             }
@@ -49,16 +47,16 @@
                     <a class="d-block p-3"
                        asp-action="Index"
                        asp-route-sortOrder="@ViewData["RolesSortParm"]"
-                       asp-route-currentFilter="@Model.CurrentFilter"
-                       asp-route-page="@Model.PageIndex"
-                       asp-route-pageSize="@Model.PageSize">
+                       asp-route-currentFilter="@Model.DataTable.CurrentFilter"
+                       asp-route-page="@Model.DataTable.PageIndex"
+                       asp-route-pageSize="@Model.DataTable.PageSize">
                         <div class="d-flex">
                             <h5 class="mb-1">Roles</h5>
-                            @if (Model.CurrentSort == "Roles")
+                            @if (Model.DataTable.CurrentSort == "Roles")
                             {
                                 <i class="fas fa-sort-up my-auto ml-auto"></i>
                             }
-                            else if (Model.CurrentSort == "roles_desc")
+                            else if (Model.DataTable.CurrentSort == "roles_desc")
                             {
                                 <i class="fas fa-sort-down my-auto ml-auto"></i>
                             }
@@ -73,7 +71,7 @@
             </tr>
         </thead>
         <tbody>
-            @foreach (var person in Model)
+            @foreach (var person in Model.People)
             {
                 <tr>
                     <td class="d-table-cell align-middle">
@@ -110,7 +108,7 @@
         </tbody>
     </table>
 
-    <partial name="_PaginationToolbar" />
+    <partial name="_PaginationToolbar" for="@Model.DataTable" />
 </div>
 
 <div class="modal fade image-modal" tabindex="-1" role="dialog">

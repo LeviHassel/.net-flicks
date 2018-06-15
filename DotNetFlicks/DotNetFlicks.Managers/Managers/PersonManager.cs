@@ -29,7 +29,7 @@ namespace DotNetFlicks.Managers.Managers
             return vm;
         }
 
-        public PaginatedList<PersonViewModel> GetRequest(IndexRequest request)
+        public PeopleViewModel GetRequest(DataTableRequest request)
         {
             var dtos = _personAccessor.GetRequest(request);
 
@@ -42,7 +42,10 @@ namespace DotNetFlicks.Managers.Managers
 
             var count = _personAccessor.GetCount(request.Search);
 
-            return new PaginatedList<PersonViewModel>(vms, count, request);
+            return new PeopleViewModel {
+                People = vms,
+                DataTable = new DataTableViewModel(request, count)
+            };
         }
 
         public PersonViewModel Save(PersonViewModel vm)

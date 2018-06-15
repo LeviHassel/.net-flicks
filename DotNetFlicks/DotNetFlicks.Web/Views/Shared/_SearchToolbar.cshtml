@@ -1,4 +1,6 @@
-﻿<form asp-action="Index" method="get">
+﻿@model DotNetFlicks.ViewModels.Shared.DataTableViewModel
+
+<form asp-action="Index" method="get">
     <input type="hidden" name="SortOrder" value="@Model.CurrentSort" />
 
     <div class="d-flex mb-4">

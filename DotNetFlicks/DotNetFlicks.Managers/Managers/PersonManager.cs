@@ -1,7 +1,7 @@
 ﻿using AutoMapper;
 using DotNetFlicks.Accessors.Interfaces;
 using DotNetFlicks.Accessors.Models.DTO;
-using DotNetFlicks.Common.Configuration;
+using DotNetFlicks.Common.Models;
 using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Person;
 using DotNetFlicks.ViewModels.Shared;

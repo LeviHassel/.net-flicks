@@ -2,7 +2,7 @@
 using DotNetFlicks.Accessors.Config;
 using DotNetFlicks.Accessors.Database;
 using DotNetFlicks.Accessors.Identity;
-using DotNetFlicks.Common.Configuration;
+using DotNetFlicks.Common.Models;
 using DotNetFlicks.Engines.Config;
 using DotNetFlicks.Managers.Config;
 using Microsoft.AspNetCore.Builder;

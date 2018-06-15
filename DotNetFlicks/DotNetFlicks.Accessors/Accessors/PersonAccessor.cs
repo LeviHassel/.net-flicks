@@ -5,7 +5,7 @@ using DotNetFlicks.Accessors.Interfaces;
 using DotNetFlicks.Accessors.Models.DTO;
 using DotNetFlicks.Accessors.Models.EF;
 using DotNetFlicks.Accessors.Models.EF.Base;
-using DotNetFlicks.Common.Configuration;
+using DotNetFlicks.Common.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;

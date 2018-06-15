@@ -1,4 +1,4 @@
-﻿using DotNetFlicks.Common.Configuration;
+﻿using DotNetFlicks.Common.Models;
 using DotNetFlicks.Managers.Interfaces;
 using Microsoft.Extensions.Options;
 using System.Net;

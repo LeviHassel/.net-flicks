@@ -1,4 +1,4 @@
-﻿using DotNetFlicks.Common.Configuration;
+﻿using DotNetFlicks.Common.Models;
 using DotNetFlicks.ViewModels.Person;
 using DotNetFlicks.ViewModels.Shared;
 

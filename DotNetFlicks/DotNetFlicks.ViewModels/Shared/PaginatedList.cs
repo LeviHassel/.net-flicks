@@ -1,4 +1,4 @@
-﻿using DotNetFlicks.Common.Configuration;
+﻿using DotNetFlicks.Common.Models;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using System;
 using System.Collections.Generic;

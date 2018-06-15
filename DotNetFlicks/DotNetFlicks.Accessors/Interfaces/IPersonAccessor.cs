@@ -1,5 +1,5 @@
 ﻿using DotNetFlicks.Accessors.Models.DTO;
-using DotNetFlicks.Common.Configuration;
+using DotNetFlicks.Common.Models;
 using System.Collections.Generic;
 
 namespace DotNetFlicks.Accessors.Interfaces

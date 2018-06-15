@@ -1,4 +1,4 @@
-﻿namespace DotNetFlicks.Common.Configuration
+﻿namespace DotNetFlicks.Common.Models
 {
     public class EmailConfiguration
     {

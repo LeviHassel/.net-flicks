@@ -1,30 +1,34 @@
 ﻿using Microsoft.AspNetCore.Mvc.Rendering;
-using Microsoft.EntityFrameworkCore;
 using System;
 using System.Collections.Generic;
 using System.Linq;
-using System.Threading.Tasks;
 
 namespace DotNetFlicks.Common.Configuration
 {
     public class PaginatedList<T> : List<T>
     {
-        public int PageIndex { get; private set; }
-        public int TotalPages { get; private set; }
-        public int TotalCount { get; private set; }
+        public string CurrentSort { get; private set; }
+        public string CurrentFilter { get; private set; }
         public int FirstItemIndex { get; private set; }
         public int LastItemIndex { get; private set; }
-        public List<SelectListItem> PageSizes { get; private set; }
+        public int PageIndex { get; private set; }
+        public int PageSize { get; private set; }
+        public int TotalCount { get; private set; }
+        public int TotalPages { get; private set; }
+        public List<SelectListItem> PageSizeOptions { get; private set; }
 
-        public PaginatedList(List<T> items, int count, int pageIndex, int pageSize)
+        public PaginatedList(List<T> items, int count, IndexRequest request)
         {
-            PageIndex = pageIndex;
-            TotalPages = (int)Math.Ceiling(count / (double)pageSize);
+            CurrentSort = request.SortOrder;
+            CurrentFilter = request.Search;
+            FirstItemIndex = count > 0 ? (request.PageIndex - 1) * request.PageSize + 1 : 0;
+            LastItemIndex = request.PageSize * request.PageIndex < count ? request.PageSize * request.PageIndex : count;
+            PageIndex = request.PageIndex;
+            PageSize = request.PageSize;
             TotalCount = count;
-            FirstItemIndex = count > 0 ? (pageIndex - 1) * pageSize + 1 : 0;
-            LastItemIndex = pageSize * pageIndex < count ? pageSize * pageIndex : count;
+            TotalPages = (int)Math.Ceiling(count / (double)request.PageSize);
 
-            PageSizes = new List<SelectListItem>
+            PageSizeOptions = new List<SelectListItem>
             {
                 new SelectListItem { Text = "10", Value = "10" },
                 new SelectListItem { Text = "25", Value = "25" },
@@ -32,7 +36,7 @@ namespace DotNetFlicks.Common.Configuration
                 new SelectListItem { Text = "100", Value = "100" }
             };
 
-            PageSizes.Single(x => x.Value == pageSize.ToString()).Selected = true;
+            PageSizeOptions.Single(x => x.Value == request.PageSize.ToString()).Selected = true;
 
             this.AddRange(items);
         }
@@ -51,13 +55,6 @@ namespace DotNetFlicks.Common.Configuration
             {
                 return (PageIndex < TotalPages);
             }
-        }
-
-        public static async Task<PaginatedList<T>> CreateAsync(IQueryable<T> source, int pageIndex, int pageSize)
-        {
-            var count = await source.CountAsync();
-            var items = await source.Skip((pageIndex - 1) * pageSize).Take(pageSize).ToListAsync();
-            return new PaginatedList<T>(items, count, pageIndex, pageSize);
         }
     }
 }

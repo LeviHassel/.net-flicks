@@ -17,14 +17,35 @@
     <table class="table">
         <thead>
             <tr>
-                <th class="d-table-cell">
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["NameSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Name</a>
+                <th class="d-table-cell p-0">
+                    <a class="d-block p-3"
+                       asp-action="Index"
+                       asp-route-sortOrder="@ViewData["NameSortParm"]"
+                       asp-route-currentFilter="@Model.CurrentFilter"
+                       asp-route-page="@Model.PageIndex"
+                       asp-route-pageSize="@Model.PageSize">
+                        <div class="d-flex">
+                            <h5 class="mb-1">Name</h5>
+                            <i class="fas fa-sort my-auto ml-auto"></i>
+                        </div>
+                    </a>
+
                 </th>
                 <th class="d-none d-md-table-cell">
                     <h5>Image</h5>
                 </th>
-                <th class="d-none d-md-table-cell">
-                    <a asp-action="Index" asp-route-sortOrder="@ViewData["RolesSortParm"]" asp-route-currentFilter="@ViewData["CurrentFilter"]">Roles</a>
+                <th class="d-none d-md-table-cell p-0">
+                    <a class="d-block p-3"
+                       asp-action="Index"
+                       asp-route-sortOrder="@ViewData["RolesSortParm"]"
+                       asp-route-currentFilter="@Model.CurrentFilter"
+                       asp-route-page="@Model.PageIndex"
+                       asp-route-pageSize="@Model.PageSize">
+                        <div class="d-flex">
+                            <h5 class="mb-1">Roles</h5>
+                            <i class="fas fa-sort my-auto ml-auto"></i>
+                        </div>
+                    </a>
                 </th>
                 <th width="116"></th>
             </tr>

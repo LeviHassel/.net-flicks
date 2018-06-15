@@ -41,7 +41,7 @@ namespace DotNetFlicks.Managers.Managers
 
             var count = _personAccessor.GetCount(request.Search);
 
-            return new PaginatedList<PersonViewModel>(vms, count, request.PageIndex, request.PageSize);
+            return new PaginatedList<PersonViewModel>(vms, count, request);
         }
 
         public PersonViewModel Save(PersonViewModel vm)

@@ -50,18 +50,23 @@
     </div>
 </div>
 
+@{
+    var collapseId = 0;
+}
+
 @foreach (var category in categories)
 {
     var categoryName = category.First().Category;
+    collapseId++;
 
     <div class="card role-card">
-        <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-@(categoryName)">
+        <div class="card-header bg-primary text-white collapse-card" data-toggle="collapse" aria-expanded="true" href="#collapse-@(collapseId)">
             <div class="d-flex">
                 <h5 class="card-title mb-0">@categoryName <small>(@category.Count())</small></h5>
                 <i class="ml-auto my-auto fas fa-chevron-up" )"></i>
             </div>
         </div>
-        <div class="card-body py-0 collapse show" id="collapse-@(categoryName)">
+        <div class="card-body py-0 collapse show" id="collapse-@(collapseId)">
             <table class="table mb-0">
                 @foreach (var role in category)
                 {

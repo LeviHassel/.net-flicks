@@ -1,4 +1,6 @@
-﻿@model DotNetFlicks.ViewModels.Person.PeopleViewModel
+﻿@using DotNetFlicks.ViewModels.Shared;
+
+@model DotNetFlicks.ViewModels.Person.PeopleViewModel
 
 @{
     ViewData["Title"] = "People";
@@ -16,56 +18,13 @@
         <thead>
             <tr>
                 <th class="d-table-cell p-0">
-                    <a class="d-block p-3"
-                       asp-action="Index"
-                       asp-route-sortOrder="@ViewData["NameSortParm"]"
-                       asp-route-currentFilter="@Model.DataTable.CurrentFilter"
-                       asp-route-page="@Model.DataTable.PageIndex"
-                       asp-route-pageSize="@Model.DataTable.PageSize">
-                        <div class="d-flex">
-                            <h5 class="mb-1">Name</h5>
-                            @if (string.IsNullOrEmpty(Model.DataTable.CurrentSort))
-                            {
-                                <i class="fas fa-sort-up my-auto ml-auto"></i>
-                            }
-                            else if (Model.DataTable.CurrentSort == "name_desc")
-                            {
-                                <i class="fas fa-sort-down my-auto ml-auto"></i>
-                            }
-                            else
-                            {
-                                <i class="fas fa-sort my-auto ml-auto" style="color: lightgray;"></i>
-                            }
-                        </div>
-                    </a>
-
+                    <partial name="_SortableHeader" model='new SortableHeaderViewModel {DataTable = Model.DataTable, ColumnName = "Name"}' />
                 </th>
                 <th class="d-none d-md-table-cell">
                     <h5>Image</h5>
                 </th>
                 <th class="d-none d-md-table-cell p-0">
-                    <a class="d-block p-3"
-                       asp-action="Index"
-                       asp-route-sortOrder="@ViewData["RolesSortParm"]"
-                       asp-route-currentFilter="@Model.DataTable.CurrentFilter"
-                       asp-route-page="@Model.DataTable.PageIndex"
-                       asp-route-pageSize="@Model.DataTable.PageSize">
-                        <div class="d-flex">
-                            <h5 class="mb-1">Roles</h5>
-                            @if (Model.DataTable.CurrentSort == "Roles")
-                            {
-                                <i class="fas fa-sort-up my-auto ml-auto"></i>
-                            }
-                            else if (Model.DataTable.CurrentSort == "roles_desc")
-                            {
-                                <i class="fas fa-sort-down my-auto ml-auto"></i>
-                            }
-                            else
-                            {
-                                <i class="fas fa-sort my-auto ml-auto" style="color: lightgray;"></i>
-                            }
-                        </div>
-                    </a>
+                    <partial name="_SortableHeader" model='new SortableHeaderViewModel {DataTable = Model.DataTable, ColumnName = "Roles"}' />
                 </th>
                 <th width="116"></th>
             </tr>

@@ -47,17 +47,20 @@ namespace DotNetFlicks.Accessors.Accessors
 
             switch (request.SortOrder)
             {
-                case "name_desc":
+                case "Name_Asc":
+                    query = query.OrderBy(x => x.Name);
+                    break;
+
+                case "Name_Desc":
                     query = query.OrderByDescending(x => x.Name);
                     break;
-                case "Roles":
+
+                case "Roles_Asc":
                     query = query.OrderBy(x => x.CrewRoles.Count() + x.CastRoles.Count());
                     break;
-                case "roles_desc":
+
+                case "Roles_Desc":
                     query = query.OrderByDescending(x => x.CrewRoles.Count() + x.CastRoles.Count());
-                    break;
-                default:
-                    query = query.OrderBy(x => x.Name);
                     break;
             }
 

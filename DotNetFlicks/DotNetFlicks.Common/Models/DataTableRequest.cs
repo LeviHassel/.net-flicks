@@ -12,7 +12,7 @@
 
         public DataTableRequest(string sortOrder, string currentFilter, string searchString, int? page, int? pageSize)
         {
-            SortOrder = sortOrder;
+            SortOrder = string.IsNullOrEmpty(sortOrder) ? "Name_Asc" : sortOrder;
             Search = searchString == null ? currentFilter : searchString;
             PageIndex = searchString == null && page.HasValue ? page.Value : 1;
             PageSize = pageSize.HasValue ? pageSize.Value : 10;

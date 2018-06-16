@@ -20,10 +20,6 @@ namespace DotNetFlicks.Web.Controllers
         {
             var request = new DataTableRequest(sortOrder, currentFilter, searchString, page, pageSize);
 
-            //TODO: consider moving these or refactoring how they work (maybe an enum or helper?)
-            ViewData["NameSortParm"] = string.IsNullOrEmpty(request.SortOrder) ? "name_desc" : "";
-            ViewData["RolesSortParm"] = request.SortOrder == "Roles" ? "roles_desc" : "Roles";
-
             var vms = _personManager.GetRequest(request);
 
             return View(vms);

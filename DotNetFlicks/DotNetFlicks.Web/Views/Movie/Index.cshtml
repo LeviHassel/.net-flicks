@@ -1,11 +1,11 @@
 ﻿@model DotNetFlicks.ViewModels.Movie.MoviesViewModel
 
 @{
-    ViewBag.Title = "Movies";
+    ViewData["Title"] = "Movies";
 }
 
 <div class="d-flex mb-5">
-    <h1>@ViewBag.Title <small>(@Model.Movies.Count)</small></h1>
+    <h1>@ViewData["Title"] <small>(@Model.Movies.Count)</small></h1>
     <a class="btn btn-primary ml-auto my-auto" asp-controller="Movie" asp-action="Edit">New</a>
 </div>
 

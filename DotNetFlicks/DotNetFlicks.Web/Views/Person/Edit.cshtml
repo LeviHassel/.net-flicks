@@ -1,10 +1,10 @@
 ﻿@model DotNetFlicks.ViewModels.Person.PersonViewModel
 
 @{
-    ViewBag.Title = Model.Id > 0 ? "Edit " + Model.Name : "New Person";
+    ViewData["Title"] = Model.Id > 0 ? "Edit " + Model.Name : "New Person";
 }
 
-<h1>@ViewBag.Title</h1>
+<h1>@ViewData["Title"]</h1>
 <br /><br />
 
 <form asp-controller="Person" asp-action="Edit" method="post" class="form-horizontal" role="form">

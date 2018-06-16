@@ -1,10 +1,10 @@
 ﻿@model DotNetFlicks.ViewModels.Genre.GenreViewModel
 
 @{
-    ViewBag.Title = "Delete " + Model.Name;
+    ViewData["Title"] = "Delete " + Model.Name;
 }
 
-<h1>@ViewBag.Title</h1>
+<h1>@ViewData["Title"]</h1>
 <p class="lead">Are you sure you want to delete @Model.Name?</p>
 <br /><br />
 

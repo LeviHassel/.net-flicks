@@ -1,13 +1,13 @@
 ﻿@model DotNetFlicks.ViewModels.Genre.GenreViewModel
 
 @{
-    ViewBag.Title = Model.Name;
+    ViewData["Title"] = Model.Name;
     ViewData["OnlyPurchasedMovies"] = false;
 }
 
 <div class="movie-card-container">
     <div class="d-flex justify-content-end mb-5">
-        <h1 class="mr-auto">@ViewBag.Title <small>(@Model.Movies.Count)</small></h1>
+        <h1 class="mr-auto">@ViewData["Title"] <small>(@Model.Movies.Count)</small></h1>
         <partial name="_MovieSorter" view-data="@ViewData" />
     </div>
 

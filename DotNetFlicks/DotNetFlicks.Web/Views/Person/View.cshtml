@@ -3,7 +3,7 @@
 @model DotNetFlicks.ViewModels.Person.PersonViewModel
 
 @{
-    ViewBag.Title = Model.Name;
+    ViewData["Title"] = Model.Name;
     var categories = Model.Roles.GroupBy(x => x.Category).OrderByDescending(x => x.Count());
 }
 
@@ -17,7 +17,7 @@
             </div>
         }
         <div class="col">
-            <h1 class="display-4">@ViewBag.Title</h1>
+            <h1 class="display-4">@ViewData["Title"]</h1>
             <hr class="my-4">
 
             <span>
@@ -82,7 +82,7 @@
     <div class="modal-dialog modal-dialog-centered" style="max-width: 550px">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">@ViewBag.Title</h2>
+                <h2 class="modal-title">@ViewData["Title"]</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -98,7 +98,7 @@
     <div class="modal-dialog modal-lg modal-dialog-centered">
         <div class="modal-content">
             <div class="modal-header">
-                <h2 class="modal-title">@ViewBag.Title</h2>
+                <h2 class="modal-title">@ViewData["Title"]</h2>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>

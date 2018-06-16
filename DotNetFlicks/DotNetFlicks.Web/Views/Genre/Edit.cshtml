@@ -1,10 +1,10 @@
 ﻿@model DotNetFlicks.ViewModels.Genre.GenreViewModel
 
 @{
-    ViewBag.Title = Model.Id > 0 ? "Edit " + Model.Name : "New Genre";
+    ViewData["Title"] = Model.Id > 0 ? "Edit " + Model.Name : "New Genre";
 }
 
-<h1>@ViewBag.Title</h1>
+<h1>@ViewData["Title"]</h1>
 <br /><br />
 
 <form asp-controller="Genre" asp-action="Edit" method="post" class="form-horizontal" role="form">

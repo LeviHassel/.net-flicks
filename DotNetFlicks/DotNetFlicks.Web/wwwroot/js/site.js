@@ -1,10 +1,6 @@
 ﻿$(function () {
-    initializeBootstrapTooltips();
-
-    //Initialize Bootstrap tooltips on DataTable draw
-    $('.table').on('draw.dt', function () {
-        initializeBootstrapTooltips();
-    });
+    //Initialize Bootstrap tooltips
+    $('[data-toggle="tooltip"]').tooltip();
 
     //Update image modals
     $('.image-modal').on('show.bs.modal', function (event) {
@@ -171,8 +167,4 @@ function changeRowOrder(row, change) {
     var orderInput = row.find('input.order');
     var order = parseInt(orderInput.val());
     orderInput.val(order + change);
-}
-
-function initializeBootstrapTooltips() {
-    $('[data-toggle="tooltip"]').tooltip();
 }

@@ -32,7 +32,6 @@ namespace DotNetFlicks.Managers.Managers
         public PeopleViewModel GetAllByRequest(DataTableRequest request)
         {
             var dtos = _personAccessor.GetAllByRequest(request);
-
             var vms = Mapper.Map<List<PersonViewModel>>(dtos);
 
             foreach (var vm in vms)

@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using DotNetFlicks.Accessors.Interfaces;
 using DotNetFlicks.Accessors.Models.DTO;
+using DotNetFlicks.Common.Models;
 using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Genre;
+using DotNetFlicks.ViewModels.Shared;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -27,9 +29,9 @@ namespace DotNetFlicks.Managers.Managers
             return vm;
         }
 
-        public GenresViewModel GetAll()
+        public GenresViewModel GetAllByRequest(DataTableRequest request)
         {
-            var dtos = _genreAccessor.GetAll();
+            var dtos = _genreAccessor.GetAllByRequest(request);
             var vms = Mapper.Map<List<GenreViewModel>>(dtos);
 
             foreach (var vm in vms)
@@ -37,7 +39,13 @@ namespace DotNetFlicks.Managers.Managers
                 vm.Movies = vm.Movies.OrderBy(x => x.Name).ToList();
             }
 
-            return new GenresViewModel { Genres = vms.OrderBy(x => x.Name).ToList() };
+            var count = _genreAccessor.GetCount(request.Search);
+
+            return new GenresViewModel
+            {
+                Genres = vms.OrderBy(x => x.Name).ToList(),
+                DataTable = new DataTableViewModel(request, count)
+            };
         }
 
         public GenreViewModel Save(GenreViewModel vm)

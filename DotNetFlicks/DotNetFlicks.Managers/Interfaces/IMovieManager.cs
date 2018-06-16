@@ -1,4 +1,5 @@
-﻿using DotNetFlicks.ViewModels.Movie;
+﻿using DotNetFlicks.Common.Models;
+using DotNetFlicks.ViewModels.Movie;
 
 namespace DotNetFlicks.Managers.Interfaces
 {
@@ -16,7 +17,7 @@ namespace DotNetFlicks.Managers.Interfaces
 
         EditMovieViewModel GetForEditing(int? id);
 
-        MoviesViewModel GetAllForEditing();
+        MoviesViewModel GetAllByRequest(DataTableRequest query);
 
         EditMovieViewModel Save(EditMovieViewModel vm);
 

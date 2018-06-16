@@ -1,23 +1,33 @@
-﻿@model DotNetFlicks.ViewModels.Movie.MoviesViewModel
+﻿@using DotNetFlicks.ViewModels.Shared;
+
+@model DotNetFlicks.ViewModels.Movie.MoviesViewModel
 
 @{
     ViewData["Title"] = "Movies";
 }
 
 <div class="d-flex mb-5">
-    <h1>@ViewData["Title"] <small>(@Model.Movies.Count)</small></h1>
+    <h1>@ViewData["Title"] <small>(@Model.DataTable.TotalCount)</small></h1>
     <a class="btn btn-primary ml-auto my-auto" asp-controller="Movie" asp-action="Edit">New</a>
 </div>
 
 <div>
-    <table class="table data-table">
+    <partial name="_SearchToolbar" for="@Model.DataTable" />
+
+    <table class="table">
         <thead>
             <tr>
-                <th><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Name)</h5></th>
-                <th class="d-none d-md-table-cell" data-searchable="false"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().ReleaseDate)</h5></th>
-                <th class="d-none d-xl-table-cell" data-sortable="false"><h5>Image</h5></th>
-                <th class="d-none d-lg-table-cell" data-searchable="false"><h5>@Html.DisplayNameFor(x => Model.Movies.FirstOrDefault().Genres)</h5></th>
-                <th width="116" data-sortable="false"></th>
+                <th class="d-table-cell p-0">
+                    <partial name="_SortableHeader" model='new SortableHeaderViewModel {DataTable = Model.DataTable, ColumnName = "Name"}' />
+                </th>
+                <th class="d-none d-md-table-cell p-0">
+                    <partial name="_SortableHeader" model='new SortableHeaderViewModel {DataTable = Model.DataTable, ColumnName = "Date"}' />
+                </th>
+                <th class="d-none d-xl-table-cell"><h5>Image</h5></th>
+                <th class="d-none d-lg-table-cell p-0">
+                    <partial name="_SortableHeader" model='new SortableHeaderViewModel {DataTable = Model.DataTable, ColumnName = "Genres"}' />
+                </th>
+                <th width="116"></th>
             </tr>
         </thead>
         <tbody>
@@ -29,7 +39,7 @@
                             @Html.DisplayFor(x => i.Name)
                         </a>
                     </td>
-                    <td class="d-none d-md-table-cell align-middle" data-sort="@i.ReleaseDate.ToString("yyyy-MM-dd")">@Html.DisplayFor(x => i.ReleaseDate)</td>
+                    <td class="d-none d-md-table-cell align-middle">@Html.DisplayFor(x => i.ReleaseDate)</td>
                     <td class="d-none d-xl-table-cell align-middle">
                         @if (!string.IsNullOrEmpty(i.ImageUrl))
                         {
@@ -38,7 +48,7 @@
                             </button>
                         }
                     </td>
-                    <td class="d-none d-lg-table-cell" data-sort="@i.Genres.Count">
+                    <td class="d-none d-lg-table-cell">
                         <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.GenresTooltip">
                             @i.Genres.Count
                         </button>
@@ -57,6 +67,8 @@
             }
         </tbody>
     </table>
+
+    <partial name="_PaginationToolbar" for="@Model.DataTable" />
 </div>
 
 <div class="modal fade image-modal" tabindex="-1" role="dialog">

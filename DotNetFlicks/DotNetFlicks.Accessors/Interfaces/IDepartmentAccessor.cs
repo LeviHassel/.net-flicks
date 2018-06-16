@@ -1,4 +1,5 @@
 ﻿using DotNetFlicks.Accessors.Models.DTO;
+using DotNetFlicks.Common.Models;
 using System.Collections.Generic;
 
 namespace DotNetFlicks.Accessors.Interfaces
@@ -7,9 +8,11 @@ namespace DotNetFlicks.Accessors.Interfaces
     {
         DepartmentDTO Get(int id);
 
-        List<DepartmentDTO> GetAll();
+        List<DepartmentDTO> GetAllByRequest(DataTableRequest query);
 
         List<DepartmentDTO> GetAllByName(string query);
+
+        int GetCount(string search);
 
         int GetRoleCount(int id);
 

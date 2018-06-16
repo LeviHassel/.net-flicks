@@ -1,4 +1,5 @@
-﻿using DotNetFlicks.ViewModels.Genre;
+﻿using DotNetFlicks.Common.Models;
+using DotNetFlicks.ViewModels.Genre;
 
 namespace DotNetFlicks.Managers.Interfaces
 {
@@ -6,7 +7,7 @@ namespace DotNetFlicks.Managers.Interfaces
     {
         GenreViewModel Get(int? id);
 
-        GenresViewModel GetAll();
+        GenresViewModel GetAllByRequest(DataTableRequest query);
 
         GenreViewModel Save(GenreViewModel vm);
 

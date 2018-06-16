@@ -1,8 +1,10 @@
 ﻿using AutoMapper;
 using DotNetFlicks.Accessors.Interfaces;
 using DotNetFlicks.Accessors.Models.DTO;
+using DotNetFlicks.Common.Models;
 using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Department;
+using DotNetFlicks.ViewModels.Shared;
 using System.Collections.Generic;
 using System.Linq;
 
@@ -26,17 +28,24 @@ namespace DotNetFlicks.Managers.Managers
             return vm;
         }
 
-        public DepartmentsViewModel GetAll()
+        public DepartmentsViewModel GetAllByRequest(DataTableRequest request)
         {
-            var dtos = _departmentAccessor.GetAll();
+            var dtos = _departmentAccessor.GetAllByRequest(request);
             var vms = Mapper.Map<List<DepartmentViewModel>>(dtos);
 
+            //TODO: Consider switching back to old way including Roles and maybe even tooltips?
             foreach (var vm in vms)
             {
                 vm.PeopleCount = _departmentAccessor.GetRoleCount(vm.Id);
             }
 
-            return new DepartmentsViewModel { Departments = vms.OrderBy(x => x.Name).ToList() };
+            var count = _departmentAccessor.GetCount(request.Search);
+
+            return new DepartmentsViewModel
+            {
+                Departments = vms.OrderBy(x => x.Name).ToList(),
+                DataTable = new DataTableViewModel(request, count)
+            };
         }
 
         public DepartmentViewModel Save(DepartmentViewModel vm)

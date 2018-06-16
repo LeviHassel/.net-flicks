@@ -1,21 +1,29 @@
-﻿@model DotNetFlicks.ViewModels.Genre.GenresViewModel
+﻿@using DotNetFlicks.ViewModels.Shared;
+
+@model DotNetFlicks.ViewModels.Genre.GenresViewModel
 
 @{
     ViewData["Title"] = "Genres";
 }
 
 <div class="d-flex mb-5">
-    <h1>@ViewData["Title"] <small>(@Model.Genres.Count)</small></h1>
+    <h1>@ViewData["Title"] <small>(@Model.DataTable.TotalCount)</small></h1>
     <a class="btn btn-primary ml-auto my-auto" asp-controller="Genre" asp-action="Edit">New</a>
 </div>
 
 <div>
-    <table class="table data-table">
+    <partial name="_SearchToolbar" for="@Model.DataTable" />
+
+    <table class="table">
         <thead>
             <tr>
-                <th><h5>@Html.DisplayNameFor(x => Model.Genres.FirstOrDefault().Name)</h5></th>
-                <th class="d-none d-sm-table-cell" data-searchable="false"><h5>@Html.DisplayNameFor(x => Model.Genres.FirstOrDefault().Movies)</h5></th>
-                <th width="116" data-sortable="false"></th>
+                <th class="d-table-cell p-0">
+                    <partial name="_SortableHeader" model='new SortableHeaderViewModel {DataTable = Model.DataTable, ColumnName = "Name"}' />
+                </th>
+                <th class="d-none d-sm-table-cell p-0">
+                    <partial name="_SortableHeader" model='new SortableHeaderViewModel {DataTable = Model.DataTable, ColumnName = "Movies"}' />
+                </th>
+                <th width="116"></th>
             </tr>
         </thead>
         <tbody>
@@ -27,7 +35,7 @@
                             @Html.DisplayFor(x => i.Name)
                         </a>
                     </td>
-                    <td class="d-none d-sm-table-cell" data-sort="@i.Movies.Count">
+                    <td class="d-none d-sm-table-cell">
                         <button type="button" class="btn btn-secondary" data-toggle="tooltip" data-html="true" title="@i.MoviesTooltip">
                             @i.Movies.Count
                         </button>
@@ -46,4 +54,6 @@
             }
         </tbody>
     </table>
+
+    <partial name="_PaginationToolbar" for="@Model.DataTable" />
 </div>

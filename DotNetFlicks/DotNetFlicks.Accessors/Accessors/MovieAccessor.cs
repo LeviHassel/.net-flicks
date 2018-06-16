@@ -5,6 +5,7 @@ using DotNetFlicks.Accessors.Interfaces;
 using DotNetFlicks.Accessors.Models.DTO;
 using DotNetFlicks.Accessors.Models.EF;
 using DotNetFlicks.Accessors.Models.EF.Base;
+using DotNetFlicks.Common.Models;
 using Microsoft.EntityFrameworkCore;
 using System.Collections.Generic;
 using System.Linq;
@@ -40,6 +41,67 @@ namespace DotNetFlicks.Accessors.Accessors
             var dtos = Mapper.Map<List<MovieDTO>>(entities);
 
             return dtos;
+        }
+
+        public List<MovieDTO> GetAllByRequest(DataTableRequest request)
+        {
+            var query = _db.Movies
+                .AsNoTracking()
+                .Include(x => x.Genres).ThenInclude(x => x.Genre)
+                .AsQueryable();
+
+            if (!string.IsNullOrEmpty(request.Search))
+            {
+                query = query.Where(x => x.Name.ToLower().Contains(request.Search.ToLower()));
+            }
+
+            switch (request.SortOrder)
+            {
+                case "Name_Asc":
+                    query = query.OrderBy(x => x.Name);
+                    break;
+
+                case "Name_Desc":
+                    query = query.OrderByDescending(x => x.Name);
+                    break;
+
+                case "Date_Asc":
+                    query = query.OrderBy(x => x.ReleaseDate);
+                    break;
+
+                case "Date_Desc":
+                    query = query.OrderByDescending(x => x.ReleaseDate);
+                    break;
+
+                case "Genres_Asc":
+                    query = query.OrderBy(x => x.Genres.Count());
+                    break;
+
+                case "Genres_Desc":
+                    query = query.OrderByDescending(x => x.Genres.Count());
+                    break;
+            }
+
+            var entities = query
+                .Skip((request.PageIndex - 1) * request.PageSize)
+                .Take(request.PageSize)
+                .ToList();
+
+            var dtos = Mapper.Map<List<MovieDTO>>(entities);
+
+            return dtos;
+        }
+
+        public int GetCount(string search)
+        {
+            if (!string.IsNullOrEmpty(search))
+            {
+                return _db.Movies.Where(x => x.Name.ToLower().Contains(search.ToLower())).Count();
+            }
+            else
+            {
+                return _db.Movies.Count();
+            }
         }
 
         public MovieDTO Save(MovieDTO dto)

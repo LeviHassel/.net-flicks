@@ -1,21 +1,29 @@
-﻿@model DotNetFlicks.ViewModels.Department.DepartmentsViewModel
+﻿@using DotNetFlicks.ViewModels.Shared;
+
+@model DotNetFlicks.ViewModels.Department.DepartmentsViewModel
 
 @{
     ViewData["Title"] = "Departments";
 }
 
 <div class="d-flex mb-5">
-    <h1>@ViewData["Title"] <small>(@Model.Departments.Count)</small></h1>
+    <h1>@ViewData["Title"] <small>(@Model.DataTable.TotalCount)</small></h1>
     <a class="btn btn-primary ml-auto my-auto" asp-controller="Department" asp-action="Edit">New</a>
 </div>
 
 <div>
-    <table class="table data-table">
+    <partial name="_SearchToolbar" for="@Model.DataTable" />
+
+    <table class="table">
         <thead>
             <tr>
-                <th><h5>@Html.DisplayNameFor(x => Model.Departments.FirstOrDefault().Name)</h5></th>
-                <th class="d-none d-sm-table-cell" data-searchable="false"><h5>Roles</h5></th>
-                <th width="116" data-sortable="false"></th>
+                <th class="d-table-cell p-0">
+                    <partial name="_SortableHeader" model='new SortableHeaderViewModel {DataTable = Model.DataTable, ColumnName = "Name"}' />
+                </th>
+                <th class="d-none d-sm-table-cell p-0">
+                    <partial name="_SortableHeader" model='new SortableHeaderViewModel {DataTable = Model.DataTable, ColumnName = "Roles"}' />
+                </th>
+                <th width="116"></th>
             </tr>
         </thead>
         <tbody>
@@ -38,4 +46,6 @@
             }
         </tbody>
     </table>
+
+    <partial name="_PaginationToolbar" for="@Model.DataTable" />
 </div>

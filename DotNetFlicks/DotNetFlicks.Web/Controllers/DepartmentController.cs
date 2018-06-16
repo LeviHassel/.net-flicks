@@ -1,4 +1,5 @@
-﻿using DotNetFlicks.Managers.Interfaces;
+﻿using DotNetFlicks.Common.Models;
+using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Department;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -15,11 +16,13 @@ namespace DotNetFlicks.Web.Controllers
             _departmentManager = departmentManager;
         }
 
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int? pageSize)
         {
-            var vm = _departmentManager.GetAll();
+            var request = new DataTableRequest(sortOrder, currentFilter, searchString, page, pageSize);
 
-            return View(vm);
+            var vms = _departmentManager.GetAllByRequest(request);
+
+            return View(vms);
         }
 
         public ActionResult Edit(int? id)

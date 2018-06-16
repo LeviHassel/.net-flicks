@@ -1,4 +1,5 @@
-﻿using DotNetFlicks.ViewModels.Department;
+﻿using DotNetFlicks.Common.Models;
+using DotNetFlicks.ViewModels.Department;
 
 namespace DotNetFlicks.Managers.Interfaces
 {
@@ -6,7 +7,7 @@ namespace DotNetFlicks.Managers.Interfaces
     {
         DepartmentViewModel Get(int? id);
 
-        DepartmentsViewModel GetAll();
+        DepartmentsViewModel GetAllByRequest(DataTableRequest query);
 
         DepartmentViewModel Save(DepartmentViewModel vm);
 

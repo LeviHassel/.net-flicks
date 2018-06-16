@@ -1,9 +1,11 @@
 ﻿using AutoMapper;
 using DotNetFlicks.Accessors.Interfaces;
 using DotNetFlicks.Accessors.Models.DTO;
+using DotNetFlicks.Common.Models;
 using DotNetFlicks.Engines.Interfaces;
 using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Movie;
+using DotNetFlicks.ViewModels.Shared;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using System.Collections.Generic;
@@ -127,9 +129,9 @@ namespace DotNetFlicks.Managers.Managers
             return vm;
         }
 
-        public MoviesViewModel GetAllForEditing()
+        public MoviesViewModel GetAllByRequest(DataTableRequest request)
         {
-            var dtos = _movieAccessor.GetAll();
+            var dtos = _movieAccessor.GetAllByRequest(request);
             var vms = Mapper.Map<List<MovieViewModel>>(dtos);
 
             foreach (var vm in vms)
@@ -137,7 +139,13 @@ namespace DotNetFlicks.Managers.Managers
                 vm.Genres = vm.Genres.OrderBy(x => x.Name).ToList();
             }
 
-            return new MoviesViewModel { Movies = vms.OrderBy(x => x.Name).ToList() };
+            var count = _movieAccessor.GetCount(request.Search);
+
+            return new MoviesViewModel
+            {
+                Movies = vms.OrderBy(x => x.Name).ToList(),
+                DataTable = new DataTableViewModel(request, count)
+            };
         }
 
 

@@ -1,4 +1,5 @@
-﻿using DotNetFlicks.Managers.Interfaces;
+﻿using DotNetFlicks.Common.Models;
+using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Movie;
 using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
@@ -64,11 +65,13 @@ namespace DotNetFlicks.Web.Controllers
         #endregion
 
         #region Administrator
-        public ActionResult Index()
+        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int? pageSize)
         {
-            var vm = _movieManager.GetAllForEditing();
+            var request = new DataTableRequest(sortOrder, currentFilter, searchString, page, pageSize);
 
-            return View(vm);
+            var vms = _movieManager.GetAllByRequest(request);
+
+            return View(vms);
         }
 
         public ActionResult Edit(int? id)

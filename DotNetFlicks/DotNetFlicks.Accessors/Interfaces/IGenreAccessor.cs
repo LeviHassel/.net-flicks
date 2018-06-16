@@ -1,4 +1,5 @@
 ﻿using DotNetFlicks.Accessors.Models.DTO;
+using DotNetFlicks.Common.Models;
 using System.Collections.Generic;
 
 namespace DotNetFlicks.Accessors.Interfaces
@@ -8,6 +9,10 @@ namespace DotNetFlicks.Accessors.Interfaces
         GenreDTO Get(int id);
 
         List<GenreDTO> GetAll();
+
+        List<GenreDTO> GetAllByRequest(DataTableRequest query);
+
+        int GetCount(string search);
 
         GenreDTO Save(GenreDTO dto);
 

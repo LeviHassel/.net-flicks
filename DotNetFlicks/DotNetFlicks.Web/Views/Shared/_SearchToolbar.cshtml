@@ -8,6 +8,7 @@
             <p class="d-inline-block mr-2">Items per page: </p>
             <select class="d-inline-block form-control w-auto" asp-items="Model.PageSizeOptions" name="PageSize" onchange="this.form.submit();"></select>
         </div>
+
         <div class="ml-auto">
             <div class="input-group mb-3">
                 <input type="text" class="form-control" name="SearchString" value="@Model.CurrentFilter" placeholder="Search" />
@@ -17,14 +18,13 @@
                     </button>
                 </div>
             </div>
-
         </div>
+
         @if (!string.IsNullOrEmpty(Model.CurrentFilter))
         {
             <div class="ml-3 mt-2">
                 <a asp-action="Index" asp-route-sortOrder="@Model.CurrentSort" asp-route-pageSize="@Model.PageSize">Clear search</a>
             </div>
         }
-
     </div>
 </form>

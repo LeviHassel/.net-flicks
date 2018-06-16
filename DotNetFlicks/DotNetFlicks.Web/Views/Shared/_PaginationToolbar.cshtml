@@ -9,6 +9,7 @@
     <p class="my-auto mr-auto">@Model.FirstItemIndex - @Model.LastItemIndex of @Model.TotalCount items</p>
 
     <div class="btn-group btn-group-toggle my-auto">
+        <!-- Display link to previous page -->
         <a asp-action="Index"
            asp-route-sortOrder="@Model.CurrentSort"
            asp-route-page="@(Model.PageIndex - 1)"
@@ -17,6 +18,7 @@
            class="btn btn-outline-primary @prevDisabled">
             <i class="fas fa-chevron-left my-auto ml-auto"></i>
         </a>
+
         @for (var i = 1; i <= Model.TotalPages; i++)
         {
             //Display page links for the current page, the pages on both sides of the current page, the first page and last page
@@ -37,6 +39,8 @@
                 <a class="btn btn-outline-primary d-none d-md-inline disabled">...</a>
             }
         }
+
+        <!-- Display link to next page -->
         <a asp-action="Index"
            asp-route-sortOrder="@Model.CurrentSort"
            asp-route-page="@(Model.PageIndex + 1)"

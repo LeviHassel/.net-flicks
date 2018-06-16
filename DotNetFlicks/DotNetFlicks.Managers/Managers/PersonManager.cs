@@ -29,9 +29,9 @@ namespace DotNetFlicks.Managers.Managers
             return vm;
         }
 
-        public PeopleViewModel GetRequest(DataTableRequest request)
+        public PeopleViewModel GetAllByRequest(DataTableRequest request)
         {
-            var dtos = _personAccessor.GetRequest(request);
+            var dtos = _personAccessor.GetAllByRequest(request);
 
             var vms = Mapper.Map<List<PersonViewModel>>(dtos);
 

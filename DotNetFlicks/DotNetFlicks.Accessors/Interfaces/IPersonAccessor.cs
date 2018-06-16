@@ -8,7 +8,7 @@ namespace DotNetFlicks.Accessors.Interfaces
     {
         PersonDTO Get(int id);
 
-        List<PersonDTO> GetRequest(DataTableRequest query);
+        List<PersonDTO> GetAllByRequest(DataTableRequest query);
 
         List<PersonDTO> GetAllByName(string query);
 

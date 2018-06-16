@@ -20,7 +20,7 @@ namespace DotNetFlicks.Web.Controllers
         {
             var request = new DataTableRequest(sortOrder, currentFilter, searchString, page, pageSize);
 
-            var vms = _personManager.GetRequest(request);
+            var vms = _personManager.GetAllByRequest(request);
 
             return View(vms);
         }

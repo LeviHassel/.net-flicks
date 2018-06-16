@@ -31,7 +31,7 @@ namespace DotNetFlicks.Accessors.Accessors
             return dto;
         }
 
-        public List<PersonDTO> GetRequest(DataTableRequest request)
+        public List<PersonDTO> GetAllByRequest(DataTableRequest request)
         {
             var query = _db.People
                 .AsNoTracking()
@@ -74,7 +74,6 @@ namespace DotNetFlicks.Accessors.Accessors
             return dtos;
         }
 
-        //TODO: Move this into GetQuery?
         public List<PersonDTO> GetAllByName(string query)
         {
             var entities = _db.People

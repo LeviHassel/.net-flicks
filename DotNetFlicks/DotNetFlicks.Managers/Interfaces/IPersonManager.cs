@@ -7,7 +7,7 @@ namespace DotNetFlicks.Managers.Interfaces
     {
         PersonViewModel Get(int? id);
 
-        PeopleViewModel GetRequest(DataTableRequest query);
+        PeopleViewModel GetAllByRequest(DataTableRequest query);
 
         PersonViewModel Save(PersonViewModel vm);
 

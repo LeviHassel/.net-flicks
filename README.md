@@ -24,7 +24,7 @@ What started as a simple template project for .NET Core evolved into a decent-si
    * [Fluent Assertions](https://fluentassertions.com/ "Fluent Assertions")
 
 ## Database Design
-The database for this solution uses Entity Framework and ASP.NET Identity. I chose not to use Identity Roles, instead allowing all users to see both the Client and Administrator UI at once for simplicity.
+The database for this solution uses Entity Framework and ASP.NET Identity. I chose not to use Identity Roles, instead allowing all users to see both the Client and Administrator UI at once for simplicity. The database, called DotNetFlicksDb, is automatically seeded with data for 40 movies, provided by [TMDB](https://www.themoviedb.org "TMDB").
 ![.NetFlicks Database](https://user-images.githubusercontent.com/9669653/41392853-b398faba-6f68-11e8-996e-21f882e9df8c.png)
 
 ## System Architecture
@@ -48,7 +48,7 @@ Here's my implementation of IDesign for this solution:
    * [.NET Core 2.1 SDK](https://www.microsoft.com/net/download/windows ".NET Core 2.1 SDK")
    * [Visual Studio Community 2017](https://www.visualstudio.com/downloads/ "Visual Studio Community 2017") (15.7+ is required for Core 2.1, select `ASP.NET and web development` workload during installation)
 2. Download this repository
-3. Open the solution in Visual Studio and run the Web project; this may take some time, as it will create and seed DotNetFlicksDb, the application's database (special thanks to [TMDB](https://www.themoviedb.org "TMDB") for providing the seed data)
+3. Open the solution in Visual Studio and run the Web project (this may take some time, as it will create and seed the database)
 4. Log into the default administrator account (email: `admin@dotnetflicks.com`, password: `p@ssWORD471`) or create your own account to start using the site
 
 ### Tips

@@ -27,15 +27,6 @@ namespace DotNetFlicks.Accessors.Accessors
             return dto;
         }
 
-        public List<DepartmentDTO> GetAll()
-        {
-            var entities = _db.Departments.ToList();
-
-            var dtos = Mapper.Map<List<DepartmentDTO>>(entities);
-
-            return dtos;
-        }
-
         public List<DepartmentDTO> GetAllByRequest(DataTableRequest request)
         {
             var query = _db.Departments.AsNoTracking().AsQueryable();

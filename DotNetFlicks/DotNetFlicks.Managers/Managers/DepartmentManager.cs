@@ -33,7 +33,6 @@ namespace DotNetFlicks.Managers.Managers
             var dtos = _departmentAccessor.GetAllByRequest(request);
             var vms = Mapper.Map<List<DepartmentViewModel>>(dtos);
 
-            //TODO: Consider switching back to old way including Roles and maybe even tooltips?
             foreach (var vm in vms)
             {
                 vm.PeopleCount = _departmentAccessor.GetRoleCount(vm.Id);

@@ -13,7 +13,6 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
-using Newtonsoft.Json.Serialization;
 
 namespace DotNetFlicks.Web.Config
 {
@@ -50,13 +49,7 @@ namespace DotNetFlicks.Web.Config
             services.Configure<FormOptions>(x => x.ValueCountLimit = 10000);
 
             //Set up MVC
-            services.AddMvc()
-                .SetCompatibilityVersion(CompatibilityVersion.Version_2_1)
-                .AddJsonOptions(options =>
-                {
-                    //This option is required for https://github.com/garvincasimir/csharp-datatables-parser
-                    options.SerializerSettings.ContractResolver = new DefaultContractResolver();
-                });
+            services.AddMvc().SetCompatibilityVersion(CompatibilityVersion.Version_2_1);
 
             //Set up dependency injection
             services.AddManagerDependencies();

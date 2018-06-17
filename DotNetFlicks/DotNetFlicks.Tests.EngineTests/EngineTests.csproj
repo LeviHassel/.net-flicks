@@ -19,7 +19,7 @@
   <ItemGroup>
     <PackageReference Include="AutoFixture" Version="4.4.0" />
     <PackageReference Include="AutoMapper" Version="7.0.0" />
-    <PackageReference Include="FluentAssertions" Version="5.3.2" />
+    <PackageReference Include="FluentAssertions" Version="5.4.0" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
     <PackageReference Include="Microsoft.NET.Test.Sdk" Version="15.7.2" />
     <PackageReference Include="Moq" Version="4.8.3" />

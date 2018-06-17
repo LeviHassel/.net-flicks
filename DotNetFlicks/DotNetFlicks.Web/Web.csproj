@@ -30,7 +30,6 @@
     <Content Remove="wwwroot\.gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="DatatablesParser-core" Version="1.2.3" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
 	<PackageReference Include="AutoMapper" Version="7.0.0" />
     <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />

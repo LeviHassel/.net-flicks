@@ -1,4 +1,6 @@
 ﻿$(function () {
+    /********** General **********/
+
     //Initialize Bootstrap tooltips
     $('[data-toggle="tooltip"]').tooltip();
 
@@ -14,8 +16,15 @@
         modal.find('img').attr('src', imageSource);
     });
 
-    //jQuery breaks validation for the Runtime TimeSpan, but server-side works: https://stackoverflow.com/a/18625285
-    $('#Runtime').rules('remove', 'range');
+    //Toggled open/closed icon on collapsible cards
+    $('.collapse-card').on('click', function () {
+        $(this)
+            .find('[data-fa-i2svg]')
+            .toggleClass('fa-chevron-up')
+            .toggleClass('fa-chevron-down');
+    });
+
+    /********** Movie Cards **********/
 
     //Sort movie cards by type
     $(document).on('click', '.sort-movies', function () {
@@ -39,13 +48,10 @@
         sortMovies(movieSorter);
     });
 
-    //Toggled open/closed icon on collapsible cards
-    $('.collapse-card').on('click', function () {
-        $(this)
-            .find('[data-fa-i2svg]')
-            .toggleClass('fa-chevron-up')
-            .toggleClass('fa-chevron-down');
-    });
+    /********** Edit Movie **********/
+
+    //jQuery breaks validation for the Runtime TimeSpan, but server-side works: https://stackoverflow.com/a/18625285
+    $('#Runtime').rules('remove', 'range');
 
     //Initialize AJAX Bootstrap Select lists on Cast/Crew modal open for faster load times
     $('#cast-modal, #crew-modal').on('show.bs.modal', function () {

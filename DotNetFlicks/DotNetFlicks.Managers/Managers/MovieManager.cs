@@ -143,7 +143,7 @@ namespace DotNetFlicks.Managers.Managers
 
             return new MoviesViewModel
             {
-                Movies = vms.OrderBy(x => x.Name).ToList(),
+                Movies = vms,
                 DataTable = new DataTableViewModel(request, count)
             };
         }

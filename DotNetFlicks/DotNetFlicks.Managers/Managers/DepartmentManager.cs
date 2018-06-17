@@ -43,7 +43,7 @@ namespace DotNetFlicks.Managers.Managers
 
             return new DepartmentsViewModel
             {
-                Departments = vms.OrderBy(x => x.Name).ToList(),
+                Departments = vms,
                 DataTable = new DataTableViewModel(request, count)
             };
         }

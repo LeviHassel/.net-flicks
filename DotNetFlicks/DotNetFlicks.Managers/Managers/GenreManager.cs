@@ -43,7 +43,7 @@ namespace DotNetFlicks.Managers.Managers
 
             return new GenresViewModel
             {
-                Genres = vms.OrderBy(x => x.Name).ToList(),
+                Genres = vms,
                 DataTable = new DataTableViewModel(request, count)
             };
         }

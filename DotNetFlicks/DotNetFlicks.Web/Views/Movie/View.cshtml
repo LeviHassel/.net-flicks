@@ -5,8 +5,6 @@
 @{
     ViewData["Title"] = Model.Name;
     var directors = Model.Crew.Where(x => x.IsDirector && (x.Role == "Director" || x.Role == "Co-Director")).OrderBy(x => x.Role != "Director").ToList();
-    var purchased = Model.PurchaseDate.HasValue;
-    var currentlyRented = Model.RentEndDate.HasValue && Model.RentEndDate.Value >= DateTime.UtcNow;
 }
 
 <div class="jumbotron">
@@ -58,7 +56,7 @@
             <p><strong>Runtime: </strong>@Model.Runtime.ToFormattedString()</p>
 
             <div class="d-flex align-items-center mt-4">
-                @if (purchased || currentlyRented)
+                @if (Model.Purchased || Model.CurrentlyRented)
                 {
                     <a class="btn btn-primary btn-lg mr-3" href="#" role="button" data-toggle="modal" data-target="#watch-modal">Watch</a>
                 }
@@ -68,12 +66,12 @@
                     <a class="btn btn-primary btn-lg mr-3" href="#" role="button" data-toggle="modal" data-target="#buy-modal">Buy ($@Model.PurchaseCost)</a>
                 }
 
-                @if (purchased)
+                @if (Model.Purchased)
                 {
                     <p class="mb-0">Purchased on @Model.PurchaseDate.Value.Date.ToLongDateString()</p>
                 }
 
-                @if (currentlyRented)
+                @if (Model.CurrentlyRented)
                 {
                     var rentHoursRemaining = Model.RentEndDate.Value - DateTime.UtcNow;
                     <p class="mb-0">@rentHoursRemaining.ToFormattedString() remaining for rental</p>
@@ -194,7 +192,7 @@
     </div>
 }
 
-@if (purchased || currentlyRented)
+@if (Model.Purchased || Model.CurrentlyRented)
 {
     <div class="modal fade" id="watch-modal" tabindex="-1" role="dialog">
         <div class="modal-dialog modal-lg modal-dialog-centered">

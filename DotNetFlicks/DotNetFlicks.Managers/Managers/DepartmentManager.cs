@@ -6,7 +6,6 @@ using DotNetFlicks.Managers.Interfaces;
 using DotNetFlicks.ViewModels.Department;
 using DotNetFlicks.ViewModels.Shared;
 using System.Collections.Generic;
-using System.Linq;
 
 namespace DotNetFlicks.Managers.Managers
 {

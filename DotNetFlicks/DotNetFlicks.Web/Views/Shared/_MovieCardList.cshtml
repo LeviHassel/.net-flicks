@@ -5,23 +5,12 @@
 <div class="mx-auto d-flex flex-wrap justify-content-center justify-content-lg-start" style="max-width: 1088px;">
     @foreach (var movie in Model)
     {
-        var purchaseDate = "";
-
-        if (movie.RentEndDate.HasValue)
-        {
-            purchaseDate = ((DateTimeOffset)movie.RentEndDate.Value.AddDays(-2)).ToUnixTimeSeconds().ToString();
-        }
-        else if (movie.PurchaseDate.HasValue)
-        {
-            purchaseDate = ((DateTimeOffset)movie.PurchaseDate.Value).ToUnixTimeSeconds().ToString();
-        }
-
         <div class="card movie-card m-3"
              style="width: 15rem;"
              data-name="@movie.Name"
              data-date="@(((DateTimeOffset)movie.ReleaseDate).ToUnixTimeSeconds().ToString())"
              data-price="@movie.RentCost"
-             data-purchase-date="@purchaseDate">
+             data-purchase-date="@movie.PurchaseDateString">
             <a asp-controller="Movie" asp-action="View" asp-route-id="@movie.Id" style="color: black; text-decoration: none;">
                 <img class="card-img-top" src="@movie.ImageUrl">
                 <div class="card-body" style="padding-bottom: 0; height: 44px;">

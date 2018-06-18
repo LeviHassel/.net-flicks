@@ -48,5 +48,29 @@ namespace DotNetFlicks.ViewModels.Movie
         public List<MovieRoleViewModel> Crew { get; set; }
 
         public string GenresTooltip { get { return Genres != null ? Genres.Select(x => x.Name).OrderBy(y => y).ToList().ToTooltipList() : ""; } }
+
+        public bool CurrentlyRented { get { return RentEndDate.HasValue && RentEndDate.Value >= DateTime.UtcNow; } }
+
+        public bool Purchased { get { return PurchaseDate.HasValue; } }
+
+        public string PurchaseDateString
+        {
+            get
+            {
+                if (RentEndDate.HasValue)
+                {
+                    return ((DateTimeOffset)RentEndDate.Value.AddDays(-2)).ToUnixTimeSeconds().ToString();
+                }
+                else if (PurchaseDate.HasValue)
+                {
+                    return ((DateTimeOffset)PurchaseDate.Value).ToUnixTimeSeconds().ToString();
+                }
+                else
+                {
+                    return string.Empty;
+                }
+
+            }
+        }
     }
 }

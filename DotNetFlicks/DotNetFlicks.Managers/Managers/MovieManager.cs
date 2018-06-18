@@ -96,7 +96,7 @@ namespace DotNetFlicks.Managers.Managers
                 vms.Add(vm);
             }
 
-            return new MoviesViewModel { Movies = vms.OrderByDescending(x => x.ReleaseDate).ToList() };
+            return new MoviesViewModel { Movies = vms.OrderByDescending(x => x.PurchaseDateString).ToList() };
         }
 
         public void Purchase(int id, string userId)

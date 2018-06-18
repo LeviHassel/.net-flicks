@@ -4,6 +4,7 @@
 
 ## Overview
 What started as a simple template project for .NET Core evolved into a decent-sized sample application showcasing what I believe to be the best .NET practices. .NetFlicks allows users to rent/purchase digital movies and view details such as cast and crew. Additionally, it contains admin pages to create/edit/delete movies, people and more. It utilizes multitier system architecture and has an intuitive, mobile-friendly user interface. This project has been a great learning experience for me and I hope it can help other developers looking for a solid template to build on.
+![.NetFlicks Demo](http://levihassel.com/wp-content/uploads/2018/06/tinytake-by-mangoapps-18-06-2018-05-26-46.gif)
 
 ## Demo
 [![.NetFlicks Demo](https://img.youtube.com/vi/ScMzIvxBSi4/0.jpg)](https://www.youtube.com/watch?v=ScMzIvxBSi4)

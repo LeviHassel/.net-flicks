@@ -24,7 +24,7 @@ namespace DotNetFlicks.Managers.Managers
             var dto = id.HasValue ? _personAccessor.Get(id.Value) : new PersonDTO();
             var vm = Mapper.Map<PersonViewModel>(dto);
 
-            vm.Roles = vm.Roles.OrderBy(x => x.MovieYear).ThenBy(x => x.MovieName).ToList();
+            vm.Roles = vm.Roles.OrderByDescending(x => x.MovieYear).ThenBy(x => x.MovieName).ToList();
 
             return vm;
         }

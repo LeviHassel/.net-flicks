@@ -79,6 +79,10 @@ body {
     max-width: 600px;
 }
 
+.btn-primary {
+    color: white !important;
+}
+
 /********** Customize DataTables **********/
 
 .pagination-toolbar a {

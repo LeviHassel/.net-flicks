@@ -22,7 +22,7 @@
              data-date="@(((DateTimeOffset)movie.ReleaseDate).ToUnixTimeSeconds().ToString())"
              data-price="@movie.RentCost"
              data-purchase-date="@purchaseDate">
-            <a asp-controller="Movie" asp-action="View" asp-route-id="@movie.Id" style="all: unset">
+            <a asp-controller="Movie" asp-action="View" asp-route-id="@movie.Id" style="color: black; text-decoration: none;">
                 <img class="card-img-top" src="@movie.ImageUrl">
                 <div class="card-body" style="padding-bottom: 0; height: 44px;">
                     @if (movie.Name.Count() > 20)

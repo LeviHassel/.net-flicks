@@ -27,6 +27,7 @@ namespace DotNetFlicks.Tests.ManagerTests
         private Mock<IMovieAccessor> _movieAccessorMock;
         private Mock<IMovieGenreAccessor> _movieGenreAccessorMock;
         private Mock<IMovieRoleUpdateEngine> _movieRoleUpdateEngineMock;
+        private Mock<IMoviePurchaseEngine> _moviePurchaseEngineMock;
         private Mock<IPersonAccessor> _personAccessorMock;
         private Mock<IUserMovieAccessor> _userMovieAccessorMock;
 
@@ -41,6 +42,7 @@ namespace DotNetFlicks.Tests.ManagerTests
                 _genreAccessorMock.Object,
                 _movieAccessorMock.Object,
                 _movieGenreAccessorMock.Object,
+                _moviePurchaseEngineMock.Object,
                 _movieRoleUpdateEngineMock.Object,
                 _personAccessorMock.Object,
                 _userMovieAccessorMock.Object);

@@ -113,7 +113,7 @@
                 changeRowOrder(prevRow, 1);
             }
         }
-        else if (order !== lastOrder) {
+        else if ($(this).is('.order-down') && order !== lastOrder) {
             var nextRow = $(row).nextAll('tr:visible:first');
 
             if (nextRow.length) {

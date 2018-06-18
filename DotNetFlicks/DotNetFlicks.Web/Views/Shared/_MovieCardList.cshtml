@@ -26,7 +26,10 @@
                 <div class="card-footer text-muted" style="background: none; border-top: none;">
                     <div class="d-flex">
                         <p class="card-text mb-0"><small>@movie.ReleaseDate.ToCustomDateString()</small></p>
-                        <p class="card-text ml-auto mb-0">$@movie.RentCost</p>
+                        @if (!(bool)ViewData["OnlyPurchasedMovies"])
+                        {
+                            <p class="card-text ml-auto mb-0">$@movie.RentCost</p>
+                        }
                     </div>
                 </div>
             </a>

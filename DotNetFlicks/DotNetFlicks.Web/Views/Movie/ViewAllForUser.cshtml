@@ -20,7 +20,7 @@
     <div class="tab-pane fade show active movie-card-container" id="pills-all" role="tabpanel" aria-labelledby="pills-all-tab">
         <div class="d-flex justify-content-end mb-5">
             <h1 class="mr-auto">My Library and Rentals <small>(@Model.Movies.Count)</small></h1>
-            <partial name="_MovieSorter" view-data="@ViewData" />
+            <partial name="_MovieSorter" />
         </div>
 
         <partial name="_MovieCardList" model="Model.Movies" />
@@ -32,7 +32,7 @@
         }
         <div class="d-flex justify-content-end mb-5">
             <h1 class="mr-auto">My Library <small>(@library.Count)</small></h1>
-            <partial name="_MovieSorter" view-data="@ViewData" />
+            <partial name="_MovieSorter" />
         </div>
 
         <partial name="_MovieCardList" model="library" />
@@ -45,7 +45,7 @@
 
         <div class="d-flex justify-content-end mb-5">
             <h1 class="mr-auto">My Rentals <small>(@rentals.Count)</small></h1>
-            <partial name="_MovieSorter" view-data="@ViewData" />
+            <partial name="_MovieSorter" />
         </div>
 
         <partial name="_MovieCardList" model="rentals" />

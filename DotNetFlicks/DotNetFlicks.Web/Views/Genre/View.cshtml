@@ -8,7 +8,7 @@
 <div class="movie-card-container">
     <div class="d-flex justify-content-end mb-5">
         <h1 class="mr-auto">@ViewData["Title"] <small>(@Model.Movies.Count)</small></h1>
-        <partial name="_MovieSorter" view-data="@ViewData" />
+        <partial name="_MovieSorter" />
     </div>
 
     <partial name="_MovieCardList" model="Model.Movies" />

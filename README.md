@@ -1,19 +1,12 @@
 # .NetFlicks (.NET Core 2.1 Sample App)
-This is a .NET Core sample app for renting digital movies and viewing details such as cast and crew. I applied best practices for multitier system architecture, database design, UI/UX and unit testing. It's been a great learning experience and I hope it can help other developers looking for a solid template to build on.
+.NetFlicks is a .NET Core sample app for renting digital movies and viewing details such as cast and crew. It contains admin pages with custom-built data tables for efficient paging, searching, sorting and editing of thousands of items. It utilizes multitier system architecture, has an intuitive, mobile-friendly user interface and comes with a complete unit testing suite. This project has been a great learning experience for me and I hope it can help other developers looking for a solid template to build on.
 
 ![.NetFlicks Demo](https://user-images.githubusercontent.com/9669653/41578865-f8172e24-7359-11e8-8b67-8302e93e122d.gif)
 
 ## Demo
-Click the thumbnail below to watch a full video demo of the sample app.
+Click the thumbnail below to watch a full video demo of .NetFlicks.
 
 [![.NetFlicks Demo](https://img.youtube.com/vi/ScMzIvxBSi4/0.jpg)](https://www.youtube.com/watch?v=ScMzIvxBSi4)
-
-## Features
- * Allows users to rent/purchase digital movies and view details such as cast and crew
- * Contains admin pages to create/edit/delete movies, people and more
- * Utilizes multitier system architecture
- * Intuitive, mobile-friendly user interface
- * Full unit testing suite (coming soon)
 
 ## Stack
  * Server
@@ -24,7 +17,7 @@ Click the thumbnail below to watch a full video demo of the sample app.
    * [Bootstrap 4.1](https://getbootstrap.com/ "Bootstrap 4.1")
    * [Bootstrap Select](https://silviomoreto.github.io/bootstrap-select/ "Bootstrap Select")
    * [Font Awesome](https://fontawesome.com/ "Font Awesome")
- * Testing
+ * Testing (Coming soon)
    * [xUnit](https://xunit.github.io/ "xUnit")
    * [Moq](https://github.com/moq/moq4 "Moq")
    * [AutoFixture](https://github.com/AutoFixture/AutoFixture "AutoFixture")

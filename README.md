@@ -1,5 +1,5 @@
 # .NetFlicks (.NET Core 2.1 Sample App)
-.NET Core sample application for renting movies. This project has been a great learning experience for me and I hope it can help other developers looking for a solid template to build on.
+This is a .NET Core sample app for renting digital movies and viewing details such as cast and crew. I applied best practices for multitier system architecture, database design, UI/UX and unit testing. It's been a great learning experience and I hope it can help other developers looking for a solid template to build on.
 
 ![.NetFlicks Demo](https://user-images.githubusercontent.com/9669653/41578865-f8172e24-7359-11e8-8b67-8302e93e122d.gif)
 

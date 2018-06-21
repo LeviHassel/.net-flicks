@@ -18,6 +18,20 @@ namespace DotNetFlicks.Web.Controllers
 
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int? pageSize)
         {
+            sortOrder = sortOrder ?? (string)TempData["GenreIndexRequest_SortOrder"];
+            currentFilter = currentFilter ?? (string)TempData["GenreIndexRequest_CurrentFilter"];
+            searchString = searchString ?? (string)TempData["GenreIndexRequest_SearchString"];
+            page = page ?? (int?)TempData["GenreIndexRequest_Page"];
+            pageSize = pageSize ?? (int?)TempData["GenreIndexRequest_PageSize"];
+
+            TempData["GenreIndexRequest_SortOrder"] = sortOrder;
+            TempData["GenreIndexRequest_CurrentFilter"] = currentFilter;
+            TempData["GenreIndexRequest_SearchString"] = searchString;
+            TempData["GenreIndexRequest_Page"] = page;
+            TempData["GenreIndexRequest_PageSize"] = pageSize;
+
+            TempData.Keep();
+
             var request = new DataTableRequest(sortOrder, currentFilter, searchString, page, pageSize);
 
             var vms = _genreManager.GetAllByRequest(request);

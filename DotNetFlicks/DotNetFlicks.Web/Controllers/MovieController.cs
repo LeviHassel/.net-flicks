@@ -23,7 +23,7 @@ namespace DotNetFlicks.Web.Controllers
         public ActionResult ViewAll()
         {
             var vm = _movieManager.GetAll();
-            
+
             return View(vm);
         }
 
@@ -67,6 +67,20 @@ namespace DotNetFlicks.Web.Controllers
         #region Administrator
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int? pageSize)
         {
+            sortOrder = sortOrder ?? (string)TempData["MovieIndexRequest_SortOrder"];
+            currentFilter = currentFilter ?? (string)TempData["MovieIndexRequest_CurrentFilter"];
+            searchString = searchString ?? (string)TempData["MovieIndexRequest_SearchString"];
+            page = page ?? (int?)TempData["MovieIndexRequest_Page"];
+            pageSize = pageSize ?? (int?)TempData["MovieIndexRequest_PageSize"];
+
+            TempData["MovieIndexRequest_SortOrder"] = sortOrder;
+            TempData["MovieIndexRequest_CurrentFilter"] = currentFilter;
+            TempData["MovieIndexRequest_SearchString"] = searchString;
+            TempData["MovieIndexRequest_Page"] = page;
+            TempData["MovieIndexRequest_PageSize"] = pageSize;
+
+            TempData.Keep();
+
             var request = new DataTableRequest(sortOrder, currentFilter, searchString, page, pageSize);
 
             var vms = _movieManager.GetAllByRequest(request);

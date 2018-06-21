@@ -18,6 +18,20 @@ namespace DotNetFlicks.Web.Controllers
 
         public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int? pageSize)
         {
+            sortOrder = sortOrder ?? (string)TempData["PersonIndexRequest_SortOrder"];
+            currentFilter = currentFilter ?? (string)TempData["PersonIndexRequest_CurrentFilter"];
+            searchString = searchString ?? (string)TempData["PersonIndexRequest_SearchString"];
+            page = page ?? (int?)TempData["PersonIndexRequest_Page"];
+            pageSize = pageSize ?? (int?)TempData["PersonIndexRequest_PageSize"];
+
+            TempData["PersonIndexRequest_SortOrder"] = sortOrder;
+            TempData["PersonIndexRequest_CurrentFilter"] = currentFilter;
+            TempData["PersonIndexRequest_SearchString"] = searchString;
+            TempData["PersonIndexRequest_Page"] = page;
+            TempData["PersonIndexRequest_PageSize"] = pageSize;
+
+            TempData.Keep();
+
             var request = new DataTableRequest(sortOrder, currentFilter, searchString, page, pageSize);
 
             var vms = _personManager.GetAllByRequest(request);

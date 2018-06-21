@@ -79,6 +79,7 @@ namespace DotNetFlicks.Web.Config
 
             app.UseHttpsRedirection();
             app.UseStaticFiles();
+            app.UseCookiePolicy();
             app.UseAuthentication();
 
             app.UseMvc(routes =>

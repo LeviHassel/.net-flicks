@@ -1,11 +1,9 @@
 # .NetFlicks (.NET Core 2.1 Sample App)
 .NetFlicks is a .NET Core sample app for renting digital movies and viewing details such as cast and crew. It contains custom-built data tables for efficient paging, searching, sorting and editing of thousands of items. Its main focus is to showcase best practices for multitier system architecture, database design, unit testing and intuitive, mobile-friendly UI. This project has been a great learning experience for me and I hope it can help other developers looking for a solid template to build on.
 
-![.NetFlicks Demo](https://user-images.githubusercontent.com/9669653/41578865-f8172e24-7359-11e8-8b67-8302e93e122d.gif)
+![.NetFlicks Preview](https://user-images.githubusercontent.com/9669653/41578865-f8172e24-7359-11e8-8b67-8302e93e122d.gif)
 
 ## Demo
-Click the thumbnail below to watch a full video demo of .NetFlicks.
-
 [![.NetFlicks Demo](https://user-images.githubusercontent.com/9669653/41757629-d514325e-75a8-11e8-8e96-fdce46279d7d.png)](https://www.youtube.com/watch?v=uZh9yOw44Cs)
 
 ## Stack

@@ -6,7 +6,7 @@
 ## Demo
 Click the thumbnail below to watch a full video demo of .NetFlicks.
 
-[![.NetFlicks Demo](https://img.youtube.com/vi/ScMzIvxBSi4/0.jpg)](https://www.youtube.com/watch?v=ScMzIvxBSi4)
+[![.NetFlicks Demo](https://user-images.githubusercontent.com/9669653/41757629-d514325e-75a8-11e8-8e96-fdce46279d7d.png)](https://www.youtube.com/watch?v=uZh9yOw44Cs)
 
 ## Stack
  * Server

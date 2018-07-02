@@ -12,7 +12,7 @@ namespace DotNetFlicks.Accessors.Interfaces
 
         List<MovieDTO> GetAllByRequest(DataTableRequest query);
 
-        int GetCount(string search);
+        int GetCount(string search = null);
 
         MovieDTO Save(MovieDTO dto);
 

@@ -81,7 +81,7 @@ namespace DotNetFlicks.Accessors.Accessors
             return dtos;
         }
 
-        public int GetCount(string search)
+        public int GetCount(string search = null)
         {
             if (!string.IsNullOrEmpty(search))
             {

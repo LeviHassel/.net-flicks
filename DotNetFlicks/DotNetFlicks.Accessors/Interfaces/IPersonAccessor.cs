@@ -12,7 +12,7 @@ namespace DotNetFlicks.Accessors.Interfaces
 
         List<PersonDTO> GetAllByName(string query);
 
-        int GetCount(string search);
+        int GetCount(string search = null);
 
         PersonDTO Save(PersonDTO dto);
 

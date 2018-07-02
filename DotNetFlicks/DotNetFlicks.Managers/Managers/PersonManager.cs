@@ -38,7 +38,7 @@ namespace DotNetFlicks.Managers.Managers
             {
                 vm.Roles = vm.Roles.OrderBy(x => x.MovieName).ToList();
             }
-
+            
             var count = _personAccessor.GetCount(request.Search);
 
             return new PeopleViewModel {

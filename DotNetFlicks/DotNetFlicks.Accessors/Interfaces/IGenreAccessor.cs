@@ -12,7 +12,7 @@ namespace DotNetFlicks.Accessors.Interfaces
 
         List<GenreDTO> GetAllByRequest(DataTableRequest query);
 
-        int GetCount(string search);
+        int GetCount(string search = null);
 
         GenreDTO Save(GenreDTO dto);
 

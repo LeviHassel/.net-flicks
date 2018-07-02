@@ -11,9 +11,9 @@
     <div class="btn-group btn-group-toggle my-auto">
         <!-- Display link to previous page -->
         <a asp-action="Index"
-           asp-route-sortOrder="@Model.CurrentSort"
-           asp-route-page="@(Model.PageIndex - 1)"
-           asp-route-currentFilter="@Model.CurrentFilter"
+           asp-route-sortOrder="@Model.SortOrder"
+           asp-route-search="@Model.Search"
+           asp-route-pageIndex="@(Model.PageIndex - 1)"
            asp-route-pageSize="@Model.PageSize"
            class="btn btn-outline-primary @prevDisabled">
             <i class="fas fa-chevron-left my-auto ml-auto"></i>
@@ -25,9 +25,9 @@
             if (Math.Abs(Model.PageIndex - i) < 2 || i == 1 || i == Model.TotalPages)
             {
                 <a asp-action="Index"
-                   asp-route-sortOrder="@Model.CurrentSort"
-                   asp-route-page="@i"
-                   asp-route-currentFilter="@Model.CurrentFilter"
+                   asp-route-sortOrder="@Model.SortOrder"
+                   asp-route-search="@Model.Search"
+                   asp-route-pageIndex="@i"
                    asp-route-pageSize="@Model.PageSize"
                    class="btn btn-outline-primary d-none d-md-inline @(i == Model.PageIndex ? "active" : "")">
                     @i
@@ -42,9 +42,9 @@
 
         <!-- Display link to next page -->
         <a asp-action="Index"
-           asp-route-sortOrder="@Model.CurrentSort"
-           asp-route-page="@(Model.PageIndex + 1)"
-           asp-route-currentFilter="@Model.CurrentFilter"
+           asp-route-sortOrder="@Model.SortOrder"
+           asp-route-search="@Model.Search"
+           asp-route-pageIndex="@(Model.PageIndex + 1)"
            asp-route-pageSize="@Model.PageSize"
            class="btn btn-outline-primary @nextDisabled">
             <i class="fas fa-chevron-right my-auto ml-auto"></i>

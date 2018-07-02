@@ -16,23 +16,9 @@ namespace DotNetFlicks.Web.Controllers
             _departmentManager = departmentManager;
         }
 
-        public ActionResult Index(string sortOrder, string currentFilter, string searchString, int? page, int? pageSize)
+        public ActionResult Index(string sortOrder, string search, int? pageIndex, int? pageSize)
         {
-            sortOrder = sortOrder ?? (string)TempData["DepartmentIndexRequest_SortOrder"];
-            currentFilter = currentFilter ?? (string)TempData["DepartmentIndexRequest_CurrentFilter"];
-            searchString = searchString ?? (string)TempData["DepartmentIndexRequest_SearchString"];
-            page = page ?? (int?)TempData["DepartmentIndexRequest_Page"];
-            pageSize = pageSize ?? (int?)TempData["DepartmentIndexRequest_PageSize"];
-
-            TempData["DepartmentIndexRequest_SortOrder"] = sortOrder;
-            TempData["DepartmentIndexRequest_CurrentFilter"] = currentFilter;
-            TempData["DepartmentIndexRequest_SearchString"] = searchString;
-            TempData["DepartmentIndexRequest_Page"] = page;
-            TempData["DepartmentIndexRequest_PageSize"] = pageSize;
-
-            TempData.Keep();
-
-            var request = new DataTableRequest(sortOrder, currentFilter, searchString, page, pageSize);
+            var request = new DataTableRequest(this, sortOrder, search, pageIndex, pageSize);
 
             var vms = _departmentManager.GetAllByRequest(request);
 

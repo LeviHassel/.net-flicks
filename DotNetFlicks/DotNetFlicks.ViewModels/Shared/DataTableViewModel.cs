@@ -8,17 +8,17 @@ namespace DotNetFlicks.ViewModels.Shared
 {
     public class DataTableViewModel
     {
-        public string CurrentSort { get; private set; }
+        public string SortOrder { get; private set; }
 
-        public string CurrentFilter { get; private set; }
-
-        public int FirstItemIndex { get; private set; }
-
-        public int LastItemIndex { get; private set; }
+        public string Search { get; private set; }
 
         public int PageIndex { get; private set; }
 
         public int PageSize { get; private set; }
+
+        public int FirstItemIndex { get; private set; }
+
+        public int LastItemIndex { get; private set; }
 
         public int TotalCount { get; private set; }
 
@@ -28,12 +28,12 @@ namespace DotNetFlicks.ViewModels.Shared
 
         public DataTableViewModel(DataTableRequest request, int count)
         {
-            CurrentSort = request.SortOrder;
-            CurrentFilter = request.Search;
-            FirstItemIndex = count > 0 ? (request.PageIndex - 1) * request.PageSize + 1 : 0;
-            LastItemIndex = request.PageSize * request.PageIndex < count ? request.PageSize * request.PageIndex : count;
+            SortOrder = request.SortOrder;
+            Search = request.Search;
             PageIndex = request.PageIndex;
             PageSize = request.PageSize;
+            FirstItemIndex = count > 0 ? (request.PageIndex - 1) * request.PageSize + 1 : 0;
+            LastItemIndex = request.PageSize * request.PageIndex < count ? request.PageSize * request.PageIndex : count;
             TotalCount = count;
             TotalPages = (int)Math.Ceiling(count / (double)request.PageSize);
 

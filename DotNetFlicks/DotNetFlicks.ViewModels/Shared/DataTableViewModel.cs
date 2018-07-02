@@ -8,34 +8,37 @@ namespace DotNetFlicks.ViewModels.Shared
 {
     public class DataTableViewModel
     {
-        public string CurrentSort { get; private set; }
+        public string SortOrder { get; private set; }
 
-        public string CurrentFilter { get; private set; }
-
-        public int FirstItemIndex { get; private set; }
-
-        public int LastItemIndex { get; private set; }
+        public string Search { get; private set; }
 
         public int PageIndex { get; private set; }
 
         public int PageSize { get; private set; }
 
+        public int FirstItemIndex { get; private set; }
+
+        public int LastItemIndex { get; private set; }
+
+        public int FilteredCount { get; private set; }
+
         public int TotalCount { get; private set; }
 
-        public int TotalPages { get; private set; }
+        public int PageCount { get; private set; }
 
         public List<SelectListItem> PageSizeOptions { get; private set; }
 
-        public DataTableViewModel(DataTableRequest request, int count)
+        public DataTableViewModel(DataTableRequest request, int filteredCount, int totalCount)
         {
-            CurrentSort = request.SortOrder;
-            CurrentFilter = request.Search;
-            FirstItemIndex = count > 0 ? (request.PageIndex - 1) * request.PageSize + 1 : 0;
-            LastItemIndex = request.PageSize * request.PageIndex < count ? request.PageSize * request.PageIndex : count;
+            SortOrder = request.SortOrder;
+            Search = request.Search;
             PageIndex = request.PageIndex;
             PageSize = request.PageSize;
-            TotalCount = count;
-            TotalPages = (int)Math.Ceiling(count / (double)request.PageSize);
+            FirstItemIndex = filteredCount > 0 ? (request.PageIndex - 1) * request.PageSize + 1 : 0;
+            LastItemIndex = request.PageSize * request.PageIndex < filteredCount ? request.PageSize * request.PageIndex : filteredCount;
+            FilteredCount = filteredCount;
+            TotalCount = totalCount;
+            PageCount = (int)Math.Ceiling(filteredCount / (double)request.PageSize);
 
             PageSizeOptions = new List<SelectListItem>
             {
@@ -60,7 +63,7 @@ namespace DotNetFlicks.ViewModels.Shared
         {
             get
             {
-                return (PageIndex < TotalPages);
+                return (PageIndex < PageCount);
             }
         }
     }

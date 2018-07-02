@@ -1,0 +1,10 @@
+﻿@model DotNetFlicks.ViewModels.Shared.DataTableViewModel
+
+@if (Model.FilteredCount == Model.TotalCount)
+{
+    <h1>@ViewData["Title"] <small>(@Model.FilteredCount)</small></h1>
+}
+else
+{
+    <h1>@ViewData["Title"] <small>(@Model.FilteredCount of @Model.TotalCount)</small></h1>
+}

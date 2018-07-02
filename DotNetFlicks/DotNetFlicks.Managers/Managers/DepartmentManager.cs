@@ -32,17 +32,15 @@ namespace DotNetFlicks.Managers.Managers
             var dtos = _departmentAccessor.GetAllByRequest(request);
             var vms = Mapper.Map<List<DepartmentViewModel>>(dtos);
 
-            foreach (var vm in vms)
-            {
-                vm.PeopleCount = _departmentAccessor.GetRoleCount(vm.Id);
-            }
+            vms.ForEach(x => x.PeopleCount = _departmentAccessor.GetRoleCount(x.Id));
 
-            var count = _departmentAccessor.GetCount(request.Search);
+            var filteredCount = _departmentAccessor.GetCount(request.Search);
+            var totalCount = _departmentAccessor.GetCount();
 
             return new DepartmentsViewModel
             {
                 Departments = vms,
-                DataTable = new DataTableViewModel(request, count)
+                DataTable = new DataTableViewModel(request, filteredCount, totalCount)
             };
         }
 

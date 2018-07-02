@@ -3,22 +3,22 @@
 @{ 
     var ascSort = Model.ColumnName + "_Asc";
     var descSort = Model.ColumnName + "_Desc";
-    var newSortOrderOnClick = Model.DataTable.CurrentSort == ascSort ? descSort : ascSort;
+    var newSortOrderOnClick = Model.DataTable.SortOrder == ascSort ? descSort : ascSort;
 }
 
 <a class="d-block p-3"
    asp-action="Index"
    asp-route-sortOrder="@newSortOrderOnClick"
-   asp-route-currentFilter="@Model.DataTable.CurrentFilter"
-   asp-route-page="@Model.DataTable.PageIndex"
+   asp-route-search="@Model.DataTable.Search"
+   asp-route-pageIndex="@Model.DataTable.PageIndex"
    asp-route-pageSize="@Model.DataTable.PageSize">
     <div class="d-flex">
         <h5 class="mb-1">@Model.ColumnName</h5>
-        @if (Model.DataTable.CurrentSort == ascSort)
+        @if (Model.DataTable.SortOrder == ascSort)
         {
             <i class="fas fa-sort-up my-auto ml-auto"></i>
         }
-        else if (Model.DataTable.CurrentSort == descSort)
+        else if (Model.DataTable.SortOrder == descSort)
         {
             <i class="fas fa-sort-down my-auto ml-auto"></i>
         }

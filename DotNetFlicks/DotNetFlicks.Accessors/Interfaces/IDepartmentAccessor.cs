@@ -12,7 +12,7 @@ namespace DotNetFlicks.Accessors.Interfaces
 
         List<DepartmentDTO> GetAllByName(string query);
 
-        int GetCount(string search);
+        int GetCount(string search = null);
 
         int GetRoleCount(int id);
 

@@ -7,7 +7,7 @@
 }
 
 <div class="d-flex mb-5">
-    <h1>@ViewData["Title"] <small>(@Model.DataTable.TotalCount)</small></h1>
+    <partial name="_DataTableTitle" for="@Model.DataTable" />
     <a class="btn btn-primary ml-auto my-auto" asp-controller="Movie" asp-action="Edit">New</a>
 </div>
 

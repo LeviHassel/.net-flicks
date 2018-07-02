@@ -10,10 +10,6 @@
   </PropertyGroup>
 
   <PropertyGroup>
-    <AssetTargetFallback>$(AssetTargetFallback);portable-net45+win8+wp8+wpa81;</AssetTargetFallback>
-  </PropertyGroup>
-
-  <PropertyGroup>
     <UserSecretsId>aspnet-DotNetFlicks-e91132e6-85a2-421c-a63d-b0ed9cc0c64f</UserSecretsId>
     <ApplicationIcon>wwwroot\favicon.ico</ApplicationIcon>
     <OutputTypeEx>library</OutputTypeEx>
@@ -30,11 +26,11 @@
     <Content Remove="wwwroot\.gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.0" />
-	<PackageReference Include="AutoMapper" Version="7.0.0" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.1" />
+	<PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.Elm" Version="0.2.2" />
-    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="1.0.20" />
+    <PackageReference Include="Microsoft.Web.LibraryManager.Build" Version="1.0.113" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Config\SeedData\departments.json" />

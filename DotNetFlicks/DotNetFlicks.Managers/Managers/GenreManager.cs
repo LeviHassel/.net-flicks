@@ -34,10 +34,7 @@ namespace DotNetFlicks.Managers.Managers
             var dtos = _genreAccessor.GetAllByRequest(request);
             var vms = Mapper.Map<List<GenreViewModel>>(dtos);
 
-            foreach (var vm in vms)
-            {
-                vm.Movies = vm.Movies.OrderBy(x => x.Name).ToList();
-            }
+            vms.ForEach(x => x.Movies.OrderBy(y => y.Name));
 
             var filteredCount = _genreAccessor.GetCount(request.Search);
             var totalCount = _genreAccessor.GetCount();

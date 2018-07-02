@@ -134,10 +134,7 @@ namespace DotNetFlicks.Managers.Managers
             var dtos = _movieAccessor.GetAllByRequest(request);
             var vms = Mapper.Map<List<MovieViewModel>>(dtos);
 
-            foreach (var vm in vms)
-            {
-                vm.Genres = vm.Genres.OrderBy(x => x.Name).ToList();
-            }
+            vms.ForEach(x => x.Genres.OrderBy(y => y.Name));
 
             var filteredCount = _movieAccessor.GetCount(request.Search);
             var totalCount = _movieAccessor.GetCount();

@@ -34,10 +34,7 @@ namespace DotNetFlicks.Managers.Managers
             var dtos = _personAccessor.GetAllByRequest(request);
             var vms = Mapper.Map<List<PersonViewModel>>(dtos);
 
-            foreach (var vm in vms)
-            {
-                vm.Roles = vm.Roles.OrderBy(x => x.MovieName).ToList();
-            }
+            vms.ForEach(x => x.Roles.OrderBy(y => y.MovieName));
 
             var filteredCount = _personAccessor.GetCount(request.Search);
             var totalCount = _personAccessor.GetCount();

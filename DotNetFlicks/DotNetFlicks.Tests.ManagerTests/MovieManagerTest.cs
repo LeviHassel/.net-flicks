@@ -1,4 +1,5 @@
 ﻿using AutoFixture;
+using AutoFixture.AutoMoq;
 using AutoMapper;
 using DotNetFlicks.Accessors.Interfaces;
 using DotNetFlicks.Accessors.Models.DTO;
@@ -16,7 +17,7 @@ namespace DotNetFlicks.Tests.ManagerTests
     [Collection("Managers")]
     public class MovieManagerTest
     {
-        private Fixture _fixture;
+        private IFixture _fixture;
 
         private MovieManager _movieManager;
 
@@ -34,7 +35,16 @@ namespace DotNetFlicks.Tests.ManagerTests
         //This is method is called before the start of every test in this class
         public MovieManagerTest()
         {
+            _castMemberAccessorMock = new Mock<ICastMemberAccessor>();
+            _crewMemberAccessorMock = new Mock<ICrewMemberAccessor>();
+            _genreAccessorMock = new Mock<IGenreAccessor>();
+            _departmentAccessorMock = new Mock<IDepartmentAccessor>();
             _movieAccessorMock = new Mock<IMovieAccessor>();
+            _movieGenreAccessorMock = new Mock<IMovieGenreAccessor>();
+            _movieRoleUpdateEngineMock = new Mock<IMovieRoleUpdateEngine>();
+            _moviePurchaseEngineMock = new Mock<IMoviePurchaseEngine>();
+            _personAccessorMock = new Mock<IPersonAccessor>();
+            _userMovieAccessorMock = new Mock<IUserMovieAccessor>();
 
             _movieManager = new MovieManager(_castMemberAccessorMock.Object,
                 _crewMemberAccessorMock.Object,
@@ -48,26 +58,37 @@ namespace DotNetFlicks.Tests.ManagerTests
                 _userMovieAccessorMock.Object);
 
             //Set up a Fixture to populate random data: https://github.com/AutoFixture/AutoFixture
-            _fixture = new Fixture();
+            _fixture = new Fixture().Customize(new AutoMoqCustomization());
         }
 
         [Fact]
         public void Get()
         {
             //Arrange
-            var expectedMovieDto = _fixture.Create<MovieDTO>();
-            var expectedMovieVm = Mapper.Map<MovieViewModel>(expectedMovieDto);
+            var movieDto = _fixture.Freeze<MovieDTO>();
+            var userMovieDto = _fixture.Create<UserMovieDTO>();
             var userId = _fixture.Create<string>();
 
+            var expectedVm = Mapper.Map<MovieViewModel>(movieDto);
+            expectedVm.Cast = expectedVm.Cast.OrderBy(x => x.Order).ToList();
+            expectedVm.Crew = expectedVm.Crew.OrderBy(x => x.Category).ThenBy(x => x.PersonName).ToList();
+            expectedVm.Genres = expectedVm.Genres.OrderBy(x => x.Name).ToList();
+            expectedVm.PurchaseDate = userMovieDto.PurchaseDate;
+            expectedVm.RentEndDate = userMovieDto.RentEndDate;
+
             _movieAccessorMock
-                .Setup(x => x.Get(expectedMovieDto.Id))
-                .Returns(expectedMovieDto);
+                .Setup(x => x.Get(movieDto.Id))
+                .Returns(movieDto);
+
+            _userMovieAccessorMock
+                .Setup(x => x.GetByMovieAndUser(movieDto.Id, userId))
+                .Returns(userMovieDto);
 
             //Act
-            var actualMovieVm = _movieManager.Get(expectedMovieDto.Id, userId);
+            var actualVm = _movieManager.Get(movieDto.Id, userId);
 
             //Assert
-            actualMovieVm.Should().BeEquivalentTo(expectedMovieVm);
+            actualVm.Should().BeEquivalentTo(expectedVm);
         }
 
         [Fact]
@@ -97,18 +118,18 @@ namespace DotNetFlicks.Tests.ManagerTests
         public void Save()
         {
             //Arrange
-            var expectedMovieVm = _fixture.Create<EditMovieViewModel>();
-            var expectedMovieDto = Mapper.Map<MovieDTO>(expectedMovieVm);
+            var expectedVm = _fixture.Create<EditMovieViewModel>();
+            var dto = Mapper.Map<MovieDTO>(expectedVm);
 
             _movieAccessorMock
               .Setup(x => x.Save(It.IsAny<MovieDTO>()))
-              .Returns(expectedMovieDto);
+              .Returns(dto);
 
             //Act
-            var actualMovieVm = _movieManager.Save(expectedMovieVm);
+            var actualVm = _movieManager.Save(expectedVm);
 
             //Assert
-            actualMovieVm.Should().BeEquivalentTo(expectedMovieVm);
+            actualVm.Should().BeEquivalentTo(expectedVm);
         }
     }
 }

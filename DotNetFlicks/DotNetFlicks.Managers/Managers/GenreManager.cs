@@ -39,12 +39,13 @@ namespace DotNetFlicks.Managers.Managers
                 vm.Movies = vm.Movies.OrderBy(x => x.Name).ToList();
             }
 
-            var count = _genreAccessor.GetCount(request.Search);
+            var filteredCount = _genreAccessor.GetCount(request.Search);
+            var totalCount = _genreAccessor.GetCount();
 
             return new GenresViewModel
             {
                 Genres = vms,
-                DataTable = new DataTableViewModel(request, count)
+                DataTable = new DataTableViewModel(request, filteredCount, totalCount)
             };
         }
 

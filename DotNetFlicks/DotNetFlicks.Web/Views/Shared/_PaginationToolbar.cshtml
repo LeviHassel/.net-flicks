@@ -6,7 +6,14 @@
 }
 
 <div class="d-flex justify-content-end mt-4 pagination-toolbar">
-    <p class="my-auto mr-auto">@Model.FirstItemIndex - @Model.LastItemIndex of @Model.TotalCount items</p>
+    @if (Model.FilteredCount == Model.TotalCount)
+    {
+        <p class="my-auto mr-auto">@Model.FirstItemIndex - @Model.LastItemIndex of @Model.FilteredCount items</p>
+    }
+    else
+    {
+        <p class="my-auto mr-auto">@Model.FirstItemIndex - @Model.LastItemIndex of @Model.FilteredCount items (filtered from @Model.TotalCount total items)</p>
+    }
 
     <div class="btn-group btn-group-toggle my-auto">
         <!-- Display link to previous page -->
@@ -19,10 +26,10 @@
             <i class="fas fa-chevron-left my-auto ml-auto"></i>
         </a>
 
-        @for (var i = 1; i <= Model.TotalPages; i++)
+        @for (var i = 1; i <= Model.PageCount; i++)
         {
             //Display page links for the current page, the pages on both sides of the current page, the first page and last page
-            if (Math.Abs(Model.PageIndex - i) < 2 || i == 1 || i == Model.TotalPages)
+            if (Math.Abs(Model.PageIndex - i) < 2 || i == 1 || i == Model.PageCount)
             {
                 <a asp-action="Index"
                    asp-route-sortOrder="@Model.SortOrder"

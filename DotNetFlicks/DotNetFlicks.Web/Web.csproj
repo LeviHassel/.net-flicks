@@ -57,6 +57,9 @@
     <Content Update="Views\Shared\_MovieCardList.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>
+    <Content Update="Views\Shared\_DataTableTitle.cshtml">
+      <Pack>$(IncludeRazorContentInPack)</Pack>
+    </Content>
     <Content Update="Views\Shared\_SortableHeader.cshtml">
       <Pack>$(IncludeRazorContentInPack)</Pack>
     </Content>

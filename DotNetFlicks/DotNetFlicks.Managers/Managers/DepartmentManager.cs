@@ -37,12 +37,13 @@ namespace DotNetFlicks.Managers.Managers
                 vm.PeopleCount = _departmentAccessor.GetRoleCount(vm.Id);
             }
 
-            var count = _departmentAccessor.GetCount(request.Search);
+            var filteredCount = _departmentAccessor.GetCount(request.Search);
+            var totalCount = _departmentAccessor.GetCount();
 
             return new DepartmentsViewModel
             {
                 Departments = vms,
-                DataTable = new DataTableViewModel(request, count)
+                DataTable = new DataTableViewModel(request, filteredCount, totalCount)
             };
         }
 

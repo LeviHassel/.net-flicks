@@ -5,6 +5,7 @@ using DotNetFlicks.Accessors.Interfaces;
 using DotNetFlicks.Accessors.Models.DTO;
 using DotNetFlicks.Engines.Interfaces;
 using DotNetFlicks.Managers.Managers;
+using DotNetFlicks.Tests.ManagerTests.Helpers;
 using DotNetFlicks.ViewModels.Movie;
 using FluentAssertions;
 using Moq;
@@ -57,8 +58,7 @@ namespace DotNetFlicks.Tests.ManagerTests
                 _personAccessorMock.Object,
                 _userMovieAccessorMock.Object);
 
-            //Set up a Fixture to populate random data: https://github.com/AutoFixture/AutoFixture
-            _fixture = new Fixture().Customize(new AutoMoqCustomization());
+            _fixture = AutoFixtureHelper.CreateFixture();
         }
 
         [Fact]

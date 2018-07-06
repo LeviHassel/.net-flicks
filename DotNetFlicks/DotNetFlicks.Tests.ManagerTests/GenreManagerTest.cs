@@ -4,6 +4,7 @@ using AutoMapper;
 using DotNetFlicks.Accessors.Interfaces;
 using DotNetFlicks.Accessors.Models.DTO;
 using DotNetFlicks.Managers.Managers;
+using DotNetFlicks.Tests.ManagerTests.Helpers;
 using DotNetFlicks.ViewModels.Genre;
 using DotNetFlicks.ViewModels.Movie;
 using FluentAssertions;
@@ -30,8 +31,7 @@ namespace DotNetFlicks.Tests.ManagerTests
 
             _genreManager = new GenreManager(_genreAccessorMock.Object);
 
-            //Set up a Fixture to populate random data: https://github.com/AutoFixture/AutoFixture
-            _fixture = new Fixture().Customize(new AutoMoqCustomization());
+            _fixture = AutoFixtureHelper.CreateFixture();
         }
 
         /*

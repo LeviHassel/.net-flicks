@@ -82,7 +82,10 @@ namespace DotNetFlicks.Tests.ManagerTests
         public void Save()
         {
             //Arrange
-            var expectedVm = _fixture.Create<GenreViewModel>();
+            var expectedVm = _fixture.Build<GenreViewModel>()
+                .Without(x => x.Movies)
+                .Create();
+
             var expectedDto = Mapper.Map<GenreDTO>(expectedVm);
 
             _genreAccessorMock

@@ -41,7 +41,8 @@ namespace DotNetFlicks.Managers.Config
             CreateMap<GenreDTO, GenreViewModel>()
                 .ForMember(dest => dest.Movies, opt => opt.MapFrom(src => src.Movies.Select(x => x.Movie)));
 
-            CreateMap<GenreViewModel, GenreDTO>();
+            CreateMap<GenreViewModel, GenreDTO>()
+                .ForMember(dest => dest.Movies, opt => opt.Ignore());
 
             CreateMap<MovieDTO, MovieViewModel>()
                 .ForMember(dest => dest.Genres, opt => opt.MapFrom(src => src.Genres.Select(x => x.Genre)))

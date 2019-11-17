@@ -31,7 +31,7 @@ namespace DotNetFlicks.ViewModels.Person
 
         public string RolesTooltip { get { return Roles != null ? Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList().ToTooltipList() : ""; } }
 
-        public string RolesBulletedList { get { return Roles != null ? Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList().ToTooltipList() : ""; } }
+        public string RolesBulletedList { get { return Roles != null ? Roles.Select(x => string.Format("{0} ({1})", x.MovieName, x.Role)).ToList().ToBulletedList() : ""; } }
 
         public string KnownFor { get { return Roles != null && Roles.Any() ? Roles.GroupBy(x => x.Category).OrderByDescending(x => x.Count()).First().Key : ""; } }
 

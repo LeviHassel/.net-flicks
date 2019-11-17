@@ -16,6 +16,6 @@ namespace DotNetFlicks.ViewModels.Genre
 
         public string MoviesTooltip { get { return Movies != null ? Movies.Select(x => x.Name).ToList().ToTooltipList() : ""; } }
 
-        public string MoviesBulletedList { get { return Movies != null ? Movies.Select(x => x.Name).ToList().ToTooltipList() : ""; } }
+        public string MoviesBulletedList { get { return Movies != null ? Movies.Select(x => x.Name).ToList().ToBulletedList() : ""; } }
     }
 }

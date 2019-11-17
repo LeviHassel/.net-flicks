@@ -1,4 +1,4 @@
-# .NetFlicks (.NET Core 2.1 Sample App)
+# .NetFlicks (.NET Core 2.2 Sample App)
 .NetFlicks is a .NET Core sample app for renting digital movies and viewing details such as cast and crew. It contains custom-built data tables for efficient paging, searching, sorting and editing of thousands of items. Its main focus is to showcase best practices for multitier system architecture, database design and intuitive, mobile-friendly UI. This project has been a great learning experience for me and I hope it can help other developers looking for a solid template to build on.
 
 ![.NetFlicks Preview](https://user-images.githubusercontent.com/9669653/41578865-f8172e24-7359-11e8-8b67-8302e93e122d.gif)
@@ -8,7 +8,7 @@
 
 ## Stack
  * Server
-   * [ASP.NET Core 2.1](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-2.0 "ASP.NET Core 2.1")
+   * [ASP.NET Core 2.2](https://docs.microsoft.com/en-us/aspnet/core/?view=aspnetcore-2.2 "ASP.NET Core 2.2")
    * [Entity Framework Core](https://docs.microsoft.com/en-us/ef/core/ "Entity Framework Core")
    * [AutoMapper](https://automapper.org/ "AutoMapper")
  * Client
@@ -38,8 +38,8 @@ Here's my implementation of IDesign for this solution:
 ## Setup
 ### Getting Started
 1. Install the following:
-   * [.NET Core 2.1 SDK](https://www.microsoft.com/net/download/windows ".NET Core 2.1 SDK")
-   * [Visual Studio Community 2017](https://www.visualstudio.com/downloads/ "Visual Studio Community 2017") (15.7+ is required for Core 2.1, select `ASP.NET and web development` workload during installation)
+   * [.NET Core 2.2 SDK](https://www.microsoft.com/net/download/windows ".NET Core 2.2 SDK")
+   * [Visual Studio Community 2017](https://www.visualstudio.com/downloads/ "Visual Studio Community 2017") (15.7+ is required for Core 2.2, select `ASP.NET and web development` workload during installation)
 2. Download this repository
 3. Open the solution in Visual Studio and run the Web project (this may take some time, as it will create and seed the database)
 4. Log into the default administrator account (email: `admin@dotnetflicks.com`, password: `p@ssWORD471`) or create your own account to start using the site

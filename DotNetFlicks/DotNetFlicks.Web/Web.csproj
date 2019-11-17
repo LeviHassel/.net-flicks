@@ -26,7 +26,7 @@
     <Content Remove="wwwroot\.gitignore" />
   </ItemGroup>
   <ItemGroup>
-    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.1" />
+    <PackageReference Include="Microsoft.AspNetCore.All" Version="2.1.4" />
 	<PackageReference Include="AutoMapper" Version="7.0.1" />
     <PackageReference Include="BuildBundlerMinifier" Version="2.8.391" />
     <PackageReference Include="Microsoft.AspNetCore.Diagnostics.Elm" Version="0.2.2" />
